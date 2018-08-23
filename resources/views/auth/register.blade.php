@@ -61,6 +61,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">User Type</label>
+
+                            <div class="col-md-6">
+                                <select class="custom-select form-control" id="user_type" name="user_type">
+                                      <option value="Investment Advisor">Investment Advisor</option>
+                                      <option value="Private Funds">Private Funds</option>
+                                      <option value="Broker Dealer">Broker Dealer</option>
+                                      <option value="Private Equity">Private Equity</option>
+                                      <option value="Consultant">Consultant</option>
+                                    </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -69,6 +83,14 @@
                             </div>
                         </div>
                     </form>
+                    @if(Session::has('alert'))
+                    <div class="alert alert-success">
+                        {{ Session::get('alert') }}
+                        @php
+                        Session::forget('alert');
+                        @endphp
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
