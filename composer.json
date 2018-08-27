@@ -9,7 +9,9 @@
         "fideloper/proxy": "^4.0",
         "jrean/laravel-user-verification": "^6.0",
         "laravel/framework": "5.6.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "laravelcollective/html": "^5.6",
+        "spatie/laravel-permission": "^2.17"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
