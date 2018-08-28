@@ -15,7 +15,15 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        foreach ($projects as $key => $value) {
+            $poc = User::find($value->poc);
+            $value->pocname = $poc->name;
+            $cco = User::find($value->cco);
+            $value->cconame = $poc->name;
+        }
+        //dd($projects);
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -62,7 +70,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('projects.show');
     }
 
     /**

@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>X-Flow</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ asset('assets/css/font-face.css') }}" rel="stylesheet" media="all">
