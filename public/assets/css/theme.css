@@ -3385,7 +3385,7 @@ section {
 }
 
 .au-task-list {
-    height: 424px;
+    height: 100%;
     position: relative;
     overflow-y: auto;
 }
