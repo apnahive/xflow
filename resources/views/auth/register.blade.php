@@ -47,6 +47,14 @@
                                 <img src="{{ asset('assets/images/icon/logo.png') }}" alt="AgileAX">
                             </a>
                         </div>
+                         @if(Session::has('alert'))
+                            <div class="alert alert-success">
+                                {{ Session::get('alert') }}
+                                @php
+                                Session::forget('alert');
+                                @endphp
+                            </div>
+                            @endif
                         <div class="login-form">
                             <form method="post" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                                 @csrf
@@ -173,14 +181,7 @@
                                     <a href="{{ route('login') }}">Sign In</a>
                                 </p>
                             </div>
-                            @if(Session::has('alert'))
-                            <div class="alert alert-success">
-                                {{ Session::get('alert') }}
-                                @php
-                                Session::forget('alert');
-                                @endphp
-                            </div>
-                            @endif
+                           
                         </div>
                     </div>
                 </div>
