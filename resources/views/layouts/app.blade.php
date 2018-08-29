@@ -55,7 +55,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="CoolAdmin" />
+                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="AgileAX" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -195,7 +195,7 @@
                             </ul> -->
                         </li>
                         <li>
-                            <a href="chart.html">
+                            <a href="{{ route('projects.index') }}">
                                 <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
                         <li>
@@ -203,7 +203,7 @@
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
                         <li>
-                            <a href="form.html">
+                            <a href="{{ route('tasks.index') }}">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <li>
@@ -403,10 +403,10 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('assets/images/icon/avatar-01.jpg') }}" alt="John Doe" />
+                                            <img src="{{ asset('assets/images/icon/avatar-01.jpg') }}" alt="User" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="{{ route('profile.index') }}">{{ Auth::user()->name }}</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -417,7 +417,7 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="{{ route('profile.index') }}">{{ Auth::user()->name }}</a>
                                                     </h5>
                                                     <!-- <span class="email">johndoe@example.com</span> -->
                                                 </div>

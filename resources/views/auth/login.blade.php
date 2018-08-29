@@ -43,7 +43,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="{{ asset('assets/images/icon/logo.png') }}" alt="CoolAdmin">
+                                <img src="{{ asset('assets/images/icon/logo.png') }}" alt="AgileAX">
                             </a>
                         </div>
                         <div class="login-form">

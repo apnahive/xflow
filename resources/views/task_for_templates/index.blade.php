@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Projects</h3>
+        <h3 class="title-5 m-b-35">Task Template</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
                 <!-- <div class="rs-select2--light rs-select2--md">
@@ -28,8 +28,8 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                <a href="{{ route('projects.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    <i class="zmdi zmdi-plus"></i>Add New Project</button></a>
+                <a href="{{ route('task_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -50,17 +50,15 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Name</th>
-                        <th>POC</th>
-                        <th>CCO</th>
-                        <th>Due Date</th>
+                        <th>Task</th>
+                        <th>Detail</th>                        
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($projects as $projectkey => $project)
+                    @foreach ($tasks as $taskkey => $task)
                     <tr class="tr-shadow">
                         <!-- <td>
                             <label class="au-checkbox">
@@ -68,33 +66,31 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $project->name }}</td>
-                        <td>{{ $project->pocname }}</td>                        
-                        <td>{{ $project->cconame }}</td>                        
-                        <td>{{ $project->duedate }}</td>
+                        <td>{{ $task->name }}</td>
+                        <td>{{ $task->detail }}</td>                        
                         <td>
                             <div class="table-data-feature">
-                                <a href="{{ route('projects.show', $project->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="{{ route('task_templates.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
-                                <a href="{{ route('projects.edit', $project->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="{{ route('task_templates.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$project->id}}" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
-                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$project->id}}">Delete</button> -->
+                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
 
-                                <form id="{{$project->id}}" action="" method="POST" style="display: none;">
+                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 </form>
-                                <div class="modal fade" id="confirm{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$project->id}}" aria-hidden="true">
+                                <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Project</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Template</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
@@ -103,8 +99,8 @@
                                         Under Development
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Project</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$project->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button>
+                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
                                       </div>
                                     </div>
                                   </div>
@@ -127,36 +123,4 @@
     </div>
 </div>
 
-<!-- <div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <strong>Projects</strong> 
-            </div>                        
-            <div class="card-body card-block">
-                <div class="row">
-                    <div class="col-md-1">#</div>
-                    <div class="col-md-3">Name</div>
-                    <div class="col-md-3">Details</div>
-                    <div class="col-md-5">Action</div>
-                </div>
-                <hr>
-                @foreach ($projects as $projectkey => $project)
-                <div class="row">
-                    <div class="col-md-1">{{ $project->id }}</div>
-                    <div class="col-md-3">{{ $project->name }}</div>
-                    <div class="col-md-3">POC: {{ $project->pocname }}<br>CCO: {{ $project->cconame }}<br>Due Date: {{ $project->duedate }}</div>
-                    <div class="col-md-5" style="display:flex;">
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a></div>
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-success btn-sm">Edit</button></a></div>
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></div>
-                    </div>
-                </div>
-                <hr>   
-                @endforeach                
-                                            
-            </div>            
-        </div>        
-    </div>
-</div> -->
 @endsection

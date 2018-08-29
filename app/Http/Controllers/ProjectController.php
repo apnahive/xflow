@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Project;
+use App\Task;
 
 class ProjectController extends Controller
 {
@@ -60,6 +61,7 @@ class ProjectController extends Controller
         $project->cco = $request->cco;
         $project->duedate = $request->duedate;
         $project->save();
+        return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
     }
 
     /**
@@ -70,7 +72,35 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return view('projects.show');
+        $project = Project::find($id);
+        $poc = User::find($project->poc);
+        $project->pocname = $poc->name;
+        $cco = User::find($project->cco);
+        $project->cconame = $poc->name;
+
+        $tasks = Task::where('project_id', $id)->get();
+        foreach ($tasks as $key => $value) {
+            $project = Project::find($value->project_id);
+            $value->projectname = $project->name;
+            if($value->status == 1)
+            {
+                $value->status1 = 'pending';
+            }
+            elseif($value->status == 2)
+            {
+                $value->status1 = 'initiated';
+            }
+            elseif($value->status == 3)
+            {
+                $value->status1 = 'completed';
+            }
+            else
+            {
+                $value->status1 = 'no status';
+            }
+        }
+        
+        return view('projects.show', compact('project', 'tasks'));
     }
 
     /**
@@ -81,7 +111,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::all();
+        $project = Project::find($id);
+        return view('projects.edit', compact('users', 'project'));
     }
 
     /**
@@ -93,7 +125,22 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd(request()->all());
+        $this->validate($request, array(
+            'name'=> 'required|max:20',                        
+            'description'=> 'required|max:191',
+            'poc'=> 'numeric|min:1',
+            'cco'=> 'numeric|min:1',
+            'duedate'=> 'required|date'
+        ));
+        $project = Project::find($id);
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->poc = $request->poc;
+        $project->cco = $request->cco;
+        $project->duedate = $request->duedate;
+        $project->save();
+        return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
     }
 
     /**

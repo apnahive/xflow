@@ -22,8 +22,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
 
-
+Route::resource('profile', 'ProfileController');
 Route::resource('users', 'UserController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('projects', 'ProjectController');
+Route::resource('tasks', 'TaskController');
+Route::resource('task_templates', 'Task_templateController');
+Route::resource('task_for_templates', 'Task_for_templateController');
+
+Route::resource('add_task', 'Add_taskController');
+Route::get('add_task/{projectId}/add/', 'Add_taskController@pro')->name('addtemp');
+Route::get('add_task/{projectId}/add/{templateId}', 'Add_taskController@add')->name('addtemppro');
