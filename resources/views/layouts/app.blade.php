@@ -55,7 +55,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="CoolAdmin" />
+                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-Flow" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
