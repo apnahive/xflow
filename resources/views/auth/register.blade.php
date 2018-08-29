@@ -39,7 +39,8 @@
     <div class="page-wrapper">
         <div class="page-content--bge5">
             <div class="container">
-                <div class="login-wrap">
+                <!-- <div class="login-wrap"> -->
+                <div class="col-lg-8" style="margin-left: 15%;">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
@@ -49,102 +50,109 @@
                         <div class="login-form">
                             <form method="post" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                                 @csrf
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input id="name" type="text" class="au-input au-input--full" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus>
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input id="name" type="text" class="au-input au-input--full" name="name" placeholder="Name" value="{{ old('name') }}" required autofocus>
 
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
-                                        </span>
-                                    @endif                                
-                                </div>
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input id="lastname" type="text" class="au-input au-input--full" name="lastname" placeholder="Last Name" value="{{ old('lastname') }}" required autofocus>
+                                            @if ($errors->has('name'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                </span>
+                                            @endif                                
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input id="email" type="email" class="au-input au-input--full" placeholder="Email" name="email" value="{{ old('email') }}" required>
 
-                                    @if ($errors->has('lastname'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('lastname') }}</strong>
-                                        </span>
-                                    @endif                                                                    
-                                </div>
-                                <div class="form-group">
-                                    <label>Date Of Birth</label>
-                                    <input id="dateofbirth" type="date" class="au-input au-input--full" name="dateofbirth" value="{{ old('dateofbirth') }}" required autofocus>
+                                            @if ($errors->has('email'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                            @endif 
+                                        </div>                                   
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input id="password" type="password" class="au-input au-input--full" placeholder="Password" name="password" required>
 
-                                    @if ($errors->has('dateofbirth'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('dateofbirth') }}</strong>
-                                        </span>
-                                    @endif                               
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input id="email" type="email" class="au-input au-input--full" placeholder="Email" name="email" value="{{ old('email') }}" required>
+                                            @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                            @endif                                    
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Company</label>
+                                            <input id="company" type="text" class="au-input au-input--full" name="company" placeholder="Company" value="{{ old('company') }}" required autofocus>
 
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif                                    
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input id="password" type="password" class="au-input au-input--full" placeholder="Password" name="password" required>
+                                            @if ($errors->has('company'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('company') }}</strong>
+                                                </span>
+                                            @endif                                
+                                        </div>
+                                        <div class="form-group">
+                                            <label>User Type</label>
+                                            <select class="custom-select au-input au-input--full" id="user_type" name="user_type">
+                                              <option value="Investment Advisor">Investment Advisor</option>
+                                              <option value="Private Funds">Private Funds</option>
+                                              <option value="Broker Dealer">Broker Dealer</option>
+                                              <option value="Private Equity">Private Equity</option>
+                                              <option value="Consultant">Consultant</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   <div class="col-lg-6 col-sm-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input id="lastname" type="text" class="au-input au-input--full" name="lastname" placeholder="Last Name" value="{{ old('lastname') }}" required autofocus>
 
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif                                    
-                                </div>
-                                <div class="form-group">
-                                    <label>Confirm Password</label>
-                                    <input id="password-confirm" type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label>User Type</label>
-                                    <select class="custom-select form-control" id="user_type" name="user_type">
-                                      <option value="Investment Advisor">Investment Advisor</option>
-                                      <option value="Private Funds">Private Funds</option>
-                                      <option value="Broker Dealer">Broker Dealer</option>
-                                      <option value="Private Equity">Private Equity</option>
-                                      <option value="Consultant">Consultant</option>
-                                    </select>
-                                    <!-- <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required> -->
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label>Organization</label>
-                                    <input id="organization" type="text" class="au-input au-input--full" name="organization" placeholder="Organization" value="{{ old('organization') }}" required autofocus>
+                                            @if ($errors->has('lastname'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                                </span>
+                                            @endif                                                                    
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date Of Birth</label>
+                                            <input id="dateofbirth" type="date" class="au-input au-input--full" name="dateofbirth" value="{{ old('dateofbirth') }}" required autofocus>
 
-                                    @if ($errors->has('organization'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('organization') }}</strong>
-                                        </span>
-                                    @endif                                
-                                </div>
-                                <div class="form-group">
-                                    <label>Company</label>
-                                    <input id="company" type="text" class="au-input au-input--full" name="company" placeholder="Company" value="{{ old('company') }}" required autofocus>
+                                            @if ($errors->has('dateofbirth'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('dateofbirth') }}</strong>
+                                                </span>
+                                            @endif                               
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <!-- <input id="password-confirm" type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required> -->
+                                            <input id="password-confirm" type="password" class="au-input au-input--full" placeholder="Confirm Password" name="password_confirmation" required>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Organization</label>
+                                            <input id="organization" type="text" class="au-input au-input--full" name="organization" placeholder="Organization" value="{{ old('organization') }}" required autofocus>
 
-                                    @if ($errors->has('company'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('company') }}</strong>
-                                        </span>
-                                    @endif                                
-                                </div>
-                                <div class="form-group">
-                                    <label>Phone Number</label>
-                                    <input id="phonenumber" type="text" class="au-input au-input--full" name="phonenumber" placeholder="Phone Number" value="{{ old('phonenumber') }}" required autofocus>
+                                            @if ($errors->has('organization'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('organization') }}</strong>
+                                                </span>
+                                            @endif                                
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input id="phonenumber" type="text" class="au-input au-input--full" name="phonenumber" placeholder="Phone Number" value="{{ old('phonenumber') }}" required autofocus>
 
-                                    @if ($errors->has('phonenumber'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('phonenumber') }}</strong>
-                                        </span>
-                                    @endif                                
+                                            @if ($errors->has('phonenumber'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('phonenumber') }}</strong>
+                                                </span>
+                                            @endif                                
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- <div class="login-checkbox">
                                     <label>
