@@ -92,7 +92,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
         UserVerification::generate($user);
-        UserVerification::send($user, 'My Custom E-mail Subject');
+        UserVerification::send($user, 'Verify Your email');
         return back()->withAlert('Register successfully, please verify your email.');
     }
 }

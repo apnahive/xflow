@@ -20,7 +20,7 @@
     <!-- Styles -->
         <style>
             .carousel-item {
-                height: 622px;
+                height: 461px;
                 margin-top: 72px;
     }
     .bgg-dark {
