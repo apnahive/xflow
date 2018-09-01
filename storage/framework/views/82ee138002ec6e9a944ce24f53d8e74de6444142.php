@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,45 +7,45 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <title>X-Flow</title>
 
     <!-- Fontfaces CSS-->
-    <link href="{{ asset('assets/css/font-face.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/css/font-face.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/font-awesome-4.7/css/font-awesome.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/mdi-font/css/material-design-iconic-font.min.css')); ?>" rel="stylesheet" media="all">
 
     <!-- Bootstrap CSS-->
-    <link href="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.min.css')); ?>" rel="stylesheet" media="all">
 
     <!-- Vendor CSS-->
-    <link href="{{ asset('assets/vendor/animsition/animsition.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/wow/animate.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/css-hamburgers/hamburgers.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/slick/slick.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/animsition/animsition.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/wow/animate.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/css-hamburgers/hamburgers.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/slick/slick.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/select2/select2.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.css')); ?>" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/css/theme.css')); ?>" rel="stylesheet" media="all">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css">
 
     <!-- Jquery JS-->
-    <script src="{{ asset('assets/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendor/jquery-3.2.1.min.js')); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -56,9 +56,9 @@
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
 <!-- <<<<<<< HEAD -->
-                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="AgileAx" />
+                            <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="AgileAx" />
 <!-- ======= -->
-                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-Flow" />
+                            <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="X-Flow" />
 <!-- >>>>>>> refs/remotes/origin/master -->
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -174,7 +174,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="Cool Admin" />
+                    <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="Cool Admin" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -199,7 +199,7 @@
                             </ul> -->
                         </li>
                         <li>
-                            <a href="{{ route('projects.index') }}">
+                            <a href="<?php echo e(route('projects.index')); ?>">
                                 <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
                         <li>
@@ -207,7 +207,7 @@
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
                         <li>
-                            <a href="{{ route('tasks.index') }}">
+                            <a href="<?php echo e(route('tasks.index')); ?>">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <li>
@@ -407,21 +407,21 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('assets/images/icon/avatar-01.jpg') }}" alt="User" />
+                                            <img src="<?php echo e(asset('assets/images/icon/avatar-01.jpg')); ?>" alt="User" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="{{ route('profile.index') }}">{{ Auth::user()->name }}</a>
+                                            <a class="js-acc-btn" href="<?php echo e(route('profile.index')); ?>"><?php echo e(Auth::user()->name); ?></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('assets/images/icon/avatar-01.jpg') }}" alt="John Doe" />
+                                                        <img src="<?php echo e(asset('assets/images/icon/avatar-01.jpg')); ?>" alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="{{ route('profile.index') }}">{{ Auth::user()->name }}</a>
+                                                        <a href="<?php echo e(route('profile.index')); ?>"><?php echo e(Auth::user()->name); ?></a>
                                                     </h5>
                                                     <!-- <span class="email">johndoe@example.com</span> -->
                                                 </div>
@@ -441,14 +441,15 @@
                                                 </div>
                                             </div> -->
                                             <div class="account-dropdown__footer">
-                                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                                <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
                                                    onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
-                                                    <i class="zmdi zmdi-power"></i>{{ __('Logout') }}
+                                                    <i class="zmdi zmdi-power"></i><?php echo e(__('Logout')); ?>
+
                                                 </a>
 
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
+                                                <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                                    <?php echo csrf_field(); ?>
                                                 </form>
 
                                                 <!-- <a href="#">
@@ -468,7 +469,7 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        @yield('content')
+                        <?php echo $__env->yieldContent('content'); ?>
                     </div>
                 </div>
             </div>
@@ -478,26 +479,26 @@
 
     </div>    
     <!-- Bootstrap JS-->
-    <script src="{{ asset('assets/vendor/bootstrap-4.1/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendor/bootstrap-4.1/popper.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.min.js')); ?>"></script>
     <!-- Vendor JS       -->
-    <script src="{{ asset('assets/vendor/slick/slick.min.js') }}">
+    <script src="<?php echo e(asset('assets/vendor/slick/slick.min.js')); ?>">
     </script>
-    <script src="{{ asset('assets/vendor/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/animsition/animsition.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}">
+    <script src="<?php echo e(asset('assets/vendor/wow/wow.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/animsition/animsition.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')); ?>">
     </script>
-    <script src="{{ asset('assets/vendor/counter-up/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/counter-up/jquery.counterup.min.js') }}">
+    <script src="<?php echo e(asset('assets/vendor/counter-up/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/counter-up/jquery.counterup.min.js')); ?>">
     </script>
-    <script src="{{ asset('assets/vendor/circle-progress/circle-progress.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('assets/vendor/chartjs/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/select2/select2.min.js') }}">    
+    <script src="<?php echo e(asset('assets/vendor/circle-progress/circle-progress.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/perfect-scrollbar/perfect-scrollbar.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/chartjs/Chart.bundle.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/select2/select2.min.js')); ?>">    
     </script>
     
 
     <!-- Main JS-->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
 </body>
 </html>

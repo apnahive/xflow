@@ -34,3 +34,6 @@ Route::resource('task_for_templates', 'Task_for_templateController');
 Route::resource('add_task', 'Add_taskController');
 Route::get('add_task/{projectId}/add/', 'Add_taskController@pro')->name('addtemp');
 Route::get('add_task/{projectId}/add/{templateId}', 'Add_taskController@add')->name('addtemppro');
+
+Route::resource('project_users', 'Project_userController');
+Route::resource('assign_tasks', 'Assign_taskController');

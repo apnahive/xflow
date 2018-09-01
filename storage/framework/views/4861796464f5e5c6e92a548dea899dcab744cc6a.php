@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="col-lg-12">
     <div class="card">
@@ -23,10 +20,10 @@
                          aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>
                         <a class="nav-item nav-link" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
-                        @role('Admin')
+                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <a class="nav-item nav-link" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
-                         @endrole
+                         <?php endif; ?>
                         <a class="nav-item nav-link" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
                     </div>
@@ -39,7 +36,7 @@
                                     <label for="name" class=" form-control-label">Name</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $project->name }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($project->name); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -47,7 +44,7 @@
                                     <label for="description" class=" form-control-label">Description</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label">{{ $project->description }}</label>
+                                    <label for="description" class=" form-control-label"><?php echo e($project->description); ?></label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
@@ -55,7 +52,7 @@
                                     <label for="poc" class=" form-control-label">POC</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="poc" class=" form-control-label">{{ $project->pocname }}</label>
+                                    <label for="poc" class=" form-control-label"><?php echo e($project->pocname); ?></label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
@@ -63,7 +60,7 @@
                                     <label for="cco" class=" form-control-label">CCO</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="cco" class=" form-control-label">{{ $project->cconame }}</label>
+                                    <label for="cco" class=" form-control-label"><?php echo e($project->cconame); ?></label>
                                 </div>
                             </div>                            
                             <div class="row form-group">
@@ -71,25 +68,25 @@
                                     <label for="duedate" class=" form-control-label">Due Date</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="duedate" class=" form-control-label">{{ $project->duedate }}</label>
+                                    <label for="duedate" class=" form-control-label"><?php echo e($project->duedate); ?></label>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
-                            @if($project->can_edit) 
-                            <a href="{{ route('addtemp', $project->id) }}" style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
+                            <?php if($project->can_edit): ?> 
+                            <a href="<?php echo e(route('addtemp', $project->id)); ?>" style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
                             <i class="zmdi zmdi-plus"></i>Add task from template</button></a>
-                            <a href="{{ route('tasks.create') }}"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="<?php echo e(route('tasks.create')); ?>"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Add wildcard task</button></a>
-                            @role('Admin')
+                            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
 
-                            @else
-                            <a href="{{ route('assign_tasks.edit', $project->id) }}"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <?php else: ?>
+                            <a href="<?php echo e(route('assign_tasks.edit', $project->id)); ?>"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Assign Task to CCO</button></a>
-                            @endrole
-                            @endif
+                            <?php endif; ?>
+                            <?php endif; ?>
                         </div>                        
 
                         <div class="table-responsive table-responsive-data2">
@@ -112,8 +109,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(count($tasks) > 0)
-                                    @foreach ($tasks as $taskkey => $task)
+                                    <?php if(count($tasks) > 0): ?>
+                                    <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taskkey => $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="tr-shadow">
                                         <!-- <td>
                                             <label class="au-checkbox">
@@ -121,30 +118,30 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $task->title }}</td>
-                                        <td>{{ $task->projectname }}</td>                        
-                                        <td>{{ $task->duedate }}</td>                        
-                                        <td>{{ $task->status1 }}</td>
+                                        <td><?php echo e($task->title); ?></td>
+                                        <td><?php echo e($task->projectname); ?></td>                        
+                                        <td><?php echo e($task->duedate); ?></td>                        
+                                        <td><?php echo e($task->status1); ?></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <!-- <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                <!-- <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a> -->
-                                                <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button></a>
-                                                @if($project->can_edit) 
-                                                <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
+                                                <?php if($project->can_edit): ?> 
+                                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>" data-backdrop="false">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
 
-                                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
+                                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>">Delete</button> -->
 
-                                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
+                                                <form id="<?php echo e($task->id); ?>" action="" method="POST" style="display: none;">
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                 </form>
-                                                <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
+                                                <div class="modal fade" id="confirm<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
                                                   <div class="modal-dialog" role="document">
                                                     <div class="modal-content" style="text-align: left;">
                                                       <div class="modal-header">
@@ -158,12 +155,12 @@
                                                       </div>
                                                       <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($task->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
                                                       </div>
                                                     </div>
                                                   </div>
                                                 </div>
-                                                @endif
+                                                <?php endif; ?>
 
 
 
@@ -174,10 +171,10 @@
                                         </td>
                                     </tr>
                                     <tr class="spacer"></tr>
-                                    @endforeach
-                                    @else
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php else: ?>
                                         <tr style="text-align: center;"><td colspan="5">No Tasks Added</td></tr>
-                                    @endif
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -192,23 +189,23 @@
                     <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
                         
                     </div>
-                    @role('Admin')
+                    <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                     <div class="tab-pane fade" id="custom-nav-users" role="tabpanel" aria-labelledby="custom-nav-users-tab">
                         <!-- <style>
                             
                                 </style> -->
 
                             <h3 class="title-5 m-b-35">Add users to the project</h3>
-                                <link href="{{ asset('css/select.css') }}" rel="stylesheet">
+                                <link href="<?php echo e(asset('css/select.css')); ?>" rel="stylesheet">
 
-                            <form action="{{ route('project_users.update', $project['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="<?php echo e(route('project_users.update', $project['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                             <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                             <div class="subject-info-box-1">
                               <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
-                                @foreach ($users as $userkey => $user)
-                                <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userkey => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                               </select>
                             </div>
 
@@ -221,9 +218,9 @@
 
                             <div class="subject-info-box-2">
                               <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
-                                    @foreach ($selected_users as $key => $selected_user)
-                                    <option value="{{ $selected_user->id }}">{{ $selected_user->name }} {{ $selected_user->lastname }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $selected_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $selected_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($selected_user->id); ?>"><?php echo e($selected_user->name); ?> <?php echo e($selected_user->lastname); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                               </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">
@@ -234,7 +231,7 @@
                             <div class="clearfix"></div>    
 
                               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-                              <script src="{{ asset('js/select.js') }}" defer></script>
+                              <script src="<?php echo e(asset('js/select.js')); ?>" defer></script>
                               
 
                                 <!-- <script>       
@@ -246,7 +243,7 @@
                         
                         
                     </div>
-                    @endrole
+                    <?php endif; ?>
                     <div class="tab-pane fade" id="custom-nav-attestation" role="tabpanel" aria-labelledby="custom-nav-attestation-tab">
                         
                     </div>
@@ -258,4 +255,5 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

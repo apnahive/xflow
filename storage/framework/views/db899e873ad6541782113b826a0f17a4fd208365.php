@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-@if($tasks->admin == 1 || $tasks->poc == 1)
+<?php if($tasks->admin == 1 || $tasks->poc == 1): ?>
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
@@ -29,13 +27,13 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                @if($tasks->admin == 1)
-                <a href="{{ route('task_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <?php if($tasks->admin == 1): ?>
+                <a href="<?php echo e(route('task_templates.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
 
-                <a href="{{ route('task_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="<?php echo e(route('task_for_templates.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add Task to Template</button></a>
-                @endif
+                <?php endif; ?>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -64,7 +62,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($task_templates as $task_templatekey => $task_template)
+                    <?php $__currentLoopData = $task_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $task_templatekey => $task_template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="tr-shadow">
                         <!-- <td>
                             <label class="au-checkbox">
@@ -72,28 +70,28 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $task_template->name }}</td>
-                        <td>{{ $task_template->detail }}</td>                        
+                        <td><?php echo e($task_template->name); ?></td>
+                        <td><?php echo e($task_template->detail); ?></td>                        
                         <td>
                             <div class="table-data-feature">
-                                <a href="{{ route('task_templates.show', $task_template->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('task_templates.show', $task_template->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
-                                @if($tasks->admin == 1)
-                                <a href="{{ route('task_templates.edit', $task_template->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <?php if($tasks->admin == 1): ?>
+                                <a href="<?php echo e(route('task_templates.edit', $task_template->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$task_template->id}}" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($task_template->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
                                 
 
-                                <form id="{{$task_template->id}}" action="" method="POST" style="display: none;">
+                                <form id="<?php echo e($task_template->id); ?>" action="" method="POST" style="display: none;">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                 </form>
-                                <div class="modal fade" id="confirm{{$task_template->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task_template->id}}" aria-hidden="true">
+                                <div class="modal fade" id="confirm<?php echo e($task_template->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task_template->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
@@ -107,12 +105,12 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task_template->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($task_template->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                @endif
+                                <?php endif; ?>
 
 
 
@@ -123,14 +121,14 @@
                         </td>
                     </tr>
                     <tr class="spacer"></tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
         </div>
         <!-- END DATA TABLE -->
     </div>
 </div>
-@endif
+<?php endif; ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -158,10 +156,10 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                @if($tasks->admin == 1 || $tasks->poc == 1 || $tasks->cco == 1)
-                <a href="{{ route('tasks.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <?php if($tasks->admin == 1 || $tasks->poc == 1 || $tasks->cco == 1): ?>
+                <a href="<?php echo e(route('tasks.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
-                @endif
+                <?php endif; ?>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -192,7 +190,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tasks as $taskkey => $task)
+                    <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taskkey => $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="tr-shadow">
                         <!-- <td>
                             <label class="au-checkbox">
@@ -200,30 +198,30 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $task->title }}</td>
-                        <td>{{ $task->projectname }}</td>                        
-                        <td>{{ $task->duedate }}</td>                        
-                        <td>{{ $task->status1 }}</td>
+                        <td><?php echo e($task->title); ?></td>
+                        <td><?php echo e($task->projectname); ?></td>                        
+                        <td><?php echo e($task->duedate); ?></td>                        
+                        <td><?php echo e($task->status1); ?></td>
                         <td>
                             <div class="table-data-feature">
-                                <!-- <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <!-- <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a> -->
-                                <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                @if($tasks->admin == 1)
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
+                                <?php if($tasks->admin == 1): ?>
+                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
-                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
+                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>">Delete</button> -->
 
-                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
+                                <form id="<?php echo e($task->id); ?>" action="" method="POST" style="display: none;">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                 </form>
-                                <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
+                                <div class="modal fade" id="confirm<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
@@ -237,12 +235,12 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($task->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                @endif
+                                <?php endif; ?>
 
 
                                 <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -252,7 +250,7 @@
                         </td>
                     </tr>
                     <tr class="spacer"></tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
         </div>
@@ -260,4 +258,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

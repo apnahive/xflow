@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -11,16 +9,16 @@
                 
             </div>
             <div class="table-data__tool-right">
-                <a href="{{ route('tasks.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="<?php echo e(route('tasks.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
                 
             </div>
         </div> -->
         <div class="table-responsive table-responsive-data2">
-            <form class="form-horizontal  form-material" role="form" method="POST" action="{{ route('add_task.update', $template['id']) }}">
+            <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('add_task.update', $template['id'])); ?>">
             <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="project" value="{{ $project }}">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="project" value="<?php echo e($project); ?>">
             <table class="table table-data2">
                 <thead>
                     <tr>
@@ -40,29 +38,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tasks as $taskkey => $task)
+                    <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taskkey => $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="tr-shadow">
                         <td>
                             <label class="au-checkbox">
                                 <!-- <input type="checkbox"> -->
-                                <input type="hidden" name="task{{ $task->id }}" value="false">
-                                <input type="checkbox" id="task{{ $task->id }}" value="true" name="task{{ $task->id }}">
+                                <input type="hidden" name="task<?php echo e($task->id); ?>" value="false">
+                                <input type="checkbox" id="task<?php echo e($task->id); ?>" value="true" name="task<?php echo e($task->id); ?>">
                                 <span class="au-checkmark"></span>
                             </label>
                         </td>
-                        <td>{{ $task->title }}</td>
-                        <td>{{ $task->category1 }}</td>                        
-                        <!-- <td>{{ $task->duedate }}</td>                        
-                        <td>{{ $task->category1 }}</td> -->
+                        <td><?php echo e($task->title); ?></td>
+                        <td><?php echo e($task->category1); ?></td>                        
+                        <!-- <td><?php echo e($task->duedate); ?></td>                        
+                        <td><?php echo e($task->category1); ?></td> -->
                         <td>
                             <!-- <div class="table-data-feature">
-                                <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
-                                <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
@@ -71,7 +69,7 @@
                         </td>
                     </tr>
                     <tr class="spacer"></tr>
-                    @endforeach                    
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                    
                 </tbody>                
             </table>
             <div class="form-group">
@@ -91,4 +89,5 @@
          $('input:checkbox').not(this).prop('checked', this.checked);
      });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

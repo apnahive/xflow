@@ -27,6 +27,9 @@ class UserController extends Controller {
     */
     public function index() {
     //Get all users and pass it to the view
+        /*$user = Auth::user();
+        $roles = $user->roles()->pluck('name');
+        dd($roles);*/
         $users = User::all(); 
         return view('users.index')->with('users', $users);
     }
@@ -115,7 +118,7 @@ class UserController extends Controller {
         $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
         $roles = $request['roles']; //Retreive all roles
         $user->fill($input)->save();
-
+        //dd($roles);
         if (isset($roles)) {        
             $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
         }        

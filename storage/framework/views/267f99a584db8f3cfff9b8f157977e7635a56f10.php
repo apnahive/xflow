@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -8,8 +6,9 @@
             <div class="card-header">
                 <strong>Create</strong> Task
             </div>            
-            <form action="{{ route('tasks.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
+            <form action="<?php echo e(route('tasks.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -18,9 +17,10 @@
                         <div class="col-12 col-md-9">
                             <select name="project" id="project" class="custom-select form-control chosen">
                                 <option value="0">Please select</option>
-                                @foreach ($projects as $project) 
-                                    <option value="{{$project->id}}">{{$project->name}}
-                                @endforeach
+                                <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($project->id); ?>"><?php echo e($project->name); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                         </div>
                     </div> 
@@ -31,11 +31,11 @@
                         <div class="col-12 col-md-9">
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
+                            <?php if($errors->has('title')): ?>
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong><?php echo e($errors->first('title')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -43,14 +43,14 @@
                             <label for="duedate" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="duedate" type="date" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
+                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
                         </div>
 
-                        @if ($errors->has('duedate'))
+                        <?php if($errors->has('duedate')): ?>
                             <span class="help-block">
-                                <strong>{{ $errors->first('duedate') }}</strong>
+                                <strong><?php echo e($errors->first('duedate')); ?></strong>
                             </span>
-                        @endif                                                       
+                        <?php endif; ?>                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -70,28 +70,28 @@
                             <label for="estimated_time_to_complete" class=" form-control-label">Estimated Time to Complete (in minutes)</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="{{ old('estimated_time_to_complete') }}" required autofocus>
+                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="<?php echo e(old('estimated_time_to_complete')); ?>" required autofocus>
                         </div>
 
-                        @if ($errors->has('estimated_time_to_complete'))
+                        <?php if($errors->has('estimated_time_to_complete')): ?>
                             <span class="help-block">
-                                <strong>{{ $errors->first('estimated_time_to_complete') }}</strong>
+                                <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>
                             </span>
-                        @endif                                                       
+                        <?php endif; ?>                                                       
                     </div>
                     <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="actual_time_to_complete" class="form-control-label">Actual Time to Complete</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="actual_time_to_complete" type="time" class="form-control" name="actual_time_to_complete" value="{{ old('actual_time_to_complete') }}" required autofocus>
+                            <input id="actual_time_to_complete" type="time" class="form-control" name="actual_time_to_complete" value="<?php echo e(old('actual_time_to_complete')); ?>" required autofocus>
                         </div>
 
-                        @if ($errors->has('actual_time_to_complete'))
+                        <?php if($errors->has('actual_time_to_complete')): ?>
                             <span class="help-block">
-                                <strong>{{ $errors->first('actual_time_to_complete') }}</strong>
+                                <strong><?php echo e($errors->first('actual_time_to_complete')); ?></strong>
                             </span>
-                        @endif                                                       
+                        <?php endif; ?>                                                       
                     </div> -->
                     <!-- <div class="row form-group">
                         <div class="col col-md-3">
@@ -111,14 +111,14 @@
                             <label for="date_completed" class="form-control-label">Date Completed</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="date_completed" type="date" class="form-control" name="date_completed" value="{{ old('date_completed') }}" required autofocus>
+                            <input id="date_completed" type="date" class="form-control" name="date_completed" value="<?php echo e(old('date_completed')); ?>" required autofocus>
                         </div>
 
-                        @if ($errors->has('date_completed'))
+                        <?php if($errors->has('date_completed')): ?>
                             <span class="help-block">
-                                <strong>{{ $errors->first('date_completed') }}</strong>
+                                <strong><?php echo e($errors->first('date_completed')); ?></strong>
                             </span>
-                        @endif                                                       
+                        <?php endif; ?>                                                       
                     </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -126,11 +126,11 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <textarea name="note" id="note" rows="3" placeholder="Note..." class="form-control"></textarea>
-                            @if ($errors->has('note'))
+                            <?php if($errors->has('note')): ?>
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('note') }}</strong>
+                                    <strong><?php echo e($errors->first('note')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -150,4 +150,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

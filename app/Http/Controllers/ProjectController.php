@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Project;
 use App\Task;
+use App\Project_user;
 
 class ProjectController extends Controller
 {
@@ -14,14 +16,62 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $id1 = Auth::id();
         $projects = Project::all();
         foreach ($projects as $key => $value) {
             $poc = User::find($value->poc);
             $value->pocname = $poc->name;
             $cco = User::find($value->cco);
-            $value->cconame = $poc->name;
+            $value->cconame = $cco->name;
+            if($id1 == $poc->id || $id1 == 1)
+            {
+                $value->can_edit = 1;
+                $value->can_view = 1;
+                if($id1 == 1)
+                    $value->can_delete = 1;
+                else
+                    $value->can_delete = 0;
+            }
+            elseif($id1 == $cco->id)
+            {
+                $value->can_edit = 0;
+                $value->can_view = 1;
+                $value->can_delete = 0;
+            }
+            else
+            {
+                $project_users = Project_user::where('project_id', $value->id)->get();
+                foreach ($project_users as $project_userkey => $project_user) 
+                {
+                    if($project_user->user_id == $id1)
+                    {
+                        $value->can_edit = 0;
+                        $value->can_view = 1;
+                        $value->can_delete = 0;
+                    }
+                    else
+                    {
+                        $value->can_edit = 0;
+                        $value->can_view = 0;
+                        $value->can_delete = 0;
+                    }
+                }
+            }
+
+        }
+        if($id1 == 1)
+        {
+            $projects->can_create = 1;
+        }
+        else
+        {
+            $projects->can_create = 0;
         }
         //dd($projects);
         return view('projects.index', compact('projects'));
@@ -34,8 +84,16 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $id1 = Auth::id();
         $users = User::all();
-        return view('projects.create', compact('users'));
+        if($id1 == 1)
+        {
+            return view('projects.create', compact('users', 'can_create'));
+        }
+        else
+        {
+            return view('errors.401');
+        }        
     }
 
     /**
@@ -60,6 +118,15 @@ class ProjectController extends Controller
         $project->poc = $request->poc;
         $project->cco = $request->cco;
         $project->duedate = $request->duedate;
+
+        $user1 = User::findOrFail($request->poc);
+        $user1->roles()->sync(2);
+
+        $user2 = User::findOrFail($request->cco);
+        $user2->roles()->sync(3);
+
+
+
         $project->save();
         return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
     }
@@ -72,16 +139,24 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        $id1 = Auth::id();
         $project = Project::find($id);
         $poc = User::find($project->poc);
         $project->pocname = $poc->name;
         $cco = User::find($project->cco);
-        $project->cconame = $poc->name;
+        $project->cconame = $cco->name;
+
+        $project_users = Project_user::where('project_id', $id)->select('user_id')->get();
+        $admin = 1;
+        $users = User::whereNotIn('id', $project_users)->where('id', '<>', $admin)->get();
+        $selected_users = User::whereIn('id', $project_users)->get();
+
+        //dd($selected_users, $users);
 
         $tasks = Task::where('project_id', $id)->get();
         foreach ($tasks as $key => $value) {
-            $project = Project::find($value->project_id);
-            $value->projectname = $project->name;
+            $project1 = Project::find($value->project_id);
+            $value->projectname = $project1->name;
             if($value->status == 1)
             {
                 $value->status1 = 'pending';
@@ -99,8 +174,39 @@ class ProjectController extends Controller
                 $value->status1 = 'no status';
             }
         }
-        
-        return view('projects.show', compact('project', 'tasks'));
+        if($id1 == $poc->id || $id1 == 1)
+        {
+            $project->can_edit = 1;
+            $project->can_view = 1;
+            $project->can_delete = 1;
+        }
+        elseif($id1 == $cco->id)
+        {
+            $project->can_edit = 0;
+            $project->can_view = 1;
+            $project->can_delete = 0;
+        }
+        else
+        {
+            $project_users = Project_user::where('project_id', $project->id)->get();
+            foreach ($project_users as $project_userkey => $project_user) 
+            {
+                if($project_user->user_id == $id1)
+                {
+                    $project->can_edit = 0;
+                    $project->can_view = 1;
+                    $project->can_delete = 0;
+                }
+                else
+                {
+                    $project->can_edit = 0;
+                    $project->can_view = 0;
+                    $project->can_delete = 0;
+                }
+            }
+        }
+        //dd($project);
+        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users'));
     }
 
     /**
@@ -111,9 +217,17 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
+        $id1 = Auth::id();
         $users = User::all();
         $project = Project::find($id);
-        return view('projects.edit', compact('users', 'project'));
+        if($id1 == $project->poc || $id1 == 1)
+        {
+            return view('projects.edit', compact('users', 'project'));
+        }
+        else
+        {
+            return view('errors.401');
+        }
     }
 
     /**
@@ -138,6 +252,14 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->poc = $request->poc;
         $project->cco = $request->cco;
+
+        /*$user1 = User::findOrFail($request->poc);
+        $user1->roles()->sync(2);
+
+        $user2 = User::findOrFail($request->cco);
+        $user2->roles()->sync(3);*/
+
+        
         $project->duedate = $request->duedate;
         $project->save();
         return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');

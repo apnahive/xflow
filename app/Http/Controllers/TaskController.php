@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Project_user;
 use App\Task;
+use App\User;
 use App\Task_template;
 use App\Task_for_template;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +25,42 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = Task::all();
+        
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {
+            //$users = User::all();
+            $tasks = Task::all();
+            $tasks->admin = 1;
+        }
+        else
+        {
+            $tasks = Task::where('assignee', $id1)->get();            
+            $tasks->admin = 0;
+        }
+
+        if($projects = Project::where('poc', $id1)->exists())
+        {
+            $tasks->poc = 1;            
+        }
+        else
+        {
+            $tasks->poc = 0;
+        }
+        if($projects = Project::where('cco', $id1)->exists())
+        {
+            $tasks->cco = 1;            
+        }
+        else
+        {
+            $tasks->cco = 0;
+        }
+
+
+
         foreach ($tasks as $key => $value) {
             $project = Project::find($value->project_id);
+
             $value->projectname = $project->name;
             if($value->status == 1)
             {
@@ -57,7 +92,17 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $projects = Project::all();
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {
+            //$users = User::all();
+            $projects = Project::all(); 
+        }
+        else
+        {
+            $projects = Project::where('poc', $id1)->get();
+        }
+        
         return view('tasks.create', compact('projects'));
     }
 
@@ -75,10 +120,7 @@ class TaskController extends Controller
             'title'=> 'required|max:20',
             'duedate'=> 'required|date',
             'category'=> 'numeric|min:1',
-            'estimated_time_to_complete'=> 'required|date_format:H:i',
-            'actual_time_to_complete'=> 'required|date_format:H:i',
-            'status'=> 'numeric|min:1',
-            'date_completed'=> 'required|date',
+            'estimated_time_to_complete'=> 'numeric|min:1',
             'note'=> 'required|max:191',
         ));
         $task = new Task;
@@ -87,12 +129,21 @@ class TaskController extends Controller
         $task->duedate = $request->duedate;
         $task->category = $request->category;
         $task->estimated_time_to_complete = $request->estimated_time_to_complete;
-        $task->actual_time_to_complete = $request->actual_time_to_complete;
-        $task->status = $request->status;
-        $task->date_completed = $request->date_completed;
+        //$task->actual_time_to_complete = $request->actual_time_to_complete;
+        $task->status = 1;
+        //$task->date_completed = $request->date_completed;
         $task->note = $request->note;
+
         $id1 = Auth::id();
-        $task->assignee = $id1;
+        if($id1 == 1)
+        {
+            $project = Project::find($request->project);
+            $task->assignee = $project->poc;
+        }
+        else
+        {
+            $task->assignee = $id1;    
+        }
         
         $task->save();
         return redirect()->route('tasks.index')->with('success', 'You have successfully created Task');
@@ -117,9 +168,57 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $projects = Project::all();
+        $id1 = Auth::id();                        
         $task = Task::find($id);
-        return view('tasks.edit', compact('projects', 'task'));
+        /*if($id1 == 1)
+        {
+            //$users = User::all();
+            $task->admin = 1;
+            $projects = Project::all(); 
+        }
+        else
+        {
+            $projects = Project::where('poc', $id1)->get();
+            $task->admin = 0;
+        }*/
+        $projects = Project::all(); 
+
+        if($id1 == 1)
+        $task->admin = 1;
+        else
+        $task->admin = 0;
+
+        $task_project = Project::find($task->project_id);
+        if($task_project->poc == 1)
+        {            
+
+            $task->poc = 1;
+            $task->cco = 0; 
+            $task->user = 0;           
+        }
+        elseif($task_project->cco == 1)
+        {
+            
+            $task->poc = 0;
+            $task->cco = 1; 
+            $task->user = 0;           
+        }
+        else
+        {
+            
+            $task->poc = 0;
+            $task->cco = 0;
+            if(Project_user::where('project_id', $task_project->id)->where('user_id', $id1)->exists())
+                $task->user = 1;
+            else
+                $task->user = 0;
+        }
+        //dd($task);
+        $users = User::all();
+        if($task->admin || $task->poc || $task->cco || $task->user)
+            return view('tasks.edit', compact('projects', 'task', 'users'));
+        else
+            return view('errors.401');
     }
 
     /**
@@ -131,29 +230,34 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd(request()->all());
         $this->validate($request, array(
             'project'=> 'numeric|min:1',
-            'title'=> 'required|max:20',
-            'duedate'=> 'required|date',
+            'title'=> 'max:20',
+            'duedate'=> 'date',
             'category'=> 'numeric|min:1',
-            'estimated_time_to_complete'=> 'required|date_format:H:i',
-            'actual_time_to_complete'=> 'required|date_format:H:i',
-            'status'=> 'numeric|min:1',
-            'date_completed'=> 'required|date',
-            'note'=> 'required|max:191',
+            'estimated_time_to_complete'=> 'numeric|min:1',
+            'actual_time_to_complete'=> 'numeric|min:1',
+            'status'=> 'numeric|min:1',            
+            'note'=> 'max:191',
         ));
         $task = Task::find($id);
+        if($request->project)
         $task->project_id = $request->project;
+        if($request->title)
         $task->title = $request->title;
+        if($request->duedate)
         $task->duedate = $request->duedate;
+        if($request->category)
         $task->category = $request->category;
+        if($request->estimated_time_to_complete)
         $task->estimated_time_to_complete = $request->estimated_time_to_complete;
         $task->actual_time_to_complete = $request->actual_time_to_complete;
         $task->status = $request->status;
         $task->date_completed = $request->date_completed;
         $task->note = $request->note;
-        $id1 = Auth::id();
-        $task->assignee = $id1;
+        if($request->assignee)
+        $task->assignee = $request->assignee;
         
         $task->save();
         return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');
