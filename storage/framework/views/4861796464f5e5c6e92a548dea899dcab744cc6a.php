@@ -187,6 +187,41 @@
                         
                     </div>
                     <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
+                        <form action="<?php echo e(route('fileupload.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">                        
+                        <?php echo e(csrf_field()); ?>
+
+                            <div class="row" style="padding-bottom: 30px;">
+                                <input type="hidden" name="project_id" value="<?php echo e($project->id); ?>">
+                                <div class="col-md-6">
+                                    <br/>
+                                    <input class="file" name="file" type="file" style="float: right;">
+                                </div>
+                                <div class="col-md-6">
+                                    <br/>
+                                    <button type="submit" class="btn btn-success">Upload file</button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table table-data2">                        
+                            <thead>
+                                <tr>                                    
+                                    <th>Project Files</th>                                    
+                                </tr>
+                            </thead>
+                        <tbody>                            
+                        <?php if(count($files) > 0): ?>
+                        <?php $__currentLoopData = $files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filekey => $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr class="tr-shadow">                            
+                            <td>
+                                <a href="<?php echo e(route('fileupload.show', $file->file)); ?>" target="_blank"><?php echo e($file->file); ?></a>
+                            </td>                            
+                        </tr>                        
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php else: ?>
+                            <tr style="text-align: center;"><td colspan="5">No Files Added</td></tr>
+                        <?php endif; ?>
+                        </tbody>
+                        </table>
                         
                     </div>
                     <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
@@ -245,6 +280,81 @@
                     </div>
                     <?php endif; ?>
                     <div class="tab-pane fade" id="custom-nav-attestation" role="tabpanel" aria-labelledby="custom-nav-attestation-tab">
+                        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+                        <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+                        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js" defer></script>  
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js" defer></script>    
+                         
+                        <script>
+                                $(document).ready(function() {
+                                    $('.summernote').summernote();
+                                });
+                        </script>
+
+
+
+                        <form action="<?php echo e(route('project_forms.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">                        
+                        <?php echo e(csrf_field()); ?>
+
+                            <input type="hidden" name="project_id" value="<?php echo e($project->id); ?>">
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="form_files" class=" form-control-label">Files</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
+                                    <br>
+                                    <?php if(count($form_files) > 0): ?>
+                                    <?php $__currentLoopData = $form_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_filekey => $form_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file); ?></a>
+                                        <br>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+                                </div>
+                                <?php if($errors->has('form_files')): ?>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong><?php echo e($errors->first('form_files')); ?></strong>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="summernote" class=" form-control-label">Attestation</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <textarea name="summernote" id="summernote" class="summernote"><?php echo e($attestation->description); ?></textarea>
+                                    
+                                
+                                    <?php if($errors->has('summernote')): ?>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($errors->first('summernote')); ?></strong>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <input type="hidden" name="send_all" value="false">
+                                    <input type="checkbox" id="send_all" value="true" name="send_all">
+                                    <label for="send_all"> Send To All </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <button type="submit" class="btn btn-info">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>                             
+
+                            
+
+
+                            
+                        </form> -->
                         
                     </div>
                 </div>

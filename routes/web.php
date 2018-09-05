@@ -37,3 +37,13 @@ Route::get('add_task/{projectId}/add/{templateId}', 'Add_taskController@add')->n
 
 Route::resource('project_users', 'Project_userController');
 Route::resource('assign_tasks', 'Assign_taskController');
+
+Route::resource('attestations', 'AttestationController');
+Route::resource('project_forms', 'Project_formController');
+Route::resource('form_sign', 'Form_signController');
+
+
+
+
+
+Route::resource('fileupload', 'FileUploadController');

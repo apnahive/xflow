@@ -8,6 +8,12 @@ use App\User;
 use App\Project;
 use App\Task;
 use App\Project_user;
+use App\Project_file;
+use App\Attestation;
+use App\Form_file;
+use App\Form_sign;
+use App\Project_form;
+
 
 class ProjectController extends Controller
 {
@@ -205,8 +211,20 @@ class ProjectController extends Controller
                 }
             }
         }
+        $files = Project_file::where('project_id', $id)->get();
+
+        if(Project_form::where('project_id', $id)->exists())
+        {
+            $attestation = Project_form::where('project_id', $id)->first();
+        }
+        else
+        {
+            $attestation = Attestation::find(3);
+        }
+        $form_files = Form_file::where('project_id', $id)->get();
+        
         //dd($project);
-        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users'));
+        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files'));
     }
 
     /**
