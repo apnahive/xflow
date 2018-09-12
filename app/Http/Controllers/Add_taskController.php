@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Project;
 use App\Task;
 use App\Task_template;
@@ -14,7 +15,12 @@ class Add_taskController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -126,6 +132,7 @@ class Add_taskController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
+        $id1 = Auth::id();
         $template = Task_template::find($id);
         $project = Project::find($request->project);
         //dd($template, $project);
@@ -144,6 +151,7 @@ class Add_taskController extends Controller
                 $task->estimated_time_to_complete = $value->estimated_time_to_complete;
                 $task->status = 1;
                 $task->note = $value->note;
+                $task->responsible = $id1;
                 $task->save();
             }
         }

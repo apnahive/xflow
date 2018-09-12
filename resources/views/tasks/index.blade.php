@@ -2,6 +2,9 @@
 
 @section('content')
 
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+
 @if($tasks->admin == 1 || $tasks->poc == 1)
 <div class="row">
     <div class="col-md-12">
@@ -175,6 +178,30 @@
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">
                 <thead>
+                    <!-- <form action="{!! route('tasks.search') !!}" method="POST" role="search" class="search-des">
+                    {{ csrf_field() }}
+                    <tr>                        
+                        <th><input id="task" type="text" class="col-md-12" name="task" value="{{ old('task') }}" placeholder="Task" style="border: 1px solid #bfbaba;padding: 9px;"></th>
+                        <th><input id="project" type="text" class="col-md-12" name="project" value="{{ old('project') }}" placeholder="Project" style="border: 1px solid #bfbaba;padding: 9px;"></th>
+                        <th>
+                            <select class="custom-select form-control" id="status" name="status">
+                              <option selected>Managed By</option>
+                                <h1><option value="available">Available</option></h1>
+                                <h1><option value="booked">Booked</option></h1>
+                                <h1><option value="hold-sites">Hold Sites</option></h1>
+                            </select>
+                        </th>
+                        <th>
+                            <select class="custom-select form-control" id="status" name="status">
+                              <option selected>Assigned To</option>
+                                <h1><option value="available">Available</option></h1>
+                                <h1><option value="booked">Booked</option></h1>
+                                <h1><option value="hold-sites">Hold Sites</option></h1>
+                            </select>
+                        </th>                        
+                        <th><button type="submit" class="btn btn-md btn-info" style="width: 100%;"><span class="glyphicon glyphicon-search"></span> Search</button></th>
+                    </tr>
+                    </form> -->
                     <tr>
                         <!-- <th>
                             <label class="au-checkbox">
@@ -184,8 +211,8 @@
                         </th> -->
                         <th>Task</th>
                         <th>Project</th>
-                        <th>Due Date</th>
-                        <th>Status</th>
+                        <th>Managed By</th>
+                        <th>Assigned To</th>
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>
@@ -193,25 +220,79 @@
                 </thead>
                 <tbody>
                     @foreach ($tasks as $taskkey => $task)
-                    <tr class="tr-shadow">
+                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @endif>
                         <!-- <td>
                             <label class="au-checkbox">
                                 <input type="checkbox">
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $task->title }}</td>
-                        <td>{{ $task->projectname }}</td>                        
-                        <td>{{ $task->duedate }}</td>                        
-                        <td>{{ $task->status1 }}</td>
+                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }} </a><br><span style="color: #808080b0;">(Due Date: {{ $task->duedate }})</span></td>
+                        <td><a href="{{ route('projects.show', $task->project_id) }}">{{ $task->projectname }}</td>                        
+                        <td>{{ $task->managedby }}</td>                        
+                        <td>{{ $task->assignedto }} <br> Status: {{ $task->status1 }}</td>
                         <td>
                             <div class="table-data-feature">
                                 <!-- <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a> -->
+                                @if($tasks->admin == 1 || $task->poc == 1 || $task->cco == 1)
+                                <button class="item" data-toggle="modal" data-target="#assign{{$task->id}}" data-backdrop="false">
+                                    <i class="fa fa-user"></i>
+                                </button>
+
+                                <div class="modal fade" id="assign{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <form action="{{ route('assign_tasks.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                    <div class="modal-content" style="text-align: left;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="assignee" class=" form-control-label">Assignee</label>
+                                            </div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
+                                                    <option value="0">Please select</option>
+                                                    @foreach ($users as $user) 
+                                                        <option value="{{$user->id}}" {{ $task['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
+                                      </div>
+                                    </div>
+                                    </form>
+                                  </div>
+                                </div>
+
+
+
+                                @endif
+                                @if($tasks->admin == 1 || $task->poc == 1 || $task->cco == 1 || $task->user == 1)
+                                <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button></a>
+                                @endif
+                                @if($tasks->admin == 1 || $task->poc == 1)
                                 <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
+                                @endif
+                                
                                 @if($tasks->admin == 1)
                                 <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>

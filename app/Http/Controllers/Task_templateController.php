@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task_template;
 use App\Task_for_template;
+use Illuminate\Support\Facades\Auth;
 
 class Task_templateController extends Controller
 {
@@ -13,10 +14,23 @@ class Task_templateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $tasks = Task_template::all();
-        return view('task_templates.index', compact('tasks'));
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {
+            $tasks = Task_template::all();
+            return view('task_templates.index', compact('tasks'));    
+        }
+        else
+        {
+            return view('errors.401');
+        }        
     }
 
     /**
@@ -26,7 +40,15 @@ class Task_templateController extends Controller
      */
     public function create()
     {
-        return view('task_templates.create');
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {
+            return view('task_templates.create');
+        }
+        else
+        {
+            return view('errors.401');
+        }        
     }
 
     /**
@@ -88,8 +110,16 @@ class Task_templateController extends Controller
      */
     public function edit($id)
     {
-        $task = Task_template::find($id);
-        return view('task_templates.edit', compact('task'));
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {
+            $task = Task_template::find($id);
+            return view('task_templates.edit', compact('task'));
+        }
+        else
+        {
+            return view('errors.401');
+        }
     }
 
     /**

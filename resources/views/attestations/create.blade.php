@@ -28,7 +28,8 @@
            /* $('.summernote').summernote('code', content);*/
         });
 </script>
-
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">

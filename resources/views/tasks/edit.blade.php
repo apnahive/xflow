@@ -2,6 +2,9 @@
 
 @section('content')
 
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+                    
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -102,7 +105,7 @@
                             <select name="status" id="status" class="form-control">
                                 <option value="0">Please select</option>
                                 <option value="1" {{ $task['status'] == 1 ? 'selected' : '' }}>Pending</option>
-                                <option value="2" {{ $task['status'] == 2 ? 'selected' : '' }}>initiated</option>
+                                <option value="2" {{ $task['status'] == 2 ? 'selected' : '' }}>Initiated</option>
                                 <option value="3" {{ $task['status'] == 3 ? 'selected' : '' }}>completed</option>
                             </select>
                         </div>

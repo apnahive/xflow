@@ -42,6 +42,8 @@ class FileUploadController extends Controller
         $uploadfile = new Project_file;
         $uploadfile->project_id = $request->project_id;
 
+        $file_name = $request->file('file')->getClientOriginalName();
+        //dd($file_name);
         $file = $request->file('file');
         //dd($file);
         $input['file'] = time().'.'.$file->getClientOriginalExtension();
@@ -53,6 +55,7 @@ class FileUploadController extends Controller
 
 
         $uploadfile->file = $input['file'];
+        $uploadfile->file_name = $file_name;
         $uploadfile->save();
 
         return redirect()->route('projects.show', $request->project_id)->with('success', 'You have successfully Uploaded file in project');
@@ -68,6 +71,7 @@ class FileUploadController extends Controller
     public function show($id)
     {
         $fullpath="project/{$id}";
+        //dd($fullpath);
         return response()->download(storage_path($fullpath), null, [], null);
     }
 

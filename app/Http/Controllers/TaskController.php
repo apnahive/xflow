@@ -10,6 +10,7 @@ use App\User;
 use App\Task_template;
 use App\Task_for_template;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class TaskController extends Controller
 {
@@ -27,6 +28,8 @@ class TaskController extends Controller
     {
         
         $id1 = Auth::id();
+        $now = new \DateTime();
+        
         if($id1 == 1)
         {
             //$users = User::all();
@@ -35,7 +38,7 @@ class TaskController extends Controller
         }
         else
         {
-            $tasks = Task::where('assignee', $id1)->get();            
+            $tasks = Task::where('assignee', $id1)->get();
             $tasks->admin = 0;
         }
 
@@ -78,11 +81,49 @@ class TaskController extends Controller
             {
                 $value->status1 = 'no status';
             }
-        }
+            $assigned = User::find($value->assignee);
+            $value->assignedto = $assigned->name;
+            $managed = User::findOrFail($value->responsible);
+            $value->managedby = $managed->name;
 
+            if($project->poc == $id1)
+                $value->poc = 1;
+            if($project->cco == $id1)
+                $value->cco = 1;
+
+            if(Project_user::where('project_id', $project->id)->where('user_id', $id1)->exists())
+                $value->user = 1;
+            else
+                $value->user = 0;
+
+            //color coding of task
+            $date1 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            //dd($now, $date1, $d, $d->days);
+            if($d->days > 3)
+                $value->color = 3;
+            if($d->days <= 3)
+                $value->color = 2;
+            if($d->invert)
+                $value->color = 1;
+
+            //dd($d->days > 3, $d);
+
+            //dd($value, $project); 
+        }
+        $users = User::all();
         $task_templates = Task_template::all();
-        //dd($projects);
-        return view('tasks.index', compact('tasks', 'task_templates'));
+        //dd($tasks);
+
+        // search functionality
+
+        $managed = Task::select('responsible')->get();
+        //dd($managed);
+        return view('tasks.index', compact('tasks', 'task_templates', 'users'));
+    }
+    public function search(Request $request)
+    {
+        dd('search has been hit');
     }
 
     /**
@@ -100,9 +141,9 @@ class TaskController extends Controller
         }
         else
         {
-            $projects = Project::where('poc', $id1)->get();
+            $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->get();
         }
-        
+        //dd($projects);
         return view('tasks.create', compact('projects'));
     }
 
@@ -139,10 +180,12 @@ class TaskController extends Controller
         {
             $project = Project::find($request->project);
             $task->assignee = $project->poc;
+            $task->responsible = $id1;
         }
         else
         {
-            $task->assignee = $id1;    
+            $task->assignee = $id1;
+            $task->responsible = $id1;    
         }
         
         $task->save();
@@ -156,8 +199,34 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {        
+        $task = Task::find($id);
+        //$users = User::all();
+        $project = Project::find($task->project_id);
+        $task->projectname = $project->name;
+        $assignee = User::find($task->assignee);
+        $task->assigneename = $assignee->name;
+        if($task->category == 1)
+            $task->categorys = "simple";
+        elseif($task->category == 2)
+            $task->categorys = "Average";
+        else
+            $task->categorys = "Difficult";
+
+        if($task->status == 1)
+            $task->statuss = "Pending";
+        elseif($task->status == 2)
+            $task->statuss = "Initiated";
+        else
+            $task->statuss = "completed";
+
+        $responsible = User::find($task->responsible);
+        $task->responsibles = $responsible->name;
+
+        //dd($task);
+
+
+        return view('tasks.show', compact('task'));
     }
 
     /**
@@ -189,14 +258,14 @@ class TaskController extends Controller
         $task->admin = 0;
 
         $task_project = Project::find($task->project_id);
-        if($task_project->poc == 1)
+        if($task_project->poc == $id1)
         {            
 
             $task->poc = 1;
             $task->cco = 0; 
             $task->user = 0;           
         }
-        elseif($task_project->cco == 1)
+        elseif($task_project->cco == $id1)
         {
             
             $task->poc = 0;
@@ -241,6 +310,9 @@ class TaskController extends Controller
             'status'=> 'numeric|min:1',            
             'note'=> 'max:191',
         ));
+
+        $id1 = Auth::id();
+
         $task = Task::find($id);
         if($request->project)
         $task->project_id = $request->project;
@@ -257,7 +329,15 @@ class TaskController extends Controller
         $task->date_completed = $request->date_completed;
         $task->note = $request->note;
         if($request->assignee)
-        $task->assignee = $request->assignee;
+        {
+            $task->assignee = $request->assignee;
+            if($request->assignee == $id1)
+            {}
+            else
+            {
+                $task->responsible = $id1;
+            }
+        }
         
         $task->save();
         return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');

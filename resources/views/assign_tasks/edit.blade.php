@@ -6,16 +6,17 @@
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Assign Task to CCO</h3>
-        <!-- <div class="table-data__tool">
+        <div class="table-data__tool">
             <div class="table-data__tool-left">
-                
+                <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
             </div>
-            <div class="table-data__tool-right">
+            <!-- <div class="table-data__tool-right">
                 <a href="{{ route('tasks.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
                 
-            </div>
-        </div> -->
+            </div> -->
+        </div>
         <div class="table-responsive table-responsive-data2">
             <form class="form-horizontal  form-material" role="form" method="POST" action="{{ route('assign_tasks.update', $project['id']) }}">
             <input type="hidden" name="_method" value="PUT">
@@ -40,7 +41,9 @@
 
             <div class="subject-info-box-2">
               <select multiple="true" id="lstBox2" name="assigned[]" class="form-control" >
-                    
+                @foreach ($cco_tasks as $cco_taskkey => $cco_task)
+                <option value="{{ $cco_task->id }}">{{ $cco_task->title }}</option>
+                @endforeach                    
               </select>
             </div>
             <button type="submit" class="btn btn-primary btn-sm">

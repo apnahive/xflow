@@ -42,7 +42,7 @@ class Task_for_templateController extends Controller
             'template_id'=> 'numeric|min:1',
             'title'=> 'required|max:20',            
             'category'=> 'numeric|min:1',
-            'estimated_time_to_complete'=> 'required|date_format:H:i',
+            'estimated_time_to_complete'=> 'numeric|min:1',
             'note'=> 'required|max:191',
         ));
         $task = new Task_for_template;
@@ -53,7 +53,7 @@ class Task_for_templateController extends Controller
         $task->note = $request->note;        
         
         $task->save();
-        return redirect()->route('task_templates.index')->with('success', 'You have successfully added Task');
+        return redirect()->route('tasks.index')->with('success', 'You have successfully added Task');
     }
 
     /**

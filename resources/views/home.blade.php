@@ -62,12 +62,51 @@
             <!-- END WELCOME-->
 
             <!-- STATISTIC-->
+            @role('Admin')
+            @else
+            <section class="statistic">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="statistic__item">
+                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $poc->task }} tasks </a> </h2>
+                                    <span class="desc">in <a href="{{ route('projects.index') }}">{{ $poc->project }} projects as POC</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="statistic__item">
+                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $cco->task }} tasks </a></h2>
+                                    <span class="desc">in <a href="{{ route('projects.index') }}">{{ $cco->project }} projects as CCO</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="statistic__item">
+                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $tasks->remaining }} tasks </a></h2>
+                                    <span class="desc">in other projects assigned</span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @endrole
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--red">
-                                <h2 class="number">10</h2>
+                                <h2 class="number">{{ $tasks->red }}</h2>
                                 <span class="desc">tasks past due date</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
@@ -76,7 +115,7 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
-                                <h2 class="number">38</h2>
+                                <h2 class="number">{{ $tasks->yellow }}</h2>
                                 <span class="desc">3 days to due</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
@@ -85,7 +124,7 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--green">
-                                <h2 class="number">12</h2>
+                                <h2 class="number">{{ $tasks->green }}</h2>
                                 <span class="desc">greater than 3 days to complete</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
@@ -104,6 +143,8 @@
                     </div>
                 </div>
             </section>
+
+            
             <!-- END STATISTIC-->
         </div>
 @endsection

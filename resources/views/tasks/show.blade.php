@@ -3,99 +3,118 @@
 
 @section('content')
 
-<div class="col-lg-12">
-    <div class="card">
-        <!-- <div class="card-header">
-            <h4>Custom Tab</h4>
-        </div> -->
-        <div class="card-body">
-            <div class="custom-tab">
-
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="custom-nav-project-tab" data-toggle="tab" href="#custom-nav-project" role="tab" aria-controls="custom-nav-project"
-                         aria-selected="true"><i class="fab fa-product-hunt"></i>Project</a>
-                        <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
-                         aria-selected="false"><i class="fas fa-tasks"></i>Tasks</a>
-                        <a class="nav-item nav-link" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
-                         aria-selected="false"><i class="fas fa-cogs"></i>X-flow</a>
-                        <a class="nav-item nav-link" id="custom-nav-checklist-tab" data-toggle="tab" href="#custom-nav-checklist" role="tab" aria-controls="custom-nav-checklist"
-                         aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>
-                        <a class="nav-item nav-link" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
-                         aria-selected="false"><i class="fas fa-copy"></i>Files</a>
-                        <a class="nav-item nav-link" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
-                         aria-selected="false"><i class="fas fa-users"></i>Users</a>
-                        <a class="nav-item nav-link" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
-                         aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
-                    </div>
-                </nav>
-                <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
-                        <div class="card-body card-block">
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="name" class=" form-control-label">Name</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $project->name }}</label>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label">Description</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label">{{ $project->description }}</label>
-                                </div>
-                            </div>                    
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="poc" class=" form-control-label">POC</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="poc" class=" form-control-label">{{ $project->pocname }}</label>
-                                </div>
-                            </div>                    
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="cco" class=" form-control-label">CCO</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="cco" class=" form-control-label">{{ $project->cconame }}</label>
-                                </div>
-                            </div>                            
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label">Due Date</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="duedate" class=" form-control-label">{{ $project->duedate }}</label>
-                                </div>
-                            </div>
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+                    
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>{{ $task['title'] }}</strong>
+                @if($task->status == 1)
+                <a href="{{ route('start_task.edit', $task->id) }}" style="float: right;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    Initiate task
+                </button></a>
+                @endif
+                @if($task->status == 3)
+                <span style="float: right;">Task Completed</span>
+                @endif
+            </div>
+            <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="title" class=" form-control-label"><b>Title</b>: {{ $task->title }} </label>
+                        </div>
+                        <div class="col col-md-6">
+                            <label for="project" class=" form-control-label"><b>Project</b>: {{ $task->projectname }} </label>
+                        </div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="duedate" class=" form-control-label"><b>Due Date</b>: {{ $task->duedate }}</label>
+                        </div>
+                        <div class="col col-md-6">
+                            <label for="category" class=" form-control-label"><b>Category</b>: {{ $task->categorys }}</label>
+                        </div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="estimated_time_to_complete" class=" form-control-label"><b>Estimated Time to Complete (in minutes)</b>: {{ $task->estimated_time_to_complete }}</label>
+                        </div>
+                        <div class="col col-md-6">
+                            <label for="actual_time_to_complete" class="form-control-label"><b>Actual Time to Complete (in minutes)</b>: {{ $task->actual_time_to_complete }}</label>
+                        </div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="status" class=" form-control-label"><b>Status</b>: {{ $task->statuss }}</label>
+                        </div>
+                        <div class="col col-md-6">
+                            <label for="date_completed" class="form-control-label"><b>Date Completed</b>: {{ $task->date_completed }}</label>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
+                    
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="assignee" class=" form-control-label"><b>Assigned To</b>: {{ $task->assigneename }}</label>
+                        </div>
+                        <div class="col col-md-6">
+                            <label for="assignee" class=" form-control-label"><b>Managed By</b>: {{ $task->responsibles }}</label>
+                        </div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-6">
+                            <label for="note" class="form-control-label"><b>Note</b>: {{ $task->note }}</label>
+                        </div>
                         
                     </div>
-                    <div class="tab-pane fade" id="custom-nav-xflow" role="tabpanel" aria-labelledby="custom-nav-xflow-tab">
-                        
-                    </div>
-                    <div class="tab-pane fade" id="custom-nav-checklist" role="tabpanel" aria-labelledby="custom-nav-checklist-tab">
-                        
-                    </div>
-                    <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
-                        
-                    </div>
-                    <div class="tab-pane fade" id="custom-nav-users" role="tabpanel" aria-labelledby="custom-nav-users-tab">
-                        
-                    </div>
-                    <div class="tab-pane fade" id="custom-nav-attestation" role="tabpanel" aria-labelledby="custom-nav-attestation-tab">
-                        
-                    </div>
-                </div>
 
+
+                @if($task->status == 2)
+                <div class="card-footer">
+                    <form action="{{ route('start_task.update', $task['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="actual_time_to_complete" class="form-control-label">Actual Time to Complete (in minutes)</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="actual_time_to_complete" type="text" class="form-control" name="actual_time_to_complete" value="{{ $task['actual_time_to_complete'] }}" autofocus>
+                        </div>
+
+                        @if ($errors->has('actual_time_to_complete'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('actual_time_to_complete') }}</strong>
+                            </span>
+                        @endif                                                       
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="date_completed" class="form-control-label">Date Completed</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="date_completed" type="date" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
+                        </div>
+
+                        @if ($errors->has('date_completed'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('date_completed') }}</strong>
+                            </span>
+                        @endif                                                       
+                    </div>
+                    <div class="row form-group">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Mark Complete
+                        </button>                
+                    </div>
+
+                    </form>
+                </div>
+                @endif
             </div>
-        </div>
+        </div>        
     </div>
 </div>
 

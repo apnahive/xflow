@@ -42,7 +42,11 @@ class Assign_taskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd(request()->all());
+        $task = Task::find($request->task_id);
+        $task->assignee = $request->assignee;
+        $task->save();
+        return redirect()->back()->with('success','You have assigned task to user');
     }
 
     /**
@@ -69,8 +73,9 @@ class Assign_taskController extends Controller
         $project = Project::find($id);
         if($project->poc == $id1)
         {
-            $tasks = Task::where('assignee', $id1)->get();
-            return view('assign_tasks.edit', compact('project', 'tasks'));
+            $tasks = Task::where('assignee', $id1)->where('project_id', $project->id)->get();
+            $cco_tasks = Task::where('assignee', $project->cco)->get();
+            return view('assign_tasks.edit', compact('project', 'tasks', 'cco_tasks'));
         }
         else
         {
@@ -90,6 +95,7 @@ class Assign_taskController extends Controller
         //dd(request()->all());
         $project = Project::find($id);
         $tasks = $request->assigned;
+        $poc_tasks = $request->pocs;
         if(count($tasks))
         {
             foreach ($tasks as $taskkey => $value) 
@@ -98,6 +104,16 @@ class Assign_taskController extends Controller
                 $task = Task::find($value);
                 $task->assignee = $project->cco;
                 $task->save();
+            }
+        }
+        if(count($poc_tasks))
+        {
+            foreach ($poc_tasks as $poc_taskkey => $poc_task) 
+            {
+                //dd($value);
+                $task1 = Task::find($poc_task);
+                $task1->assignee = $project->poc;
+                $task1->save();
             }
         }
         return redirect()->route('assign_tasks.edit', $id)->with('success', 'You have successfully assigned task to CCO');

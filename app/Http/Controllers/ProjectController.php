@@ -13,6 +13,7 @@ use App\Attestation;
 use App\Form_file;
 use App\Form_sign;
 use App\Project_form;
+use DateTime;
 
 
 class ProjectController extends Controller
@@ -146,6 +147,7 @@ class ProjectController extends Controller
     public function show($id)
     {
         $id1 = Auth::id();
+        $now = new \DateTime();
         $project = Project::find($id);
         $poc = User::find($project->poc);
         $project->pocname = $poc->name;
@@ -159,38 +161,21 @@ class ProjectController extends Controller
 
         //dd($selected_users, $users);
 
-        $tasks = Task::where('project_id', $id)->get();
-        foreach ($tasks as $key => $value) {
-            $project1 = Project::find($value->project_id);
-            $value->projectname = $project1->name;
-            if($value->status == 1)
-            {
-                $value->status1 = 'pending';
-            }
-            elseif($value->status == 2)
-            {
-                $value->status1 = 'initiated';
-            }
-            elseif($value->status == 3)
-            {
-                $value->status1 = 'completed';
-            }
-            else
-            {
-                $value->status1 = 'no status';
-            }
-        }
+        
+        
         if($id1 == $poc->id || $id1 == 1)
         {
             $project->can_edit = 1;
             $project->can_view = 1;
             $project->can_delete = 1;
+            $tasks = Task::where('project_id', $id)->get(); 
         }
         elseif($id1 == $cco->id)
         {
             $project->can_edit = 0;
             $project->can_view = 1;
             $project->can_delete = 0;
+            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->get(); 
         }
         else
         {
@@ -210,7 +195,57 @@ class ProjectController extends Controller
                     $project->can_delete = 0;
                 }
             }
+            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->get(); 
         }
+
+        foreach ($tasks as $key => $value) {
+            $project1 = Project::find($value->project_id);
+            $value->projectname = $project1->name;
+            if($value->status == 1)
+            {
+                $value->status1 = 'pending';
+            }
+            elseif($value->status == 2)
+            {
+                $value->status1 = 'initiated';
+            }
+            elseif($value->status == 3)
+            {
+                $value->status1 = 'completed';
+            }
+            else
+            {
+                $value->status1 = 'no status';
+            }
+            $assigned = User::find($value->assignee);
+            $value->assignedto = $assigned->name;
+            $managed = User::findOrFail($value->responsible);
+            $value->managedby = $managed->name;
+
+            if($id1 == 1)
+                $value->admin = 1;
+            if($project1->poc == $id1)
+                $value->poc = 1;
+            if($project1->cco == $id1)
+                $value->cco = 1;
+
+            if(Project_user::where('project_id', $project1->id)->where('user_id', $id1)->exists())
+                $value->user = 1;
+            else
+                $value->user = 0;
+
+
+            $date1 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            //dd($now, $date1, $d, $d->days);
+            if($d->days > 3)
+                $value->color = 3;
+            if($d->days <= 3)
+                $value->color = 2;
+            if($d->invert)
+                $value->color = 1;
+        }
+        
         $files = Project_file::where('project_id', $id)->get();
 
         if(Project_form::where('project_id', $id)->exists())

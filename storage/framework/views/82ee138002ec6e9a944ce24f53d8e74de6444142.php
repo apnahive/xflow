@@ -180,8 +180,8 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="#">
+                        <li class="<?php echo e(request()->is('home') ? 'active' : ''); ?>">
+                            <a class="js-arrow" href="<?php echo e(route('home')); ?>">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <!-- <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
@@ -198,15 +198,21 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
+                        <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('projects.index')); ?>">
                                 <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
+                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                        <li class="<?php echo e(request()->is('task_templates') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('task_templates.index')); ?>">
+                                <i class="fas fa-folder-open"></i>Task Template</a>
+                        </li>
+                        <?php endif; ?>
                         <li>
                             <a href="table.html">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
-                        <li>
+                        <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>

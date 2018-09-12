@@ -4,89 +4,66 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Edit</strong> Project
+                <strong>Sign</strong> Form
             </div>            
-            <form action="<?php echo e(route('projects.update', $project['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-            <input type="hidden" name="_method" value="PUT">
+            <form action="<?php echo e(route('form_sign.update', $form['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 25px;">
+                <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-            <div class="card-body card-block">
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="name" class=" form-control-label">Name</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<?php echo e(old('name', $project['name'])); ?>">
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            <?php if($errors->has('name')): ?>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong><?php echo e($errors->first('name')); ?></strong>
-                                </span>
-                            <?php endif; ?>
-                        </div>
+            <input type="hidden" name="form_id" value="<?php echo e($form->id); ?>">
+            <input type="hidden" name="user_id" value="<?php echo e($id1); ?>">
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label>
                     </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="description" class=" form-control-label">Description</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control"><?php echo $project->description; ?></textarea>
-                            <?php if($errors->has('description')): ?>
-                                <span class="invalid-feedback" role="alert">
-                                    <strong><?php echo e($errors->first('description')); ?></strong>
-                                </span>
-                            <?php endif; ?>
-                        </div>
-                    </div>                    
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="poc" class=" form-control-label">POC</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="poc" id="poc" class="custom-select form-control chosen">
-                                <option value="0">Please select</option>
-                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($user->id); ?>" <?php echo e($project['poc'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?>
-
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                        </div>
-                    </div>                    
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="cco" class=" form-control-label">CCO</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="cco" id="cco" class="form-control chosen">
-                                <option value="0">Please select</option>
-                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($user->id); ?>" <?php echo e($project['cco'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                        </div>
+                    <div class="col-12 col-md-9">
+                        <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
+                        <br> -->
+                        <?php if(count($form_files) > 0): ?>
+                        <?php $__currentLoopData = $form_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_filekey => $form_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file); ?></a>
+                            <br>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </div>
-                    <script type="text/javascript">
-                          $(".chosen").chosen();
-                    </script>
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="duedate" class=" form-control-label">Due Date</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e($project['duedate']); ?>" required autofocus>
-                        </div>
-
-                        <?php if($errors->has('duedate')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('duedate')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
+                    <?php if($errors->has('form_files')): ?>
+                        <span class="invalid-feedback" role="alert">
+                            <strong><?php echo e($errors->first('form_files')); ?></strong>
+                        </span>
+                    <?php endif; ?>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
                     </div>
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary btn-sm">
-                    <i class="fa fa-dot-circle-o"></i> Update
-                </button>                
-            </div>
+                    <div class="col-12 col-md-9">
+                        <?php echo $form->description; ?>                                    
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input type="hidden" name="sign" value="false">
+                        <input type="checkbox" id="sign" value="true" name="sign">
+                        <label for="sign"> I have reviewed the content and accepted the terms.</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3" style="font-weight: 700;">
+                        Upload You sign
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input class="sign" name="sign" type="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8">
+                        <button type="submit" class="btn btn-info">
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>        
     </div>

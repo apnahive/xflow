@@ -73,10 +73,12 @@ class Project_formController extends Controller
                 //dd($form_files);
                 $uploadfile = new Form_file;
                 $uploadfile->project_id = $request->project_id;
+
                 $uploadfile->form_id = $form->id;
 
                 $file = $value;
-                //dd($file);
+                $file_name = $value->getClientOriginalName();
+                //dd($file_name);
                 $input['file'] = time().'.'.$file->getClientOriginalExtension();
 
                 $destinationPath = storage_path('/form_files/'); 
@@ -84,6 +86,7 @@ class Project_formController extends Controller
                 $file->move($destinationPath, $input['file']);
 
                 $uploadfile->file = $input['file'];
+                $uploadfile->file_name = $file_name;
                 $uploadfile->save();
                 
             }
@@ -109,7 +112,7 @@ class Project_formController extends Controller
             {
                 $sign = new Form_sign;
                 $sign->form_id = $form->id;
-                $sign->user_id = $user->id;
+                $sign->user_id = $mailuser->id;
                 $sign->status = 0;
 
                 # mail send  link to sign document...
@@ -152,7 +155,9 @@ class Project_formController extends Controller
      */
     public function edit($id)
     {
-        //
+        $form = Project_form::find($id);
+        //dd($form);
+        return view('project_forms.edit', compact('form'));
     }
 
     /**
@@ -164,7 +169,14 @@ class Project_formController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd(request()->all());
+        $this->validate($request, array(
+            'summernote'=> 'required|max:15048',
+        ));
+        $form = Project_form::find($id);
+        $form->description = $request->summernote;
+        $form->save();
+        return redirect()->route('projects.show', $form->project_id)->with('success', 'You have successfully Updated the form');
     }
 
     /**

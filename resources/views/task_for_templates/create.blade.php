@@ -2,6 +2,9 @@
 
 @section('content')
 
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+                    
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -43,7 +46,7 @@
                             <label for="estimated_time_to_complete" class=" form-control-label">Estimated Time to Complete</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="estimated_time_to_complete" type="time" class="form-control" name="estimated_time_to_complete" value="{{ old('estimated_time_to_complete') }}" required autofocus>
+                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="{{ old('estimated_time_to_complete') }}" required autofocus>
                         </div>
 
                         @if ($errors->has('estimated_time_to_complete'))

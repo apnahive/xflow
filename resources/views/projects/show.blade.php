@@ -3,6 +3,9 @@
 
 @section('content')
 
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+                    
 <div class="col-lg-12">
     <div class="card">
         <!-- <div class="card-header">
@@ -104,8 +107,8 @@
                                         </th> -->
                                         <th>Task</th>
                                         <th>Project</th>
-                                        <th>Due Date</th>
-                                        <th>Status</th>
+                                        <th>Managed By</th>
+                                        <th>Assigned To</th>
                                         <!-- <th>status</th>
                                         <th>price</th> -->
                                         <th></th>
@@ -114,26 +117,83 @@
                                 <tbody>
                                     @if(count($tasks) > 0)
                                     @foreach ($tasks as $taskkey => $task)
-                                    <tr class="tr-shadow">
+                                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @endif>
                                         <!-- <td>
                                             <label class="au-checkbox">
                                                 <input type="checkbox">
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $task->title }}</td>
-                                        <td>{{ $task->projectname }}</td>                        
-                                        <td>{{ $task->duedate }}</td>                        
-                                        <td>{{ $task->status1 }}</td>
+                                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a> <br><span style="color: #808080b0;">(Due Date: {{ $task->duedate }})</span></td>
+                                        <td><a href="{{ route('projects.show', $task->project_id) }}">{{ $task->projectname }}</a></td>                        
+                                        <td>{{ $task->managedby }}</td>                        
+                                        <td>{{ $task->assignedto }} <br> Status: {{ $task->status1 }}</td>
                                         <td>
                                             <div class="table-data-feature">
                                                 <!-- <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a> -->
+                                                <!-- <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button></a>  -->
+                                                @if($task->admin == 1 || $task->poc == 1 || $task->cco == 1)
+                                                <button class="item" data-toggle="modal" data-target="#assign{{$task->id}}" data-backdrop="false">
+                                                    <i class="fa fa-user"></i>
+                                                </button>
+
+                                                <div class="modal fade" id="assign{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
+                                                  <div class="modal-dialog" role="document">
+                                                    <form action="{{ route('assign_tasks.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                                    <div class="modal-content" style="text-align: left;">
+                                                      <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                      </div>
+                                                      <div class="modal-body">
+                                                        <div class="row form-group">
+                                                            <div class="col col-md-3">
+                                                                <label for="assignee" class=" form-control-label">Assignee</label>
+                                                            </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
+                                                                    <option value="0">Please select</option>
+                                                                    @foreach ($users as $user) 
+                                                                        <option value="{{$user->id}}" {{ $task['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                      <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary btn-sm">
+                                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
+                                                      </div>
+                                                    </div>
+                                                    </form>
+                                                  </div>
+                                                </div>
+
+
+
+                                                @endif
+                                                @if($task->admin == 1 || $task->poc == 1 || $task->cco == 1 || $task->user == 1)
+                                                <a href="{{ route('tasks.show', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                </button></a>
+                                                @endif
+                                                @if($task->admin == 1 || $task->poc == 1)
                                                 <a href="{{ route('tasks.edit', $task->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button></a>
-                                                @if($project->can_edit) 
+                                                @endif
+
+                                                @role('Admin')
                                                 <button class="item" data-toggle="modal" data-target="#confirm{{$task->id}}" data-backdrop="false">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
@@ -163,7 +223,7 @@
                                                     </div>
                                                   </div>
                                                 </div>
-                                                @endif
+                                                @endrole
 
 
 
@@ -215,7 +275,7 @@
                         @foreach ($files as $filekey => $file)
                         <tr class="tr-shadow">                            
                             <td>
-                                <a href="{{ route('fileupload.show', $file->file) }}" target="_blank">{{ $file->file }}</a>
+                                <a href="{{ route('fileupload.show', $file->file) }}" target="_blank">{{ $file->file_name }}</a>
                             </td>                            
                         </tr>                        
                         @endforeach
@@ -282,7 +342,7 @@
                     </div>
                     @endrole
                     <div class="tab-pane fade" id="custom-nav-attestation" role="tabpanel" aria-labelledby="custom-nav-attestation-tab">
-                        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+                        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
                         <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
                         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js" defer></script>  
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js" defer></script>    
@@ -307,7 +367,7 @@
                                     <br>
                                     @if(count($form_files) > 0)
                                     @foreach ($form_files as $form_filekey => $form_file)
-                                        <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file }}</a>
+                                        <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file_name }}</a>
                                         <br>
                                     @endforeach
                                     @endif
@@ -323,8 +383,13 @@
                                     <label for="summernote" class=" form-control-label">Attestation</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <textarea name="summernote" id="summernote" class="summernote">{{ $attestation->description }}</textarea>
-                                    
+                                    <a href="{{ route('project_forms.edit', $attestation->id) }}">
+                                        <button type="submit" class="btn btn-secondary ">
+                                            Edit Form
+                                        </button>
+                                    </a>
+                                    {!! $attestation->description !!}
+                                    <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                                 
                                     @if ($errors->has('summernote'))
                                         <span class="invalid-feedback" role="alert">
@@ -349,13 +414,13 @@
                                         Send
                                     </button>
                                 </div>
-                            </div>                             
+                            </div>
 
                             
 
 
                             
-                        </form> -->
+                        </form>
                         
                     </div>
                 </div>

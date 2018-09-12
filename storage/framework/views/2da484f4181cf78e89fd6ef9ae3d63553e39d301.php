@@ -27,10 +27,10 @@
     background-color: #ffffff!important;
     }
     .navbar-dark .navbar-nav .nav-link {
-    color: #ff2e44;
+    color: #555;
     }
     .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
-    color: #242424;
+    color: #4272d7;
     }
     .carousel-control-next:focus, .carousel-control-next:hover, .carousel-control-prev:focus, .carousel-control-prev:hover {
     color: #242424;
@@ -60,23 +60,23 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto" style="font-weight: 700;font-size: 16px;">
             <li class="nav-item active">
-              <a class="nav-link" href="<?php echo e(url('/')); ?>">Home
+              <a class="nav-link" href="<?php echo e(url('/')); ?>"><i class="fas fa-home"></i>&nbsp Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="#"><i class="fas fa-address-card"></i>&nbsp About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo e(url('/register')); ?>">Register</a>
+              <a class="nav-link" href="<?php echo e(url('/register')); ?>"><i class="fas fa-user-plus"></i>&nbsp Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo e(url('/login')); ?>">Login</a>
+              <a class="nav-link" href="<?php echo e(url('/login')); ?>"><i class="fas fa-user"></i>&nbsp Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="#"><i class="fas fa-phone"></i>&nbsp Contact</a>
             </li>
           </ul>
         </div>
@@ -84,7 +84,7 @@
     </nav>
 
     <header>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 95%;margin: auto;">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
