@@ -47,6 +47,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+    <script>
+     /*
+     $(document).ready(function () {
+     $('#nav-tab a[href="#{{ old('tab') }}"]').tab('show')
+     });*/
+     /*$(function(){
+  var hash = window.location.hash;
+  hash && $('div.nav a[href="' + hash + '"]').tab('show');
+
+  $('.nav-tabs a').click(function (e) {
+    $(this).tab('show');
+    var scrollmem = $('body').scrollTop();
+    window.location.hash = this.hash;
+    $('html,body').scrollTop(scrollmem);
+  });
+});*/
+    </script>
 </head>
 <body class="animsition">
     <div class="page-wrapper">

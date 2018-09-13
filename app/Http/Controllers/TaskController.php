@@ -127,7 +127,7 @@ class TaskController extends Controller
     }
     public function search(Request $request)
     {
-        dd(request()->all());
+       // dd(request()->all());
     }
 
     /**
