@@ -8,6 +8,8 @@ use App\Project;
 use App\Task;
 use App\Task_template;
 use App\Task_for_template;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class Add_taskController extends Controller
 {
@@ -155,6 +157,7 @@ class Add_taskController extends Controller
                 $task->save();
             }
         }
+        Alert::success('Success', 'You have successfully added task to Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $request->project)->with('success', 'You have successfully added task to Project');
 
     }

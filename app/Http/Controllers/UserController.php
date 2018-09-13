@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Permission;
 
 //Enables us to output flash messaging
 use Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller {
 

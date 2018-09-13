@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Project_user;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Project_userController extends Controller
 {
@@ -115,6 +116,7 @@ class Project_userController extends Controller
                 }
             }
         }
+        Alert::success('Success', 'You have successfully updated users in project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $id)->with('success', 'You have successfully updated users in project');
 
     }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Project;
 use App\Task;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class Assign_taskController extends Controller
@@ -46,6 +47,7 @@ class Assign_taskController extends Controller
         $task = Task::find($request->task_id);
         $task->assignee = $request->assignee;
         $task->save();
+        Alert::success('Success', 'You have assigned task to user')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','You have assigned task to user');
     }
 
@@ -116,6 +118,7 @@ class Assign_taskController extends Controller
                 $task1->save();
             }
         }
+        Alert::success('Success', 'You have successfully assigned task to CCO')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('assign_tasks.edit', $id)->with('success', 'You have successfully assigned task to CCO');
     }
 

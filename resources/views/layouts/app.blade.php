@@ -46,6 +46,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -474,6 +475,7 @@
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
+                        @include('sweetalert::alert')
                         @yield('content')
                     </div>
                 </div>

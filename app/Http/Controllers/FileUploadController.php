@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project_file;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FileUploadController extends Controller
 {
@@ -57,7 +58,7 @@ class FileUploadController extends Controller
         $uploadfile->file = $input['file'];
         $uploadfile->file_name = $file_name;
         $uploadfile->save();
-
+        Alert::success('Success', 'You have successfully Uploaded file in project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $request->project_id)->with('success', 'You have successfully Uploaded file in project');
 
     }

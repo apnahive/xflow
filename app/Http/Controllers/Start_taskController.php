@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Task;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Start_taskController extends Controller
 {
@@ -66,6 +67,7 @@ class Start_taskController extends Controller
         $task = Task::find($id);
         $task->status = 2;
         $task->save();
+        Alert::success('Success', 'task has been Initiated')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','task has been Initiated');
     }
 
@@ -92,6 +94,7 @@ class Start_taskController extends Controller
         
         
         $task->save();
+        Alert::success('Success', 'task has been completed')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','task has been completed');
     }
 

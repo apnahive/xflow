@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task_template;
 use App\Task_for_template;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Task_for_templateController extends Controller
 {
@@ -53,6 +54,7 @@ class Task_for_templateController extends Controller
         $task->note = $request->note;        
         
         $task->save();
+        Alert::success('Success', 'You have successfully added Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully added Task');
     }
 

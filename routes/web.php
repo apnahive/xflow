@@ -49,3 +49,11 @@ Route::post('taskss/search', 'TaskController@search')->name('tasks.search');
 
 
 Route::resource('fileupload', 'FileUploadController');
+
+
+
+Route::get('images/{slug}', [
+    'as' => 'images.show',
+    'uses' => 'ImageController@show',
+    'middleware' => 'auth',
+]);

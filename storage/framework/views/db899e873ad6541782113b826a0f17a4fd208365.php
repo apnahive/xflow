@@ -180,25 +180,31 @@
                     <?php echo e(csrf_field()); ?>
 
                     <tr>                        
-                        <th><input id="task" type="text" class="col-md-12" name="task" value="<?php echo e(old('task')); ?>" placeholder="Task" style="border: 1px solid #bfbaba;padding: 9px;"></th>
-                        <th><input id="project" type="text" class="col-md-12" name="project" value="<?php echo e(old('project')); ?>" placeholder="Project" style="border: 1px solid #bfbaba;padding: 9px;"></th>
+                        <th><input id="task" type="text" class="col-md-12" name="task" value="<?php echo e(old('task')); ?>" placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;"></th>
+                        <th><input id="project" type="text" class="col-md-12" name="project" value="<?php echo e(old('project')); ?>" placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;"></th>
                         <th>
-                            <select class="custom-select form-control" id="status" name="status">
-                              <option selected>Managed By</option>
-                                <h1><option value="available">Available</option></h1>
-                                <h1><option value="booked">Booked</option></h1>
-                                <h1><option value="hold-sites">Hold Sites</option></h1>
-                            </select>
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2" id="managed" name="managed">
+                                    <option value="0" selected="selected">Managed By</option>
+                                    <?php $__currentLoopData = $managedby; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $managed): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                        <option value="<?php echo e($managed->id); ?>"><?php echo e($managed->name); ?> <?php echo e($managed->lastname); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>                            
                         </th>
                         <th>
-                            <select class="custom-select form-control" id="status" name="status">
-                              <option selected>Assigned To</option>
-                                <h1><option value="available">Available</option></h1>
-                                <h1><option value="booked">Booked</option></h1>
-                                <h1><option value="hold-sites">Hold Sites</option></h1>
-                            </select>
+                            <div class="rs-select2--light rs-select2--md">
+                                <select class="js-select2" id="assigned" name="assigned">
+                                    <option value="0" selected="selected">Assigned To</option>
+                                    <?php $__currentLoopData = $assignedto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $assigned): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                        <option value="<?php echo e($assigned->id); ?>"><?php echo e($assigned->name); ?> <?php echo e($assigned->lastname); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                    
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>                              
                         </th>                        
-                        <th><button type="submit" class="btn btn-md btn-info" style="width: 100%;"><span class="glyphicon glyphicon-search"></span> Search</button></th>
+                        <th><button type="submit" class="btn btn-md btn-info" style="width: 100%;color: white;background-color: #4272d7;border-radius: 1px;font-size: 16px;"><i class="zmdi zmdi-search"></i> Search</button></th>
                     </tr>
                     </form>
                     <tr>
@@ -281,12 +287,10 @@
 
 
 
-                                <?php endif; ?>
-                                <?php if($tasks->admin == 1 || $task->poc == 1 || $task->cco == 1 || $task->user == 1): ?>
+                                <?php endif; ?>                                
                                 <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
-                                </button></a>
-                                <?php endif; ?>
+                                </button></a>                                
                                 <?php if($tasks->admin == 1 || $task->poc == 1): ?>
                                 <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>

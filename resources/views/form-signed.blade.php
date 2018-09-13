@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@
     }
     .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(25, 21, 21, 0.75);
-    }
+    }    
     </style>
   </head>
 
@@ -100,17 +101,16 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <!-- <div class="col col-md-3" style="font-weight: 700;">
-                        Upload You sign
+                     <div class="col col-md-3" style="font-weight: 700;">
+                    
                     </div>
                     <div class="col-12 col-md-9">
-                        <input class="sign" name="sign" type="file">
-                    </div> 
-                    >-->
+                        <img src="{{ $base64 }}" style="height:100px;"></img>
+                    </div>                     
                 </div>
-                <!--  -->
-                <img src="{{ $imagepath }}"></img>
-                {{ $imagepath }}
+                
+                
+                
                 <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">

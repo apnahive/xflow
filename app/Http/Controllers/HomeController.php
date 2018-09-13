@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Task;
 use App\Project;
 use DateTime;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {

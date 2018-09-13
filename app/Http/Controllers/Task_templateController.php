@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Task_template;
 use App\Task_for_template;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Task_templateController extends Controller
 {
@@ -67,6 +68,7 @@ class Task_templateController extends Controller
         $task->name = $request->name;
         $task->detail = $request->detail;
         $task->save();
+        Alert::success('Success', 'You have successfully created Template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('task_templates.index')->with('success', 'You have successfully created Template');
     }
 
@@ -139,6 +141,7 @@ class Task_templateController extends Controller
         $task->name = $request->name;
         $task->detail = $request->detail;
         $task->save();
+        Alert::success('Success', 'You have successfully updated Template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('task_templates.index')->with('success', 'You have successfully created Template');
     }
 

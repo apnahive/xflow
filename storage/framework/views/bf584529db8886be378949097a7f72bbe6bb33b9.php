@@ -1,19 +1,21 @@
 <?php $__env->startSection('content'); ?>
 
+
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Add Tasks to Project</h3>
-        <!-- <div class="table-data__tool">
+        <div class="table-data__tool">
             <div class="table-data__tool-left">
-                
+                <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
             </div>
-            <div class="table-data__tool-right">
+            <!-- <div class="table-data__tool-right">
                 <a href="<?php echo e(route('tasks.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
                 
-            </div>
-        </div> -->
+            </div> -->
+        </div>
         <div class="table-responsive table-responsive-data2">
             <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('add_task.update', $template['id'])); ?>">
             <input type="hidden" name="_method" value="PUT">

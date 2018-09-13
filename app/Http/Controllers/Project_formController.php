@@ -10,6 +10,8 @@ use App\Form_sign;
 use App\Project_user;
 use Mail;
 use App\Mail\Sign_form;
+use App\Attestation;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Project_formController extends Controller
 {
@@ -47,9 +49,16 @@ class Project_formController extends Controller
                 'form_files.*.required' => 'Please upload an file',
                 'form_files.*.mimes' => 'Only doc,pdf,docx files are allowed',
                 'form_files.*.max' => 'Sorry! Maximum allowed size for an size is 2MB',
-            ],
-            'summernote'=> 'required|max:15048',
+            ],            
         ));
+        if($request->summernote)
+        {}
+        else
+        {
+            $attestation = Attestation::find(3);
+            $request->summernote = $attestation->description;
+
+        }
         if(Project_form::where('project_id', $request->project_id)->exists())
         {
             $form = Project_form::where('project_id', $request->project_id)->first();
@@ -128,7 +137,7 @@ class Project_formController extends Controller
             $sign->save();
             //dd($sign);
         }
-
+        Alert::success('Success', 'You have successfully saved and send mails to users')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $request->project_id)->with('success', 'You have successfully saved and send mails to users');
         //dd('files accepted');
 
@@ -176,6 +185,7 @@ class Project_formController extends Controller
         $form = Project_form::find($id);
         $form->description = $request->summernote;
         $form->save();
+        Alert::success('Success', 'You have successfully Updated the form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $form->project_id)->with('success', 'You have successfully Updated the form');
     }
 

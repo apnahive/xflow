@@ -14,7 +14,7 @@ use App\Form_file;
 use App\Form_sign;
 use App\Project_form;
 use DateTime;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
 {
@@ -135,6 +135,7 @@ class ProjectController extends Controller
 
 
         $project->save();
+        Alert::success('Success', 'You have successfully created Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
     }
 
@@ -315,6 +316,7 @@ class ProjectController extends Controller
         
         $project->duedate = $request->duedate;
         $project->save();
+        Alert::success('Success', 'You have successfully updated Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Attestation;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AttestationController extends Controller
 {
@@ -72,6 +73,7 @@ class AttestationController extends Controller
         $attestation->name = $request->name;
         $attestation->description = $detail;
         $attestation->save();
+        Alert::success('Success', 'You have successfully created form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
     }
 
     /**

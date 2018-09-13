@@ -26,9 +26,10 @@
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <a class="nav-item nav-link" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
-                         <?php endif; ?>
+                         
                         <a class="nav-item nav-link" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
+                        <?php endif; ?>
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -179,12 +180,10 @@
 
 
 
-                                                <?php endif; ?>
-                                                <?php if($task->admin == 1 || $task->poc == 1 || $task->cco == 1 || $task->user == 1): ?>
+                                                <?php endif; ?>                                                
                                                 <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
-                                                </button></a>
-                                                <?php endif; ?>
+                                                </button></a>                                                
                                                 <?php if($task->admin == 1 || $task->poc == 1): ?>
                                                 <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
@@ -339,7 +338,7 @@
                         
                         
                     </div>
-                    <?php endif; ?>
+                    
                     <div class="tab-pane fade" id="custom-nav-attestation" role="tabpanel" aria-labelledby="custom-nav-attestation-tab">
                         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
                         <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
@@ -424,6 +423,7 @@
                         </form>
                         
                     </div>
+                    <?php endif; ?>
                 </div>
 
             </div>

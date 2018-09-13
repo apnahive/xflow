@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Form_signController extends Controller
 {
@@ -43,6 +44,8 @@ class Form_signController extends Controller
     public function index()
     {
         //Mail::to('dev.sadiquee@gmail.com')->send(new Form_sign(3));
+        
+        
         $id1 = 5;
         $id = 1;
         $form = Project_form::find($id);
@@ -67,8 +70,9 @@ class Form_signController extends Controller
             //$imagepath = $this->getUrl($sign->sign);
             //$url = $this->viewimage($imagepath);
             //$url = $imagepath->getPathname();
+            //$storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
             //$imagepath = storage_path($fullpath);
-            $imagepath = $fullpath;
+           // $imagepath = $fullpath;
 
             /*$image = File::get($imagepath);
 
@@ -76,10 +80,10 @@ class Form_signController extends Controller
             //$imagepath = Storage::get($fullpath);
             //$imagepath = 'data:'.mime_content_type($full_path) . ';base64,' . $base64;
             //$file = File::get($imagepath);
-            //dd($imagepath);
+           // dd($imagepath);
 
             //$imagepath = storage_path($fullpath);
-            return view('form-signed', compact('form', 'form_files', 'id1', 'imagepath'));
+            return view('form-signed', compact('form', 'form_files', 'id1', 'imagepath', 'sign'));
         }
         else
         {
@@ -194,15 +198,21 @@ class Form_signController extends Controller
         }
         //$fullpath = "form_sign/".$sign->sign;            
         //$imagepath = $fullpath;
+        //$path1 = route('images.show', $sign->sign);
+        /*$sign = Form_sign::where('status', true)->where('user_id', $id1)->where('form_id', $form_id)->first();
+        $path = storage_path('form_sign/'.$sign->sign);
         
-
-        $pdf = PDF::loadView('form-signed', compact('form', 'form_files', 'id1', 'sign', 'imagepath'));
-        //return $pdf->download('form-signed.pdf');
-        //$destinationPath1 = storage_path('/sign_documents/'); 
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);        
+        $pdf = PDF::setOptions([
+            'images' => true
+        ])->loadView('form-signed', compact('form', 'form_files', 'id1', 'sign', 'imagepath', 'base64'));
+        
         $name = '/sign_documents/sign'.$id1.'form'.$form_id.'.pdf';
-        $pdf->save(storage_path($name));
+        $pdf->save(storage_path($name));*/
         //$pdf->move($destinationPath, $pdf);
-
+        Alert::success('Success', 'You have successfully signed the document')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('home')->with('success', 'You have successfully signed the document');
     }
 

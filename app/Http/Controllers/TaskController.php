@@ -11,6 +11,7 @@ use App\Task_template;
 use App\Task_for_template;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TaskController extends Controller
 {
@@ -118,12 +119,15 @@ class TaskController extends Controller
         // search functionality
 
         $managed = Task::select('responsible')->get();
-        //dd($managed);
-        return view('tasks.index', compact('tasks', 'task_templates', 'users'));
+        $managedby = User::whereIn('id', $managed)->get();
+        $assigned = Task::select('assignee')->get();
+        $assignedto = User::whereIn('id', $assigned)->get();
+        //dd($managedby);
+        return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
     }
     public function search(Request $request)
     {
-        dd('search has been hit');
+        dd(request()->all());
     }
 
     /**
@@ -189,6 +193,7 @@ class TaskController extends Controller
         }
         
         $task->save();
+        Alert::success('Success', 'You have successfully created Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully created Task');
     }
 
@@ -340,6 +345,7 @@ class TaskController extends Controller
         }
         
         $task->save();
+        Alert::success('Success', 'You have successfully updated Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');
     }
 
