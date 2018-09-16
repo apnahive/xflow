@@ -14,9 +14,9 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="custom-nav-details-tab" data-toggle="tab" href="#custom-nav-details" role="tab" aria-controls="custom-nav-details"
-                         aria-selected="true"><i class="fas fa-info-circle"></i> Details</a>
+                         aria-selected="true"><i class="fas fa-info-circle"></i>Details</a>
                         <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
-                         aria-selected="false"><i class="fas fa-tasks"></i>Tasks</a>                        
+                         aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>                        
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -27,49 +27,32 @@
                                     <label for="name" class=" form-control-label">Name</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label"><?php echo e($task->name); ?></label>
+                                    <label for="name" class=" form-control-label"><?php echo e($checklist->title); ?></label>
                                 </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label">Description</label>
-                                </div>
-                                <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label"><?php echo e($task->detail); ?></label>
-                                </div>
-                            </div>
+                            </div>                            
                         </div>                        
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row">
                             <div class="col-md-12">                                
                                 <h3 class="title-5 m-b-35">Tasks</h3>
-                                <!-- <div class="table-data__tool">
-                                    <div class="table-data__tool-left">
-                                        
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <a href="<?php echo e(route('task_for_templates.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
-                                        
-                                    </div>
-                                </div> -->
+                                
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>                                                
-                                                <th>Task</th>
-                                                <th>Category</th>
-                                                <th>Estimated Time</th>
+                                                <th>Checklist</th>
+                                                <!-- <th>Category</th>
+                                                <th>Estimated Time</th> -->
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $__currentLoopData = $task_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php $__currentLoopData = $checklist_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr class="tr-shadow">                                                
                                                 <td><?php echo e($value->title); ?></td>
-                                                <td><?php echo e($value->category1); ?></td>                        
-                                                <td><?php echo e($value->estimated_time_to_complete); ?></td>
+                                                <!-- <td></td>                        
+                                                <td></td> -->
                                                 <td>
                                                     <!-- <div class="table-data-feature">
                                                         <a href="<?php echo e(route('task_for_templates.show', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">

@@ -117,7 +117,7 @@ class Project_userController extends Controller
             }
         }
         Alert::success('Success', 'You have successfully updated users in project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.show', $id)->with('success', 'You have successfully updated users in project');
+        return redirect()->route('projects.show', $id)->withInput(['tab'=>'custom-nav-users']);
 
     }
 

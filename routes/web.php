@@ -49,7 +49,10 @@ Route::post('taskss/search', 'TaskController@search')->name('tasks.search');
 
 
 Route::resource('fileupload', 'FileUploadController');
-
+Route::resource('calender', 'CalenderController');
+Route::resource('checklists', 'ChecklistController');
+Route::resource('checklist_templates', 'Checklist_templateController');
+Route::resource('checklist_for_templates', 'Checklist_for_templateController');
 
 
 Route::get('images/{slug}', [

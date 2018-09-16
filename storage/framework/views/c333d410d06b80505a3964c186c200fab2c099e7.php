@@ -21,7 +21,26 @@
                     $(document).ready(function() {
                         $('.summernote').summernote();
                     });
+            </script>
+            <?php if($form->id == 1000): ?>
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="project" class=" form-control-label">Project</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select name="project" id="project" class="custom-select form-control chosen">
+                        <option value="0">Please select</option>
+                        <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                            <option value="<?php echo e($project->id); ?>"><?php echo e($project->name); ?>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
+                </div>
+            </div> 
+            <script type="text/javascript">
+                  $(".chosen").chosen();
             </script>            
+            <?php endif; ?>
             <textarea name="summernote" id="summernote" class="summernote"><?php echo e($form->description); ?></textarea>
 
             <div class="form-group">

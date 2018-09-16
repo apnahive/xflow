@@ -256,11 +256,18 @@ class ProjectController extends Controller
         else
         {
             $attestation = Attestation::find(3);
+            $attestation->id = 1000;
         }
         $form_files = Form_file::where('project_id', $id)->get();
         
-        //dd($project);
-        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files'));
+        $form_sign = Form_sign::where('form_id', $attestation->id)->get();
+        foreach ($form_sign as $form_signkey => $sign_value) 
+        {
+            $sign_name = User::find($sign_value->user_id);
+            $sign_value->name = $sign_name->name.' '.$sign_name->lastname;
+        }
+        //dd($attestation);
+        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign'));
     }
 
     /**

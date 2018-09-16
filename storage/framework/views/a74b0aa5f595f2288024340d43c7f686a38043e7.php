@@ -31,7 +31,7 @@
                                     <span class="au-breadcrumb-span">You are here:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Home</a>
+                                            <a href="<?php echo e(route('home')); ?>">Home</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>

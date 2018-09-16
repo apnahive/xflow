@@ -35,11 +35,15 @@ class TaskController extends Controller
         {
             //$users = User::all();
             $tasks = Task::all();
+            $managed1 = Task::select('responsible')->get();
+            $assigned1 = Task::select('assignee')->get();
             $tasks->admin = 1;
         }
         else
         {
             $tasks = Task::where('assignee', $id1)->get();
+            $managed1 = Task::where('assignee', $id1)->select('responsible')->get();
+            $assigned1 = Task::where('assignee', $id1)->select('assignee')->get();
             $tasks->admin = 0;
         }
 
@@ -118,16 +122,156 @@ class TaskController extends Controller
 
         // search functionality
 
-        $managed = Task::select('responsible')->get();
-        $managedby = User::whereIn('id', $managed)->get();
-        $assigned = Task::select('assignee')->get();
-        $assignedto = User::whereIn('id', $assigned)->get();
-        //dd($managedby);
+        
+        $managedby = User::whereIn('id', $managed1)->get();
+        
+        $assignedto = User::whereIn('id', $assigned1)->get();
+        //dd($assignedto);
         return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
     }
     public function search(Request $request)
     {
-       // dd(request()->all());
+        //dd(request()->all());
+        $id1 = Auth::id();
+        $now = new \DateTime();
+
+        
+        if($id1 == 1)
+        {
+            //$users = User::all();
+            //$tasks = Task::all();
+            if($request->task == null && $request->project == null && $request->managed == 0 && $request->assigned == 0)
+            {
+                return redirect()->route('tasks.index');
+            }
+            else
+            {
+                if($request->assigned <> 0)
+                    $tasks = Task::where('assignee', $request->assigned)->get();
+                if($request->managed <> 0)
+                    $tasks = Task::where('responsible', $request->managed)->get();
+                if($request->project)
+                {
+                    $searchproject = Project::where('name', 'like', '%'.$request->project.'%')->select('id')->get();
+                    $tasks = Task::whereIn('project_id', $searchproject)->get();
+                    //dd($tasks);
+                }
+                if($request->task)
+                    $tasks = Task::where('title', 'like', '%'.$request->task.'%')->get();
+            }
+            //dd($tasks);
+            $managed1 = Task::select('responsible')->get();
+            $assigned1 = Task::select('assignee')->get();
+            $tasks->admin = 1;
+        }
+        else
+        {
+            //$tasks = Task::where('assignee', $id1)->get();
+            if($request->task == null && $request->project == null && $request->managed == 0 && $request->assigned == 0)
+            {
+                return redirect()->route('tasks.index');
+            }
+            else
+            {
+                if($request->assigned <> 0)
+                    $tasks = Task::where('assignee', $id1)->where('assignee', $request->assigned)->get();
+                if($request->managed <> 0)
+                    $tasks = Task::where('assignee', $id1)->where('responsible', $request->managed)->get();
+                if($request->project)
+                {
+                    $searchproject = Project::where('name', 'like', '%'.$request->project.'%')->select('id')->get();
+                    $tasks = Task::where('assignee', $id1)->whereIn('project_id', $searchproject)->get();
+                    //dd($tasks);
+                }
+                if($request->task)
+                    $tasks = Task::where('assignee', $id1)->where('title', 'like', '%'.$request->task.'%')->get();
+            }
+            $managed1 = Task::where('assignee', $id1)->select('responsible')->get();
+            $assigned1 = Task::where('assignee', $id1)->select('assignee')->get();
+            $tasks->admin = 0;
+        }
+
+        if($projects = Project::where('poc', $id1)->exists())
+        {
+            $tasks->poc = 1;            
+        }
+        else
+        {
+            $tasks->poc = 0;
+        }
+        if($projects = Project::where('cco', $id1)->exists())
+        {
+            $tasks->cco = 1;            
+        }
+        else
+        {
+            $tasks->cco = 0;
+        }
+
+
+
+        foreach ($tasks as $key => $value) {
+            $project = Project::find($value->project_id);
+
+            $value->projectname = $project->name;
+            if($value->status == 1)
+            {
+                $value->status1 = 'pending';
+            }
+            elseif($value->status == 2)
+            {
+                $value->status1 = 'initiated';
+            }
+            elseif($value->status == 3)
+            {
+                $value->status1 = 'completed';
+            }
+            else
+            {
+                $value->status1 = 'no status';
+            }
+            $assigned = User::find($value->assignee);
+            $value->assignedto = $assigned->name;
+            $managed = User::findOrFail($value->responsible);
+            $value->managedby = $managed->name;
+
+            if($project->poc == $id1)
+                $value->poc = 1;
+            if($project->cco == $id1)
+                $value->cco = 1;
+
+            if(Project_user::where('project_id', $project->id)->where('user_id', $id1)->exists())
+                $value->user = 1;
+            else
+                $value->user = 0;
+
+            //color coding of task
+            $date1 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            //dd($now, $date1, $d, $d->days);
+            if($d->days > 3)
+                $value->color = 3;
+            if($d->days <= 3)
+                $value->color = 2;
+            if($d->invert)
+                $value->color = 1;
+
+            //dd($d->days > 3, $d);
+
+            //dd($value, $project); 
+        }
+        $users = User::all();
+        $task_templates = Task_template::all();
+        //dd($tasks);
+
+        // search functionality
+
+        
+        $managedby = User::whereIn('id', $managed1)->get();
+        
+        $assignedto = User::whereIn('id', $assigned1)->get();
+        //dd($managedby);
+        return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
     }
 
     /**

@@ -13,27 +13,27 @@
 
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="custom-nav-project-tab" data-toggle="tab" href="#custom-nav-project" role="tab" aria-controls="custom-nav-project"
+                        <a class="nav-item nav-link" id="custom-nav-project-tab" data-toggle="tab" href="#custom-nav-project" role="tab" aria-controls="custom-nav-project"
                          aria-selected="true"><i class="fab fa-product-hunt"></i>Project</a>
-                        <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
+                        <a class="nav-item nav-link active" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-tasks"></i>Tasks</a>
-                        <a class="nav-item nav-link" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-xflow' ? 'active' : ''); ?>" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
                          aria-selected="false"><i class="fas fa-cogs"></i>X-flow</a>
-                        <a class="nav-item nav-link" id="custom-nav-checklist-tab" data-toggle="tab" href="#custom-nav-checklist" role="tab" aria-controls="custom-nav-checklist"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-checklist' ? 'active' : ''); ?>" id="custom-nav-checklist-tab" data-toggle="tab" href="#custom-nav-checklist" role="tab" aria-controls="custom-nav-checklist"
                          aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>
-                        <a class="nav-item nav-link" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-files' ? 'active' : ''); ?>" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
-                        <a class="nav-item nav-link" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-users' ? 'active' : ''); ?>" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
                          
-                        <a class="nav-item nav-link" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-attestation' ? 'active' : ''); ?>" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
                         <?php endif; ?>
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
+                    <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
                         <div class="card-body card-block">
                             <div class="row form-group">
                                 <div class="col col-md-3">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
+                    <div class="tab-pane fade show active" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
                             <?php if($project->can_edit): ?> 
                             <a href="<?php echo e(route('addtemp', $project->id)); ?>" style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
@@ -379,14 +379,36 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="summernote" class=" form-control-label">Attestation</label>
+                                    <label for="summernote" class=" form-control-label">User Status</label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <a href="<?php echo e(route('project_forms.edit', $attestation->id)); ?>">
-                                        <button type="submit" class="btn btn-secondary ">
+                                    <?php if(count($form_sign) > 0): ?>
+                                    <?php $__currentLoopData = $form_sign; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_signkey => $sign_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($sign_value->status): ?>
+                                            <div class="alert alert-success col-md-6" role="alert">
+                                                <?php echo e($sign_value->name); ?>
+
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="alert alert-secondary col-md-6" role="alert">
+                                                <?php echo e($sign_value->name); ?>
+
+                                            </div>                                            
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
+                                    <a href="<?php echo e(route('project_forms.edit', $attestation->id)); ?>" style="float: right;">
+                                        <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             Edit Form
-                                        </button>
-                                    </a>
+                                        </button> 
+                                    </a>                                    
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="summernote" class=" form-control-label">Attestation</label>
+                                </div>
+                                <div class="col-12 col-md-9">                                    
                                     <?php echo $attestation->description; ?>
 
                                     <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->

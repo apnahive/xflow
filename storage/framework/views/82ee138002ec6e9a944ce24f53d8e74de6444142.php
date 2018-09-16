@@ -38,7 +38,18 @@
     <script src="<?php echo e(asset('assets/vendor/jquery-3.2.1.min.js')); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
     <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+     <script>
+     
+     $(document).ready(function () {
+     $('#nav-tab a[href="#<?php echo e(old('tab')); ?>"]').tab('show')
+     });
+     $(document).ready(function () {
+     $('#nav-tab a[href="#<?php echo e(old('tab')); ?>"-tab]').tab('show')
+     });     
+    </script>
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('js/app.js')); ?>" defer></script> -->
+    <!-- Commented for calender to work -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -46,24 +57,9 @@
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <?php echo $__env->yieldContent('style'); ?>
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-    <script>
-     /*
-     $(document).ready(function () {
-     $('#nav-tab a[href="#<?php echo e(old('tab')); ?>"]').tab('show')
-     });*/
-     /*$(function(){
-  var hash = window.location.hash;
-  hash && $('div.nav a[href="' + hash + '"]').tab('show');
-
-  $('.nav-tabs a').click(function (e) {
-    $(this).tab('show');
-    var scrollmem = $('body').scrollTop();
-    window.location.hash = this.hash;
-    $('html,body').scrollTop(scrollmem);
-  });
-});*/
-    </script>
+   
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -226,8 +222,8 @@
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
                         <?php endif; ?>
-                        <li>
-                            <a href="table.html">
+                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('calender.index')); ?>">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
@@ -238,8 +234,8 @@
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
-                        <li>
-                            <a href="map.html">
+                        <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
                         <!-- <li class="has-sub">
@@ -525,5 +521,6 @@
 
     <!-- Main JS-->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+    <?php echo $__env->yieldContent('script'); ?>
 </body>
 </html>

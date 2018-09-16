@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project_form;
+use App\Project;
 use App\Form_file;
 use App\User;
 use App\Form_sign;
@@ -138,7 +139,7 @@ class Project_formController extends Controller
             //dd($sign);
         }
         Alert::success('Success', 'You have successfully saved and send mails to users')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.show', $request->project_id)->with('success', 'You have successfully saved and send mails to users');
+        return redirect()->route('projects.show', $request->project_id)->withInput(['tab'=>'custom-nav-attestation']);
         //dd('files accepted');
 
 
@@ -164,9 +165,17 @@ class Project_formController extends Controller
      */
     public function edit($id)
     {
-        $form = Project_form::find($id);
+        if($id == 1000)
+        {
+            $form = Attestation::find(3);
+            $form->id = 1000;
+        }
+        else            
+            $form = Project_form::find($id);
+
+        $projects = Project::all();
         //dd($form);
-        return view('project_forms.edit', compact('form'));
+        return view('project_forms.edit', compact('form', 'projects'));
     }
 
     /**
@@ -182,7 +191,13 @@ class Project_formController extends Controller
         $this->validate($request, array(
             'summernote'=> 'required|max:15048',
         ));
-        $form = Project_form::find($id);
+        if($id == 1000)
+        {
+            $form = new Project_form;
+            $form->project_id = $request->project;
+        }
+        else    
+            $form = Project_form::find($id);
         $form->description = $request->summernote;
         $form->save();
         Alert::success('Success', 'You have successfully Updated the form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);

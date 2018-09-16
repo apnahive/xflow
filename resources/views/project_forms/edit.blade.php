@@ -23,7 +23,25 @@
                     $(document).ready(function() {
                         $('.summernote').summernote();
                     });
+            </script>
+            @if($form->id == 1000)
+            <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="project" class=" form-control-label">Project</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select name="project" id="project" class="custom-select form-control chosen">
+                        <option value="0">Please select</option>
+                        @foreach ($projects as $project) 
+                            <option value="{{$project->id}}">{{$project->name}}
+                        @endforeach
+                    </select>
+                </div>
+            </div> 
+            <script type="text/javascript">
+                  $(".chosen").chosen();
             </script>            
+            @endif
             <textarea name="summernote" id="summernote" class="summernote">{{ $form->description }}</textarea>
 
             <div class="form-group">

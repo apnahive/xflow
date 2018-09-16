@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Project_file;
+use App\Checklist_template;
+use App\Checklist_for_template;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class FileUploadController extends Controller
+class Checklist_for_templateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +26,8 @@ class FileUploadController extends Controller
      */
     public function create()
     {
-        //
+        $checklist_templates = Checklist_template::all();
+        return view('checklist_for_templates.create', compact('checklist_templates'));
     }
 
     /**
@@ -36,31 +38,17 @@ class FileUploadController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request()->all());
-        $this->validate($request, [
-            'file' => 'required|mimes:doc,pdf,docx,zip|max:4048',
-        ]);
-        $uploadfile = new Project_file;
-        $uploadfile->project_id = $request->project_id;
-
-        $file_name = $request->file('file')->getClientOriginalName();
-        //dd($file_name);
-        $file = $request->file('file');
-        //dd($file);
-        $input['file'] = time().'.'.$file->getClientOriginalExtension();
-
-        $destinationPath = storage_path('/project/'); 
-
-        $file->move($destinationPath, $input['file']);
-
-
-
-        $uploadfile->file = $input['file'];
-        $uploadfile->file_name = $file_name;
-        $uploadfile->save();
-        Alert::success('Success', 'You have successfully Uploaded file in project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.show', $request->project_id)->withInput(['tab'=>'custom-nav-files']);
-
+        $this->validate($request, array(
+            'template_id'=> 'numeric|min:1',
+            'title'=> 'required|max:20',
+        ));
+        $checklist = new Checklist_for_template;
+        $checklist->template_id = $request->template_id;
+        $checklist->title = $request->title;        
+        
+        $checklist->save();
+        Alert::success('Success', 'You have successfully added Checklist')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('checklists.index')->with('success', 'You have successfully added Checklist');
     }
 
     /**
@@ -71,9 +59,7 @@ class FileUploadController extends Controller
      */
     public function show($id)
     {
-        $fullpath="project/{$id}";
-        //dd($fullpath);
-        return response()->download(storage_path($fullpath), null, [], null);
+        //
     }
 
     /**
