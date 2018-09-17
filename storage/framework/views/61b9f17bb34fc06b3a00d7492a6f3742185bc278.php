@@ -7,42 +7,39 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Checklist
+                <strong>Create</strong> Task Template
             </div>            
-            <form action="<?php echo e(route('checklists.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('task_templates.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <?php echo e(csrf_field()); ?>
 
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Title</label>
+                            <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control">
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            <?php if($errors->has('title')): ?>
+                            <?php if($errors->has('name')): ?>
                                 <span class="invalid-feedback" role="alert">
-                                    <strong><?php echo e($errors->first('title')); ?></strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
                             <?php endif; ?>
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="assign" class=" form-control-label">Assign</label>
+                            <label for="detail" class="form-control-label">Detail</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="assign" id="assign" class="custom-select form-control chosen">
-                                <option value="0">Please select</option>
-                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
+                            <textarea name="detail" id="detail" rows="3" placeholder="Detail..." class="form-control"></textarea>
+                            <?php if($errors->has('detail')): ?>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong><?php echo e($errors->first('detail')); ?></strong>
+                                </span>
+                            <?php endif; ?>
                         </div>
                     </div>
-                    <script type="text/javascript">
-                          $(".chosen").chosen();
-                    </script>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">

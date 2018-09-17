@@ -41,7 +41,7 @@ class Task_for_templateController extends Controller
         //dd(request()->all());
         $this->validate($request, array(
             'template_id'=> 'numeric|min:1',
-            'title'=> 'required|max:20',            
+            'title'=> 'required|max:80',            
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
             'note'=> 'required|max:191',

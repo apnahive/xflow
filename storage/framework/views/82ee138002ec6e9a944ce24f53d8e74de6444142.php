@@ -188,10 +188,17 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a href="#">
-                    <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="Cool Admin" />
+                    <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="Logo" />
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
+                <div class="account2" style="padding-bottom: 0;">
+                    <div class="image">
+                        <img src="<?php echo e(asset('assets/images/icon/CWI_Logo.png')); ?>" alt="John Doe">
+                    </div>
+                    <!-- <h4 class="name">john doe</h4>
+                    <a href="#">Sign out</a> -->
+                </div>
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="<?php echo e(request()->is('home') ? 'active' : ''); ?>">

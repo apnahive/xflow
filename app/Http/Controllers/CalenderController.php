@@ -28,7 +28,7 @@ class CalenderController extends Controller
         {
             //$projects = Project::where('poc', $id1)
             $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
-            $tasks = Task::where('assignee', $id1)->orWhere('project_id', $projects)->select('duedate')->distinct()->get();
+            $tasks = Task::where('assignee', $id1)->orWhere('project_id', $projects)->select('duedate')->distinct()->get(); 
             //$tasks = Task::select('duedate')->distinct()->get();
         }
 
@@ -36,17 +36,48 @@ class CalenderController extends Controller
 
         foreach ($tasks as $taskkey => $task) 
         {
-            $events[] = \Calendar::event(
-                'View Details',
-                true,
-                new \DateTime($task->duedate),
-                new \DateTime($task->duedate),
-                1,            
-                 [
-                     'color' => '#59bd60',
-                     'url' => route('calender.show', $task->duedate),
-                 ]
-            );    
+            if($id1 == 1)
+                $taskcount = Task::where('duedate', $task->duedate)->get();
+            else
+            {                
+                $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+                $taskcount = Task::where('duedate', $task->duedate)->where('assignee', $id1)->orWhere('project_id', $projects)->select('duedate')->distinct()->get(); 
+                
+            }
+            
+            $count = count($taskcount);
+            //dd($taskcount->title);
+            if($count == 1)
+            {
+                $events[] = \Calendar::event(
+                    $taskcount[0]->title,
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('calender.show', $task->duedate),
+                     ]
+                );    
+            }
+            else
+            {
+                $events[] = \Calendar::event(
+                    'View Details',
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('calender.show', $task->duedate),
+                     ]
+                );    
+
+            }
+
+            
         }
         
 
