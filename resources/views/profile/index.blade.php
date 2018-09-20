@@ -109,6 +109,24 @@
                     </div>
                     
                     <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
+                        <div class="card-body card-block">
+                            <div class="row form-group">
+                                
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">Signed Files</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <label class=" form-control-label">
+                                        @foreach ($signed as $key => $value)
+                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a>
+                                        @endforeach
+                                    </label>
+                                </div>
+                                
+                                
+                            </div>
+                        </div> 
+
                         
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">

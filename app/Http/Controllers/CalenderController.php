@@ -32,25 +32,45 @@ class CalenderController extends Controller
             //$tasks = Task::select('duedate')->distinct()->get();
         }
 
-        //dd($tasks);
+        
 
         foreach ($tasks as $taskkey => $task) 
         {
             if($id1 == 1)
-                $taskcount = Task::where('duedate', $task->duedate)->get();
+            {
+                $taskcount = Task::where('duedate', $task->duedate)->whereIn('status', [1,2])->get();
+                if(!$taskcount)
+                    $taskcount[0]->time = floor($taskcount[0]->estimated_time_to_complete/60);
+                //dd($taskcount);
+            }
             else
             {                
                 $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
-                $taskcount = Task::where('duedate', $task->duedate)->where('assignee', $id1)->orWhere('project_id', $projects)->select('duedate')->distinct()->get(); 
-                
+                $taskcount = Task::where('duedate', '2018-09-13')->where('assignee', $id1)->orWhere('project_id', $projects)->whereIn('status', [1,2])->get();
             }
             
             $count = count($taskcount);
-            //dd($taskcount->title);
+            //dd($taskcount);
             if($count == 1)
             {
+                $taskcount[0]->time = floor($taskcount[0]->estimated_time_to_complete/60);
+                //dd($taskcount[0]->estimated_time_to_complete);
                 $events[] = \Calendar::event(
-                    $taskcount[0]->title,
+                    $count.'Tasks - '.$taskcount[0]->time.' Hrs',
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('calender.show', $task->duedate),
+                     ]
+                );    
+            }
+            elseif($count == 0)
+            {
+                $events[] = \Calendar::event(
+                    'Task completed',
                     true,
                     new \DateTime($task->duedate),
                     new \DateTime($task->duedate),
@@ -63,8 +83,16 @@ class CalenderController extends Controller
             }
             else
             {
+                $time = 0;
+                foreach ($taskcount as $countkey => $value) 
+                {
+                    $time = $time + $value->estimated_time_to_complete;    
+                } 
+                $taskcount->time = floor($time/60);
+                //dd($taskcount->time);
+
                 $events[] = \Calendar::event(
-                    'View Details',
+                    $count.'Tasks - '.$taskcount->time.' Hrs',
                     true,
                     new \DateTime($task->duedate),
                     new \DateTime($task->duedate),
@@ -79,6 +107,7 @@ class CalenderController extends Controller
 
             
         }
+        //dd($tasks);
         
 
        /* $events[] = \Calendar::event(
@@ -208,6 +237,8 @@ class CalenderController extends Controller
                 $value->color = 2;
             if($d->invert)
                 $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
 
             //dd($d->days > 3, $d);
 

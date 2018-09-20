@@ -5,7 +5,7 @@
 <style type="text/css">
 	.fc-day-grid-event>.fc-content {
 	    padding: 7px;
-	    font-size: 16px;
+	    font-size: 13px;
 	}
 	.fc-right {
 	    display: none;

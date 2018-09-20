@@ -42,7 +42,14 @@
                         <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
                     </div>
                     <div class="col-12 col-md-9">
-                        {!! $form->description !!}                                    
+                        {!! $form->description !!}
+                        @if(count($sections) > 0)
+                        @foreach ($sections as $sectionkey => $section)
+                            <span style="font-size: 18px;font-style:  italic;">Initials</span>
+                            <input type="text" name="section{{ $sectionkey }}" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">
+                            {!! $section->description !!}
+                        @endforeach
+                        @endif
                     </div>
                 </div>
                 <div class="row form-group">

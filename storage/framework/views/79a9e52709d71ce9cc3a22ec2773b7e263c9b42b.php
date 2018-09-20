@@ -86,8 +86,18 @@
                     <div class="col col-md-3">
                         <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
                     </div>
-                    <div class="col-12 col-md-9">
-                        <?php echo $form->description; ?>                                    
+                    <div class="col-12 col-md-9">                        
+                        <?php $__currentLoopData = $user_forms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_formkey => $user_form): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($user_form->section_id == 0): ?>
+                                <?php echo $user_form->description; ?>
+
+                            <?php else: ?>                            
+                                <span style="font-size: 18px;font-style:  italic;">Initials</span>
+                                <input type="text" name="section<?php echo e($user_form->section_id); ?>" value="<?php echo e(old('initial', $user_form['initials'])); ?>" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">
+                                <?php echo $user_form->description; ?>
+
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
                 <div class="row form-group">

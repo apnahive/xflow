@@ -111,6 +111,8 @@ class TaskController extends Controller
                 $value->color = 2;
             if($d->invert)
                 $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
 
             //dd($d->days > 3, $d);
 

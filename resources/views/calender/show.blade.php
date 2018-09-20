@@ -34,7 +34,7 @@
                 </thead>
                 <tbody>
                     @foreach ($tasks as $taskkey => $task)
-                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @endif>
+                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @elseif($task->color == 4) style="border-left: 3px solid #777272;" @endif>
                         <!-- <td>
                             <label class="au-checkbox">
                                 <input type="checkbox">

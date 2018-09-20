@@ -13,6 +13,7 @@ use App\Attestation;
 use App\Form_file;
 use App\Form_sign;
 use App\Project_form;
+use App\Form_section;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -245,6 +246,8 @@ class ProjectController extends Controller
                 $value->color = 2;
             if($d->invert)
                 $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
         }
         
         $files = Project_file::where('project_id', $id)->get();
@@ -252,12 +255,16 @@ class ProjectController extends Controller
         if(Project_form::where('project_id', $id)->exists())
         {
             $attestation = Project_form::where('project_id', $id)->first();
+            $sections = Form_section::where('form_id', $attestation->id)->get();
+            $attestation->status = true;
         }
         else
         {
             $attestation = Attestation::find(3);
-            $attestation->id = 1000;
+            $sections = null;
+            $attestation->status = false;
         }
+
         $form_files = Form_file::where('project_id', $id)->get();
         
         $form_sign = Form_sign::where('form_id', $attestation->id)->get();
@@ -267,7 +274,7 @@ class ProjectController extends Controller
             $sign_value->name = $sign_name->name.' '.$sign_name->lastname;
         }
         //dd($attestation);
-        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign'));
+        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign', 'sections'));
     }
 
     /**

@@ -107,6 +107,24 @@
                     </div>
                     
                     <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
+                        <div class="card-body card-block">
+                            <div class="row form-group">
+                                
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">Signed Files</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <label class=" form-control-label">
+                                        <?php $__currentLoopData = $signed; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e(route('profile.show', $value['id'])); ?>" target="_blank">Download <?php echo e($value->project); ?> Signed Document</a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </label>
+                                </div>
+                                
+                                
+                            </div>
+                        </div> 
+
                         
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">

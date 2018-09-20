@@ -40,6 +40,8 @@ Route::resource('assign_tasks', 'Assign_taskController');
 
 Route::resource('attestations', 'AttestationController');
 Route::resource('project_forms', 'Project_formController');
+Route::get('project_form/{id}', 'Project_formController@createf')->name('project_forms.createf');
+Route::resource('form_sections', 'Form_sectionController');
 Route::resource('form_sign', 'Form_signController');
 
 

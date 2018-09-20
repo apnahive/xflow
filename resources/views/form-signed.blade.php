@@ -86,8 +86,16 @@
                     <div class="col col-md-3">
                         <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
                     </div>
-                    <div class="col-12 col-md-9">
-                        {!! $form->description !!}                                    
+                    <div class="col-12 col-md-9">                        
+                        @foreach ($user_forms as $user_formkey => $user_form)
+                            @if($user_form->section_id == 0)
+                                {!! $user_form->description !!}
+                            @else                            
+                                <span style="font-size: 18px;font-style:  italic;">Initials</span>
+                                <input type="text" name="section{{ $user_form->section_id }}" value="{{ old('initial', $user_form['initials']) }}" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">
+                                {!! $user_form->description !!}
+                            @endif
+                        @endforeach
                     </div>
                 </div>
                 <div class="row form-group">

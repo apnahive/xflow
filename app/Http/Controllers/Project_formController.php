@@ -12,7 +12,9 @@ use App\Project_user;
 use Mail;
 use App\Mail\Sign_form;
 use App\Attestation;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Form_section;
 
 class Project_formController extends Controller
 {
@@ -21,6 +23,11 @@ class Project_formController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -108,9 +115,9 @@ class Project_formController extends Controller
             
             $mailuser = User::find($user->user_id);
             //dd($mailuser);
-            if(Form_sign::where('user_id',$user->id)->where('form_id', $form->id)->exists())
+            if(Form_sign::where('user_id',$mailuser->id)->where('form_id', $form->id)->exists())
             {
-                $sign = Form_sign::where('user_id',$user->id)->where('form_id', $form->id)->first();
+                $sign = Form_sign::where('user_id',$mailuser->id)->where('form_id', $form->id)->first();
                 if($request->send_all)
                 {
                     $sign->status = 0;
@@ -164,18 +171,23 @@ class Project_formController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        if($id == 1000)
-        {
-            $form = Attestation::find(3);
-            $form->id = 1000;
-        }
-        else            
-            $form = Project_form::find($id);
+    {        
+        $form = Project_form::find($id); 
+        $sections = Form_section::where('form_id', $id)->get();
 
-        $projects = Project::all();
-        //dd($form);
-        return view('project_forms.edit', compact('form', 'projects'));
+        //dd($sections);
+        return view('project_forms.edit', compact('form', 'sections'));
+    }
+
+    public function createf($id)
+    {
+        //dd('new record for project to be created');
+        $attestation = Attestation::find(3);
+        $form = new Project_form;
+        $form->project_id = $id;
+        $form->description = $attestation->description;
+        $form->save();
+        return redirect()->route('project_forms.edit', $form->id)->with('success', 'You have successfully Updated the form');
     }
 
     /**
@@ -190,18 +202,12 @@ class Project_formController extends Controller
         //dd(request()->all());
         $this->validate($request, array(
             'summernote'=> 'required|max:15048',
-        ));
-        if($id == 1000)
-        {
-            $form = new Project_form;
-            $form->project_id = $request->project;
-        }
-        else    
-            $form = Project_form::find($id);
+        ));        
+        $form = Project_form::find($id);
         $form->description = $request->summernote;
         $form->save();
         Alert::success('Success', 'You have successfully Updated the form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.show', $form->project_id)->with('success', 'You have successfully Updated the form');
+        return redirect()->route('project_forms.edit', $form->id)->with('success', 'You have successfully Updated the form');
     }
 
     /**

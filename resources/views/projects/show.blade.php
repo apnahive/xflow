@@ -118,7 +118,7 @@
                                 <tbody>
                                     @if(count($tasks) > 0)
                                     @foreach ($tasks as $taskkey => $task)
-                                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @endif>
+                                    <tr class="tr-shadow" @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @elseif($task->color == 4) style="border-left: 3px solid #777272;" @endif>
                                         <!-- <td>
                                             <label class="au-checkbox">
                                                 <input type="checkbox">
@@ -395,11 +395,19 @@
                                         @endif
                                     @endforeach
                                     @endif
+                                    @if($attestation->status)
                                     <a href="{{ route('project_forms.edit', $attestation->id) }}" style="float: right;">
                                         <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             Edit Form
                                         </button> 
-                                    </a>                                    
+                                    </a>
+                                    @else
+                                    <a href="{{ route('project_forms.createf', $project->id) }}" style="float: right;">
+                                        <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            Edit Form
+                                        </button> 
+                                    </a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -408,6 +416,9 @@
                                 </div>
                                 <div class="col-12 col-md-9">                                    
                                     {!! $attestation->description !!}
+                                    @foreach ($sections as $sectionkey => $section)
+                                        {!! $section->description !!}
+                                    @endforeach
                                     <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                                 
                                     @if ($errors->has('summernote'))

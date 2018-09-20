@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Project_form;
 use App\Form_file;
 use App\User;
+use App\User_form;
 use App\Form_sign;
+use App\Form_section;
+use App\Form_initial;
+//use App\Form_section;
 use App\Project_user;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -42,48 +46,40 @@ class Form_signController extends Controller
     }*/
 
     public function index()
-    {
-        //Mail::to('dev.sadiquee@gmail.com')->send(new Form_sign(3));
-        
-        
-        $id1 = 5;
-        $id = 1;
-        $form = Project_form::find($id);
-        if(Form_sign::where('status', true)->where('user_id', $id1)->where('form_id', $form->id)->exists())
-        {
-
-        }        
-        else    
-            return view('errors.401');
+    {   
+        $id1 = 5; //user id
+        $id = 1; //form id
+        $form = Project_form::find($id);        
             
         
-        //->where('status', false)->where('user_id', $id1)->get();
-        //$access = Project_user::where('project_id', $form->project_id)->where('user_id', $id1)->get();
-        //dd($form);
+        
+        $user_forms = User_form::where('form_id', $form->id)->get();
+                
+
+        foreach ($user_forms as $user_formkey => $user_form) 
+        {
+            if($user_form->section_id == 0)
+                $user_form->initials = false;
+            else
+            {
+                if(Form_initial::where('form_id', $form->id)->where('user_id', $id1)->where('section_id', $user_form->section_id)->exists())
+                {
+                    $initial = Form_initial::where('form_id', $form->id)->where('user_id', $id1)->where('section_id', $user_form->section_id)->first();
+                    //dd($initial);
+                    $user_form->initials = $initial->initials;
+                }
+            }
+        }
+        //dd($user_forms);
         if(Project_user::where('project_id', $form->project_id)->where('user_id', $id1)->exists())
         {
             $form_files = Form_file::where('project_id', $form->project_id)->get();
             $sign = Form_sign::where('user_id', $id1)->where('form_id', $form->id)->first();
-            //dd($sign);
+            
             $fullpath = "form_sign/{$sign->sign}";
-            //$imagepath = Storage::url($fullpath);
-            //$imagepath = $this->getUrl($sign->sign);
-            //$url = $this->viewimage($imagepath);
-            //$url = $imagepath->getPathname();
-            //$storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-            //$imagepath = storage_path($fullpath);
-           // $imagepath = $fullpath;
-
-            /*$image = File::get($imagepath);
-
-            return response()->make($image, 200, ['content-type' => 'image/jpg']);*/
-            //$imagepath = Storage::get($fullpath);
-            //$imagepath = 'data:'.mime_content_type($full_path) . ';base64,' . $base64;
-            //$file = File::get($imagepath);
-           // dd($imagepath);
-
-            //$imagepath = storage_path($fullpath);
-            return view('form-signed', compact('form', 'form_files', 'id1', 'imagepath', 'sign'));
+            //dd('input');
+            //dd($user_forms);
+            return view('form-signed', compact('form', 'form_files', 'id1', 'fullpath', 'sign', 'user_forms'));
         }
         else
         {
@@ -123,6 +119,8 @@ class Form_signController extends Controller
         $id1 = Auth::id();
         //dd($id);
         $form = Project_form::find($id);
+        //dd($form);
+        $sections = Form_section::where('form_id', $id)->get();
         if(Form_sign::where('status', true)->where('user_id', $id1)->where('form_id', $form->id)->exists())
             return view('errors.401');
             
@@ -133,7 +131,8 @@ class Form_signController extends Controller
         if(Project_user::where('project_id', $form->project_id)->where('user_id', $id1)->exists())
         {
             $form_files = Form_file::where('project_id', $form->project_id)->get();
-            return view('form_sign.edit', compact('form', 'form_files', 'id1'));
+
+            return view('form_sign.edit', compact('form', 'form_files', 'id1', 'sections'));
         }
         else
         {
@@ -166,15 +165,73 @@ class Form_signController extends Controller
         $this->validate($request, [
             'sign' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4048',
         ]);
-        ini_set('max_execution_time', 900);
+        
         $id1 = Auth::id();
         $form_id = $request->form_id;
 
         $form = Project_form::find($form_id);
+        if(User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', 0)->exists())
+        {
+            $userform = User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', 0)->first();
+            $userform->description = $form->description;    
+            $userform->save();
+        }
+        else
+        {
+            $userform = new User_form;
+            $userform->description = $form->description;
+            $userform->form_id = $form_id;
+            $userform->user_id = $id1;
+            $userform->section_id = 0;
+            $userform->save();    
+        }
+        
+
+
+        $sections = Form_section::where('form_id',$form_id)->get();
         $form_files = Form_file::where('project_id', $form->project_id)->get();
 
         if(Form_sign::where('status', false)->where('user_id', $id1)->where('form_id', $form_id)->exists())
         {
+
+            if(count($sections) > 0)
+            {
+                foreach ($sections as $sectionkey => $section) 
+                {
+                    if(User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', $section->id)->exists())
+                    {
+                        $userform = User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', $section->id)->first();
+                        $userform->description = $section->description;    
+                        $userform->save();
+                    }
+                    else
+                    {
+                        $userform = new User_form;
+                        $userform->description = $section->description;
+                        $userform->form_id = $form_id;
+                        $userform->user_id = $id1;
+                        $userform->section_id = $section->id;
+                        $userform->save();    
+                    }
+
+                    $initial = 'section'.$sectionkey;
+                    if(Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->exists())
+                    {                        
+                        $initials = Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->first();
+                        $initials->initials = $request->$initial;
+                        $initials->save();
+                    }
+                    else
+                    {
+                        $initials = new Form_initial;
+                        $initials->initials = $request->$initial;
+                        $initials->form_id = $form_id;
+                        $initials->user_id = $id1;
+                        $initials->section_id = $section->id;
+                        $initials->save();
+                    }
+                }
+            }
             $sign = Form_sign::where('status', false)->where('user_id', $id1)->where('form_id', $form_id)->first();
             $sign->status = true;
 

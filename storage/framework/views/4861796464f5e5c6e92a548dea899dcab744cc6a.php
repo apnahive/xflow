@@ -115,7 +115,7 @@
                                 <tbody>
                                     <?php if(count($tasks) > 0): ?>
                                     <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taskkey => $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr class="tr-shadow" <?php if($task->color == 1): ?> style="border-left: 3px solid #fa4251;" <?php elseif($task->color == 2): ?> style="border-left: 3px solid #ffa037;" <?php elseif($task->color == 3): ?> style="border-left: 3px solid #00ad5f;" <?php endif; ?>>
+                                    <tr class="tr-shadow" <?php if($task->color == 1): ?> style="border-left: 3px solid #fa4251;" <?php elseif($task->color == 2): ?> style="border-left: 3px solid #ffa037;" <?php elseif($task->color == 3): ?> style="border-left: 3px solid #00ad5f;" <?php elseif($task->color == 4): ?> style="border-left: 3px solid #777272;" <?php endif; ?>>
                                         <!-- <td>
                                             <label class="au-checkbox">
                                                 <input type="checkbox">
@@ -397,11 +397,19 @@
                                         <?php endif; ?>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
+                                    <?php if($attestation->status): ?>
                                     <a href="<?php echo e(route('project_forms.edit', $attestation->id)); ?>" style="float: right;">
                                         <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             Edit Form
                                         </button> 
-                                    </a>                                    
+                                    </a>
+                                    <?php else: ?>
+                                    <a href="<?php echo e(route('project_forms.createf', $project->id)); ?>" style="float: right;">
+                                        <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            Edit Form
+                                        </button> 
+                                    </a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -411,6 +419,10 @@
                                 <div class="col-12 col-md-9">                                    
                                     <?php echo $attestation->description; ?>
 
+                                    <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionkey => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php echo $section->description; ?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                                 
                                     <?php if($errors->has('summernote')): ?>
