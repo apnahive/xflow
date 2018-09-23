@@ -102,6 +102,11 @@ class UserxController extends Controller
                 //$form = Project_form::find($value->form_id);
                 $project_name = Project::find($value1->project_id);
                 $value1->name = $project_name->name;
+                $value1->duedate = $project_name->duedate;
+                $poc = User::find($project_name->poc);
+                $value1->pocname = $poc->name;
+                $cco = User::find($project_name->cco);
+                $value1->cconame = $cco->name;
             }
         }
 

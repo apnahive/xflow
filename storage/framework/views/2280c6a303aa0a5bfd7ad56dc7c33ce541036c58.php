@@ -100,7 +100,13 @@
                             </div>
 
                             
-                        </div>                        
+                        </div>
+                        <?php if($user1->verification_token): ?>
+                        <div class="card-footer"> 
+                            <a href="<?php echo e(route('users.approve', $user1->id)); ?>" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">Approve</a>
+                            <a href="<?php echo e(route('users.reject', $user1->id)); ?>" class="btn btn-danger pull-left" style="margin-right: 3px;color:white;">Reject</a>                       
+                        </div>
+                        <?php endif; ?>
                     </div>
 
                     <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
@@ -109,9 +115,9 @@
                                 <thead>
                                     <tr>                        
                                         <th>Project Name</th>
-                                        <!-- <th>POC</th>
+                                        <th>POC</th>
                                         <th>CCO</th>
-                                        <th>Due Date</th> -->
+                                        <th>Due Date</th>
                                         <!-- <th>status</th>
                                         <th>price</th> -->
                                         <th></th>
@@ -127,13 +133,14 @@
                                             </label>
                                         </td> -->
                                         <td><?php echo e($user1->name); ?></td>
-                                        <!-- <td></td>                        
-                                        <td></td>                        
-                                        <td></td> -->
+                                        <td><?php echo e($user1->pocname); ?></td>                        
+                                        <td><?php echo e($user1->cconame); ?></td>                        
+                                        <td><?php echo e($user1->duedate); ?></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                
-                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">View</a>
+                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                </button></a>                                                
                                             </div>
                                         </td>
                                     </tr>                                    

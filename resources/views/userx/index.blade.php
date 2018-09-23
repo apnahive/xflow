@@ -21,9 +21,9 @@
                 <thead>
                     <tr>                        
                         <th>Name</th>
-                        <!-- <th>POC</th>
-                        <th>CCO</th>
-                        <th>Due Date</th> -->
+                        <th>Email</th>
+                        <th>User Type</th>
+                        <th>Status</th>
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>
@@ -39,19 +39,32 @@
                             </label>
                         </td> -->
                         <td>{{ $user->name }} {{ $user->lastname }}</td>
-                        <!-- <td></td>                        
-                        <td></td>                        
-                        <td></td> -->
+                        <td>{{ $user->email }}</td>                        
+                        <td>{{ $user->user_type }}</td>                        
+                        <td>
+                            @if($user->verified)
+                                Approved
+                            @else
+                                @if($user->verification_token)
+                                    Pending
+                                @else 
+                                    Rejected
+                                @endif    
+                            @endif
+                        </td>
                         <td>
                             <div class="table-data-feature">
-                                @if($user->verified)
+                                <a href="{{ route('users.show', $user->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                    <i class="zmdi zmdi-mail-send"></i>
+                                </button></a>
+                                <!-- @if($user->verified)
                                 <a href="{{ route('users.show', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">View</a>
                                 @else
                                     @if($user->verification_token)
                                         <a href="{{ route('users.approve', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">Approve</a>
                                         <a href="{{ route('users.reject', $user->id) }}" class="btn btn-danger pull-left" style="margin-right: 3px;color:white;">Reject</a>
                                     @endif    
-                                @endif
+                                @endif -->
                             </div>
                         </td>
                     </tr>

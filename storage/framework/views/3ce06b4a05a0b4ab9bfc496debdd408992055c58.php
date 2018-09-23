@@ -1,5 +1,5 @@
-Hello <?php echo e($user); ?>,<br><br>
+Hello Admin,<br><br>
 
-Please open the following link to sign the document <?php echo e($user); ?> <br><br>
+<?php echo e($user->name); ?> <?php echo e($user->lastname); ?> has been registered. Please open the following link <a href="<?php echo e(route('users.index')); ?>">Link</a> approve/reject user. <br><br>
 
 Thanks,<br>
