@@ -130,8 +130,10 @@
                     <tr class="spacer"></tr>
                     @endif
                     @endforeach
+
                 </tbody>
             </table>
+            {!! $projects->render() !!}
         </div>
         <!-- END DATA TABLE -->
     </div>

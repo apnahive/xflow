@@ -23,7 +23,7 @@ class UserxController extends Controller
      */
     public function index()
     {
-        $users = User::all(); 
+        $users = User::where('id', '!=', 1)->paginate(15); 
         return view('userx.index')->with('users', $users);
     }
 

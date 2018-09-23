@@ -25,7 +25,7 @@ class Task_templateController extends Controller
         $id1 = Auth::id();
         if($id1 == 1)
         {
-            $tasks = Task_template::all();
+            $tasks = Task_template::paginate(15);
             return view('task_templates.index', compact('tasks'));    
         }
         else
@@ -81,7 +81,7 @@ class Task_templateController extends Controller
     public function show($id)
     {
         $task = Task_template::find($id);
-        $task_templates = Task_for_template::where('task_template_id', $id)->get();
+        $task_templates = Task_for_template::where('task_template_id', $id)->paginate(15);
         foreach ($task_templates as $key => $value) {
             if($value->category == 1)
             {

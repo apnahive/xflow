@@ -128,8 +128,11 @@
                     <tr class="spacer"></tr>
                     <?php endif; ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                 </tbody>
             </table>
+            <?php echo $projects->render(); ?>
+
         </div>
         <!-- END DATA TABLE -->
     </div>

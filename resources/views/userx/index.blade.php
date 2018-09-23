@@ -72,6 +72,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $users->render() !!}
         </div>
         <!-- END DATA TABLE -->
     </div>

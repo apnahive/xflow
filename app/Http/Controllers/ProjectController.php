@@ -16,6 +16,8 @@ use App\Project_form;
 use App\Form_section;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mail;
+use App\Mail\Project_created;
 
 class ProjectController extends Controller
 {
@@ -31,7 +33,7 @@ class ProjectController extends Controller
     public function index()
     {
         $id1 = Auth::id();
-        $projects = Project::all();
+        $projects = Project::paginate(15);
         foreach ($projects as $key => $value) {
             $poc = User::find($value->poc);
             $value->pocname = $poc->name;
@@ -136,6 +138,13 @@ class ProjectController extends Controller
 
 
         $project->save();
+
+
+
+        Mail::to($user1['email'])->send(new Project_created($user1, $project));
+        Mail::to($user2['email'])->send(new Project_created($user2, $project));
+        dd('test');
+
         Alert::success('Success', 'You have successfully created Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
     }
@@ -170,14 +179,14 @@ class ProjectController extends Controller
             $project->can_edit = 1;
             $project->can_view = 1;
             $project->can_delete = 1;
-            $tasks = Task::where('project_id', $id)->get(); 
+            $tasks = Task::where('project_id', $id)->paginate(15); 
         }
         elseif($id1 == $cco->id)
         {
             $project->can_edit = 0;
             $project->can_view = 1;
             $project->can_delete = 0;
-            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->get(); 
+            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->paginate(15); 
         }
         else
         {
@@ -197,7 +206,7 @@ class ProjectController extends Controller
                     $project->can_delete = 0;
                 }
             }
-            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->get(); 
+            $tasks = Task::where('project_id', $id)->where('assignee', $id1)->paginate(15); 
         }
 
         foreach ($tasks as $key => $value) {

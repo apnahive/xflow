@@ -239,6 +239,7 @@
                                     @endif
                                 </tbody>
                             </table>
+                            {!! $tasks->render() !!}
                         </div>
                         
                     </div>
@@ -416,9 +417,11 @@
                                 </div>
                                 <div class="col-12 col-md-9">                                    
                                     {!! $attestation->description !!}
+                                    @if(count($sections) > 0)
                                     @foreach ($sections as $sectionkey => $section)
                                         {!! $section->description !!}
                                     @endforeach
+                                    @endif
                                     <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                                 
                                     @if ($errors->has('summernote'))

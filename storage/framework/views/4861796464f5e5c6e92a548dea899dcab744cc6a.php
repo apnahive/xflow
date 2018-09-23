@@ -237,6 +237,8 @@
                                     <?php endif; ?>
                                 </tbody>
                             </table>
+                            <?php echo $tasks->render(); ?>
+
                         </div>
                         
                     </div>
@@ -419,10 +421,12 @@
                                 <div class="col-12 col-md-9">                                    
                                     <?php echo $attestation->description; ?>
 
+                                    <?php if(count($sections) > 0): ?>
                                     <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionkey => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <?php echo $section->description; ?>
 
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>
                                     <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                                 
                                     <?php if($errors->has('summernote')): ?>

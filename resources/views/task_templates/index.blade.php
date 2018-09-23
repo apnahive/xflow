@@ -123,6 +123,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {!! $tasks->render() !!}
         </div>
         <!-- END DATA TABLE -->
     </div>

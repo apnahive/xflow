@@ -121,6 +121,8 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
+            <?php echo $tasks->render(); ?>
+
         </div>
         <!-- END DATA TABLE -->
     </div>

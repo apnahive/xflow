@@ -34,14 +34,14 @@ class TaskController extends Controller
         if($id1 == 1)
         {
             //$users = User::all();
-            $tasks = Task::all();
+            $tasks = Task::paginate(10);
             $managed1 = Task::select('responsible')->get();
             $assigned1 = Task::select('assignee')->get();
             $tasks->admin = 1;
         }
         else
         {
-            $tasks = Task::where('assignee', $id1)->get();
+            $tasks = Task::where('assignee', $id1)->paginate(15);
             $managed1 = Task::where('assignee', $id1)->select('responsible')->get();
             $assigned1 = Task::where('assignee', $id1)->select('assignee')->get();
             $tasks->admin = 0;
