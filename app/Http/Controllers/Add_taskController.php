@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Project;
 use App\Task;
+use App\User;
 use App\Task_template;
 use App\Task_for_template;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mail;
+use App\Mail\Task_assigned;
 
 
 class Add_taskController extends Controller
@@ -157,6 +160,10 @@ class Add_taskController extends Controller
                 $task->save();
             }
         }
+
+        $user1 = User::findOrFail($project->poc);
+        Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
+
         Alert::success('Success', 'You have successfully added task to Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $request->project)->with('success', 'You have successfully added task to Project');
 

@@ -12,6 +12,8 @@ use App\Task_for_template;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mail;
+use App\Mail\Task_assigned;
 
 class TaskController extends Controller
 {
@@ -339,6 +341,10 @@ class TaskController extends Controller
         }
         
         $task->save();
+
+        $user1 = User::findOrFail($task->assignee);
+        Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
+
         Alert::success('Success', 'You have successfully created Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully created Task');
     }

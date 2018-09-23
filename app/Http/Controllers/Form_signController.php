@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project_form;
+use App\Project;
 use App\Form_file;
 use App\User;
 use App\User_form;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Storage;
 use PDF;
 use File;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mail;
+use App\Mail\Form_signed;
 
 class Form_signController extends Controller
 {
@@ -269,6 +272,12 @@ class Form_signController extends Controller
         $name = '/sign_documents/sign'.$id1.'form'.$form_id.'.pdf';
         $pdf->save(storage_path($name));*/
         //$pdf->move($destinationPath, $pdf);
+
+        $user1 = User::findOrFail($id1);
+        $project = Project::find($form->project_id);
+        $user2 = User::find($project->poc);
+        Mail::to($user2['email'])->send(new Form_signed($user1, $project));
+
         Alert::success('Success', 'You have successfully signed the document')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('home')->with('success', 'You have successfully signed the document');
     }
