@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Jrean\UserVerification\Traits\VerifiesUsers;
 use Jrean\UserVerification\Facades\UserVerification;
 use Illuminate\Http\Request;
+use Mail;
+use App\Mail\Approve_user;
 
 class RegisterController extends Controller
 {
@@ -92,7 +94,8 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
         UserVerification::generate($user);
-        UserVerification::send($user, 'Verify Your email');
-        return back()->withAlert('Registerd successfully, please verify your email.');
+        Mail::to('dev.sadiquee@gmail.com')->send(new Approve_user($user));
+        //UserVerification::send($user, 'Verify Your email');
+        return back()->withAlert('Registerd successfully, please wait for admin approval.');
     }
 }

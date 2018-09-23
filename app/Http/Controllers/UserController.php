@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
-use Auth;
+use Auth; 
 
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;

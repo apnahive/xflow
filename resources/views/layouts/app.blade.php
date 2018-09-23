@@ -224,6 +224,10 @@
                                 <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
                         @role('Admin')
+                        <li class="{{ request()->is('users') ? 'active' : '' }}">
+                            <a href="{{ route('users.index') }}">
+                                <i class="fas fa-users"></i>Users</a>
+                        </li>
                         <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>

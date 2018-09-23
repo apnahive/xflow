@@ -224,6 +224,10 @@
                                 <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                        <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('users.index')); ?>">
+                                <i class="fas fa-users"></i>Users</a>
+                        </li>
                         <li class="<?php echo e(request()->is('task_templates') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>

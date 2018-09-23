@@ -103,7 +103,44 @@
                         </div>                        
                     </div>
 
-                    <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">                        
+                    <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>                        
+                                        <th>Project Name</th>
+                                        <!-- <th>POC</th>
+                                        <th>CCO</th>
+                                        <th>Due Date</th> -->
+                                        <!-- <th>status</th>
+                                        <th>price</th> -->
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $project_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project_userkey => $user1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                    
+                                    <tr class="tr-shadow">
+                                        <!-- <td>
+                                            <label class="au-checkbox">
+                                                <input type="checkbox">
+                                                <span class="au-checkmark"></span>
+                                            </label>
+                                        </td> -->
+                                        <td><?php echo e($user1->name); ?></td>
+                                        <!-- <td></td>                        
+                                        <td></td>                        
+                                        <td></td> -->
+                                        <td>
+                                            <div class="table-data-feature">
+                                                
+                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">View</a>
+                                            </div>
+                                        </td>
+                                    </tr>                                    
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
+                            </table>
+                        </div>                        
                     </div>
                     
                     <div class="tab-pane fade" id="custom-nav-files" role="tabpanel" aria-labelledby="custom-nav-files-tab">
@@ -128,6 +165,34 @@
                         
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
+                        <div class="card-body card-block">
+                            <div class="row form-group">
+                                
+                                <div class="col col-md-3">
+                                    <label class="form-control-label">Form Signed</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <label style="width: 50%;">
+                                        <?php if(count($status) > 0): ?>
+                                        <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($value->status): ?>
+                                                <div class="alert alert-success col-md-12" role="alert">
+                                                    <?php echo e($value->name); ?>
+
+                                                </div>
+                                            <?php else: ?>
+                                                <div class="alert alert-secondary col-md-12" role="alert">
+                                                    <?php echo e($value->name); ?>
+
+                                                </div>                                            
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+                                    </label>
+                                </div>
+                                
+                                
+                            
                         
                     </div>                    
                 </div>

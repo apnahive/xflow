@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12">
@@ -34,7 +32,7 @@
                                         <label class="form-control-label">Name</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->name }} {{ $user1->lastname }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->name); ?> <?php echo e($user1->lastname); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -42,7 +40,7 @@
                                         <label class="form-control-label">Email</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +50,7 @@
                                         <label class="form-control-label">User Type</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->user_type }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->user_type); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -60,7 +58,7 @@
                                         <label class="form-control-label">Date of Birth</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->dateofbirth }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->dateofbirth); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +68,7 @@
                                         <label class="form-control-label">Company</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->company }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->company); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -78,7 +76,7 @@
                                         <label class="form-control-label">Orgnization</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->organization }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->organization); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +86,7 @@
                                         <label class="form-control-label">Phone Number</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->phonenumber }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->phonenumber); ?></label>
                                     </div>
                                 </div>
                                 <!-- <div class="row col-lg-6">
@@ -96,7 +94,7 @@
                                         <label class="form-control-label"><b>Status</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div> -->
                             </div>
@@ -120,7 +118,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($project_users as $project_userkey => $user1)                    
+                                    <?php $__currentLoopData = $project_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project_userkey => $user1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                    
                                     <tr class="tr-shadow">
                                         <!-- <td>
                                             <label class="au-checkbox">
@@ -128,18 +126,18 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $user1->name }}</td>
+                                        <td><?php echo e($user1->name); ?></td>
                                         <!-- <td></td>                        
                                         <td></td>                        
                                         <td></td> -->
                                         <td>
                                             <div class="table-data-feature">
                                                 
-                                                <a href="{{ route('projects.show', $user1->project_id) }}" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">View</a>
+                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">View</a>
                                             </div>
                                         </td>
                                     </tr>                                    
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>                        
@@ -154,9 +152,9 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label class=" form-control-label">
-                                        @foreach ($signed as $key => $value)
-                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a>
-                                        @endforeach
+                                        <?php $__currentLoopData = $signed; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e(route('profile.show', $value['id'])); ?>" target="_blank">Download <?php echo e($value->project); ?> Signed Document</a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </label>
                                 </div>
                                 
@@ -175,24 +173,28 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label style="width: 50%;">
-                                        @if(count($status) > 0)
-                                        @foreach ($status as $key => $value)
-                                            @if($value->status)
+                                        <?php if(count($status) > 0): ?>
+                                        <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($value->status): ?>
                                                 <div class="alert alert-success col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>
-                                            @else
+                                            <?php else: ?>
                                                 <div class="alert alert-secondary col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>                                            
-                                            @endif
-                                        @endforeach
-                                        @endif
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                                 
                                 
-                            
+                            </div>
+                        </div> 
+                        
                         
                     </div>                    
                 </div>
@@ -202,4 +204,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

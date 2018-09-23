@@ -23,7 +23,10 @@ Route::get('email-verification/error', 'Auth\RegisterController@getVerificationE
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
 
 Route::resource('profile', 'ProfileController');
-Route::resource('users', 'UserController');
+//Route::resource('users', 'UserController');
+Route::resource('users', 'UserxController');
+Route::get('users/approve/{id}', 'UserxController@approve')->name('users.approve');
+Route::get('users/reject/{id}', 'UserxController@reject')->name('users.reject');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('projects', 'ProjectController');

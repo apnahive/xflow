@@ -13,6 +13,7 @@ use App\Form_file;
 use App\User_form;
 use App\Form_section;
 use App\Form_initial;
+use App\Project_user;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use File;
@@ -40,8 +41,28 @@ class ProfileController extends Controller
             $project = Project::find($project_id->project_id);
             $value->project = $project->name;
         }
+        $status = Form_sign::where('user_id', $id1)->get();
+        if(count($status))
+        {
+            foreach ($status as $key => $value) 
+            {
+                $form = Project_form::find($value->form_id);
+                $project_name = Project::find($form->project_id);
+                $value->name = $project_name->name;
+            }
+        }
+        $project_users = Project_user::where('user_id', '=', $id1)->get();
+        if(count($project_users))
+        {
+            foreach ($project_users as $project_userkey => $value1) 
+            {
+                //$form = Project_form::find($value->form_id);
+                $project_name = Project::find($value1->project_id);
+                $value1->name = $project_name->name;
+            }
+        }
         //dd($signed);
-        return view('profile.index', compact('user1', 'signed'));
+        return view('profile.index', compact('user1', 'signed', 'status', 'project_users'));
     }
 
     /**
