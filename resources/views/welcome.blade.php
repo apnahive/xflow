@@ -45,6 +45,21 @@
     .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(25, 21, 21, 0.75);
     }
+    @media only screen and (max-width: 600px) {
+      .carousel-item {
+                  height: 30px;
+                  margin-top: 72px;
+                  min-height: 130px;
+      }
+    }
+    @media only screen and (min-width: 610px) and (max-width: 768px){
+        .carousel-item {
+                  height: 30px;
+                  margin-top: 72px;
+                  min-height: 270px;
+      }
+    }
+}
     </style>
   </head>
 
@@ -56,7 +71,7 @@
          <a class="logo" href="index.html">
             <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-flow" />
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #000000fa;">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -122,6 +137,44 @@
     </header>
 
     <!-- Page Content -->
+     <!-- Services -->
+    <section id="services" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <h2 class="section-heading text-uppercase">ComplianceWorks Administration Tool</h2>
+            <h5 class="section-subheading text-muted">Compliance program for Investment Advisors, Private (Hedge) Funds, Private Equity and Broker Dealers.</h5>
+          </div>
+        </div>
+        <div class="row text-center">
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-tasks fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Task Management</h4>
+            <p class="text-muted">The only tool you need for task management and lists. Organize everything you need to keep track of individual and team tasks.</p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-cogs fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">X-flow</h4>
+            <p class="text-muted">For building, executing and managing business processes and workflows. It is a basis for building collaborative applications as well as integrating processes across an enterprise</p>
+          </div>
+          <div class="col-md-4">
+            <span class="fa-stack fa-4x">
+              <i class="fas fa-circle fa-stack-2x text-primary"></i>
+              <i class="fas fa-map-signs fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4 class="service-heading">Checklists</h4>
+            <p class="text-muted">Create recurring checklists, workflows and standard operating procedures in project is a simple, free and powerful way to manage your work</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="py-5">
       <div class="container">
         <h3>Overview</h3>
@@ -132,7 +185,32 @@ Welcome to the ComplianceWorks Administration Tool (CAT). CAT is a business inte
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; AgileAX 2018</p>
+        <!-- <p class="m-0 text-center text-white">Copyright &copy; AgileAX 2018</p> -->
+         <div class="row">
+          <div class="col-md-6">
+            <span class="copyright text-white">Copyright &copy; AgileAX 2018</span>
+          </div>
+          <div class="col-md-6" style="text-align: right;">
+            <ul class="list-inline social-buttons">
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-twitter text-white"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-facebook-f text-white"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-linkedin-in text-white"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
       </div>
       <!-- /.container -->
     </footer>

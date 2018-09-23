@@ -32,7 +32,21 @@
 
     <!-- Main CSS-->
     <link href="{{ asset('assets/css/theme.css') }}" rel="stylesheet" media="all">
-
+    <style>
+    .leffto{
+        margin-left: 15%;
+    }
+    @media only screen and (max-width: 600px) {
+      .leffto{
+        margin-left: 0%;
+    }
+    }
+    @media only screen and (min-width: 610px) and (max-width: 768px){
+     .leffto{
+        margin-left: 0%;
+    } 
+    }
+    </style>
 </head>
 
 <body class="animsition">
@@ -40,7 +54,7 @@
         <div class="page-content--bge5">
             <div class="container">
                 <!-- <div class="login-wrap"> -->
-                <div class="col-lg-8" style="margin-left: 15%;">
+                <div class="col-lg-8 leffto">
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
