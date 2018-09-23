@@ -11,12 +11,12 @@
     <title>Agile AX</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css')); ?>" rel="stylesheet" media="all">
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/full-slider.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/full-slider.css')); ?>" rel="stylesheet">
     <!-- Styles -->
         <style>
         .service-heading{
@@ -52,14 +52,14 @@
     .navbar-dark .navbar-nav .nav-link:hover {
     color: rgba(25, 21, 21, 0.75);
     }
-    @media only screen and (max-width: 600px) {
+    @media  only screen and (max-width: 600px) {
       .carousel-item {
                   height: 30px;
                   margin-top: 72px;
                   min-height: 130px;
       }
     }
-    @media only screen and (min-width: 610px) and (max-width: 768px){
+    @media  only screen and (min-width: 610px) and (max-width: 768px){
         .carousel-item {
                   height: 30px;
                   margin-top: 72px;
@@ -76,7 +76,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bgg-dark fixed-top" style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);>
       <div class="container">
          <a class="logo" href="index.html">
-            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-flow" />
+            <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="X-flow" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #000000fa;">
           <span class="navbar-toggler-icon"></span>
@@ -84,7 +84,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto" style="font-weight: 700;font-size: 16px;">
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-home"></i>&nbsp Home
+              <a class="nav-link" href="<?php echo e(url('/')); ?>"><i class="fas fa-home"></i>&nbsp Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -92,10 +92,10 @@
               <a class="nav-link" href="#"><i class="fas fa-address-card"></i>&nbsp About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/register') }}"><i class="fas fa-user-plus"></i>&nbsp Register</a>
+              <a class="nav-link" href="<?php echo e(url('/register')); ?>"><i class="fas fa-user-plus"></i>&nbsp Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/login') }}"><i class="fas fa-user"></i>&nbsp Login</a>
+              <a class="nav-link" href="<?php echo e(url('/login')); ?>"><i class="fas fa-user"></i>&nbsp Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"><i class="fas fa-phone"></i>&nbsp Contact</a>
@@ -114,19 +114,19 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('{{ asset('assets/images/slider/s1.jpg') }}')">
+          <div class="carousel-item active" style="background-image: url('<?php echo e(asset('assets/images/slider/s1.jpg')); ?>')">
             <div class="carousel-caption d-none d-md-block">
              
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s2.jpg') }}')">
+          <div class="carousel-item" style="background-image: url('<?php echo e(asset('assets/images/slider/s2.jpg')); ?>')">
             <div class="carousel-caption d-none d-md-block">
              
             </div>
           </div>
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s3.jpg') }}')">
+          <div class="carousel-item" style="background-image: url('<?php echo e(asset('assets/images/slider/s3.jpg')); ?>')">
             <div class="carousel-caption d-none d-md-block">
              
             </div>
@@ -223,8 +223,8 @@ Welcome to the ComplianceWorks Administration Tool (CAT). CAT is a business inte
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('assets/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.bundle.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendor/jquery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.bundle.min.js')); ?>"></script>
     <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
