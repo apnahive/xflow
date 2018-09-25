@@ -7,7 +7,7 @@
                     Back</button></a>
                     
 <div class="col-lg-12">
-    <div class="card">
+    <div class="card" style="margin-bottom: 100px;">
         <!-- <div class="card-header">
             <h4>Custom Tab</h4>
         </div> -->

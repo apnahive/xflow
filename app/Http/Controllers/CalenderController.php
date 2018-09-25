@@ -244,7 +244,7 @@ class CalenderController extends Controller
 
             //dd($value, $project); 
         }
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         //$task_templates = Task_template::all();
         //dd($tasks);
 

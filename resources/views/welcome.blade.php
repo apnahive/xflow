@@ -194,10 +194,10 @@ Welcome to the ComplianceWorks Administration Tool (CAT). CAT is a business inte
       <div class="container">
         <!-- <p class="m-0 text-center text-white">Copyright &copy; AgileAX 2018</p> -->
          <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" style="width: 50%;">
             <span class="copyright text-white">Copyright &copy; AgileAX 2018</span>
           </div>
-          <div class="col-md-6" style="text-align: right;">
+          <div class="col-md-6" style="text-align: right;width: 50%;">
             <ul class="list-inline social-buttons">
               <li class="list-inline-item">
                 <a href="#">

@@ -14,7 +14,7 @@
                 
             </div>
         </div>
-        <div class="table-responsive table-responsive-data2">
+        <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
             <table class="table table-data2">
                 <thead>
                     <tr>                        

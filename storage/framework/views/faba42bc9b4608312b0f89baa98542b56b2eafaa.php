@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
 <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
-<div class="row">
+<div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">

@@ -6,7 +6,7 @@
 <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
-<div class="col-lg-12">
+<div class="col-lg-12" style="margin-bottom: 100px;">
     <div class="card">
         <!-- <div class="card-header">
             <h4>Custom Tab</h4>

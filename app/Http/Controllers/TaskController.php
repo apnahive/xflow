@@ -120,7 +120,7 @@ class TaskController extends Controller
 
             //dd($value, $project); 
         }
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $task_templates = Task_template::all();
         //dd($tasks);
 
@@ -144,7 +144,7 @@ class TaskController extends Controller
         {
             //$users = User::all();
             //$tasks = Task::all();
-            if($request->task == null && $request->project == null && $request->managed == 0 && $request->assigned == 0)
+            if($request->task == null && $request->project == null && $request->managed == 0 && $request->assigned == 0 && $request->status == 0)
             {
                 return redirect()->route('tasks.index');
             }
@@ -152,6 +152,8 @@ class TaskController extends Controller
             {
                 if($request->assigned <> 0)
                     $tasks = Task::where('assignee', $request->assigned)->get();
+                if($request->status <> 0)
+                    $tasks = Task::where('status', $request->status)->get();
                 if($request->managed <> 0)
                     $tasks = Task::where('responsible', $request->managed)->get();
                 if($request->project)
@@ -259,12 +261,13 @@ class TaskController extends Controller
                 $value->color = 2;
             if($d->invert)
                 $value->color = 1;
-
+            if($value->status == 3)
+                $value->color = 4;
             //dd($d->days > 3, $d);
 
             //dd($value, $project); 
         }
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $task_templates = Task_template::all();
         //dd($tasks);
 
@@ -440,11 +443,12 @@ class TaskController extends Controller
                 $task->user = 0;
         }
         //dd($task);
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         if($task->admin || $task->poc || $task->cco || $task->user)
             return view('tasks.edit', compact('projects', 'task', 'users'));
         else
             return view('errors.401');
+        
     }
 
     /**

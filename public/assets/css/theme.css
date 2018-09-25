@@ -14639,3 +14639,14 @@ section {
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
 }
+
+@media (min-width: 600px) {
+    .search-task {
+        display: flex;
+    }    
+}
+@media (max-width: 991px) {
+    .account-dropdown {
+        left: 0;
+    }
+}

@@ -33,10 +33,10 @@
             </div>
             <div class="table-data__tool-right">
                 @if($tasks->admin == 1)
-                <a href="{{ route('task_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="{{ route('task_templates.create') }}" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
 
-                <a href="{{ route('task_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="{{ route('task_for_templates.create') }}" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add Task to Template</button></a>
                 @endif
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
@@ -135,7 +135,7 @@
 </div>
 @endif
 
-<div class="row">
+<div class="row" style="margin-bottom: 100px;">
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Tasks</h3>
@@ -174,28 +174,16 @@
                     <div class="dropDownSelect2"></div>
                 </div> -->
             </div>
-        </div>
+        </div>        
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">
                 <thead>
                     <form action="{!! route('tasks.search') !!}" method="POST" role="search" class="search-des">
                     {{ csrf_field() }}
-                    <tr>                        
-                        <th><input id="task" type="text" class="col-md-12" name="task" value="{{ old('task') }}" placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;"></th>
-                        <th><input id="project" type="text" class="col-md-12" name="project" value="{{ old('project') }}" placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;"></th>
-                        <th>
-                            <div class="rs-select2--light rs-select2--md">
-                                <select class="js-select2" id="managed" name="managed">
-                                    <option value="0" selected="selected">Managed By</option>
-                                    @foreach ($managedby as $managed) 
-                                        <option value="{{$managed->id}}">{{$managed->name}} {{$managed->lastname}}</option>
-                                    @endforeach
-                                </select>
-                                <div class="dropDownSelect2"></div>
-                            </div>                            
-                        </th>
-                        <th>
-                            <div class="rs-select2--light rs-select2--md">
+                    <div class="search-task">
+                        <div class="col-md-4">
+                            <input id="task" type="text" class="col-md-12" name="task" value="{{ old('task') }}" placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
                                 <select class="js-select2" id="assigned" name="assigned">
                                     <option value="0" selected="selected">Assigned To</option>
                                     @foreach ($assignedto as $assigned) 
@@ -203,10 +191,33 @@
                                     @endforeach                                    
                                 </select>
                                 <div class="dropDownSelect2"></div>
-                            </div>                              
-                        </th>                        
-                        <th><button type="submit" class="btn btn-md btn-info" style="width: 100%;color: white;background-color: #4272d7;border-radius: 1px;font-size: 16px;"><i class="zmdi zmdi-search"></i> Search</button></th>
-                    </tr>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <input id="project" type="text" class="col-md-12" name="project" value="{{ old('project') }}" placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
+                                <select class="js-select2" id="status" name="status">
+                                    <option value="0" selected="selected">Status</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Initiated</option>
+                                    <option value="3">Completed</option>                                    
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div> 
+                        </div>
+                        <div class="col-md-4">
+                            <div class="rs-select2--light rs-select2--md" style="width: 100%;font-weight: 600;font-size: 16px;">
+                                <select class="js-select2" id="managed" name="managed">
+                                    <option value="0" selected="selected">Managed By</option>
+                                    @foreach ($managedby as $managed) 
+                                        <option value="{{$managed->id}}">{{$managed->name}} {{$managed->lastname}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                                <button type="submit" class="btn btn-md btn-info" style="width: 100%;color: white;background-color: #4272d7;border-radius: 1px;font-size: 16px;margin-top: 10px;"><i class="zmdi zmdi-search"></i> Search</button>
+                            </div>                            
+                        </div>                        
+                    </div>
                     </form>
                     <tr>
                         <!-- <th>

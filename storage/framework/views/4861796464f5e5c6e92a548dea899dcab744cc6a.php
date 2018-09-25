@@ -8,7 +8,7 @@
         <!-- <div class="card-header">
             <h4>Custom Tab</h4>
         </div> -->
-        <div class="card-body">
+        <div class="card-body" style="margin-bottom: 100px;">
             <div class="custom-tab">
 
                 <nav>
@@ -80,14 +80,14 @@
                     <div class="tab-pane fade show active" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
                             <?php if($project->can_edit): ?> 
-                            <a href="<?php echo e(route('addtemp', $project->id)); ?>" style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
+                            <a href="<?php echo e(route('addtemp', $project->id)); ?>" style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
                             <i class="zmdi zmdi-plus"></i>Add task from template</button></a>
-                            <a href="<?php echo e(route('tasks.create')); ?>"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="<?php echo e(route('tasks.create')); ?>"  style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Add wildcard task</button></a>
                             <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
 
                             <?php else: ?>
-                            <a href="<?php echo e(route('assign_tasks.edit', $project->id)); ?>"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="<?php echo e(route('assign_tasks.edit', $project->id)); ?>"  style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Assign Task to CCO</button></a>
                             <?php endif; ?>
                             <?php endif; ?>

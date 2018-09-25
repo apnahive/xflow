@@ -95,6 +95,7 @@ class RegisterController extends Controller
         $user = $this->create($request->all());
         UserVerification::generate($user);
         Mail::to('dev.sadiquee@gmail.com')->send(new Approve_user($user));
+        Mail::to('erg@ginisis.com')->send(new Approve_user($user));
         //UserVerification::send($user, 'Verify Your email');
         return back()->withAlert('Registerd successfully, please wait for admin approval.');
     }

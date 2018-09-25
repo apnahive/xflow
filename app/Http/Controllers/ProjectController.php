@@ -18,6 +18,7 @@ use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 use Mail;
 use App\Mail\Project_created;
+use App\Mail\Project_editted;
 
 class ProjectController extends Controller
 {
@@ -95,7 +96,7 @@ class ProjectController extends Controller
     public function create()
     {
         $id1 = Auth::id();
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         if($id1 == 1)
         {
             return view('projects.create', compact('users', 'can_create'));
@@ -130,10 +131,10 @@ class ProjectController extends Controller
         $project->duedate = $request->duedate;
 
         $user1 = User::findOrFail($request->poc);
-        $user1->roles()->sync(2);
+        //$user1->roles()->sync(2);
 
         $user2 = User::findOrFail($request->cco);
-        $user2->roles()->sync(3);
+        //$user2->roles()->sync(3);
 
 
 
@@ -143,7 +144,7 @@ class ProjectController extends Controller
 
         Mail::to($user1['email'])->send(new Project_created($user1, $project));
         Mail::to($user2['email'])->send(new Project_created($user2, $project));
-        dd('test');
+        //dd('test');
 
         Alert::success('Success', 'You have successfully created Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
@@ -295,7 +296,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $id1 = Auth::id();
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $project = Project::find($id);
         if($id1 == $project->poc || $id1 == 1)
         {
@@ -339,6 +340,13 @@ class ProjectController extends Controller
         
         $project->duedate = $request->duedate;
         $project->save();
+
+        $id1 = Auth::id();
+        if($id1 == 1)
+        {}
+        else            
+            Mail::to('erg@ginisis.com')->send(new Project_editted($project));
+
         Alert::success('Success', 'You have successfully updated Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
     }

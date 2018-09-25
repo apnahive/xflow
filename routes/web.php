@@ -65,3 +65,6 @@ Route::get('images/{slug}', [
     'uses' => 'ImageController@show',
     'middleware' => 'auth',
 ]);
+
+
+Route::post('search', 'SearchController@search')->name('search');

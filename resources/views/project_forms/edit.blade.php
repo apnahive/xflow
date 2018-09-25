@@ -16,7 +16,7 @@
                     
             </script>            
 
-<div class="row">
+<div class="row" style="margin-bottom: 100px;">
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Edit Form</h3>

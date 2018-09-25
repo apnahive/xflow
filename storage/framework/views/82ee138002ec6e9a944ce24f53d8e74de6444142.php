@@ -60,6 +60,7 @@
     <?php echo $__env->yieldContent('style'); ?>
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
    
+   
 </head>
 <body class="animsition">
     <div class="page-wrapper">
@@ -68,9 +69,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="<?php echo e(route('home')); ?>">
 <!-- <<<<<<< HEAD -->
-                            <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="AgileAx" />
+                            <!-- <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="AgileAx" /> -->
 <!-- ======= -->
                             <img src="<?php echo e(asset('assets/images/icon/logo-blue.png')); ?>" alt="X-Flow" />
 <!-- >>>>>>> refs/remotes/origin/master -->
@@ -86,8 +87,8 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                        <li class="has-sub <?php echo e(request()->is('home') ? 'active' : ''); ?>">
+                            <a class="js-arrow" href="<?php echo e(route('home')); ?>">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <!-- <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
@@ -104,25 +105,35 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-product-hunt"></i>Project</a>
+                       <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('projects.index')); ?>">
+                                <i class="fab fa-product-hunt"></i>Project</a>
                         </li>
-                        <li>
-                            <a href="">
-                                <i class="fas fa-table"></i>Calander</a>
+                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                        <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('users.index')); ?>">
+                                <i class="fas fa-users"></i>Users</a>
                         </li>
-                        <li>
-                            <a href="">
-                                <i class="far fa-check-square"></i>Tasks</a>
+                        <li class="<?php echo e(request()->is('task_templates') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('task_templates.index')); ?>">
+                                <i class="fas fa-folder-open"></i>Task Template</a>
+                        </li>
+                        <?php endif; ?>
+                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('calender.index')); ?>">
+                                <i class="fas fa-calendar-alt"></i>Calender</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('tasks.index')); ?>">
+                                <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <li>
                             <a href="#">
-                                <i class="fas fa-calendar-alt"></i>Xflow</a>
+                                <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
-                        <li>
-                            <a href="">
-                                <i class="fas fa-map-marker-alt"></i>Checklists</a>
+                        <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklists.index')); ?>">
+                                <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -316,8 +327,10 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                            <form class="form-header" action="<?php echo route('search'); ?>" method="POST" role="search"> 
+                                <?php echo e(csrf_field()); ?>
+
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for projects &amp; tasks..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>

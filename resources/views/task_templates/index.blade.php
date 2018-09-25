@@ -31,9 +31,9 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                <a href="{{ route('task_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="{{ route('task_templates.create') }}" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
-                <a href="{{ route('task_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="{{ route('task_for_templates.create') }}" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i>Add Task to Template</button></a>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
@@ -45,7 +45,7 @@
                 </div> -->
             </div>
         </div>
-        <div class="table-responsive table-responsive-data2">
+        <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
             <table class="table table-data2">
                 <thead>
                     <tr>

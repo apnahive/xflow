@@ -16,7 +16,7 @@ class ChecklistController extends Controller
      */
     public function index()
     {
-        $users = User::all();        
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();        
         $checklists = Checklist::all();
         foreach ($checklists as $key => $value) 
         {
@@ -36,7 +36,7 @@ class ChecklistController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         return view('checklists.create', compact('users'));
     }
 
@@ -81,7 +81,7 @@ class ChecklistController extends Controller
      */
     public function edit($id)
     {
-        $users = User::all();
+        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $checklist = Checklist::find($id);
         return view('checklists.edit', compact('checklist', 'users'));
     }

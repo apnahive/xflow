@@ -1,7 +1,7 @@
 .subject-info-box-1,
 .subject-info-box-2 {
   float: left;
-  width: 45%;
+  width: 42.5%;
 }
 .subject-info-box-1 select,
 .subject-info-box-2 select {
@@ -19,7 +19,7 @@
 
 .subject-info-arrows {
   float: left;
-  width: 10%;
+  width: 15%;
 }
 .subject-info-arrows input {
   width: 70%;

@@ -5,7 +5,7 @@
 <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 
-<div class="row">
+<div class="row" style="margin-bottom: 100px;">
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Choose Template {{ $projectId }} </h3>

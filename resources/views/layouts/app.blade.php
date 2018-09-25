@@ -69,9 +69,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="index.html">
+                        <a class="logo" href="{{ route('home') }}">
 <!-- <<<<<<< HEAD -->
-                            <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="AgileAx" />
+                            <!-- <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="AgileAx" /> -->
 <!-- ======= -->
                             <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-Flow" />
 <!-- >>>>>>> refs/remotes/origin/master -->
@@ -327,8 +327,9 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                            <form class="form-header" action="{!! route('search') !!}" method="POST" role="search"> 
+                                {{ csrf_field() }}
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for projects &amp; tasks..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>

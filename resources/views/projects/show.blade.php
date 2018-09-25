@@ -11,7 +11,7 @@
         <!-- <div class="card-header">
             <h4>Custom Tab</h4>
         </div> -->
-        <div class="card-body">
+        <div class="card-body" style="margin-bottom: 100px;">
             <div class="custom-tab">
 
                 <nav>
@@ -83,14 +83,14 @@
                     <div class="tab-pane fade show active" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
                             @if($project->can_edit) 
-                            <a href="{{ route('addtemp', $project->id) }}" style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
+                            <a href="{{ route('addtemp', $project->id) }}" style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">                        
                             <i class="zmdi zmdi-plus"></i>Add task from template</button></a>
-                            <a href="{{ route('tasks.create') }}"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="{{ route('tasks.create') }}"  style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Add wildcard task</button></a>
                             @role('Admin')
 
                             @else
-                            <a href="{{ route('assign_tasks.edit', $project->id) }}"  style="text-align:center;margin:auto;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <a href="{{ route('assign_tasks.edit', $project->id) }}"  style="text-align:center;margin:auto;margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             <i class="zmdi zmdi-plus"></i>Assign Task to CCO</button></a>
                             @endrole
                             @endif

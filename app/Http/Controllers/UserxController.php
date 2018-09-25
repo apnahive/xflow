@@ -10,6 +10,9 @@ use App\Form_sign;
 use App\Project;
 use App\Project_form;
 use App\Project_user;
+use Mail;
+use App\Mail\User_approved;
+use App\Mail\User_rejected;
 
 class UserxController extends Controller
 {
@@ -33,6 +36,9 @@ class UserxController extends Controller
         $user->verified = 1;
         $user->verification_token = null;
         $user->save();
+
+        Mail::to($user['email'])->send(new User_approved($user));
+
         Alert::success('Success', 'You have successfully Approved User')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('users.index');
     }
@@ -43,6 +49,9 @@ class UserxController extends Controller
         $user->verified = 0;
         $user->verification_token = null;
         $user->save();
+
+        Mail::to($user['email'])->send(new User_rejected($user));
+
         Alert::success('Success', 'You have successfully Rejected User')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('users.index');
     }

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Task;
+use App\User;
 use RealRashid\SweetAlert\Facades\Alert;
+use Mail;
+use App\Mail\Task_initiated;
+use App\Mail\Task_completed;
 
 class Start_taskController extends Controller
 {
@@ -67,6 +71,11 @@ class Start_taskController extends Controller
         $task = Task::find($id);
         $task->status = 2;
         $task->save();
+
+        $user1 = User::findOrFail($task->responsible);
+        Mail::to($user1['email'])->send(new Task_initiated($task));
+        Mail::to('erg@ginisis.com')->send(new Task_initiated($task));
+
         Alert::success('Success', 'task has been Initiated')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','task has been Initiated');
     }
@@ -94,6 +103,11 @@ class Start_taskController extends Controller
         
         
         $task->save();
+
+        $user1 = User::findOrFail($task->responsible);
+        Mail::to($user1['email'])->send(new Task_completed($task));
+        Mail::to('erg@ginisis.com')->send(new Task_completed($task));
+
         Alert::success('Success', 'task has been completed')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','task has been completed');
     }
