@@ -77,14 +77,15 @@ class Form_sectionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd(request()->all());
         $this->validate($request, array(
-            'summernote'=> 'required|max:15048',
+            'summernotex'=> 'required|max:15048',
         ));        
         $form = Form_section::find($id);
-        $form->description = $request->summernote;
+        $form->description = $request->summernotex;
         $form->save();
         Alert::success('Success', 'You have successfully Updated the section')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('project_forms.edit', $form->id)->with('success', 'You have successfully Updated the form');
+        return redirect()->route('project_forms.edit', $form->form_id)->with('success', 'You have successfully Updated the form');
     }
 
     /**

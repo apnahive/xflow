@@ -87,11 +87,11 @@
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
 
-                                <form action="{{ route('task_templates.destroy', $task_template->id) }}" method="POST">
+                                <form action="{{ route('task_templates.destroy', $task->id) }}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 
-                                <div class="modal fade" id="temp{{$task_template->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task_template->id}}" aria-hidden="true">
+                                <div class="modal fade" id="temp{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">

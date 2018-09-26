@@ -39,11 +39,11 @@
             </form>
             @if(count($sections) > 0)
                 @foreach ($sections as $sectionkey => $section)
-                    <form class="form-horizontal  form-material" role="form" method="POST" action="{{ route('form_sections.update', $section['form_id']) }}">
+                    <form class="form-horizontal  form-material" role="form" method="POST" action="{{ route('form_sections.update', $section['id']) }}">
                     <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <textarea name="summernote" id="summernote{{ $sectionkey }}" class="summernote">{{ $section->description }}</textarea>
+                    <textarea name="summernotex" id="summernote{{ $sectionkey }}" class="summernote">{{ $section->description }}</textarea>
                     <div class="form-group">
                             <div class="col-md-8">
                                 <button type="submit" class="btn btn-info">

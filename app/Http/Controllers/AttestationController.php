@@ -108,7 +108,43 @@ class AttestationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, array(
+            'name'=> 'required|max:20',                        
+            'summernote'=> 'required|max:15048',            
+        ));
+
+
+        $detail=$request->summernote;
+ 
+        $dom = new \domdocument();
+        $dom->loadHtml($detail, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+ 
+        $images = $dom->getelementsbytagname('img');
+ 
+        foreach($images as $k => $img){
+            $data = $img->getattribute('src');
+ 
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+ 
+            $data = base64_decode($data);
+            $image_name= time().$k.'.png';
+            $path = public_path() .'/'. $image_name;
+ 
+            file_put_contents($path, $data);
+ 
+            $img->removeattribute('src');
+            $img->setattribute('src', $image_name);
+        }
+ 
+        $detail = $dom->savehtml();
+
+
+        $attestation = Attestation::find($id);
+        $attestation->name = $request->name;
+        $attestation->description = $detail;
+        $attestation->save();
+        Alert::success('Success', 'You have successfully created form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
     }
 
     /**

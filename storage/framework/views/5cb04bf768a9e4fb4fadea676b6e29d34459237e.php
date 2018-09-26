@@ -79,35 +79,36 @@
                                 <a href="<?php echo e(route('task_templates.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#temp<?php echo e($task->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>">Delete</button> -->
 
-                                <form id="<?php echo e($task->id); ?>" action="" method="POST" style="display: none;">
+                                <form action="<?php echo e(route('task_templates.destroy', $task->id)); ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                                </form>
-                                <div class="modal fade" id="confirm<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
+                                
+                                <div class="modal fade" id="temp<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Template</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Task Template</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task Template. All the associated records will be deleted. You won't be able to revert these changes! 
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($task->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
 
 
 

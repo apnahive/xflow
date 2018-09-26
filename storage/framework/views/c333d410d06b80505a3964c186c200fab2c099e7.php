@@ -37,11 +37,11 @@
             </form>
             <?php if(count($sections) > 0): ?>
                 <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionkey => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('form_sections.update', $section['form_id'])); ?>">
+                    <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('form_sections.update', $section['id'])); ?>">
                     <input type="hidden" name="_method" value="PUT">
                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
-                    <textarea name="summernote" id="summernote<?php echo e($sectionkey); ?>" class="summernote"><?php echo e($section->description); ?></textarea>
+                    <textarea name="summernotex" id="summernote<?php echo e($sectionkey); ?>" class="summernote"><?php echo e($section->description); ?></textarea>
                     <div class="form-group">
                             <div class="col-md-8">
                                 <button type="submit" class="btn btn-info">
