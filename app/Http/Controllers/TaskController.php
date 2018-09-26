@@ -150,20 +150,54 @@ class TaskController extends Controller
             }
             else
             {
+                $search = $request;
                 if($request->assigned <> 0)
+                {
+                    $search->assigned = $request->assigned;
+                    $search->status = null;
+                    $search->managed = null;
+                    $search->project = null;
+                    $search->task = null;
                     $tasks = Task::where('assignee', $request->assigned)->get();
+                }
                 if($request->status <> 0)
+                {
+                    $search->assigned = null;
+                    $search->status = $request->status;
+                    $search->managed = null;
+                    $search->project = null;
+                    $search->task = null;
                     $tasks = Task::where('status', $request->status)->get();
+                }
                 if($request->managed <> 0)
+                {
+                    $search->assigned = null;
+                    $search->status = null;
+                    $search->managed = $request->managed;
+                    $search->project = null;
+                    $search->task = null;
                     $tasks = Task::where('responsible', $request->managed)->get();
+                }
                 if($request->project)
                 {
+                    $search->assigned = null;
+                    $search->status = null;
+                    $search->managed = null;
+                    $search->project = $request->project;
+                    $search->task = null;
                     $searchproject = Project::where('name', 'like', '%'.$request->project.'%')->select('id')->get();
                     $tasks = Task::whereIn('project_id', $searchproject)->get();
                     //dd($tasks);
                 }
                 if($request->task)
+                {
+                    $search->assigned = null;
+                    $search->status = null;
+                    $search->managed = null;
+                    $search->project = null;
+                    $search->task = $request->task;
                     $tasks = Task::where('title', 'like', '%'.$request->task.'%')->get();
+                }
             }
             //dd($tasks);
             $managed1 = Task::select('responsible')->get();
@@ -277,8 +311,8 @@ class TaskController extends Controller
         $managedby = User::whereIn('id', $managed1)->get();
         
         $assignedto = User::whereIn('id', $assigned1)->get();
-        //dd($managedby);
-        return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+        //dd($search->status);
+        return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto', 'search'));
     }
 
     /**
@@ -513,6 +547,10 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd('delete has been hitted');
+        $task = Task::find($id);
+        $task->delete();
+        Alert::success('Success', 'You have successfully deleted Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('tasks.index')->with('success', 'You have successfully deleted Site');
     }
 }

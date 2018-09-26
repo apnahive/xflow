@@ -53,25 +53,25 @@
                     {{ csrf_field() }}
                     <div class="search-task">
                         <div class="col-md-4">
-                            <input id="task" type="text" class="col-md-12" name="task" value="{{ old('task') }}" placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="task" type="text" class="col-md-12" name="task" @if($search->task) value="{{ $search->task }}" @else value="{{ old('task') }}" @endif placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
                                 <select class="js-select2" id="assigned" name="assigned">
                                     <option value="0" selected="selected">Assigned To</option>
                                     @foreach ($assignedto as $assigned) 
-                                        <option value="{{$assigned->id}}">{{$assigned->name}} {{$assigned->lastname}}</option>
+                                        <option value="{{$assigned->id}}" @if($search->assigned == $assigned->id) selected @endif>{{$assigned->name}} {{$assigned->lastname}}</option>
                                     @endforeach                                    
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <input id="project" type="text" class="col-md-12" name="project" value="{{ old('project') }}" placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="project" type="text" class="col-md-12" name="project" @if($search->project) value="{{ $search->project }}" @else value="{{ old('project') }}" @endif placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
                                 <select class="js-select2" id="status" name="status">
                                     <option value="0" selected="selected">Status</option>
-                                    <option value="1">Pending</option>
-                                    <option value="2">Initiated</option>
-                                    <option value="3">Completed</option>                                    
+                                    <option value="1" @if($search->status == 1) selected @endif>Pending</option>
+                                    <option value="2" @if($search->status == 2) selected @endif>Initiated</option>
+                                    <option value="3" @if($search->status == 3) selected @endif>Completed</option>                                    
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div> 
@@ -81,7 +81,7 @@
                                 <select class="js-select2" id="managed" name="managed">
                                     <option value="0" selected="selected">Managed By</option>
                                     @foreach ($managedby as $managed) 
-                                        <option value="{{$managed->id}}">{{$managed->name}} {{$managed->lastname}}</option>
+                                        <option value="{{$managed->id}}" @if($search->managed == $managed->id) selected @endif>{{$managed->name}} {{$managed->lastname}}</option>
                                     @endforeach
                                 </select>
                                 <div class="dropDownSelect2"></div>
@@ -186,10 +186,10 @@
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
 
-                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
+                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                </form>
+                                
                                 <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -200,15 +200,16 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
                                 @endif
 
 

@@ -112,10 +112,10 @@
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
 
-                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
+                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                </form>
+                                
                                 <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -126,15 +126,16 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
                                 @endif
 
 

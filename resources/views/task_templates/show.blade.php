@@ -27,7 +27,7 @@
                         <div class="card-body card-block">
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="name" class=" form-control-label">Name</label>
+                                    <label for="name" class=" form-control-label"><b>Name</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="name" class=" form-control-label">{{ $task->name }}</label>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label">Description</label>
+                                    <label for="description" class=" form-control-label"><b>Description</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label">{{ $task->detail }}</label>

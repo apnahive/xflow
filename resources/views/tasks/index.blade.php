@@ -86,35 +86,37 @@
                                 <a href="{{ route('task_templates.edit', $task_template->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$task_template->id}}" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#temp{{$task_template->id}}" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
                                 
 
-                                <form id="{{$task_template->id}}" action="" method="POST" style="display: none;">
+                                <form action="{{ route('task_templates.destroy', $task_template->id) }}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                </form>
-                                <div class="modal fade" id="confirm{{$task_template->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task_template->id}}" aria-hidden="true">
+                                
+                                <div class="modal fade" id="temp{{$task_template->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task_template->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Template</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Task Template</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task Template. All the associated records will be deleted. You won't be able to revert these changes! 
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task_template->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
+                                
                                 @endif
 
 
@@ -315,10 +317,10 @@
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$task->id}}">Delete</button> -->
 
-                                <form id="{{$task->id}}" action="" method="POST" style="display: none;">
+                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                </form>
+                                
                                 <div class="modal fade" id="confirm{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -329,15 +331,16 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$task->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
                                 @endif
 
 

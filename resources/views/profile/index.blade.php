@@ -31,7 +31,7 @@
                             <div class="row form-group">
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Name</label>
+                                        <label class="form-control-label"><b>Name</b></label>
                                     </div>
                                     <div class="col-md-9">
                                         <label class=" form-control-label">{{ $user1->name }} {{ $user1->lastname }}</label>
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Email</label>
+                                        <label class="form-control-label"><b>Email</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <label class=" form-control-label">{{ $user1->email }}</label>
@@ -49,7 +49,7 @@
                             <div class="row form-group">
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">User Type</label>
+                                        <label class="form-control-label"><b>User Type</b></label>
                                     </div>
                                     <div class="col-md-9">
                                         <label class=" form-control-label">{{ $user1->user_type }}</label>
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Date of Birth</label>
+                                        <label class="form-control-label"><b>Date of Birth</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <label class=" form-control-label">{{ $user1->dateofbirth }}</label>
@@ -67,7 +67,7 @@
                             <div class="row form-group">
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Company</label>
+                                        <label class="form-control-label"><b>Company</b></label>
                                     </div>
                                     <div class="col-md-9">
                                         <label class=" form-control-label">{{ $user1->company }}</label>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Orgnization</label>
+                                        <label class="form-control-label"><b>Orgnization</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
                                         <label class=" form-control-label">{{ $user1->organization }}</label>
@@ -85,7 +85,7 @@
                             <div class="row form-group">
                                 <div class="row col-lg-6">
                                     <div class="col col-md-3">
-                                        <label class="form-control-label">Phone Number</label>
+                                        <label class="form-control-label"><b>Phone Number</b></label>
                                     </div>
                                     <div class="col-md-9">
                                         <label class=" form-control-label">{{ $user1->phonenumber }}</label>

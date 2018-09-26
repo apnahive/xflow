@@ -14,6 +14,8 @@ use App\Form_file;
 use App\Form_sign;
 use App\Project_form;
 use App\Form_section;
+use App\Form_initial;
+use App\User_form;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 use Mail;
@@ -359,6 +361,39 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd('delete has been hitted');
+        $project = Project::find($id);
+        $form_files = Form_file::where('project_id', $id);
+        $task = Task::where('project_id', $id);
+        $project_user = Project_user::where('project_id', '=', $id);
+        $form_id = Form_file::where('project_id', $id)->select('form_id')->first();
+        if($form_id)
+        {
+            $formid = $form_id->form_id;
+            $sign = Form_sign::where('form_id', $formid);
+            $initial = Form_initial::where('form_id', $formid);
+            $sections = Form_section::where('form_id', $formid);
+            $user_forms = User_form::where('form_id', $formid);    
+            $sign->delete();
+            $initial->delete();
+            $sections->delete();
+            $user_forms->delete();        
+        }
+        
+        $form = Project_form::where('project_id', $id);
+        $files = Project_file::where('project_id', $id);
+        
+        //dd($user_forms->get());
+        $form_files->delete();
+        $task->delete();
+        $project_user->delete();
+        $form->delete();
+        $files->delete();
+        
+        //dd('wait');
+        $project->delete();
+
+        Alert::success('Success', 'You have successfully deleted Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('projects.index')->with('success', 'You have successfully deleted Site');
     }
 }

@@ -335,7 +335,7 @@
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
                             </form>
-                            <div class="header-button">
+                            <div class="header-button" style="width: 100px;">
                                 <!-- <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-comment-more"></i>

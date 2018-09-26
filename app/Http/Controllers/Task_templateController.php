@@ -153,6 +153,12 @@ class Task_templateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //dd('delete has been hitted');
+        $task = Task_template::find($id);
+        $task_templates = Task_for_template::where('task_template_id', $id);
+        $task->delete();
+        $task_templates->delete();
+        Alert::success('Success', 'You have successfully deleted Task template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('task_templates.index')->with('success', 'You have successfully deleted Site');
     }
 }

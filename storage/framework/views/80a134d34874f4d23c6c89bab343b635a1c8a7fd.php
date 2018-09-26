@@ -4,7 +4,7 @@
                     Back</button></a>
 
 
-<div class="row">
+<div class="row" style="margin-bottom: 100px;">
     <div class="col-md-12">
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Tasks</h3>
@@ -50,27 +50,27 @@
                     <form action="<?php echo route('tasks.search'); ?>" method="POST" role="search" class="search-des">
                     <?php echo e(csrf_field()); ?>
 
-                    <div style="display: flex;">
+                    <div class="search-task">
                         <div class="col-md-4">
-                            <input id="task" type="text" class="col-md-12" name="task" value="<?php echo e(old('task')); ?>" placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="task" type="text" class="col-md-12" name="task" <?php if($search->task): ?> value="<?php echo e($search->task); ?>" <?php else: ?> value="<?php echo e(old('task')); ?>" <?php endif; ?> placeholder="Task" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
                                 <select class="js-select2" id="assigned" name="assigned">
                                     <option value="0" selected="selected">Assigned To</option>
                                     <?php $__currentLoopData = $assignedto; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $assigned): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                        <option value="<?php echo e($assigned->id); ?>"><?php echo e($assigned->name); ?> <?php echo e($assigned->lastname); ?></option>
+                                        <option value="<?php echo e($assigned->id); ?>" <?php if($search->assigned == $assigned->id): ?> selected <?php endif; ?>><?php echo e($assigned->name); ?> <?php echo e($assigned->lastname); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                    
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <input id="project" type="text" class="col-md-12" name="project" value="<?php echo e(old('project')); ?>" placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="project" type="text" class="col-md-12" name="project" <?php if($search->project): ?> value="<?php echo e($search->project); ?>" <?php else: ?> value="<?php echo e(old('project')); ?>" <?php endif; ?> placeholder="Project" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
                                 <select class="js-select2" id="status" name="status">
                                     <option value="0" selected="selected">Status</option>
-                                    <option value="1">Pending</option>
-                                    <option value="2">Initiated</option>
-                                    <option value="3">Completed</option>                                    
+                                    <option value="1" <?php if($search->status == 1): ?> selected <?php endif; ?>>Pending</option>
+                                    <option value="2" <?php if($search->status == 2): ?> selected <?php endif; ?>>Initiated</option>
+                                    <option value="3" <?php if($search->status == 3): ?> selected <?php endif; ?>>Completed</option>                                    
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div> 
@@ -80,7 +80,7 @@
                                 <select class="js-select2" id="managed" name="managed">
                                     <option value="0" selected="selected">Managed By</option>
                                     <?php $__currentLoopData = $managedby; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $managed): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                        <option value="<?php echo e($managed->id); ?>"><?php echo e($managed->name); ?> <?php echo e($managed->lastname); ?></option>
+                                        <option value="<?php echo e($managed->id); ?>" <?php if($search->managed == $managed->id): ?> selected <?php endif; ?>><?php echo e($managed->name); ?> <?php echo e($managed->lastname); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                                 <div class="dropDownSelect2"></div>
@@ -186,10 +186,10 @@
 
                                 <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>">Delete</button> -->
 
-                                <form id="<?php echo e($task->id); ?>" action="" method="POST" style="display: none;">
+                                <form action="<?php echo e(route('tasks.destroy', $task->id)); ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                                </form>
+                                
                                 <div class="modal fade" id="confirm<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -200,15 +200,16 @@
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        Under Development
+                                        You are going to delete Task. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($task->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
+                                </form>
                                 <?php endif; ?>
 
 
