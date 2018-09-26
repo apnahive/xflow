@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 
-<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(route('projects.show', $form['project_id'])); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
      <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
             <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
@@ -20,11 +20,12 @@
         <h3 class="title-5 m-b-35">Edit Form</h3>
         
         <div class="table-responsive table-responsive-data2">
+            <a href="<?php echo e(route('form_sections.add', $form['id'])); ?>"><button class="btn btn-info" type="button">Add Section</button></a>
             <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('project_forms.update', $form['id'])); ?>">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">            
             
-            <a href="<?php echo e(route('form_sections.edit', $form->id)); ?>"><button class="btn btn-info" type="button" name="addDom">Add Section</button></a>
+            
             
             <textarea name="summernote" id="summernote" class="summernote"><?php echo e($form->description); ?></textarea>
             <div class="form-group">

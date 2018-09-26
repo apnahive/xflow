@@ -71,8 +71,8 @@ class Project_formController extends Controller
         {
             $form = Project_form::where('project_id', $request->project_id)->first();
             //$form->project_id = $request->project_id;
-            $form->description = $request->summernote;
-            $form->save();
+            //$form->description = $request->summernote;
+            //$form->save();
         }
         else
         {

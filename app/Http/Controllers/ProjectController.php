@@ -268,7 +268,7 @@ class ProjectController extends Controller
         {
             $attestation = Project_form::where('project_id', $id)->first();
             $sections = Form_section::where('form_id', $attestation->id)->get();
-            $attestation->status = true;
+            $attestation->status = true; 
         }
         else
         {

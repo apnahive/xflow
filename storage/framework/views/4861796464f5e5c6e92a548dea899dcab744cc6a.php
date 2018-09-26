@@ -23,7 +23,7 @@
                          aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>
                         <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-files' ? 'active' : ''); ?>" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
-                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                        <?php if($project->can_edit): ?> 
                         <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-users' ? 'active' : ''); ?>" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
                          
@@ -287,7 +287,7 @@
                         </table>
                         
                     </div>
-                    <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                    <?php if($project->can_edit): ?> 
                     <div class="tab-pane fade" id="custom-nav-users" role="tabpanel" aria-labelledby="custom-nav-users-tab">
                         <!-- <style>
                             

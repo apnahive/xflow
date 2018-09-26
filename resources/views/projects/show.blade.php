@@ -26,13 +26,13 @@
                          aria-selected="false"><i class="fas fa-map-signs"></i>Checklists</a>
                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-files' ? 'active' : '' }}" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
-                        @role('Admin')
+                        @if($project->can_edit) 
                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-users' ? 'active' : '' }}" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
                          
                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-attestation' ? 'active' : '' }}" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
-                        @endrole
+                        @endif
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -287,7 +287,7 @@
                         </table>
                         
                     </div>
-                    @role('Admin')
+                    @if($project->can_edit) 
                     <div class="tab-pane fade" id="custom-nav-users" role="tabpanel" aria-labelledby="custom-nav-users-tab">
                         <!-- <style>
                             
@@ -457,7 +457,7 @@
                         </form>
                         
                     </div>
-                    @endrole
+                    @endif
                 </div>
 
             </div>

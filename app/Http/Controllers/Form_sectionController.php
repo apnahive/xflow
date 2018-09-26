@@ -25,7 +25,14 @@ class Form_sectionController extends Controller
      */
     public function create()
     {
-        //
+        /*$form = new Form_section;
+        $form->name = ' ';
+        $form->description = ' ';
+        //$form->form_id = $id;
+        $form->save();*/
+        //dd($form);
+
+        return view('form_sections.edit', compact('form'));
     }
 
     /**
@@ -36,7 +43,17 @@ class Form_sectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd(request()->all());
+         $this->validate($request, array(
+            'summernote'=> 'required|max:15048',
+        ));        
+        $form = new Form_section;
+        $form->description = $request->summernote;
+        $form->form_id = $request->form_id;
+        $form->name = ' ';
+        $form->save();
+        Alert::success('Success', 'You have successfully created the form section')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('project_forms.edit', $form->form_id)->with('success', 'You have successfully created the form section');
     }
 
     /**
@@ -45,6 +62,11 @@ class Form_sectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function add($id)
+    {
+        return view('form_sections.add', compact('id'));
+    }
+
     public function show($id)
     {
         //

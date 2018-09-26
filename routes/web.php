@@ -45,6 +45,7 @@ Route::resource('attestations', 'AttestationController');
 Route::resource('project_forms', 'Project_formController');
 Route::get('project_form/{id}', 'Project_formController@createf')->name('project_forms.createf');
 Route::resource('form_sections', 'Form_sectionController');
+Route::get('form_sections/{id}/add', 'Form_sectionController@add')->name('form_sections.add');
 Route::resource('form_sign', 'Form_signController');
 
 
