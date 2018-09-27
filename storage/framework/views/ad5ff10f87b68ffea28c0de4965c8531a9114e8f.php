@@ -1,9 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12">
@@ -30,7 +27,7 @@
                                     <label for="name" class=" form-control-label"><b>Name</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $task->name }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($task->name); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -38,7 +35,7 @@
                                     <label for="description" class=" form-control-label"><b>Description</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label">{{ $task->detail }}</label>
+                                    <label for="description" class=" form-control-label"><?php echo e($task->detail); ?></label>
                                 </div>
                             </div>
                         </div>                        
@@ -52,7 +49,7 @@
                                         
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <a href="{{ route('task_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <a href="<?php echo e(route('task_for_templates.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
                                         
                                     </div>
@@ -68,29 +65,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($task_templates as $key => $value)
+                                            <?php $__currentLoopData = $task_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr class="tr-shadow">                                                
-                                                <td>{{ $value->title }}</td>
-                                                <td>{{ $value->category1 }}</td>                        
-                                                <td>{{ $value->estimated_time_to_complete }}</td>
+                                                <td><?php echo e($value->title); ?></td>
+                                                <td><?php echo e($value->category1); ?></td>                        
+                                                <td><?php echo e($value->estimated_time_to_complete); ?></td>
                                                 <td>
                                                     <div class="table-data-feature">
-                                                         @role('Admin')
-                                                        <a href="{{ route('task_for_templates.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                                                        <a href="<?php echo e(route('task_for_templates.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button></a>
 
-                                                        <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
+                                                        <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($value->id); ?>" data-backdrop="false">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
 
                                                         
 
-                                                        <form action="{{ route('task_for_templates.destroy', $value->id) }}" method="POST">
+                                                        <form action="<?php echo e(route('task_for_templates.destroy', $value->id)); ?>" method="POST">
                                                         <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                         
-                                                        <div class="modal fade" id="confirm{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                        <div class="modal fade" id="confirm<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
                                                           <div class="modal-dialog" role="document">
                                                             <div class="modal-content" style="text-align: left;">
                                                               <div class="modal-header">
@@ -113,14 +110,15 @@
                                                         </div>
                                                         </form>
                                                     </div>
-                                                    @endrole
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                             <tr class="spacer"></tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
-                                    {!! $task_templates->render() !!}
+                                    <?php echo $task_templates->render(); ?>
+
                                 </div>
                                 <!-- END DATA TABLE -->
                             </div>
@@ -136,4 +134,5 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

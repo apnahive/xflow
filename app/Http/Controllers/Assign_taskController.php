@@ -54,7 +54,8 @@ class Assign_taskController extends Controller
 
         $user1 = User::findOrFail($request->assignee);
         $project = Project::find($task->project_id);
-        Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
+        $task->projectname = $project->name;
+        Mail::to($user1['email'])->send(new Task_assigned($user1, $task));
 
         Alert::success('Success', 'You have assigned task to user')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->back()->with('success','You have assigned task to user');

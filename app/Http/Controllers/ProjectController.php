@@ -163,6 +163,12 @@ class ProjectController extends Controller
         $id1 = Auth::id();
         $now = new \DateTime();
         $project = Project::find($id);
+        if(!$project)
+        {
+            Alert::error('Error', 'Project not found')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+            return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
+        }
+        
         $poc = User::find($project->poc);
         $project->pocname = $poc->name;
         $cco = User::find($project->cco);
@@ -204,11 +210,14 @@ class ProjectController extends Controller
                 }
                 else
                 {
-                    $project->can_edit = 0;
+                    /*$project->can_edit = 0;
                     $project->can_view = 0;
-                    $project->can_delete = 0;
+                    $project->can_delete = 0;*/
+                    return view('errors.401');
                 }
             }
+            if(count($project_users) == 0)
+                return view('errors.401');
             $tasks = Task::where('project_id', $id)->where('assignee', $id1)->paginate(15); 
         }
 

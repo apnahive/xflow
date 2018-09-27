@@ -77,7 +77,10 @@ class Task_for_templateController extends Controller
      */
     public function edit($id)
     {
-        //
+        //dd('edit is hitted');
+        $task = Task_for_template::find($id);
+        $task_templates = Task_template::all();
+        return view('task_for_templates.edit', compact('task', 'task_templates'));
     }
 
     /**
@@ -89,7 +92,23 @@ class Task_for_templateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, array(
+            'template_id'=> 'numeric|min:1',
+            'title'=> 'required|max:80',            
+            'category'=> 'numeric|min:1',
+            'estimated_time_to_complete'=> 'numeric|min:1',
+            'note'=> 'required|max:191',
+        ));
+        $task = Task_for_template::find($id);
+        $task->task_template_id = $request->template_id;
+        $task->title = $request->title;        
+        $task->category = $request->category;
+        $task->estimated_time_to_complete = $request->estimated_time_to_complete;        
+        $task->note = $request->note;        
+        
+        $task->save();
+        Alert::success('Success', 'You have successfully updated Task in template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('task_templates.index')->with('success', 'You have successfully added Task');
     }
 
     /**
@@ -100,6 +119,9 @@ class Task_for_templateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task_for_template::find($id);
+        $task->delete();
+        Alert::success('Success', 'You have successfully deleted Task in template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('task_templates.index')->with('success', 'You have successfully deleted Site');
     }
 }

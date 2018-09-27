@@ -395,6 +395,11 @@ class TaskController extends Controller
     public function show($id)
     {        
         $task = Task::find($id);
+        if(!$task)
+        {
+            Alert::error('Error', 'Task not found')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+            return redirect()->route('tasks.index');
+        }
         //$users = User::all();
         $project = Project::find($task->project_id);
         $task->projectname = $project->name;
