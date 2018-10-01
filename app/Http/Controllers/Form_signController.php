@@ -173,6 +173,11 @@ class Form_signController extends Controller
         $form_id = $request->form_id;
 
         $form = Project_form::find($form_id);
+        if(User_form::where('form_id',$form_id)->where('user_id',$id1)->exists())
+        {
+            $oldform = User_form::where('form_id',$form_id)->where('user_id',$id1);
+            $oldform->delete();
+        }
         if(User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', 0)->exists())
         {
             $userform = User_form::where('form_id',$form_id)->where('user_id',$id1)->where('section_id', 0)->first();

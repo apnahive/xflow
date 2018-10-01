@@ -112,7 +112,7 @@ class ProfileController extends Controller
         //
         $form_files = Form_file::where('project_id', $form->project_id)->get();
         //dd($form_files);
-        $user_forms = User_form::where('form_id', $form->id)->get();
+        $user_forms = User_form::where('form_id', $form->id)->where('user_id', $id1)->get();
                 
 
         foreach ($user_forms as $user_formkey => $user_form) 
@@ -145,7 +145,7 @@ class ProfileController extends Controller
 
         //dd($user_forms);
         //return view('form-signed', compact('form', 'form_files', 'id1', 'sign', 'user_forms', 'base64'));        
-
+        //return view('form-signed', compact('form', 'form_files', 'id1', 'sign', 'user_forms', 'base64'));
 
         $pdf = PDF::setOptions([
             'images' => true
