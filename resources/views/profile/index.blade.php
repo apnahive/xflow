@@ -156,7 +156,7 @@
                                 <div class="col-md-9">
                                     <label class=" form-control-label">
                                         @foreach ($signed as $key => $value)
-                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a>
+                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a><br>
                                         @endforeach
                                     </label>
                                 </div>

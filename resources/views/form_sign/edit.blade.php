@@ -26,7 +26,7 @@
                         <br> -->
                         @if(count($form_files) > 0)
                         @foreach ($form_files as $form_filekey => $form_file)
-                            <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file }}</a>
+                            <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file_name }}</a> 
                             <br>
                         @endforeach
                         @endif

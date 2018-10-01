@@ -64,14 +64,14 @@
             <input type="hidden" name="user_id" value="<?php echo e($id1); ?>">
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label>
+                        <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label><br>
                     </div>
                     <div class="col-12 col-md-9">
                         <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
                         <br> -->
                         <?php if(count($form_files) > 0): ?>
                         <?php $__currentLoopData = $form_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_filekey => $form_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file); ?></a>
+                            <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file_name); ?></a>
                             <br>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>

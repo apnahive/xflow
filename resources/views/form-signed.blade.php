@@ -64,14 +64,14 @@
             <input type="hidden" name="user_id" value="{{ $id1 }}">
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label>
+                        <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label><br>
                     </div>
                     <div class="col-12 col-md-9">
                         <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
                         <br> -->
                         @if(count($form_files) > 0)
                         @foreach ($form_files as $form_filekey => $form_file)
-                            <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file }}</a>
+                            <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file_name }}</a>
                             <br>
                         @endforeach
                         @endif
@@ -84,7 +84,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
+                        <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label><br>
                     </div>
                     <div class="col-12 col-md-9">                        
                         @foreach ($user_forms as $user_formkey => $user_form)
