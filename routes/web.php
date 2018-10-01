@@ -23,6 +23,7 @@ Route::get('email-verification/error', 'Auth\RegisterController@getVerificationE
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
 
 Route::resource('profile', 'ProfileController');
+//Route::get('download-document/{userid}/{formid}', 'ProfileController@download')->name('profile.download');
 //Route::resource('users', 'UserController');
 Route::resource('users', 'UserxController');
 Route::get('users/approve/{id}', 'UserxController@approve')->name('users.approve');

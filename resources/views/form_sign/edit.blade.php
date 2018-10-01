@@ -59,7 +59,7 @@
                     <div class="col-12 col-md-9">
                         <input type="hidden" name="sign" value="false">
                         <input type="checkbox" id="sign" value="true" name="sign">
-                        <label for="sign"> I have reviewed the content and accepted the terms.</label>
+                        <label for="sign"> I have reviewed the content and accepted the terms. Click submit to sign the form.</label>
                     </div>
                 </div>
                 <div class="row form-group">

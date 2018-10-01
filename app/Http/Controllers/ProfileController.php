@@ -100,10 +100,10 @@ class ProfileController extends Controller
     public function show($id)
     {
         //dd('download is hitted');
-        $id1 = Auth::id();
+        
         ini_set('max_execution_time', 900);
         $signed = Form_sign::find($id);
-        
+        $id1 = $signed->user_id;
 
         $form = Project_form::find($signed->form_id);
         $project = Project::find($form->project_id);
@@ -134,7 +134,8 @@ class ProfileController extends Controller
 
 
 
-        $sign = Form_sign::where('status', true)->where('user_id', $id1)->where('form_id', $form->id)->first();
+        $sign = Form_sign::find($id);
+        //dd($signed, $sign, $id1, $form);
         $path = storage_path('form_sign/'.$sign->sign);
         
         $type = pathinfo($path, PATHINFO_EXTENSION);

@@ -12,12 +12,12 @@
     <title>Agile AX</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.min.css')); ?>" rel="stylesheet" media="all">
+    <link href="<?php echo e(asset('assets/vendor/font-awesome-5/css/fontawesome-all.min.css')); ?>" rel="stylesheet" media="all">
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/full-slider.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/full-slider.css')); ?>" rel="stylesheet">
     <!-- Styles -->
         <style>
             .carousel-item {
@@ -57,11 +57,11 @@
             <div class="card-header">
                 <strong>Sign</strong> Form
             </div>            
-            <form action="{{ route('form_sign.update', $form['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 25px;">
+            <form action="<?php echo e(route('form_sign.update', $form['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 25px;">
                 <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="form_id" value="{{ $form->id }}">
-            <input type="hidden" name="user_id" value="{{ $id1 }}">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <input type="hidden" name="form_id" value="<?php echo e($form->id); ?>">
+            <input type="hidden" name="user_id" value="<?php echo e($id1); ?>">
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="form_files" class=" form-control-label" style="font-weight: 700;">Files</label>
@@ -69,33 +69,35 @@
                     <div class="col-12 col-md-9">
                         <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
                         <br> -->
-                        @if(count($form_files) > 0)
-                        @foreach ($form_files as $form_filekey => $form_file)
-                            <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file }}</a>
+                        <?php if(count($form_files) > 0): ?>
+                        <?php $__currentLoopData = $form_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_filekey => $form_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file); ?></a>
                             <br>
-                        @endforeach
-                        @endif
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </div>
-                    @if ($errors->has('form_files'))
+                    <?php if($errors->has('form_files')): ?>
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('form_files') }}</strong>
+                            <strong><?php echo e($errors->first('form_files')); ?></strong>
                         </span>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
                     </div>
                     <div class="col-12 col-md-9">                        
-                        @foreach ($user_forms as $user_formkey => $user_form)
-                            @if($user_form->section_id == 0)
-                                {!! $user_form->description !!}
-                            @else                            
+                        <?php $__currentLoopData = $user_forms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_formkey => $user_form): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($user_form->section_id == 0): ?>
+                                <?php echo $user_form->description; ?>
+
+                            <?php else: ?>                            
                                 <span style="font-size: 18px;font-style:  italic;">Initials</span>
-                                <input type="text" name="section{{ $user_form->section_id }}" value="{{ old('initial', $user_form['initials']) }}" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">
-                                {!! $user_form->description !!}
-                            @endif
-                        @endforeach
+                                <input type="text" name="section<?php echo e($user_form->section_id); ?>" value="<?php echo e(old('initial', $user_form['initials'])); ?>" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">
+                                <?php echo $user_form->description; ?>
+
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -113,7 +115,7 @@
                     
                     </div>
                     <div class="col-12 col-md-9">
-                        <img src="{{ $base64 }}" style="height:100px;"></img>
+                        <img src="<?php echo e($base64); ?>" style="height:100px;"></img>
                     </div>                     
                 </div>
                 
@@ -138,8 +140,8 @@
     
     
     
-    <script src="{{ asset('assets/vendor/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap-4.1/bootstrap.bundle.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/vendor/jquery.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/bootstrap-4.1/bootstrap.bundle.min.js')); ?>"></script>
     
 
   </body>
