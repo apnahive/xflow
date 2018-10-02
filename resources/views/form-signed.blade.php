@@ -57,7 +57,7 @@
             <div class="card-header">
                 <strong>Sign</strong> Form
             </div>            
-            <form action="{{ route('form_sign.update', $form['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 25px;">
+            <form action="{{ route('form_sign.update', $form['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 75px;">
                 <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="form_id" value="{{ $form->id }}">
@@ -69,6 +69,7 @@
                     <div class="col-12 col-md-9">
                         <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
                         <br> -->
+                        <br><br>
                         @if(count($form_files) > 0)
                         @foreach ($form_files as $form_filekey => $form_file)
                             <a href="{{ route('project_forms.show', $form_file->file) }}" target="_blank">{{ $form_file->file_name }}</a>
@@ -86,7 +87,8 @@
                     <div class="col col-md-3">
                         <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label><br>
                     </div>
-                    <div class="col-12 col-md-9">                        
+                    <div class="col-12 col-md-9">
+                    <br><br>                        
                         @foreach ($user_forms as $user_formkey => $user_form)
                             @if($user_form->section_id == 0)
                                 {!! $user_form->description !!}

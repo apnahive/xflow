@@ -263,6 +263,12 @@
                                     <br/>
                                     <button type="submit" class="btn btn-success">Upload file</button>
                                 </div>
+                                <!-- for the error messages -->
+                                <div class="col-md-6">
+                                    @foreach ($errors->all() as $error)
+                                       {!! $errors->first() !!}
+                                    @endforeach
+                                </div>
                             </div>
                         </form>
                         <table class="table table-data2">                        
@@ -373,11 +379,17 @@
                                     @endforeach
                                     @endif
                                 </div>
-                                @if ($errors->has('form_files'))
+                                <!-- for the error messages -->
+                                <div class="col-md-6">
+                                    @foreach ($errors->all() as $error)
+                                       {!! $errors->first() !!}
+                                    @endforeach
+                                </div>
+                                <!-- @if ($errors->has('form_files'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('form_files') }}</strong>
                                     </span>
-                                @endif
+                                @endif -->
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">

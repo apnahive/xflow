@@ -114,12 +114,13 @@ class Project_formController extends Controller
         {
             
             $mailuser = User::find($user->user_id);
-            //dd($mailuser);
+            //dd($request->send_all);
             if(Form_sign::where('user_id',$mailuser->id)->where('form_id', $form->id)->exists())
             {
                 $sign = Form_sign::where('user_id',$mailuser->id)->where('form_id', $form->id)->first();
-                if($request->send_all)
+                if($request->send_all == 'true')
                 {
+                    //dd($request->send_all);
                     $sign->status = 0;
                     # mail send  link to sign document...
                     Mail::to($mailuser['email'])->send(new Sign_form($form->id, $mailuser));

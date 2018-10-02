@@ -57,7 +57,7 @@
             <div class="card-header">
                 <strong>Sign</strong> Form
             </div>            
-            <form action="<?php echo e(route('form_sign.update', $form['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 25px;">
+            <form action="<?php echo e(route('form_sign.update', $form['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal" style="width: 95%;margin: auto;padding-top: 75px;">
                 <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <input type="hidden" name="form_id" value="<?php echo e($form->id); ?>">
@@ -69,6 +69,7 @@
                     <div class="col-12 col-md-9">
                         <!-- <input id="form_files" class="form_files" name="form_files[]" type="file" multiple>
                         <br> -->
+                        <br><br>
                         <?php if(count($form_files) > 0): ?>
                         <?php $__currentLoopData = $form_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_filekey => $form_file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <a href="<?php echo e(route('project_forms.show', $form_file->file)); ?>" target="_blank"><?php echo e($form_file->file_name); ?></a>
@@ -84,9 +85,10 @@
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-3">
-                        <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label>
+                        <label for="summernote" class=" form-control-label" style="font-weight: 700;">Document</label><br>
                     </div>
-                    <div class="col-12 col-md-9">                        
+                    <div class="col-12 col-md-9">
+                    <br><br>                        
                         <?php $__currentLoopData = $user_forms; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user_formkey => $user_form): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if($user_form->section_id == 0): ?>
                                 <?php echo $user_form->description; ?>

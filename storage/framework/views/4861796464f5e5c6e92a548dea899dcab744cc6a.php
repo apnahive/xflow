@@ -263,6 +263,12 @@
                                     <br/>
                                     <button type="submit" class="btn btn-success">Upload file</button>
                                 </div>
+                                <div class="col-md-6">
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <?php echo $errors->first(); ?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
                             </div>
                         </form>
                         <table class="table table-data2">                        
@@ -374,11 +380,17 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
                                 </div>
-                                <?php if($errors->has('form_files')): ?>
+                                <div class="col-md-6">
+                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       <?php echo $errors->first(); ?>
+
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                                <!-- <?php if($errors->has('form_files')): ?>
                                     <span class="invalid-feedback" role="alert">
                                         <strong><?php echo e($errors->first('form_files')); ?></strong>
                                     </span>
-                                <?php endif; ?>
+                                <?php endif; ?> -->
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">

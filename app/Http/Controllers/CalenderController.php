@@ -46,11 +46,11 @@ class CalenderController extends Controller
             else
             {                
                 $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
-                $taskcount = Task::where('duedate', '2018-09-13')->where('assignee', $id1)->orWhere('project_id', $projects)->whereIn('status', [1,2])->get();
+                $taskcount = Task::where('duedate', $task->duedate)->where('assignee', $id1)->whereIn('status', [1,2])->orWhere('project_id', $projects)->get();                
             }
             
             $count = count($taskcount);
-            //dd($taskcount);
+            //dd($count);
             if($count == 1)
             {
                 $taskcount[0]->time = floor($taskcount[0]->estimated_time_to_complete/60);
@@ -159,7 +159,7 @@ class CalenderController extends Controller
         if($id1 == 1)
         {
             //$users = User::all();
-            $tasks = Task::where('duedate', $id)->get();
+            $tasks = Task::where('duedate', $id)->paginate(10);
             //dd($tasks);
             $managed1 = Task::where('duedate', $id)->select('responsible')->get();
             $assigned1 = Task::where('duedate', $id)->select('assignee')->get();
@@ -167,7 +167,7 @@ class CalenderController extends Controller
         }
         else
         {
-            $tasks = Task::where('duedate', $id)->where('assignee', $id1)->get();
+            $tasks = Task::where('duedate', $id)->where('assignee', $id1)->paginate(10);
             $managed1 = Task::where('duedate', $id)->where('assignee', $id1)->select('responsible')->get();
             $assigned1 = Task::where('duedate', $id)->where('assignee', $id1)->select('assignee')->get();
             $tasks->admin = 0;

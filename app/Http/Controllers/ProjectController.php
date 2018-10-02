@@ -36,7 +36,16 @@ class ProjectController extends Controller
     public function index()
     {
         $id1 = Auth::id();
+        //$selected_users = Project_user::where('user_id', $id1)->get(); 
+        
         $projects = Project::paginate(15);
+        /*if($id1 == 1)
+            
+        else
+        {
+            $selected_projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+
+        }*/
         foreach ($projects as $key => $value) {
             $poc = User::find($value->poc);
             $value->pocname = $poc->name;

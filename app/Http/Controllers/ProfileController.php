@@ -101,7 +101,7 @@ class ProfileController extends Controller
     {
         //dd('download is hitted');
         
-        ini_set('max_execution_time', 900);
+        //ini_set('max_execution_time', 900);
         $signed = Form_sign::find($id);
         $id1 = $signed->user_id;
 
@@ -151,6 +151,7 @@ class ProfileController extends Controller
             'images' => true
         ])->loadView('form-signed', compact('form', 'form_files', 'id1', 'sign', 'user_forms', 'base64'));
         
+        //dd($pdf);
 
         return $pdf->download($filename);
 
