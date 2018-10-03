@@ -26,7 +26,9 @@ class UserxController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '!=', 1)->paginate(15); 
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->paginate(15);
+        //$users = User::where('id', '!=', 1)->paginate(15); 
         return view('userx.index')->with('users', $users);
     }
 

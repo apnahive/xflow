@@ -316,7 +316,9 @@ class CalenderController extends Controller
 
             //dd($value, $project); 
         }
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         //$task_templates = Task_template::all();
         //dd($tasks);
 

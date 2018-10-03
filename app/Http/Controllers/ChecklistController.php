@@ -16,7 +16,10 @@ class ChecklistController extends Controller
      */
     public function index()
     {
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
         $checklists = Checklist::all();
         foreach ($checklists as $key => $value) 
         {
@@ -35,8 +38,10 @@ class ChecklistController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
+    {        
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         return view('checklists.create', compact('users'));
     }
 
@@ -81,7 +86,9 @@ class ChecklistController extends Controller
      */
     public function edit($id)
     {
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         $checklist = Checklist::find($id);
         return view('checklists.edit', compact('checklist', 'users'));
     }

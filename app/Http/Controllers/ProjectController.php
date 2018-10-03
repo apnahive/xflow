@@ -112,9 +112,9 @@ class ProjectController extends Controller
         $checkadmin = User::find($id1);        
         $checkadmins = $checkadmin->hasRole('Admin');
         //$users = User::all();
-        $users = User::role('Admin')->select('id')->get();
         //dd($users);
-        $users = User::where('verified', 1)->whereNotIn('id', $users)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         if($checkadmins)
         {
             return view('projects.create', compact('users', 'can_create'));
@@ -327,7 +327,9 @@ class ProjectController extends Controller
         $id1 = Auth::id();
         $checkadmin = User::find($id1);        
         $checkadmins = $checkadmin->hasRole('Admin');
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $project = Project::find($id);
         if($id1 == $project->poc || $checkadmins)
         {
