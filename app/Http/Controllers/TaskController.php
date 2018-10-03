@@ -31,9 +31,11 @@ class TaskController extends Controller
     {
         
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $now = new \DateTime();
         
-        if($id1 == 1)
+        if($checkadmins)
         {
             //$users = User::all();
             $tasks = Task::paginate(10);
@@ -137,10 +139,12 @@ class TaskController extends Controller
     {
         //dd(request()->all());
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $now = new \DateTime();
 
         
-        if($id1 == 1)
+        if($checkadmins)
         {
             //$users = User::all();
             //$tasks = Task::all();
@@ -323,7 +327,9 @@ class TaskController extends Controller
     public function create()
     {
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
         {
             //$users = User::all();
             $projects = Project::all(); 
@@ -365,7 +371,9 @@ class TaskController extends Controller
         $task->note = $request->note;
 
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
         {
             $project = Project::find($request->project);
             $task->assignee = $project->poc;
@@ -436,7 +444,9 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $id1 = Auth::id();                        
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $task = Task::find($id);
         /*if($id1 == 1)
         {
@@ -451,7 +461,7 @@ class TaskController extends Controller
         }*/
         $projects = Project::all(); 
 
-        if($id1 == 1)
+        if($checkadmins)
         $task->admin = 1;
         else
         $task->admin = 0;

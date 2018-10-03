@@ -22,7 +22,10 @@ class CalenderController extends Controller
     {        
         $events = [];
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
             $tasks = Task::select('duedate')->distinct()->get();
         else
         {
@@ -36,7 +39,7 @@ class CalenderController extends Controller
 
         foreach ($tasks as $taskkey => $task) 
         {
-            if($id1 == 1)
+            if($checkadmins)
             {
                 $taskcount = Task::where('duedate', $task->duedate)->whereIn('status', [1,2])->get();
                 if(!$taskcount)
@@ -154,12 +157,14 @@ class CalenderController extends Controller
     {
         //dd($id);
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $now = new \DateTime();
         $date3 = date('Y-m-d', strtotime("+3 day"));
         if($id == 'past')
         {
             //dd($id);
-            if($id1 == 1)
+            if($checkadmins)
             {
                 //$users = User::all();
                 $tasks = Task::where('duedate', '<', $now)->paginate(10);
@@ -182,7 +187,7 @@ class CalenderController extends Controller
             
             $date3 = date('Y-m-d', strtotime("+3 day"));
             //dd($date3);
-            if($id1 == 1)
+            if($checkadmins)
             {
                 //$users = User::all();
                 $tasks = Task::whereBetween('duedate', [$now, $date3])->paginate(10);
@@ -202,7 +207,7 @@ class CalenderController extends Controller
         elseif($id == 'future')
         {
             //dd($id);
-            if($id1 == 1)
+            if($checkadmins)
             {
                 //$users = User::all();
                 $tasks = Task::where('duedate', '>', $date3)->paginate(10);
@@ -221,7 +226,7 @@ class CalenderController extends Controller
         }
         else
         {
-            if($id1 == 1)
+            if($checkadmins)
             {
                 //$users = User::all();
                 $tasks = Task::where('duedate', $id)->paginate(10);

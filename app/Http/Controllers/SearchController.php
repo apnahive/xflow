@@ -21,10 +21,12 @@ class SearchController extends Controller
     {
     	//dd(request()->all());
     	$id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
     	//$columnsToSearch = ['column1', 'column2', 'column3'];
     	$searchQuery = '%' . $request->search . '%';
 
-    	if($id1 == 1)
+    	if($checkadmins)
     	{
     		$projects = Project::where('name', 'LIKE', $searchQuery)->orWhere('description', 'LIKE', $searchQuery);
 			$tasks = Task::where('title', 'LIKE', $searchQuery)->orWhere('note', 'LIKE', $searchQuery);	
@@ -48,7 +50,7 @@ class SearchController extends Controller
             $value->pocname = $poc->name;
             $cco = User::find($value->cco);
             $value->cconame = $cco->name;
-            if($id1 == $poc->id || $id1 == 1)
+            if($id1 == $poc->id || $checkadmins)
             {                
                 $value->can_view = 1;                
             }

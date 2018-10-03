@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Task;
+use App\User;
 use App\Project;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -30,9 +31,14 @@ class HomeController extends Controller
     public function index()
     {
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        //dd($users);
+        //$roles = $user->getRoleNames();
+        
         $now = new \DateTime();
         
-        if($id1 == 1)
+        if($checkadmins)
             $tasks = Task::all();
         else
             $tasks = Task::where('assignee', $id1)->get();

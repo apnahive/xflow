@@ -49,6 +49,7 @@
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a> -->
                                 <?php if($tasks->admin == 1 || $task->poc == 1 || $task->cco == 1): ?>
+                                <?php if($task->status < 3): ?>
                                 <button class="item" data-toggle="modal" data-target="#assign<?php echo e($task->id); ?>" data-backdrop="false">
                                     <i class="fa fa-user"></i>
                                 </button>
@@ -93,15 +94,17 @@
                                 </div>
 
 
-
+                                <?php endif; ?>
                                 <?php endif; ?>                                
                                 <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>                                
                                 <?php if($tasks->admin == 1 || $task->poc == 1): ?>
+                                <?php if($task->status < 3): ?>
                                 <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
+                                <?php endif; ?>
                                 <?php endif; ?>
                                 
                                 <?php if($tasks->admin == 1): ?>

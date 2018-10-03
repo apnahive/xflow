@@ -135,6 +135,7 @@
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button></a>  -->
                                                 <?php if($task->admin == 1 || $task->poc == 1 || $task->cco == 1): ?>
+                                                <?php if($task->status < 3): ?>
                                                 <button class="item" data-toggle="modal" data-target="#assign<?php echo e($task->id); ?>" data-backdrop="false">
                                                     <i class="fa fa-user"></i>
                                                 </button>
@@ -179,15 +180,17 @@
                                                 </div>
 
 
-
+                                                <?php endif; ?>
                                                 <?php endif; ?>                                                
                                                 <a href="<?php echo e(route('tasks.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>                                                
                                                 <?php if($task->admin == 1 || $task->poc == 1): ?>
+                                                <?php if($task->status < 3): ?>
                                                 <a href="<?php echo e(route('tasks.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button></a>
+                                                <?php endif; ?>
                                                 <?php endif; ?>
 
                                                 <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
@@ -263,6 +266,7 @@
                                     <br/>
                                     <button type="submit" class="btn btn-success">Upload file</button>
                                 </div>
+                                <!-- for the error messages -->
                                 <div class="col-md-6">
                                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                        <?php echo $errors->first(); ?>
@@ -380,6 +384,7 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php endif; ?>
                                 </div>
+                                <!-- for the error messages -->
                                 <div class="col-md-6">
                                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                        <?php echo $errors->first(); ?>

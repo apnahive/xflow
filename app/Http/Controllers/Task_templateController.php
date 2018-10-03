@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Task_template;
 use App\Task_for_template;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -23,7 +24,9 @@ class Task_templateController extends Controller
     public function index()
     {
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
         {
             $tasks = Task_template::paginate(15);
             return view('task_templates.index', compact('tasks'));    
@@ -42,7 +45,9 @@ class Task_templateController extends Controller
     public function create()
     {
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
         {
             return view('task_templates.create');
         }
@@ -113,7 +118,9 @@ class Task_templateController extends Controller
     public function edit($id)
     {
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
         {
             $task = Task_template::find($id);
             return view('task_templates.edit', compact('task'));

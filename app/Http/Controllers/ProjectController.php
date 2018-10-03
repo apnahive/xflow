@@ -36,6 +36,8 @@ class ProjectController extends Controller
     public function index()
     {
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         //$selected_users = Project_user::where('user_id', $id1)->get(); 
         
         $projects = Project::paginate(15);
@@ -51,11 +53,11 @@ class ProjectController extends Controller
             $value->pocname = $poc->name;
             $cco = User::find($value->cco);
             $value->cconame = $cco->name;
-            if($id1 == $poc->id || $id1 == 1)
+            if($id1 == $poc->id || $checkadmins)
             {
                 $value->can_edit = 1;
                 $value->can_view = 1;
-                if($id1 == 1)
+                if($checkadmins)
                     $value->can_delete = 1;
                 else
                     $value->can_delete = 0;
@@ -87,7 +89,7 @@ class ProjectController extends Controller
             }
 
         }
-        if($id1 == 1)
+        if($checkadmins)
         {
             $projects->can_create = 1;
         }
@@ -107,8 +109,13 @@ class ProjectController extends Controller
     public function create()
     {
         $id1 = Auth::id();
-        $users = User::where('verified', 1)->where('id', '<>', 1)->get();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        //$users = User::all();
+        $users = User::role('Admin')->select('id')->get();
+        //dd($users);
+        $users = User::where('verified', 1)->whereNotIn('id', $users)->get();
+        if($checkadmins)
         {
             return view('projects.create', compact('users', 'can_create'));
         }
@@ -170,6 +177,8 @@ class ProjectController extends Controller
     public function show($id)
     {
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $now = new \DateTime();
         $project = Project::find($id);
         if(!$project)
@@ -192,7 +201,7 @@ class ProjectController extends Controller
 
         
         
-        if($id1 == $poc->id || $id1 == 1)
+        if($id1 == $poc->id || $checkadmins)
         {
             $project->can_edit = 1;
             $project->can_view = 1;
@@ -254,7 +263,7 @@ class ProjectController extends Controller
             $managed = User::findOrFail($value->responsible);
             $value->managedby = $managed->name;
 
-            if($id1 == 1)
+            if($checkadmins)
                 $value->admin = 1;
             if($project1->poc == $id1)
                 $value->poc = 1;
@@ -316,9 +325,11 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
         $users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $project = Project::find($id);
-        if($id1 == $project->poc || $id1 == 1)
+        if($id1 == $project->poc || $checkadmins)
         {
             return view('projects.edit', compact('users', 'project'));
         }
@@ -362,7 +373,10 @@ class ProjectController extends Controller
         $project->save();
 
         $id1 = Auth::id();
-        if($id1 == 1)
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
         {}
         else            
             Mail::to('erg@ginisis.com')->send(new Project_editted($project));
