@@ -45,11 +45,11 @@ class HomeController extends Controller
             $d = date_diff($now, $date1);
             //dd($now, $date1, $d, $d->days);
             if($d->days > 3 && $d->invert == 0)
-                $tasks->red++;
-            if($d->days <= 3)
+                $tasks->green++;
+            if($d->days <= 3 && $d->invert == 0)
                 $tasks->yellow++;
             if($d->invert)
-                $tasks->green++;
+                $tasks->red++;
         }
 
         $poc = Project::where('poc', $id1)->get();

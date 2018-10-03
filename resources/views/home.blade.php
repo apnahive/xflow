@@ -106,8 +106,8 @@
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--red">
-                                <h2 class="number"><a href="{{ route('tasks.index') }}" style="color: white;">{{ $tasks->red }}</a></h2>
-                                <span class="desc"><a href="{{ route('tasks.index') }}" style="color: white;">tasks past due date</a></span>
+                                <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $tasks->red }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">tasks past due date</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -115,8 +115,8 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
-                                <h2 class="number"><a href="{{ route('tasks.index') }}" style="color: white;">{{ $tasks->yellow }}</a></h2>
-                                <span class="desc"><a href="{{ route('tasks.index') }}" style="color: white;">3 days to due</a></span>
+                                <h2 class="number"><a href="{{ route('calender.show', '3-days') }}" style="color: white;">{{ $tasks->yellow }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', '3-days') }}" style="color: white;">3 days to due</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -124,8 +124,8 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--green">
-                                <h2 class="number"><a href="{{ route('tasks.index') }}" style="color: white;">{{ $tasks->green }}</a></h2>
-                                <span class="desc"><a href="{{ route('tasks.index') }}" style="color: white;">greater than 3 days to complete</a></span>
+                                <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $tasks->green }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">greater than 3 days to complete</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>

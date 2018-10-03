@@ -152,26 +152,93 @@ class CalenderController extends Controller
      */
     public function show($id)
     {
-        //dd('Date is pressed on calender');
+        //dd($id);
         $id1 = Auth::id();
         $now = new \DateTime();
-        
-        if($id1 == 1)
+        $date3 = date('Y-m-d', strtotime("+3 day"));
+        if($id == 'past')
         {
-            //$users = User::all();
-            $tasks = Task::where('duedate', $id)->paginate(10);
-            //dd($tasks);
-            $managed1 = Task::where('duedate', $id)->select('responsible')->get();
-            $assigned1 = Task::where('duedate', $id)->select('assignee')->get();
-            $tasks->admin = 1;
+            //dd($id);
+            if($id1 == 1)
+            {
+                //$users = User::all();
+                $tasks = Task::where('duedate', '<', $now)->paginate(10);
+                //dd($tasks);
+                $managed1 = Task::where('duedate', '<', $now)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', '<', $now)->select('assignee')->get();
+                $tasks->admin = 1;
+            }
+            else
+            {
+                $tasks = Task::where('duedate', '<', $now)->where('assignee', $id1)->paginate(10);
+                $managed1 = Task::where('duedate', '<', $now)->where('assignee', $id1)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', '<', $now)->where('assignee', $id1)->select('assignee')->get();
+                $tasks->admin = 0;
+            }
+        }
+        elseif($id == '3-days')
+        {
+            //$date3 = strtotime("+3 day");
+            
+            $date3 = date('Y-m-d', strtotime("+3 day"));
+            //dd($date3);
+            if($id1 == 1)
+            {
+                //$users = User::all();
+                $tasks = Task::whereBetween('duedate', [$now, $date3])->paginate(10);
+                //dd($tasks);
+                $managed1 = Task::whereBetween('duedate', [$now, $date3])->select('responsible')->get();
+                $assigned1 = Task::whereBetween('duedate', [$now, $date3])->select('assignee')->get();
+                $tasks->admin = 1;
+            }
+            else
+            {
+                $tasks = Task::whereBetween('duedate', [$now, $date3])->where('assignee', $id1)->paginate(10);
+                $managed1 = Task::whereBetween('duedate', [$now, $date3])->select('responsible')->get();
+                $assigned1 = Task::whereBetween('duedate', [$now, $date3])->where('assignee', $id1)->select('assignee')->get();
+                $tasks->admin = 0;
+            }
+        }
+        elseif($id == 'future')
+        {
+            //dd($id);
+            if($id1 == 1)
+            {
+                //$users = User::all();
+                $tasks = Task::where('duedate', '>', $date3)->paginate(10);
+                //dd($tasks);
+                $managed1 = Task::where('duedate', '>', $date3)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', '<', $date3)->select('assignee')->get();
+                $tasks->admin = 1;
+            }
+            else
+            {
+                $tasks = Task::where('duedate', '>', $date3)->where('assignee', $id1)->paginate(10);
+                $managed1 = Task::where('duedate', '>', $date3)->where('assignee', $id1)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', '>', $date3)->where('assignee', $id1)->select('assignee')->get();
+                $tasks->admin = 0;
+            }
         }
         else
         {
-            $tasks = Task::where('duedate', $id)->where('assignee', $id1)->paginate(10);
-            $managed1 = Task::where('duedate', $id)->where('assignee', $id1)->select('responsible')->get();
-            $assigned1 = Task::where('duedate', $id)->where('assignee', $id1)->select('assignee')->get();
-            $tasks->admin = 0;
+            if($id1 == 1)
+            {
+                //$users = User::all();
+                $tasks = Task::where('duedate', $id)->paginate(10);
+                //dd($tasks);
+                $managed1 = Task::where('duedate', $id)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', $id)->select('assignee')->get();
+                $tasks->admin = 1;
+            }
+            else
+            {
+                $tasks = Task::where('duedate', $id)->where('assignee', $id1)->paginate(10);
+                $managed1 = Task::where('duedate', $id)->where('assignee', $id1)->select('responsible')->get();
+                $assigned1 = Task::where('duedate', $id)->where('assignee', $id1)->select('assignee')->get();
+                $tasks->admin = 0;
+            }    
         }
+        
 
         if($projects = Project::where('poc', $id1)->exists())
         {
