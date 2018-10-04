@@ -17,7 +17,7 @@
                             <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                             <label for="description" class=" form-control-label">Description</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control"></textarea>
+                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
                             @if ($errors->has('description'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('description') }}</strong>

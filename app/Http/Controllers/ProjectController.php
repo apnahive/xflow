@@ -135,7 +135,7 @@ class ProjectController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'name'=> 'required|max:20',                        
+            'name'=> 'required|max:191', /*limit increased on client's request -samar*/                       
             'description'=> 'required|max:191',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
@@ -179,6 +179,7 @@ class ProjectController extends Controller
         $id1 = Auth::id();
         $checkadmin = User::find($id1);        
         $checkadmins = $checkadmin->hasRole('Admin');
+        $users = User::role('Admin')->select('id')->get();
         $now = new \DateTime();
         $project = Project::find($id);
         if(!$project)
@@ -193,8 +194,9 @@ class ProjectController extends Controller
         $project->cconame = $cco->name;
 
         $project_users = Project_user::where('project_id', $id)->select('user_id')->get();
-        $admin = 1;
-        $users = User::whereNotIn('id', $project_users)->where('id', '<>', $admin)->get();
+       // $admin = 1;
+      //  $users = User::whereNotIn('id', $project_users)->where('id', '<>', $admin)->get();
+        $users = User::where('verified', 1)->whereNotIn('id', $users)->get();
         $selected_users = User::whereIn('id', $project_users)->get();
 
         //dd($selected_users, $users);
@@ -352,7 +354,7 @@ class ProjectController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'name'=> 'required|max:20',                        
+            'name'=> 'required|max:50',/*limit increased on client's request -samar*/
             'description'=> 'required|max:191',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
