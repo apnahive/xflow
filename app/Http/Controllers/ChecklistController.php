@@ -54,10 +54,14 @@ class ChecklistController extends Controller
     public function store(Request $request)
     {
         //dd(request()->all());
-        $this->validate($request, array(            
+        $this->validate($request, [            
             'title'=> 'required|max:20',            
             'assign'=> 'numeric|min:1',            
-        ));
+            ],
+            [
+                'assign.min' => 'Please choose a user.',                
+            ]
+        );
         $checklist = new Checklist;        
         $checklist->title = $request->title;
         $checklist->assignee = $request->assign;        
@@ -102,10 +106,14 @@ class ChecklistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, array(            
+        $this->validate($request, [            
             'title'=> 'required|max:20',            
             'assign'=> 'numeric|min:1',            
-        ));
+            ],
+            [
+                'assign.min' => 'Please choose a user.',                
+            ]
+        );        
         $checklist = Checklist::find($id);
         $checklist->title = $request->title;
         $checklist->assignee = $request->assign;        

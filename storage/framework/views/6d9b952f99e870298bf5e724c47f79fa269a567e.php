@@ -82,10 +82,10 @@
                         </div>
 
                         <?php if($errors->has('actual_time_to_complete')): ?>
-                            <span class="help-block">
+                            <span class="help-block error">
                                 <strong><?php echo e($errors->first('actual_time_to_complete')); ?></strong>
                             </span>
-                        <?php endif; ?>                                                       
+                        <?php endif; ?> 
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -96,10 +96,10 @@
                         </div>
 
                         <?php if($errors->has('date_completed')): ?>
-                            <span class="help-block">
+                            <span class="help-block error">
                                 <strong><?php echo e($errors->first('date_completed')); ?></strong>
                             </span>
-                        <?php endif; ?>                                                       
+                        <?php endif; ?>
                     </div>
                     <div class="row form-group">
                         <button type="submit" class="btn btn-primary btn-sm">

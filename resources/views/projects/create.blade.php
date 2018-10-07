@@ -18,12 +18,11 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
-                            @endif
+                            @endif                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -33,10 +32,10 @@
                         <div class="col-12 col-md-9">
                             <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
                             @if ($errors->has('description'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('description') }}</strong>
                                 </span>
-                            @endif
+                            @endif                            
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -49,8 +48,14 @@
                                 @foreach ($users as $user) 
                                     <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}
                                 @endforeach
-                            </select>
+                            </select>                            
+                            @if ($errors->has('poc'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('poc') }}</strong>
+                                </span>
+                            @endif
                         </div>
+                         
                     </div>                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -63,6 +68,11 @@
                                     <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}
                                 @endforeach
                             </select>
+                            @if ($errors->has('cco'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('cco') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -74,13 +84,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
+                            @if ($errors->has('duedate'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('duedate') }}</strong>
+                                </span>
+                            @endif 
                         </div>
-
-                        @if ($errors->has('duedate'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('duedate') }}</strong>
-                            </span>
-                        @endif                                                       
                     </div>
             </div>
             <div class="card-footer">

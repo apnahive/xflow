@@ -57,7 +57,7 @@ class Project_formController extends Controller
                 'form_files.*.required' => 'Please upload an file',
                 'form_files.*.mimes' => 'Only doc,pdf,docx files are allowed',
                 'form_files.*.max' => 'Sorry! Maximum allowed size for an size is 2MB',
-            ],            
+            ],             
         ));
         if($request->summernote)
         {}

@@ -18,9 +18,9 @@
                             <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control"  required>
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            <?php if($errors->has('name')): ?>
+                            <?php if($errors->has('name')): ?> 
                                 <span class="invalid-feedback" role="alert">
                                     <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
@@ -32,7 +32,7 @@
                             <label for="detail" class="form-control-label">Detail</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="detail" id="detail" rows="3" placeholder="Detail..." class="form-control"></textarea>
+                            <textarea name="detail" id="detail" rows="3" placeholder="Detail..." class="form-control"  required></textarea>
                             <?php if($errors->has('detail')): ?>
                                 <span class="invalid-feedback" role="alert">
                                     <strong><?php echo e($errors->first('detail')); ?></strong>

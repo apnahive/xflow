@@ -67,7 +67,7 @@ class Task_templateController extends Controller
     {
         $this->validate($request, array(            
             'name'=> 'required|max:80',            
-            'detail'=> 'required|max:191',
+            'detail'=> 'required|max:2048',
         ));
         $task = new Task_template;        
         $task->name = $request->name;
@@ -142,7 +142,7 @@ class Task_templateController extends Controller
     {
         $this->validate($request, array(            
             'name'=> 'required|max:80',            
-            'detail'=> 'required|max:191',
+            'detail'=> 'required|max:2048',
         ));
         $task = Task_template::find($id);
         $task->name = $request->name;

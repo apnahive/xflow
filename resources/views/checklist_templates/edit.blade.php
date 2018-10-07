@@ -24,7 +24,7 @@
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="{{ old('name', $checklist['title']) }}">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif

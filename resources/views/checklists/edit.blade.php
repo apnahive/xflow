@@ -23,10 +23,10 @@
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="{{ old('name', $checklist['title']) }}">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('title'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -40,6 +40,11 @@
                                     <option value="{{$user->id}}" {{ $checklist['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('assign'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('assign') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <script type="text/javascript">

@@ -39,13 +39,18 @@ class Task_for_templateController extends Controller
     public function store(Request $request)
     {
         //dd(request()->all());
-        $this->validate($request, array(
+        $this->validate($request, [
             'template_id'=> 'numeric|min:1',
             'title'=> 'required|max:80',            
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
-            'note'=> 'required|max:191',
-        ));
+            'note'=> 'required|max:2048',
+            ],
+            [
+                'template_id.min' => 'Please choose a Template.',
+                'category.min' => 'Please choose a Category.',
+            ]
+        );
         $task = new Task_for_template;
         $task->task_template_id = $request->template_id;
         $task->title = $request->title;        
@@ -92,13 +97,18 @@ class Task_for_templateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, array(
+        $this->validate($request, [
             'template_id'=> 'numeric|min:1',
             'title'=> 'required|max:80',            
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
-            'note'=> 'required|max:191',
-        ));
+            'note'=> 'required|max:2048',
+            ],
+            [
+                'template_id.min' => 'Please choose a Template.',
+                'category.min' => 'Please choose a Category.',
+            ]
+        );
         $task = Task_for_template::find($id);
         $task->task_template_id = $request->template_id;
         $task->title = $request->title;        

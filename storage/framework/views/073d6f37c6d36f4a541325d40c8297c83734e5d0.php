@@ -18,13 +18,13 @@
                             <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<?php echo e(old('name', $project['name'])); ?>">
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<?php echo e(old('name', $project['name'])); ?>">                           
+                            
                             <?php if($errors->has('name')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -34,10 +34,10 @@
                         <div class="col-12 col-md-9">
                             <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control"><?php echo $project->description; ?></textarea>
                             <?php if($errors->has('description')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('description')); ?></strong>
                                 </span>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -52,6 +52,11 @@
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <?php if($errors->has('poc')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('poc')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -65,6 +70,11 @@
                                     <option value="<?php echo e($user->id); ?>" <?php echo e($project['cco'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <?php if($errors->has('cco')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('cco')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -76,13 +86,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e($project['duedate']); ?>" required autofocus>
+                            <?php if($errors->has('duedate')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('duedate')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('duedate')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
             </div>
             <div class="card-footer">

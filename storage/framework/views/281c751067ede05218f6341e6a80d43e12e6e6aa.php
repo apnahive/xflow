@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 
@@ -28,7 +26,7 @@
            /* $('.summernote').summernote('code', content);*/
         });
 </script>
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 <div class="row">
     <div class="col-lg-12">
@@ -36,8 +34,9 @@
             <div class="card-header">
                 <strong>Create</strong> Attestation Form
             </div>            
-            <form action="{{ route('attestations.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
+            <form action="<?php echo e(route('attestations.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -46,11 +45,11 @@
                         <div class="col-12 col-md-9">
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('name'))
+                            <?php if($errors->has('name')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -61,11 +60,11 @@
                             <textarea name="summernote" id="summernote" class="summernote"></textarea>
                             <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                         
-                            @if ($errors->has('summernote'))
+                            <?php if($errors->has('summernote')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('summernote') }}</strong>
+                                    <strong><?php echo e($errors->first('summernote')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
             </div>
@@ -81,4 +80,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

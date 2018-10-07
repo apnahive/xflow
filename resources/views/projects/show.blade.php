@@ -261,6 +261,7 @@
                                 <div class="col-md-6">
                                     <br/>
                                     <input class="file" name="file" type="file" style="float: right;">
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <br/>
@@ -268,9 +269,11 @@
                                 </div>
                                 <!-- for the error messages -->
                                 <div class="col-md-6">
-                                    @foreach ($errors->all() as $error)
-                                       {!! $errors->first() !!}
-                                    @endforeach
+                                    @if ($errors->has('file'))
+                                        <span class="help-block error">
+                                            <strong>{{ $errors->first('file') }}</strong>
+                                        </span>
+                                    @endif 
                                 </div>
                             </div>
                         </form>
@@ -385,7 +388,9 @@
                                 <!-- for the error messages -->
                                 <div class="col-md-6">
                                     @foreach ($errors->all() as $error)
-                                       {!! $errors->first() !!}
+                                        <span class="help-block error">
+                                            {!! $errors->first() !!}
+                                        </span>
                                     @endforeach
                                 </div>
                                 <!-- @if ($errors->has('form_files'))

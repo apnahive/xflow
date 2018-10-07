@@ -36,10 +36,10 @@
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="{{ old('name', $attestation['name']) }}">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -51,10 +51,10 @@
                             <!-- <textarea name="summernoteInput" class="summernote"></textarea> -->
                         
                             @if ($errors->has('summernote'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('summernote') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
             </div>

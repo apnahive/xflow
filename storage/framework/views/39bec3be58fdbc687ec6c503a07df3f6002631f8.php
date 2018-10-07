@@ -24,6 +24,11 @@
                                     <option value="<?php echo e($project->id); ?>" <?php echo e($task['project_id'] == $project->id ? 'selected' : ''); ?>><?php echo e($project->name); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <?php if($errors->has('project')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('project')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -34,10 +39,10 @@
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<?php echo e(old('name', $task['title'])); ?>" <?php if($task->admin == 0): ?> disabled <?php endif; ?>>
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             <?php if($errors->has('title')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('title')); ?></strong>
                                 </span>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -46,13 +51,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e($task['duedate']); ?>" required autofocus <?php if($task->admin == 0): ?> disabled <?php endif; ?>>
+                            <?php if($errors->has('duedate')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('duedate')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('duedate')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -65,6 +69,11 @@
                                 <option value="2" <?php echo e($task['category'] == 2 ? 'selected' : ''); ?>>Average</option>
                                 <option value="3" <?php echo e($task['category'] == 3 ? 'selected' : ''); ?>>Difficult</option>
                             </select>
+                            <?php if($errors->has('category')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('category')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -73,13 +82,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="<?php echo e($task['estimated_time_to_complete']); ?>" required autofocus <?php if($task->admin == 0): ?> disabled <?php endif; ?>>
+                            <?php if($errors->has('estimated_time_to_complete')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('estimated_time_to_complete')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -87,13 +95,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="actual_time_to_complete" type="text" class="form-control" name="actual_time_to_complete" value="<?php echo e($task['actual_time_to_complete']); ?>" autofocus>
+                            <?php if($errors->has('actual_time_to_complete')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('actual_time_to_complete')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('actual_time_to_complete')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('actual_time_to_complete')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -106,6 +113,11 @@
                                 <option value="2" <?php echo e($task['status'] == 2 ? 'selected' : ''); ?>>Initiated</option>
                                 <option value="3" <?php echo e($task['status'] == 3 ? 'selected' : ''); ?>>completed</option>
                             </select>
+                            <?php if($errors->has('status')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('status')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -114,13 +126,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="date_completed" type="date" class="form-control" name="date_completed" value="<?php echo e($task['date_completed']); ?>" autofocus>
+                            <?php if($errors->has('date_completed')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('date_completed')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('date_completed')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('date_completed')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <?php if($task->admin == 1 || $task->poc == 1 || $task->cco == 1): ?>
                     <div class="row form-group">
@@ -134,6 +145,11 @@
                                     <option value="<?php echo e($user->id); ?>" <?php echo e($task['assignee'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <?php if($errors->has('assignee')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('assignee')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <?php endif; ?>
@@ -144,7 +160,7 @@
                         <div class="col-12 col-md-9">
                             <textarea name="note" id="note" rows="3" placeholder="Note..." class="form-control"><?php echo $task->note; ?></textarea>
                             <?php if($errors->has('note')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('note')); ?></strong>
                                 </span>
                             <?php endif; ?>

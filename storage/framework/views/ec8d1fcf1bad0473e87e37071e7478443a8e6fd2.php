@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
@@ -11,8 +9,9 @@
             <div class="card-header">
                 <strong>Create</strong> Checklist Template
             </div>            
-            <form action="{{ route('checklist_templates.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
+            <form action="<?php echo e(route('checklist_templates.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -21,11 +20,11 @@
                         <div class="col-12 col-md-9">
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('name'))
+                            <?php if($errors->has('name')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>                    
             </div>
@@ -41,4 +40,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

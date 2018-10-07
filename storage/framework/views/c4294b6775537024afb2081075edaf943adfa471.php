@@ -1,18 +1,17 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Checklist
+                <strong>Create</strong> Task for Template
             </div>            
-            <form action="{{ route('checklists.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
+            <form action="<?php echo e(route('checklist_for_templates.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -21,34 +20,31 @@
                         <div class="col-12 col-md-9">
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
+                            <?php if($errors->has('title')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong><?php echo e($errors->first('title')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
-                    </div>
+                    </div>                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="assign" class=" form-control-label">Assign</label>
+                            <label for="template_id" class=" form-control-label">Template</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="assign" id="assign" class="custom-select form-control chosen">
+                            <select name="template_id" id="template_id" class="custom-select form-control chosen">
                                 <option value="0">Please select</option>
-                                @foreach ($users as $user) 
-                                    <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $checklist_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checklist_template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($checklist_template->id); ?>"><?php echo e($checklist_template->title); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('assign'))
+                            <?php if($errors->has('template_id')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('assign') }}</strong>
+                                    <strong><?php echo e($errors->first('template_id')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
-                    <script type="text/javascript">
-                          $(".chosen").chosen();
-                    </script>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">
@@ -62,4 +58,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

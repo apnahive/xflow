@@ -27,7 +27,11 @@
             </script>                        
 
             <textarea name="summernote" id="summernote" class="summernote">{{ $form->description }}</textarea>
-
+            @if ($errors->has('summernote'))
+                <span class="help-block error">
+                    <strong>{{ $errors->first('summernote') }}</strong>
+                </span>
+            @endif 
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">

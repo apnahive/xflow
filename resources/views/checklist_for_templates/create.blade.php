@@ -22,10 +22,10 @@
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('title'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -39,6 +39,11 @@
                                     <option value="{{$checklist_template->id}}">{{$checklist_template->title}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('template_id'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('template_id') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
             </div>

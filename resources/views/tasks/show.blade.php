@@ -85,10 +85,10 @@
                         </div>
 
                         @if ($errors->has('actual_time_to_complete'))
-                            <span class="help-block">
+                            <span class="help-block error">
                                 <strong>{{ $errors->first('actual_time_to_complete') }}</strong>
                             </span>
-                        @endif                                                       
+                        @endif 
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -99,10 +99,10 @@
                         </div>
 
                         @if ($errors->has('date_completed'))
-                            <span class="help-block">
+                            <span class="help-block error">
                                 <strong>{{ $errors->first('date_completed') }}</strong>
                             </span>
-                        @endif                                                       
+                        @endif
                     </div>
                     <div class="row form-group">
                         <button type="submit" class="btn btn-primary btn-sm">

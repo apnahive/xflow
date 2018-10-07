@@ -26,6 +26,11 @@
                                     <option value="{{$project->id}}" {{ $task['project_id'] == $project->id ? 'selected' : '' }}>{{$project->name}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('project'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('project') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -36,10 +41,10 @@
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="{{ old('name', $task['title']) }}" @if($task->admin == 0) disabled @endif>
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('title'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('title') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -48,13 +53,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="{{ $task['duedate'] }}" required autofocus @if($task->admin == 0) disabled @endif>
+                            @if ($errors->has('duedate'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('duedate') }}</strong>
+                                </span>
+                            @endif 
                         </div>
-
-                        @if ($errors->has('duedate'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('duedate') }}</strong>
-                            </span>
-                        @endif                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -67,6 +71,11 @@
                                 <option value="2" {{ $task['category'] == 2 ? 'selected' : '' }}>Average</option>
                                 <option value="3" {{ $task['category'] == 3 ? 'selected' : '' }}>Difficult</option>
                             </select>
+                            @if ($errors->has('category'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('category') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -75,13 +84,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="{{ $task['estimated_time_to_complete'] }}" required autofocus @if($task->admin == 0) disabled @endif>
+                            @if ($errors->has('estimated_time_to_complete'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('estimated_time_to_complete') }}</strong>
+                                </span>
+                            @endif 
                         </div>
-
-                        @if ($errors->has('estimated_time_to_complete'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('estimated_time_to_complete') }}</strong>
-                            </span>
-                        @endif                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -89,13 +97,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="actual_time_to_complete" type="text" class="form-control" name="actual_time_to_complete" value="{{ $task['actual_time_to_complete'] }}" autofocus>
+                            @if ($errors->has('actual_time_to_complete'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('actual_time_to_complete') }}</strong>
+                                </span>
+                            @endif 
                         </div>
-
-                        @if ($errors->has('actual_time_to_complete'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('actual_time_to_complete') }}</strong>
-                            </span>
-                        @endif                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -108,6 +115,11 @@
                                 <option value="2" {{ $task['status'] == 2 ? 'selected' : '' }}>Initiated</option>
                                 <option value="3" {{ $task['status'] == 3 ? 'selected' : '' }}>completed</option>
                             </select>
+                            @if ($errors->has('status'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('status') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -116,13 +128,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="date_completed" type="date" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
+                            @if ($errors->has('date_completed'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('date_completed') }}</strong>
+                                </span>
+                            @endif 
                         </div>
-
-                        @if ($errors->has('date_completed'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('date_completed') }}</strong>
-                            </span>
-                        @endif                                                       
                     </div>
                     @if($task->admin == 1 || $task->poc == 1 || $task->cco == 1)
                     <div class="row form-group">
@@ -136,6 +147,11 @@
                                     <option value="{{$user->id}}" {{ $task['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('assignee'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('assignee') }}</strong>
+                                </span>
+                            @endif 
                         </div>
                     </div>
                     @endif
@@ -146,7 +162,7 @@
                         <div class="col-12 col-md-9">
                             <textarea name="note" id="note" rows="3" placeholder="Note..." class="form-control">{!! $task->note !!}</textarea>
                             @if ($errors->has('note'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('note') }}</strong>
                                 </span>
                             @endif

@@ -261,6 +261,7 @@
                                 <div class="col-md-6">
                                     <br/>
                                     <input class="file" name="file" type="file" style="float: right;">
+                                    
                                 </div>
                                 <div class="col-md-6">
                                     <br/>
@@ -268,10 +269,11 @@
                                 </div>
                                 <!-- for the error messages -->
                                 <div class="col-md-6">
-                                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                       <?php echo $errors->first(); ?>
-
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($errors->has('file')): ?>
+                                        <span class="help-block error">
+                                            <strong><?php echo e($errors->first('file')); ?></strong>
+                                        </span>
+                                    <?php endif; ?> 
                                 </div>
                             </div>
                         </form>
@@ -387,8 +389,10 @@
                                 <!-- for the error messages -->
                                 <div class="col-md-6">
                                     <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                       <?php echo $errors->first(); ?>
+                                        <span class="help-block error">
+                                            <?php echo $errors->first(); ?>
 
+                                        </span>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                                 <!-- <?php if($errors->has('form_files')): ?>

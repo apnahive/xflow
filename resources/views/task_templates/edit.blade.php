@@ -24,10 +24,10 @@
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="{{ old('name', $task['name']) }}">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
                     
@@ -38,10 +38,10 @@
                         <div class="col-12 col-md-9">
                             <textarea name="detail" id="detail" rows="3" placeholder="Detail..." class="form-control">{!! $task->detail !!}</textarea>
                             @if ($errors->has('detail'))
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong>{{ $errors->first('detail') }}</strong>
                                 </span>
-                            @endif
+                            @endif 
                         </div>
                     </div>
             </div>

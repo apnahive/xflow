@@ -355,14 +355,19 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         //dd(request()->all());
-        $this->validate($request, array(
+        $this->validate($request, [
             'project'=> 'numeric|min:1',
             'title'=> 'required|max:50', /*limit increased on client's request -samar*/
             'duedate'=> 'required|date',
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
-            'note'=> 'required|max:191',
-        ));
+            'note'=> 'required|max:2048',
+            ],
+            [
+                'project.min' => 'Please choose a Project.',
+                'category.min' => 'Please choose a Category.',
+            ]
+        );
         $task = new Task;
         $task->project_id = $request->project;
         $task->title = $request->title;
@@ -516,16 +521,24 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
-        $this->validate($request, array(
+        $this->validate($request, [
             'project'=> 'numeric|min:1',
             'title'=> 'max:50', /*limit increased on client's request -samar*/
             'duedate'=> 'date',
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
             'actual_time_to_complete'=> 'numeric|min:1',
-            'status'=> 'numeric|min:1',            
-            'note'=> 'max:191',
-        ));
+            'status'=> 'numeric|min:1',
+            'assignee'=> 'numeric|min:1',
+            'note'=> 'max:2048',
+            ],
+            [
+                'project.min' => 'Please choose a Project.',
+                'category.min' => 'Please choose a Category.',
+                'status.min' => 'Please choose a Status.',
+                'assignee.min' => 'Please choose a Assignee.',
+            ]
+        );
 
         $id1 = Auth::id();
 

@@ -30,6 +30,11 @@
             
             
             <textarea name="summernote" id="summernote" class="summernote">{{ $form->description }}</textarea>
+            @if ($errors->has('summernote'))
+                <span class="help-block error">
+                    <strong>{{ $errors->first('summernote') }}</strong>
+                </span>
+            @endif 
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">
@@ -38,6 +43,11 @@
                     </div>
                 </div>
             </form>
+            @if ($errors->has('summernotex'))
+                <span class="help-block error">
+                    <strong>{{ $errors->first('summernotex') }}</strong>
+                </span>
+            @endif 
             @if(count($sections) > 0)
                 @foreach ($sections as $sectionkey => $section)
                     <form class="form-horizontal  form-material" role="form" method="POST" action="{{ route('form_sections.update', $section['id']) }}">

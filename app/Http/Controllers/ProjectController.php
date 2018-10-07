@@ -134,13 +134,19 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //dd(request()->all());
-        $this->validate($request, array(
+        $this->validate($request, [
             'name'=> 'required|max:191', /*limit increased on client's request -samar*/                       
-            'description'=> 'required|max:191',
+            'description'=> 'required|max:20',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required|date'
-        ));
+            'duedate'=> 'required|date',            
+            ],
+            [
+                'poc.min' => 'Please choose a user.',
+                'cco.min' => 'Please choose a user.',                
+            ]
+        );
+        //dd($request->getErrors());
         $project = new Project;
         $project->name = $request->name;
         $project->description = $request->description;
@@ -353,13 +359,18 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
-        $this->validate($request, array(
-            'name'=> 'required|max:50',/*limit increased on client's request -samar*/
-            'description'=> 'required|max:191',
+        $this->validate($request, [
+            'name'=> 'required|max:191', /*limit increased on client's request -samar*/                       
+            'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required|date'
-        ));
+            'duedate'=> 'required|date',            
+            ],
+            [
+                'poc.min' => 'Please choose a user.',
+                'cco.min' => 'Please choose a user.',
+            ]
+        );        
         $project = Project::find($id);
         $project->name = $request->name;
         $project->description = $request->description;

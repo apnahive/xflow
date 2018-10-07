@@ -26,7 +26,11 @@
             </script>                        
             <input type="hidden" name="form_id" value="{{ $id }}">
             <textarea name="summernote" id="summernote" class="summernote"></textarea>
-
+            @if ($errors->has('summernote'))
+                <span class="help-block error">
+                    <strong>{{ $errors->first('summernote') }}</strong>
+                </span>
+            @endif 
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">

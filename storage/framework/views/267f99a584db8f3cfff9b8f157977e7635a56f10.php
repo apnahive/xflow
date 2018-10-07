@@ -25,6 +25,11 @@
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
+                            <?php if($errors->has('project')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('project')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div> 
                     <div class="row form-group">
@@ -35,10 +40,10 @@
                             <input type="text" id="title" name="title" placeholder="Title" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
                             <?php if($errors->has('title')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('title')); ?></strong>
                                 </span>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -47,13 +52,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
+                            <?php if($errors->has('duedate')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('duedate')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('duedate')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -66,6 +70,11 @@
                                 <option value="2">Average</option>
                                 <option value="3">Difficult</option>
                             </select>
+                            <?php if($errors->has('category')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('category')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -74,13 +83,12 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="<?php echo e(old('estimated_time_to_complete')); ?>" required autofocus>
+                            <?php if($errors->has('estimated_time_to_complete')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
                         </div>
-
-                        <?php if($errors->has('estimated_time_to_complete')): ?>
-                            <span class="help-block">
-                                <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>
-                            </span>
-                        <?php endif; ?>                                                       
                     </div>
                     <!-- <div class="row form-group">
                         <div class="col col-md-3">
@@ -130,10 +138,10 @@
                         <div class="col-12 col-md-9">
                             <textarea name="note" id="note" rows="3" placeholder="Note..." class="form-control"></textarea>
                             <?php if($errors->has('note')): ?>
-                                <span class="invalid-feedback" role="alert">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('note')); ?></strong>
                                 </span>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <script type="text/javascript">

@@ -38,10 +38,14 @@ class Checklist_for_templateController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, array(
+        $this->validate($request, [
             'template_id'=> 'numeric|min:1',
             'title'=> 'required|max:20',
-        ));
+            ],
+            [
+                'template_id.min' => 'Please select a template.',
+            ]
+        );
         $checklist = new Checklist_for_template;
         $checklist->template_id = $request->template_id;
         $checklist->title = $request->title;        
