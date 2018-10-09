@@ -136,7 +136,7 @@ class ProjectController extends Controller
         //dd(request()->all());
         $this->validate($request, [
             'name'=> 'required|max:191', /*limit increased on client's request -samar*/                       
-            'description'=> 'required|max:20',
+            'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
             'duedate'=> 'required|date',            

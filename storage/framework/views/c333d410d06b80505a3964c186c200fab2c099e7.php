@@ -3,7 +3,7 @@
 <a href="<?php echo e(route('projects.show', $form['project_id'])); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
      <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-            <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
             <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js" defer></script>  
             <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js" defer></script>    
              
@@ -28,6 +28,11 @@
             
             
             <textarea name="summernote" id="summernote" class="summernote"><?php echo e($form->description); ?></textarea>
+            <?php if($errors->has('summernote')): ?>
+                <span class="help-block error">
+                    <strong><?php echo e($errors->first('summernote')); ?></strong>
+                </span>
+            <?php endif; ?> 
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">
@@ -36,6 +41,11 @@
                     </div>
                 </div>
             </form>
+            <?php if($errors->has('summernotex')): ?>
+                <span class="help-block error">
+                    <strong><?php echo e($errors->first('summernotex')); ?></strong>
+                </span>
+            <?php endif; ?> 
             <?php if(count($sections) > 0): ?>
                 <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sectionkey => $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <form class="form-horizontal  form-material" role="form" method="POST" action="<?php echo e(route('form_sections.update', $section['id'])); ?>">

@@ -9,3 +9,12 @@
  .error {
     color: red;
 }
+
+/* Form edit icons */
+
+.note-popover {
+    display: none;
+}
+.note-toolbar.panel-heading {
+    display: none;
+}
