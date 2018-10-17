@@ -8,6 +8,7 @@ use App\Task;
 use App\User;
 use App\Project;
 use DateTime;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -28,6 +29,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $id1 = Auth::id();

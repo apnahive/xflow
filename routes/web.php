@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('import-user', 'HomeController@importExport');
+//Route::post('importuser', ['as' => 'importuser', 'uses' => 'HomeController@importExcel']);
+//Route::post('importuser',array('as'=>'importuser','uses'=>'HomeController@importExcel'));
+Route::resource('importuser', 'User_importController');
 
 Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
