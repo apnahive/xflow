@@ -70,7 +70,7 @@
                             <div class="col-md-6 col-lg-4">
                                 <div class="statistic__item">
                                     <h2 class="number"><a href="<?php echo e(route('tasks.index')); ?>"><?php echo e($poc->task); ?> tasks </a> </h2>
-                                    <span class="desc">in <a href="<?php echo e(route('projects.index')); ?>"><?php echo e($poc->project); ?> projects as POC</a></span>
+                                    <span class="desc">in <a href="<?php echo e(route('projects.index')); ?>"><?php echo e($poc->project); ?> projects as Consultant</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -115,7 +115,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
                                 <h2 class="number"><a href="<?php echo e(route('calender.show', '3-days')); ?>" style="color: white;"><?php echo e($tasks->yellow); ?></a></h2>
-                                <span class="desc"><a href="<?php echo e(route('calender.show', '3-days')); ?>" style="color: white;">3 days to due</a></span>
+                                <span class="desc"><a href="<?php echo e(route('calender.show', '3-days')); ?>" style="color: white;">30 days to due</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>

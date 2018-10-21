@@ -228,8 +228,8 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Task</th>
-                        <th>Project</th>
+                        <th><a href="{{ route('tasks.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Task <a href="{{ route('tasks.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        <th style="width: 148px;"><a href="{{ route('tasks.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Project <a href="{{ route('tasks.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Managed By</th>
                         <th>Assigned To</th>
                         <!-- <th>status</th>
@@ -246,7 +246,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }} </a><br><span style="color: #808080b0;">(Due Date: {{ $task->duedate }})</span></td>
+                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }} </a><br><span style="color: #808080b0;">(Contract Date: {{ $task->duedate }})</span></td>
                         <td><a href="{{ route('projects.show', $task->project_id) }}">{{ $task->projectname }}</td>                        
                         <td>{{ $task->managedby }}</td>                        
                         <td>{{ $task->assignedto }} <br> Status: {{ $task->status1 }}</td>

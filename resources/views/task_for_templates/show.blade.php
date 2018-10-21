@@ -63,7 +63,7 @@
                                             <tr>                                                
                                                 <th>Task</th>
                                                 <th>Category</th>
-                                                <th>Due Date</th>
+                                                <th>Contract Date</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

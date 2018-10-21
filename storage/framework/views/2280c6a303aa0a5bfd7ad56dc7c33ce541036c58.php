@@ -115,7 +115,7 @@
                                 <thead>
                                     <tr>                        
                                         <th>Project Name</th>
-                                        <th>POC</th>
+                                        <th>Consultant</th>
                                         <th>CCO</th>
                                         <th>Due Date</th>
                                         <!-- <th>status</th>

@@ -31,6 +31,13 @@ class UserxController extends Controller
         //$users = User::where('id', '!=', 1)->paginate(15); 
         return view('userx.index')->with('users', $users);
     }
+    public function sort($feild, $type)
+    {
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::whereNotIn('id', $useradmin)->orderBy($feild, $type)->paginate(15);
+        //$users = User::where('id', '!=', 1)->paginate(15); 
+        return view('userx.index')->with('users', $users);   
+    }
 
     public function approve($id)
     {
@@ -101,6 +108,7 @@ class UserxController extends Controller
             foreach ($status as $key => $value) 
             {
                 $form = Project_form::find($value->form_id);
+                //dd($form);
                 $project_name = Project::find($form->project_id);
                 $value->name = $project_name->name;
             }

@@ -11,14 +11,96 @@
         <div class="card">
             <div class="card-header">
                 <strong>{{ $task['title'] }}</strong>
+                
                 @if($task->status == 1)
-                <a href="{{ route('start_task.edit', $task->id) }}" style="float: right;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="{{ route('start_task.edit', $task->id) }}" style="float: right;"><button class="au-btn au-btn-icon au-btn--green au-btn--small"> 
                     Initiate task
                 </button></a>
                 @endif
                 @if($task->status == 3)
                 <span style="float: right;">Task Completed</span>
                 @endif
+                <!-- <a href="{{ route('start_task.show', $task->id) }}" style="float: right;margin-right: 15px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small"> 
+                    Copy
+                </button></a> -->
+                @if($task->allow == 1)
+                <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#copy" data-backdrop="false" style="float: right;margin-right: 15px;">
+                    Copy
+                </button>
+
+                
+
+                <form action="{{ route('start_task.store') }}" method="POST">
+                {{ csrf_field() }}
+                
+                <div class="modal fade" id="copy" tabindex="-1" role="dialog" aria-labelledby="copy" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="text-align: left;">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Copy Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <input type="hidden" name="task" value="{{ $task->id }}">
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="interval" class=" form-control-label">Interval</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <select name="interval" id="interval" class="form-control">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Daily</option>
+                                    <option value="2">weekly</option>
+                                    <option value="3">Monthly</option>
+                                    <option value="4">Quaterly</option>
+                                </select>
+                                @if ($errors->has('interval'))
+                                    <span class="help-block error">
+                                        <strong>{{ $errors->first('interval') }}</strong>
+                                    </span>
+                                @endif 
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="start" class=" form-control-label">Start Date</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input id="start" type="date" class="form-control" name="start" value="<?php echo date("Y-m-d"); ?>" required autofocus>
+                                @if ($errors->has('start'))
+                                    <span class="help-block error">
+                                        <strong>{{ $errors->first('start') }}</strong>
+                                    </span>
+                                @endif 
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col col-md-3">
+                                <label for="till" class=" form-control-label">Till Date</label>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <input id="till" type="date" class="form-control" name="till" value="{{ old('till') }}" required autofocus>
+                                @if ($errors->has('till'))
+                                    <span class="help-block error">
+                                        <strong>{{ $errors->first('till') }}</strong>
+                                    </span>
+                                @endif 
+                            </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button> -->
+                        <button type="submit" class="btn btn-primary" >Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </form>
+                @endif
+
+
             </div>
             <div class="card-body card-block">
                     <div class="row form-group">
@@ -31,7 +113,7 @@
                     </div>                    
                     <div class="row form-group">
                         <div class="col col-md-6">
-                            <label for="duedate" class=" form-control-label"><b>Due Date</b>: {{ $task->duedate }}</label>
+                            <label for="duedate" class=" form-control-label"><b>Contract Date</b>: {{ $task->duedate }}</label>
                         </div>
                         <div class="col col-md-6">
                             <label for="category" class=" form-control-label"><b>Category</b>: {{ $task->categorys }}</label>

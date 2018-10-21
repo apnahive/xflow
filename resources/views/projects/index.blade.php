@@ -54,10 +54,10 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Name</th>
-                        <th>POC</th>
+                        <th><a href="{{ route('projects.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="{{ route('projects.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
+                        <th>Consultant</th>
                         <th>CCO</th>
-                        <th>Due Date</th>
+                        <th>Contract Date</th>
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>

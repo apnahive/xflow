@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('import-user', 'HomeController@importExport');
 //Route::post('importuser', ['as' => 'importuser', 'uses' => 'HomeController@importExcel']);
 //Route::post('importuser',array('as'=>'importuser','uses'=>'HomeController@importExcel'));
-Route::resource('importuser', 'User_importController');
+//Route::resource('importuser', 'User_importController');
 
 Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
@@ -30,12 +30,15 @@ Route::resource('profile', 'ProfileController');
 //Route::get('download-document/{userid}/{formid}', 'ProfileController@download')->name('profile.download');
 //Route::resource('users', 'UserController');
 Route::resource('users', 'UserxController');
+Route::get('users/sort/{feild}/{type}', 'UserxController@sort')->name('users.sort'); //for sorting
 Route::get('users/approve/{id}', 'UserxController@approve')->name('users.approve');
 Route::get('users/reject/{id}', 'UserxController@reject')->name('users.reject');
-Route::resource('roles', 'RoleController');
-Route::resource('permissions', 'PermissionController');
+//Route::resource('roles', 'RoleController');
+//Route::resource('permissions', 'PermissionController');
 Route::resource('projects', 'ProjectController');
+Route::get('projects/sort/{feild}/{type}', 'ProjectController@sort')->name('projects.sort'); //for sorting
 Route::resource('tasks', 'TaskController');
+Route::get('tasks/sort/{feild}/{type}', 'TaskController@sort')->name('tasks.sort'); //for sorting
 Route::resource('task_templates', 'Task_templateController');
 Route::resource('task_for_templates', 'Task_for_templateController');
 

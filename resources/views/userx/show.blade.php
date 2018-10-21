@@ -117,9 +117,9 @@
                                 <thead>
                                     <tr>                        
                                         <th>Project Name</th>
-                                        <th>POC</th>
+                                        <th>Consultant</th>
                                         <th>CCO</th>
-                                        <th>Due Date</th>
+                                        <th>Contract Date</th>
                                         <!-- <th>status</th>
                                         <th>price</th> -->
                                         <th></th>

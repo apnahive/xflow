@@ -52,9 +52,9 @@ class HomeController extends Controller
             $date1 = new DateTime($value->duedate);
             $d = date_diff($now, $date1);
             //dd($now, $date1, $d, $d->days);
-            if($d->days > 3 && $d->invert == 0)
+            if($d->days > 30 && $d->invert == 0) //for the dashboard
                 $tasks->green++;
-            if($d->days <= 3 && $d->invert == 0)
+            if($d->days <= 30 && $d->invert == 0)
                 $tasks->yellow++;
             if($d->invert)
                 $tasks->red++;

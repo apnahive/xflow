@@ -29,6 +29,9 @@
                          
                         <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-attestation' ? 'active' : ''); ?>" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
+
+                         <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-attestation1' ? 'active' : ''); ?>" id="custom-nav-attestation-tab1" data-toggle="tab" href="#custom-nav-attestation1" role="tab" aria-controls="custom-nav-attestation1"
+                         aria-selected="false"><i class="fas fa-check-square"></i>Form Status</a>
                         <?php endif; ?>
                     </div>
                 </nav>
@@ -53,7 +56,7 @@
                             </div>                    
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="poc" class=" form-control-label"><b>POC</b></label>
+                                    <label for="poc" class=" form-control-label"><b>Consultant</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="poc" class=" form-control-label"><?php echo e($project->pocname); ?></label>
@@ -69,7 +72,7 @@
                             </div>                            
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Due Date</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Contract Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label"><?php echo e($project->duedate); ?></label>
@@ -122,7 +125,7 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td><a href="<?php echo e(route('tasks.show', $task->id)); ?>"><?php echo e($task->title); ?></a> <br><span style="color: #808080b0;">(Due Date: <?php echo e($task->duedate); ?>)</span></td>
+                                        <td><a href="<?php echo e(route('tasks.show', $task->id)); ?>"><?php echo e($task->title); ?></a> <br><span style="color: #808080b0;">(Contract Date: <?php echo e($task->duedate); ?>)</span></td>
                                         <td><a href="<?php echo e(route('projects.show', $task->project_id)); ?>"><?php echo e($task->projectname); ?></a></td>                        
                                         <td><?php echo e($task->managedby); ?></td>                        
                                         <td><?php echo e($task->assignedto); ?> <br> Status: <?php echo e($task->status1); ?></td>
@@ -286,17 +289,24 @@
                         <tbody>                            
                         <?php if(count($files) > 0): ?>
                         <?php $__currentLoopData = $files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $filekey => $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr class="tr-shadow">                            
+                        <tr class="tr-shadow">
+                            <?php if($file->check == 1): ?>
+                            <?php else: ?>
                             <td>
-                                <a href="<?php echo e(route('fileupload.show', $file->file)); ?>" target="_blank"><?php echo e($file->file_name); ?></a>
-                            </td>                            
+                                <a href="<?php echo e(route('fileupload.show', $file->file)); ?>" target="_blank"><?php echo e($file->file_name); ?></a>  <?php echo e($file->left); ?> Days left before file is deleted.
+                            </td>
+                            <?php endif; ?>                            
                         </tr>                        
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php else: ?>
                             <tr style="text-align: center;"><td colspan="5">No Files Added</td></tr>
                         <?php endif; ?>
+
+                        
                         </tbody>
+
                         </table>
+                        *Note: Please download file before it is deleted.
                         
                     </div>
                     <?php if($project->can_edit): ?> 
@@ -401,26 +411,13 @@
                                     </span>
                                 <?php endif; ?> -->
                             </div>
+                            
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="summernote" class=" form-control-label">User Status</label>
+                                    <label for="summernote" class=" form-control-label"></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <?php if(count($form_sign) > 0): ?>
-                                    <?php $__currentLoopData = $form_sign; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_signkey => $sign_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <?php if($sign_value->status): ?>
-                                            <div class="alert alert-success col-md-6" role="alert">
-                                                <?php echo e($sign_value->name); ?>
-
-                                            </div>
-                                        <?php else: ?>
-                                            <div class="alert alert-secondary col-md-6" role="alert">
-                                                <?php echo e($sign_value->name); ?>
-
-                                            </div>                                            
-                                        <?php endif; ?>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    <?php endif; ?>
+                                    
                                     <?php if($attestation->status): ?>
                                     <a href="<?php echo e(route('project_forms.edit', $attestation->id)); ?>" style="float: right;">
                                         <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -436,6 +433,11 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
+
+
+
+
+
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="summernote" class=" form-control-label">Attestation</label>
@@ -481,6 +483,31 @@
 
                             
                         </form>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="custom-nav-attestation1" role="tabpanel" aria-labelledby="custom-nav-attestation-tab1">
+                        <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="summernote" class=" form-control-label">User Status</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <?php if(count($form_sign) > 0): ?>
+                                    <?php $__currentLoopData = $form_sign; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $form_signkey => $sign_value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($sign_value->status): ?>
+                                            <div class="alert alert-success col-md-6" role="alert">
+                                                <?php echo e($sign_value->name); ?>
+
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="alert alert-secondary col-md-6" role="alert">
+                                                <?php echo e($sign_value->name); ?>
+
+                                            </div>                                            
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php endif; ?>                                    
+                                </div>
+                            </div>
                         
                     </div>
                     <?php endif; ?>

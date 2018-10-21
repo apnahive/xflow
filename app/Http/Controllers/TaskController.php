@@ -39,6 +39,11 @@ class TaskController extends Controller
         {
             //$users = User::all();
             $tasks = Task::paginate(10);
+            /*$tasks = Task::with('projects')->get()
+               ->sortBy(function($project) { 
+                   return $project->tasks->title;
+              });
+            dd($tasks);*/
             $managed1 = Task::select('responsible')->get();
             $assigned1 = Task::select('assignee')->get();
             $tasks->admin = 1;
@@ -46,6 +51,119 @@ class TaskController extends Controller
         else
         {
             $tasks = Task::where('assignee', $id1)->paginate(15);
+            $managed1 = Task::where('assignee', $id1)->select('responsible')->get();
+            $assigned1 = Task::where('assignee', $id1)->select('assignee')->get();
+            $tasks->admin = 0;
+        }
+
+        if($projects = Project::where('poc', $id1)->exists())
+        {
+            $tasks->poc = 1;            
+        }
+        else
+        {
+            $tasks->poc = 0;
+        }
+        if($projects = Project::where('cco', $id1)->exists())
+        {
+            $tasks->cco = 1;            
+        }
+        else
+        {
+            $tasks->cco = 0;
+        }
+
+
+
+        foreach ($tasks as $key => $value) {
+            $project = Project::find($value->project_id);
+
+            $value->projectname = $project->name;
+            if($value->status == 1)
+            {
+                $value->status1 = 'pending';
+            }
+            elseif($value->status == 2)
+            {
+                $value->status1 = 'initiated';
+            }
+            elseif($value->status == 3)
+            {
+                $value->status1 = 'completed';
+            }
+            else
+            {
+                $value->status1 = 'no status';
+            }
+            $assigned = User::find($value->assignee);
+            $value->assignedto = $assigned->name;
+            $managed = User::findOrFail($value->responsible);
+            $value->managedby = $managed->name;
+
+            if($project->poc == $id1)
+                $value->poc = 1;
+            if($project->cco == $id1)
+                $value->cco = 1;
+
+            if(Project_user::where('project_id', $project->id)->where('user_id', $id1)->exists())
+                $value->user = 1;
+            else
+                $value->user = 0;
+
+            //color coding of task
+            $date1 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            //dd($now, $date1, $d, $d->days);
+            if($d->days > 3)
+                $value->color = 3;
+            if($d->days <= 3)
+                $value->color = 2;
+            if($d->invert)
+                $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
+
+            //dd($d->days > 3, $d);
+
+            //dd($value, $project); 
+        }
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+        $task_templates = Task_template::all();
+        //dd($tasks);
+
+        // search functionality
+
+        
+        $managedby = User::whereIn('id', $managed1)->get();
+        
+        $assignedto = User::whereIn('id', $assigned1)->get();
+        //dd($assignedto);
+        return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+    }
+    public function sort($feild, $type)
+    {
+        //dd($feild, $type);
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        $now = new \DateTime();
+        
+        if($checkadmins)
+        {
+            //$users = User::all();
+            $tasks = Task::join('projects', 'tasks.project_id', '=', 'projects.id')->select('tasks.id', 'tasks.title', 'tasks.project_id', 'tasks.duedate', 'tasks.status', 'tasks.responsible', 'tasks.assignee', 'projects.name')->orderBy($feild, $type)->paginate(10); //for sorting
+
+            
+            //dd($tasks);
+            $managed1 = Task::select('responsible')->get();
+            $assigned1 = Task::select('assignee')->get();
+            $tasks->admin = 1;
+        }
+        else
+        {
+            $tasks = Task::where('assignee', $id1)->orderBy($feild, $type)->paginate(15); //for sorting
             $managed1 = Task::where('assignee', $id1)->select('responsible')->get();
             $assigned1 = Task::where('assignee', $id1)->select('assignee')->get();
             $tasks->admin = 0;
@@ -397,7 +515,7 @@ class TaskController extends Controller
         $task->save();
 
         $user1 = User::findOrFail($task->assignee);
-        Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
+        //Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
 
         Alert::success('Success', 'You have successfully created Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully created Task');
@@ -410,7 +528,8 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {        
+    { 
+        $now = new \DateTime();       
         $task = Task::find($id);
         if(!$task)
         {
@@ -440,9 +559,18 @@ class TaskController extends Controller
         $task->responsibles = $responsible->name;
 
         //dd($task);
-
-
-        return view('tasks.show', compact('task'));
+        //for access
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
+            $task->allow = 1;
+        elseif($project->poc == $id1)
+            $task->allow = 1;
+        else
+            $task->allow = 0;
+        //dd($task);
+        return view('tasks.show', compact('task', 'now'));
     }
 
     /**
@@ -527,7 +655,7 @@ class TaskController extends Controller
             'duedate'=> 'date',
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
-            'actual_time_to_complete'=> 'numeric|min:1',
+            'actual_time_to_complete'=> 'numeric|nullable|min:1',
             'status'=> 'numeric|min:1',
             'assignee'=> 'numeric|min:1',
             'note'=> 'max:2048',
@@ -570,6 +698,7 @@ class TaskController extends Controller
         
         $task->save();
         Alert::success('Success', 'You have successfully updated Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        //return redirect()->back()->with('success', 'You have successfully updated Task');
         return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');
     }
 

@@ -20,9 +20,9 @@
             <table class="table table-data2">
                 <thead>
                     <tr>                        
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>User Type</th>
+                        <th><a href="{{ route('users.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="{{ route('users.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        <th><a href="{{ route('users.sort', ['email', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Email <a href="{{ route('users.sort', ['email', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        <th><a href="{{ route('users.sort', ['user_type', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> User Type <a href="{{ route('users.sort', ['user_type', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Status</th>
                         <!-- <th>status</th>
                         <th>price</th> -->

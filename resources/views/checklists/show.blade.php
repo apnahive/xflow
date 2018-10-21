@@ -31,7 +31,7 @@
                     </div>                    
                     <div class="row form-group">
                         <div class="col col-md-6">
-                            <label for="duedate" class=" form-control-label"><b>Due Date</b>: {{ $task->duedate }}</label>
+                            <label for="duedate" class=" form-control-label"><b>Contract Date</b>: {{ $task->duedate }}</label>
                         </div>
                         <div class="col col-md-6">
                             <label for="category" class=" form-control-label"><b>Category</b>: {{ $task->categorys }}</label>

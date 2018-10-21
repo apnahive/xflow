@@ -49,7 +49,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="duedate" class=" form-control-label">Due Date</label>
+                            <label for="duedate" class=" form-control-label">Contract Date</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="{{ $task['duedate'] }}" required autofocus @if($task->admin == 0) disabled @endif>
@@ -83,7 +83,7 @@
                             <label for="estimated_time_to_complete" class=" form-control-label">Estimated Time to Complete (in minutes)</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="{{ $task['estimated_time_to_complete'] }}" required autofocus @if($task->admin == 0) disabled @endif>
+                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="{{ $task['estimated_time_to_complete'] }}" autofocus @if($task->admin == 0) disabled @endif>
                             @if ($errors->has('estimated_time_to_complete'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('estimated_time_to_complete') }}</strong>

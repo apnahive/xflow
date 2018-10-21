@@ -227,8 +227,8 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Task</th>
-                        <th>Project</th>
+                        <th><a href="<?php echo e(route('tasks.sort', ['title', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Task <a href="<?php echo e(route('tasks.sort', ['title', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        <th style="width: 148px;"><a href="<?php echo e(route('tasks.sort', ['name', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Project <a href="<?php echo e(route('tasks.sort', ['name', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Managed By</th>
                         <th>Assigned To</th>
                         <!-- <th>status</th>
@@ -245,7 +245,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td><a href="<?php echo e(route('tasks.show', $task->id)); ?>"><?php echo e($task->title); ?> </a><br><span style="color: #808080b0;">(Due Date: <?php echo e($task->duedate); ?>)</span></td>
+                        <td><a href="<?php echo e(route('tasks.show', $task->id)); ?>"><?php echo e($task->title); ?> </a><br><span style="color: #808080b0;">(Contract Date: <?php echo e($task->duedate); ?>)</span></td>
                         <td><a href="<?php echo e(route('projects.show', $task->project_id)); ?>"><?php echo e($task->projectname); ?></td>                        
                         <td><?php echo e($task->managedby); ?></td>                        
                         <td><?php echo e($task->assignedto); ?> <br> Status: <?php echo e($task->status1); ?></td>

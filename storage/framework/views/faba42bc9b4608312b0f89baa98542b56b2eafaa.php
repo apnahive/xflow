@@ -18,7 +18,7 @@
                         <div class="col-12 col-md-9">
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
                             <?php if($errors->has('name')): ?>
-                                <span class="help-block">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
                             <?php endif; ?>                            
@@ -31,7 +31,7 @@
                         <div class="col-12 col-md-9">
                             <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
                             <?php if($errors->has('description')): ?>
-                                <span class="help-block">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('description')); ?></strong>
                                 </span>
                             <?php endif; ?>                            
@@ -50,7 +50,7 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>                            
                             <?php if($errors->has('poc')): ?>
-                                <span class="help-block">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('poc')); ?></strong>
                                 </span>
                             <?php endif; ?>
@@ -70,7 +70,7 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('cco')): ?>
-                                <span class="help-block">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('cco')); ?></strong>
                                 </span>
                             <?php endif; ?> 
@@ -86,7 +86,7 @@
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
                             <?php if($errors->has('duedate')): ?>
-                                <span class="help-block">
+                                <span class="help-block error">
                                     <strong><?php echo e($errors->first('duedate')); ?></strong>
                                 </span>
                             <?php endif; ?> 

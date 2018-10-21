@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Task;
 use App\User;
+use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 use Mail;
 use App\Mail\Task_initiated;
@@ -43,9 +44,47 @@ class Start_taskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //for task copy for regulated interval
     {
-        //
+        //dd(request()->all());
+        $this->validate($request, array(
+            'start'=> 'required|date',
+            'till'=> 'required|date',
+            'interval'=> 'numeric|min:1',
+        ));
+        //$now = new \DateTime();
+        //$now1 = new \DateTime();
+        $task = Task::find($request->task);
+
+        $now = $request->start;
+        while ($now < $request->till) 
+        {   
+            $task_new = new Task;
+
+            $task_new->project_id = $task->project_id;
+            $task_new->title = $task->title;
+            $task_new->duedate = $now;
+            $task_new->category = $task->category;
+            $task_new->estimated_time_to_complete = $task->estimated_time_to_complete;            
+            $task_new->status = 1;            
+            $task_new->note = $task->note;
+            $task_new->assignee = $task->assignee;
+            $task_new->responsible = $task->responsible;
+            $task_new->copy = $task->id;
+            $task_new->save();
+
+            if($request->interval == 1)
+                $now = date('Y-m-d', strtotime("+1 days", strtotime($now)));
+            elseif($request->interval == 2)
+                $now = date('Y-m-d', strtotime("+7 days", strtotime($now)));
+            elseif($request->interval == 3)
+                $now = date('Y-m-d', strtotime("+1 months", strtotime($now)));
+            elseif($request->interval == 4)
+                $now = date('Y-m-d', strtotime("+3 months", strtotime($now)));
+
+        }
+        Alert::success('Success', 'task has been Copied')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->back()->with('success','task has been Initiated');
     }
 
     /**
@@ -56,7 +95,7 @@ class Start_taskController extends Controller
      */
     public function show($id)
     {
-        //
+        //dd("task copy");
     }
 
     /**

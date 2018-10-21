@@ -45,7 +45,7 @@
                     </div>                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="poc" class=" form-control-label">POC</label>
+                            <label for="poc" class=" form-control-label">Consultant</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="poc" id="poc" class="custom-select form-control chosen">
@@ -84,7 +84,7 @@
                     </script>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="duedate" class=" form-control-label">Due Date</label>
+                            <label for="duedate" class=" form-control-label">Contract Date</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="{{ $project['duedate'] }}" required autofocus>

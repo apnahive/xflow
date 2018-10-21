@@ -329,7 +329,7 @@
                         <div class="header-wrap">
                             <form class="form-header" action="{!! route('search') !!}" method="POST" role="search"> 
                                 {{ csrf_field() }}
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for projects &amp; tasks..." />
+                                <input class="au-input au-input--xl" type="text" name="search" @if($search) value="{{ $search }}" @endif placeholder="Search for projects &amp; tasks..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>

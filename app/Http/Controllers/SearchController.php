@@ -30,11 +30,13 @@ class SearchController extends Controller
     	{
     		$projects = Project::where('name', 'LIKE', $searchQuery)->orWhere('description', 'LIKE', $searchQuery);
 			$tasks = Task::where('title', 'LIKE', $searchQuery)->orWhere('note', 'LIKE', $searchQuery);	
+            $users = User::where('name', 'LIKE', $searchQuery)->orWhere('email', 'LIKE', $searchQuery)->orWhere('user_type', 'LIKE', $searchQuery)->orWhere('lastname', 'LIKE', $searchQuery)->orWhere('organization', 'LIKE', $searchQuery)->orWhere('company', 'LIKE', $searchQuery)->orWhere('phonenumber', 'LIKE', $searchQuery)->orWhere('dateofbirth', 'LIKE', $searchQuery)->get(); 
     	}
     	else
     	{
     		$projects = Project::where('name', 'LIKE', $searchQuery)->orWhere('description', 'LIKE', $searchQuery);
 			$tasks = Task::where('title', 'LIKE', $searchQuery)->orWhere('note', 'LIKE', $searchQuery)->where('assignee', $id1);	
+            $users = null;
     	}
 
 		
@@ -85,9 +87,10 @@ class SearchController extends Controller
 
 		$count1 = count($tasks);
 		$count2 = count($projects);
-		$count = $count1 + $count2;
+        $count3 = count($users);
+		$count = $count1 + $count2 + $count3;
 		$search = $request->search;
-		//dd($projects);
-		return view('search', compact('projects', 'tasks', 'count', 'search'));
+		//dd($users);
+		return view('search', compact('projects', 'tasks', 'count', 'search', 'users'));
     }
 }

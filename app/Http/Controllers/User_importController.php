@@ -56,7 +56,15 @@ class User_importController extends Controller
                 else
                     $value->dateofbirth = new DateTime('1991-01-01');
 
-                $arr[] = ['name' => $value->name, 'lastname' => $value->lastname, 'email' => $value->email, 'password' => Hash::make('password'), 'user_type' => $value->user_type, 'dateofbirth' => $value->dateofbirth, 'organization' => $value->organization, 'company' => $value->company, 'phonenumber' => $value->phonenumber, 'verified' => 1, 'created_at' => $now, 'updated_at' => $now ];
+                if(!$value->phonenumber)
+                {
+                    $value->phonenumber = ' ';
+                }
+
+                if(User::where('email', $value->email)->exists())
+                {}
+                else
+                    $arr[] = ['name' => $value->name, 'lastname' => $value->lastname, 'email' => $value->email, 'password' => Hash::make('password'), 'user_type' => $value->user_type, 'dateofbirth' => $value->dateofbirth, 'organization' => $value->organization, 'company' => $value->company, 'phonenumber' => $value->phonenumber, 'verified' => 1, 'created_at' => $now, 'updated_at' => $now ];
             }
  
             if(!empty($arr)){

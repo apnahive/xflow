@@ -41,7 +41,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }} </a><br><span style="color: #808080b0;">(Due Date: {{ $task->duedate }})</span></td>
+                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }} </a><br><span style="color: #808080b0;">(Contract Date: {{ $task->duedate }})</span></td>
                         <td><a href="{{ route('projects.show', $task->project_id) }}">{{ $task->projectname }}</td>                        
                         <td>{{ $task->managedby }}</td>                        
                         <td>{{ $task->assignedto }} <br> Status: {{ $task->status1 }}</td>

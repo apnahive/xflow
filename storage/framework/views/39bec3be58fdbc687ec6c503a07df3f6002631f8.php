@@ -81,7 +81,7 @@
                             <label for="estimated_time_to_complete" class=" form-control-label">Estimated Time to Complete (in minutes)</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="<?php echo e($task['estimated_time_to_complete']); ?>" required autofocus <?php if($task->admin == 0): ?> disabled <?php endif; ?>>
+                            <input id="estimated_time_to_complete" type="text" class="form-control" name="estimated_time_to_complete" value="<?php echo e($task['estimated_time_to_complete']); ?>" autofocus <?php if($task->admin == 0): ?> disabled <?php endif; ?>>
                             <?php if($errors->has('estimated_time_to_complete')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('estimated_time_to_complete')); ?></strong>

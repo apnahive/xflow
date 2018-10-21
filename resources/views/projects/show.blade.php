@@ -32,6 +32,9 @@
                          
                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-attestation' ? 'active' : '' }}" id="custom-nav-attestation-tab" data-toggle="tab" href="#custom-nav-attestation" role="tab" aria-controls="custom-nav-attestation"
                          aria-selected="false"><i class="fas fa-file-text"></i>Forms</a>
+
+                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-attestation1' ? 'active' : '' }}" id="custom-nav-attestation-tab1" data-toggle="tab" href="#custom-nav-attestation1" role="tab" aria-controls="custom-nav-attestation1"
+                         aria-selected="false"><i class="fas fa-check-square"></i>Form Status</a>
                         @endif
                     </div>
                 </nav>
@@ -56,7 +59,7 @@
                             </div>                    
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="poc" class=" form-control-label"><b>POC</b></label>
+                                    <label for="poc" class=" form-control-label"><b>Consultant</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="poc" class=" form-control-label">{{ $project->pocname }}</label>
@@ -72,7 +75,7 @@
                             </div>                            
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Due Date</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Contract Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">{{ $project->duedate }}</label>
@@ -125,7 +128,7 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a> <br><span style="color: #808080b0;">(Due Date: {{ $task->duedate }})</span></td>
+                                        <td><a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a> <br><span style="color: #808080b0;">(Contract Date: {{ $task->duedate }})</span></td>
                                         <td><a href="{{ route('projects.show', $task->project_id) }}">{{ $task->projectname }}</a></td>                        
                                         <td>{{ $task->managedby }}</td>                        
                                         <td>{{ $task->assignedto }} <br> Status: {{ $task->status1 }}</td>
@@ -286,17 +289,24 @@
                         <tbody>                            
                         @if(count($files) > 0)
                         @foreach ($files as $filekey => $file)
-                        <tr class="tr-shadow">                            
+                        <tr class="tr-shadow">
+                            @if($file->check == 1)
+                            @else
                             <td>
-                                <a href="{{ route('fileupload.show', $file->file) }}" target="_blank">{{ $file->file_name }}</a>
-                            </td>                            
+                                <a href="{{ route('fileupload.show', $file->file) }}" target="_blank">{{ $file->file_name }}</a>  {{ $file->left }} Days left before file is deleted.
+                            </td>
+                            @endif                            
                         </tr>                        
                         @endforeach
                         @else
                             <tr style="text-align: center;"><td colspan="5">No Files Added</td></tr>
                         @endif
+
+                        
                         </tbody>
+
                         </table>
+                        *Note: Please download file before it is deleted.
                         
                     </div>
                     @if($project->can_edit) 
@@ -399,24 +409,13 @@
                                     </span>
                                 @endif -->
                             </div>
+                            
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="summernote" class=" form-control-label">User Status</label>
+                                    <label for="summernote" class=" form-control-label"></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    @if(count($form_sign) > 0)
-                                    @foreach ($form_sign as $form_signkey => $sign_value)
-                                        @if($sign_value->status)
-                                            <div class="alert alert-success col-md-6" role="alert">
-                                                {{ $sign_value->name }}
-                                            </div>
-                                        @else
-                                            <div class="alert alert-secondary col-md-6" role="alert">
-                                                {{ $sign_value->name }}
-                                            </div>                                            
-                                        @endif
-                                    @endforeach
-                                    @endif
+                                    
                                     @if($attestation->status)
                                     <a href="{{ route('project_forms.edit', $attestation->id) }}" style="float: right;">
                                         <button type="submit" class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -432,6 +431,11 @@
                                     @endif
                                 </div>
                             </div>
+
+
+
+
+
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="summernote" class=" form-control-label">Attestation</label>
@@ -475,6 +479,29 @@
 
                             
                         </form>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="custom-nav-attestation1" role="tabpanel" aria-labelledby="custom-nav-attestation-tab1">
+                        <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="summernote" class=" form-control-label">User Status</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    @if(count($form_sign) > 0)
+                                    @foreach ($form_sign as $form_signkey => $sign_value)
+                                        @if($sign_value->status)
+                                            <div class="alert alert-success col-md-6" role="alert">
+                                                {{ $sign_value->name }}
+                                            </div>
+                                        @else
+                                            <div class="alert alert-secondary col-md-6" role="alert">
+                                                {{ $sign_value->name }}
+                                            </div>                                            
+                                        @endif
+                                    @endforeach
+                                    @endif                                    
+                                </div>
+                            </div>
                         
                     </div>
                     @endif

@@ -48,7 +48,7 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="duedate" class=" form-control-label">Due Date</label>
+                            <label for="duedate" class=" form-control-label">Contract Date</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <input id="duedate" type="date" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>

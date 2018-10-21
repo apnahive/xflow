@@ -24,7 +24,11 @@
             </script>                        
             <input type="hidden" name="form_id" value="<?php echo e($id); ?>">
             <textarea name="summernote" id="summernote" class="summernote"></textarea>
-
+            <?php if($errors->has('summernote')): ?>
+                <span class="help-block error">
+                    <strong><?php echo e($errors->first('summernote')); ?></strong>
+                </span>
+            <?php endif; ?> 
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">

@@ -101,6 +101,74 @@ class ProjectController extends Controller
         return view('projects.index', compact('projects'));
     }
 
+    public function sort($feild, $type)
+    {
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        //$selected_users = Project_user::where('user_id', $id1)->get(); 
+        
+        $projects = Project::orderBy($feild, $type)->paginate(15);
+        /*if($id1 == 1)
+            
+        else
+        {
+            $selected_projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+
+        }*/
+        foreach ($projects as $key => $value) {
+            $poc = User::find($value->poc);
+            $value->pocname = $poc->name;
+            $cco = User::find($value->cco);
+            $value->cconame = $cco->name;
+            if($id1 == $poc->id || $checkadmins)
+            {
+                $value->can_edit = 1;
+                $value->can_view = 1;
+                if($checkadmins)
+                    $value->can_delete = 1;
+                else
+                    $value->can_delete = 0;
+            }
+            elseif($id1 == $cco->id)
+            {
+                $value->can_edit = 0;
+                $value->can_view = 1;
+                $value->can_delete = 0;
+            }
+            else
+            {
+                $project_users = Project_user::where('project_id', $value->id)->get();
+                foreach ($project_users as $project_userkey => $project_user) 
+                {
+                    if($project_user->user_id == $id1)
+                    {
+                        $value->can_edit = 0;
+                        $value->can_view = 1;
+                        $value->can_delete = 0;
+                    }
+                    else
+                    {
+                        $value->can_edit = 0;
+                        $value->can_view = 0;
+                        $value->can_delete = 0;
+                    }
+                }
+            }
+
+        }
+        if($checkadmins)
+        {
+            $projects->can_create = 1;
+        }
+        else
+        {
+            $projects->can_create = 0;
+        }
+        //dd($projects);
+        return view('projects.index', compact('projects'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -298,6 +366,20 @@ class ProjectController extends Controller
         }
         
         $files = Project_file::where('project_id', $id)->get();
+        foreach ($files as $filekey => $file) 
+        {
+            //$date1 = new DateTime($file->created_at);
+            $date1 = date('Y-m-d', strtotime("+4 months", strtotime($file->created_at)));
+            //dd($date1);
+            $date1 = new DateTime($date1);
+            $d = date_diff($now, $date1);
+            
+            $file->check = $d->invert;
+            $file->left = $d->days;
+            /*$interval = $date1->diffInDays($now);
+            $file->left = $interval->format('%a');*/
+
+        }
 
         if(Project_form::where('project_id', $id)->exists())
         {

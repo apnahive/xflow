@@ -68,7 +68,7 @@
                             </div>                            
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label">Due Date</label>
+                                    <label for="duedate" class=" form-control-label">Contract Date</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">{{ $project->duedate }}</label>
@@ -104,7 +104,7 @@
                                         </th> -->
                                         <th>Task</th>
                                         <th>Project</th>
-                                        <th>Due Date</th>
+                                        <th>Contract Date</th>
                                         <th>Status</th>
                                         <!-- <th>status</th>
                                         <th>price</th> -->

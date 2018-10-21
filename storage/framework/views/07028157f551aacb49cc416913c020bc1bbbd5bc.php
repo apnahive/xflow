@@ -66,7 +66,12 @@
                         Upload You sign
                     </div>
                     <div class="col-12 col-md-9">
-                        <input class="sign" name="sign" type="file">
+                        <input class="sign" name="sign" type="file"><br>
+                        <?php if($errors->has('sign')): ?>
+                            <span class="help-block error">
+                                <strong><?php echo e($errors->first('sign')); ?></strong>
+                            </span>
+                        <?php endif; ?> 
                     </div>
                 </div>
                 <div class="form-group">
