@@ -108,7 +108,7 @@
                             <label for="title" class=" form-control-label"><b>Title</b>: {{ $task->title }} </label>
                         </div>
                         <div class="col col-md-6">
-                            <label for="project" class=" form-control-label"><b>Project</b>: {{ $task->projectname }} </label>
+                            <label for="project" class=" form-control-label"><b>Client</b>: {{ $task->projectname }} </label>
                         </div>
                     </div>                    
                     <div class="row form-group">

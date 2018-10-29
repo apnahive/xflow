@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Projects</h3>
+        <h3 class="title-5 m-b-35">Clients</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
                 <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -32,7 +32,7 @@
             <div class="table-data__tool-right">
                 @if($projects->can_create)
                 <a href="{{ route('projects.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    <i class="zmdi zmdi-plus"></i>Add New Project</button></a>
+                    <i class="zmdi zmdi-plus"></i>Add New Client</button></a>
                 @endif
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
@@ -102,16 +102,16 @@
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Project</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Client</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        You are going to delete Project. All the associated records will be deleted. You won't be able to revert these changes!
+                                        You are going to delete Client. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Project</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Client</button>
                                         <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>

@@ -107,7 +107,7 @@
                         </li>
                        <li class="{{ request()->is('projects') ? 'active' : '' }}">
                             <a href="{{ route('projects.index') }}">
-                                <i class="fab fa-product-hunt"></i>Project</a>
+                                <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
@@ -232,7 +232,7 @@
                         </li>
                         <li class="{{ request()->is('projects') ? 'active' : '' }}">
                             <a href="{{ route('projects.index') }}">
-                                <i class="fab fa-product-hunt"></i>Project</a>
+                                <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
@@ -329,7 +329,7 @@
                         <div class="header-wrap">
                             <form class="form-header" action="{!! route('search') !!}" method="POST" role="search"> 
                                 {{ csrf_field() }}
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for projects &amp; tasks..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for clients &amp; tasks..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>

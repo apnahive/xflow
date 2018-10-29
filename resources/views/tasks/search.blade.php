@@ -98,7 +98,7 @@
                             </label>
                         </th> -->
                         <th><a href="{{ route('tasks.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Task <a href="{{ route('tasks.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
-                        <th>Project</th>
+                        <th>Client</th>
                         <th>Managed By</th>
                         <th>Assigned To</th>
                         <!-- <th>status</th>

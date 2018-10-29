@@ -239,7 +239,7 @@ class ProjectController extends Controller
         //dd('test');
 
         Alert::success('Success', 'You have successfully created Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.index')->with('success', 'You have successfully created Project');
+        return redirect()->route('projects.index')->with('success', 'You have successfully created new client');
     }
 
     /**
@@ -390,7 +390,7 @@ class ProjectController extends Controller
         else
         {
             $attestation = Attestation::find(3);
-            $sections = null;
+            $sections = Form_section::where('form_id', $attestation->id)->get();;
             $attestation->status = false;
         }
 
@@ -402,7 +402,7 @@ class ProjectController extends Controller
             $sign_name = User::find($sign_value->user_id);
             $sign_value->name = $sign_name->name.' '.$sign_name->lastname;
         }
-        //dd($attestation);
+        //dd($sections);
         return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign', 'sections'));
     }
 
@@ -479,7 +479,7 @@ class ProjectController extends Controller
             Mail::to('erg@ginisis.com')->send(new Project_editted($project));
 
         Alert::success('Success', 'You have successfully updated Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
+        return redirect()->route('projects.index')->with('success', 'You have successfully updated client');
     }
 
     /**

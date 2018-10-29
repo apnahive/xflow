@@ -17,7 +17,7 @@
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="project" class=" form-control-label">Project</label>
+                            <label for="project" class=" form-control-label">Client</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="project" id="project" class="custom-select form-control chosen" @if($task->admin == 0) disabled @endif>

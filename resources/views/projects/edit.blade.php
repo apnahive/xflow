@@ -10,7 +10,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Edit</strong> Project
+                <strong>Edit</strong> Client
             </div>            
             <form action="{{ route('projects.update', $project['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
