@@ -107,7 +107,7 @@
                         </li>
                        <li class="{{ request()->is('projects') ? 'active' : '' }}">
                             <a href="{{ route('projects.index') }}">
-                                <i class="fab fa-product-hunt"></i>Project</a>
+                                <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">

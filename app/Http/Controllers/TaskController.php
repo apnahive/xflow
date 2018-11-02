@@ -699,12 +699,13 @@ class TaskController extends Controller
         $task->save();
         Alert::success('Success', 'You have successfully updated Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         //return redirect()->back()->with('success', 'You have successfully updated Task');
-        return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');
+       // return redirect()->route('tasks.index')->with('success', 'You have successfully updated Task');
+        return redirect()->route('projects.show', $request->project)->withInput(['tab'=>'custom-nav-task']);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * href="{{ route('projects.show', $project->id) }}"
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

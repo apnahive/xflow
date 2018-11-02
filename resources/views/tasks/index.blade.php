@@ -134,32 +134,45 @@
                                 </button>
 
                                 <div class="modal fade" id="assign{{$task->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$task->id}}" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <form action="{{ route('assign_tasks.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="task_id" value="{{ $task->id }}">
-                                    <div class="modal-content" style="text-align: left;">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row form-group">
-                                            <div class="col col-md-3">
-                                                <label for="assignee" class=" form-control-label">Assignee</label>
-                                            </div>
-                                            <div class="col-12 col-md-9">
-                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
-                                                    <option value="0">Please select</option>
-                                                    @foreach ($users as $user) 
-                                                        <option value="{{$user->id}}" {{ $task['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                      </div>
+                                      <div class="modal-dialog" role="document">
+                                        <form action="{{ route('assign_tasks.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                             <div class="modal-content" style="text-align: left;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-3">
+                                                            <label for="assignee" class=" form-control-label">Assignee</label>
+                                                        </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
+                                                                    <option value="0">Please select</option>
+                                                                    @foreach ($users as $user) 
+                                                                        <option value="{{$user->id}}" {{ $task['assignee'] == $user->id ? 'selected' : '' }}>{{$user->name}} {{$user->lastname}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <div class="col col-md-3">
+                                                                <label for="start" class=" form-control-label">Contract Date</label>
+                                                            </div>
+                                                        <div class="col-12 col-md-9">
+                                                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo date("Y-m-d"); ?>" required autofocus>
+                                                            @if ($errors->has('duedate'))
+                                                                <span class="help-block error">
+                                                                    <strong>{{ $errors->first('duedate') }}</strong>
+                                                                </span>
+                                                            @endif 
+                                                        </div>
+                                                    </div>
+                                                  </div>
                                       <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Submit

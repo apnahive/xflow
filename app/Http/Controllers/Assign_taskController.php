@@ -47,9 +47,17 @@ class Assign_taskController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request()->all());
+     ///dd(request()->all());
+         $this->validate($request, array(
+            'task_id'=> 'numeric|min:1',
+            'duedate'=> 'required|date',
+            'assignee'=> 'numeric|min:1',
+        ));
         $task = Task::find($request->task_id);
+        //dd($task);
         $task->assignee = $request->assignee;
+        $task->duedate = $request->duedate;
+        //dd($task);
         $task->save();
 
         $user1 = User::findOrFail($request->assignee);

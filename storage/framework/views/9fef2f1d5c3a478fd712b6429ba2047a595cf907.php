@@ -133,33 +133,46 @@
                                 </button>
 
                                 <div class="modal fade" id="assign<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <form action="<?php echo e(route('assign_tasks.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                    <?php echo e(csrf_field()); ?>
+                                      <div class="modal-dialog" role="document">
+                                        <form action="<?php echo e(route('assign_tasks.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                        <?php echo e(csrf_field()); ?>
 
-                                    <input type="hidden" name="task_id" value="<?php echo e($task->id); ?>">
-                                    <div class="modal-content" style="text-align: left;">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true">&times;</span>
-                                        </button>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row form-group">
-                                            <div class="col col-md-3">
-                                                <label for="assignee" class=" form-control-label">Assignee</label>
-                                            </div>
-                                            <div class="col-12 col-md-9">
-                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
-                                                    <option value="0">Please select</option>
-                                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                                        <option value="<?php echo e($user->id); ?>" <?php echo e($task['assignee'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                      </div>
+                                        <input type="hidden" name="task_id" value="<?php echo e($task->id); ?>">
+                                             <div class="modal-content" style="text-align: left;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Task</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-3">
+                                                            <label for="assignee" class=" form-control-label">Assignee</label>
+                                                        </div>
+                                                            <div class="col-12 col-md-9">
+                                                                <select name="assignee" id="assignee" class="custom-select form-control chosen">
+                                                                    <option value="0">Please select</option>
+                                                                    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                                                        <option value="<?php echo e($user->id); ?>" <?php echo e($task['assignee'] == $user->id ? 'selected' : ''); ?>><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
+                                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <div class="col col-md-3">
+                                                                <label for="start" class=" form-control-label">Contract Date</label>
+                                                            </div>
+                                                        <div class="col-12 col-md-9">
+                                                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo date("Y-m-d"); ?>" required autofocus>
+                                                            <?php if($errors->has('duedate')): ?>
+                                                                <span class="help-block error">
+                                                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
+                                                                </span>
+                                                            <?php endif; ?> 
+                                                        </div>
+                                                    </div>
+                                                  </div>
                                       <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
                                             <i class="fa fa-dot-circle-o"></i> Submit
