@@ -58,7 +58,7 @@ class FileUploadController extends Controller
         $uploadfile->file = $input['file'];
         $uploadfile->file_name = $file_name;
         $uploadfile->save();
-        Alert::success('Success', 'You have successfully Uploaded file in project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        Alert::success('Success', 'You have successfully Uploaded file in client')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('projects.show', $request->project_id)->withInput(['tab'=>'custom-nav-files']);
 
     }

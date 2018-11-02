@@ -164,8 +164,8 @@ class Add_taskController extends Controller
         $user1 = User::findOrFail($project->poc);
         //Mail::to($user1['email'])->send(new Task_assigned($user1, $project));
 
-        Alert::success('Success', 'You have successfully added task to Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.show', $request->project)->with('success', 'You have successfully added task to Project');
+        Alert::success('Success', 'You have successfully added task to Client')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('projects.show', $request->project)->with('success', 'You have successfully added task to Client');
 
     }
 
