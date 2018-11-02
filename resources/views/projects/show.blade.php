@@ -318,35 +318,35 @@
                             <h3 class="title-5 m-b-35">Add users to the Client</h3>
                                 <link href="{{ asset('css/select.css') }}" rel="stylesheet">
 
-                            <form action="{{ route('project_users.update', $project['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="subject-info-box-1">
-                              <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
-                                @foreach ($users as $userkey => $user)
-                                <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
-                                @endforeach
-                              </select>
-                            </div>
+                                <form action="{{ route('project_users.update', $project['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <div class="subject-info-box-1">
+                                      <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
+                                        @foreach ($users as $userkey => $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                            <div class="subject-info-arrows text-center">
-                              <input type="button" id="btnAllRight" value=">>" class="btn btn-default"><br>
-                              <input type="button" id="btnRight" value=">" class="btn btn-default"><br>
-                              <input type="button" id="btnLeft" value="<" class="btn btn-default"><br>
-                              <input type="button" id="btnAllLeft" value="<<" class="btn btn-default">
-                            </div>
+                                <div class="subject-info-arrows text-center">
+                                  <input type="button" id="btnAllRight" value=">>" class="btn btn-default"><br>
+                                  <input type="button" id="btnRight" value=">" class="btn btn-default"><br>
+                                  <input type="button" id="btnLeft" value="<" class="btn btn-default"><br>
+                                  <input type="button" id="btnAllLeft" value="<<" class="btn btn-default">
+                              </div>
 
-                            <div class="subject-info-box-2">
-                              <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
+                              <div class="subject-info-box-2">
+                                  <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
                                     @foreach ($selected_users as $key => $selected_user)
                                     <option value="{{ $selected_user->id }}">{{ $selected_user->name }} {{ $selected_user->lastname }}</option>
                                     @endforeach
-                              </select>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Update Users in Client
                             </button>                
-                            </form>
+                        </form>
 
                             <div class="clearfix"></div>    
 

@@ -318,35 +318,35 @@
                             <h3 class="title-5 m-b-35">Add users to the Client</h3>
                                 <link href="<?php echo e(asset('css/select.css')); ?>" rel="stylesheet">
 
-                            <form action="<?php echo e(route('project_users.update', $project['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-                            <input type="hidden" name="_method" value="PUT">
-                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                            <div class="subject-info-box-1">
-                              <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
-                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userkey => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                              </select>
-                            </div>
+                                <form action="<?php echo e(route('project_users.update', $project['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                    <div class="subject-info-box-1">
+                                      <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
+                                        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userkey => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </select>
+                                </div>
 
-                            <div class="subject-info-arrows text-center">
-                              <input type="button" id="btnAllRight" value=">>" class="btn btn-default"><br>
-                              <input type="button" id="btnRight" value=">" class="btn btn-default"><br>
-                              <input type="button" id="btnLeft" value="<" class="btn btn-default"><br>
-                              <input type="button" id="btnAllLeft" value="<<" class="btn btn-default">
-                            </div>
+                                <div class="subject-info-arrows text-center">
+                                  <input type="button" id="btnAllRight" value=">>" class="btn btn-default"><br>
+                                  <input type="button" id="btnRight" value=">" class="btn btn-default"><br>
+                                  <input type="button" id="btnLeft" value="<" class="btn btn-default"><br>
+                                  <input type="button" id="btnAllLeft" value="<<" class="btn btn-default">
+                              </div>
 
-                            <div class="subject-info-box-2">
-                              <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
+                              <div class="subject-info-box-2">
+                                  <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
                                     <?php $__currentLoopData = $selected_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $selected_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <option value="<?php echo e($selected_user->id); ?>"><?php echo e($selected_user->name); ?> <?php echo e($selected_user->lastname); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                              </select>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Update Users in Client
                             </button>                
-                            </form>
+                        </form>
 
                             <div class="clearfix"></div>    
 
