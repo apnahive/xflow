@@ -71,7 +71,7 @@ class Project_userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd(request()->all());
+       // dd(request()->all());
         $project = Project::find($id);
         $users = $request->users;
         $no_users = $request->no_user;

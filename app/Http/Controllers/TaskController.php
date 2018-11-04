@@ -525,7 +525,7 @@ class TaskController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+      * @return \Illuminate\Http\Response
      */
     public function show($id)
     { 
@@ -715,6 +715,23 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->delete();
         Alert::success('Success', 'You have successfully deleted Task')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('tasks.index')->with('success', 'You have successfully deleted Site');
+    }
+
+    public function deleteCopies(Request $request)
+    {
+        //dd('delete has been hitted');
+        //dd(request()->all());
+        //dd(request()->origintask);
+        $id3 = $request->origintask;
+        $tasks = Task::where('copy', $id3)->get();
+        foreach ($tasks as $task) {
+        $task->delete();    
+         //dd($task);   
+        }
+        //dd($task);
+        $task->delete();
+        Alert::success('Success', 'You have successfully deleted all copied tasks')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('tasks.index')->with('success', 'You have successfully deleted Site');
     }
 }

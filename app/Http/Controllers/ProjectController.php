@@ -270,7 +270,7 @@ class ProjectController extends Controller
         $project_users = Project_user::where('project_id', $id)->select('user_id')->get();
        // $admin = 1;
       //  $users = User::whereNotIn('id', $project_users)->where('id', '<>', $admin)->get();
-        $users = User::where('verified', 1)->whereNotIn('id', $users)->get();
+        $users = User::where('verified', 1)->whereNotIn('id', $project_users)->get();  //samar- to remove selected users.
         $selected_users = User::whereIn('id', $project_users)->get();
 
         //dd($selected_users, $users);
@@ -402,7 +402,7 @@ class ProjectController extends Controller
             $sign_name = User::find($sign_value->user_id);
             $sign_value->name = $sign_name->name.' '.$sign_name->lastname;
         }
-        //dd($sections);
+       // dd($selected_users);
         return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign', 'sections'));
     }
 

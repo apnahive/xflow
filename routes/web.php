@@ -60,6 +60,7 @@ Route::resource('form_sign', 'Form_signController');
 Route::resource('start_task', 'Start_taskController');
 
 Route::post('taskss/search', 'TaskController@search')->name('tasks.search');
+Route::post('taskss/allcopy', 'TaskController@deleteCopies')->name('tasks.deletecopy');
 
 
 Route::resource('fileupload', 'FileUploadController');

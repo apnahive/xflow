@@ -20,6 +20,7 @@ use File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Mail;
 use App\Mail\Form_signed;
+use Illuminate\Support\Facades\Validator;
 
 class Form_signController extends Controller
 {
@@ -165,9 +166,20 @@ class Form_signController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
-        $this->validate($request, [
-            'sign' => 'required|mimes:jpeg,png,jpg,gif,svg|max:4048',
-        ]);
+        $rules = [
+            'sign' => 'mimes:jpeg,jpg|max:191|image',
+            /*'section.*' => 'required|max:20', */
+
+        ];
+        Validator::make($request->all(), $rules);
+        /*if(empty($request->sign))
+        {
+            $this->validate($request, [
+                'sign' => 'mimes:jpeg,png,jpg,gif,svg|max:4048',
+                'electronic_signature' => 'max:20',
+
+            ]);
+        }*/
         
         $id1 = Auth::id();
         $form_id = $request->form_id;
@@ -202,7 +214,7 @@ class Form_signController extends Controller
         if(Form_sign::where('status', false)->where('user_id', $id1)->where('form_id', $form_id)->exists())
         {
 
-            if(count($sections) > 0)
+            if($sections && count($sections) > 0)
             {
                 foreach ($sections as $sectionkey => $section) 
                 {
@@ -223,20 +235,27 @@ class Form_signController extends Controller
                     }
 
                     $initial = 'section'.$sectionkey;
-                    if(Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->exists())
-                    {                        
-                        $initials = Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->first();
-                        $initials->initials = $request->$initial;
-                        $initials->save();
+                    //dd($request->$initial);
+                    if($request->$initial){
+                        if(Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->exists())
+                        {                        
+                            $initials = Form_initial::where('form_id',$form_id)->where('user_id',$id1)->where('section_id',$section->id)->first();
+                            $initials->initials = $request->$initial;
+                            $initials->save();
+                        }
+                        else
+                        {
+                            $initials = new Form_initial;
+                            $initials->initials = $request->$initial;
+                            $initials->form_id = $form_id;
+                            $initials->user_id = $id1;
+                            $initials->section_id = $section->id;
+                            $initials->save();
+                        }
                     }
-                    else
-                    {
-                        $initials = new Form_initial;
-                        $initials->initials = $request->$initial;
-                        $initials->form_id = $form_id;
-                        $initials->user_id = $id1;
-                        $initials->section_id = $section->id;
-                        $initials->save();
+                    else{
+                        Alert::error('Not Signed', 'Provide Initials in form')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+                        return redirect()->route('form_sign.show',$form_id)->with('Not Signed', 'Provide Initials in form');
                     }
                 }
             }
@@ -245,16 +264,18 @@ class Form_signController extends Controller
 
             //sign upload
             $file = $request->file('sign');
-            
-            $input['file'] = time().'.'.$file->getClientOriginalExtension();
+            if($file){
+                $input['file'] = time().'.'.$file->getClientOriginalExtension();
 
-            $destinationPath = storage_path('/form_sign/'); 
+                $destinationPath = storage_path('/form_sign/'); 
 
-            $file->move($destinationPath, $input['file']);
-            //dd($file);
+                $file->move($destinationPath, $input['file']);
+                //dd($file);
 
 
-            $sign->sign = $input['file'];
+                $sign->sign = $input['file'];
+            }
+            $sign->electronic_signature = $request->electronic_signature;
 
             $sign->save();
             $fullpath = "form_sign/{$sign->sign}";            

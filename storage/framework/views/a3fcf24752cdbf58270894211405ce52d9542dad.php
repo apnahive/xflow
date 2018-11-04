@@ -20,10 +20,42 @@
                 <!-- <a href="<?php echo e(route('start_task.show', $task->id)); ?>" style="float: right;margin-right: 15px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small"> 
                     Copy
                 </button></a> -->
-                <?php if($task->allow == 1): ?>
+                <?php if($task->allow ==1 && $task->copy): ?>
+                <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#deletecopy" data-backdrop="false" style="float: right;margin-right: 15px;">
+                    Delete Copies
+                </button>
+
+                 <form action="<?php echo route('tasks.deletecopy'); ?>" method="POST">
+                                
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                
+                                <div class="modal fade" id="deletecopy" tabindex="-1" role="dialog" aria-labelledby="deletecopy" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <input type="hidden" name="origintask" value="<?php echo e($task->copy); ?>">
+                                    <div class="modal-content" style="text-align: left;">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete All Copies of T hisTask</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        You are going to delete all copies of this Task. All the associated records will be deleted. You won't be able to revert these changes!
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
+                                        <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </form>
+                <?php endif; ?>
+                <?php if($task->allow == 1 && !$task->copy): ?>
                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#copy" data-backdrop="false" style="float: right;margin-right: 15px;">
                     Copy
                 </button>
+
 
                 
 

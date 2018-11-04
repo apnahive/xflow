@@ -83,7 +83,7 @@ class Project_formController extends Controller
         }
         $form_files = $request->form_files;
         
-        if(count($form_files)>0)
+        if($form_files && count($form_files)>0)
         {
             foreach ($form_files as $key => $value) 
             {

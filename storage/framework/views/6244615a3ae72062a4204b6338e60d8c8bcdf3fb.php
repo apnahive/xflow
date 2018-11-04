@@ -232,7 +232,7 @@
                         </li>
                         <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('projects.index')); ?>">
-                                <i class="fab fa-product-hunt"></i>Project</a>
+                                <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
