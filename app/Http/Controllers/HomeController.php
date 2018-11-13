@@ -47,14 +47,17 @@ class HomeController extends Controller
         $tasks->red = 0;
         $tasks->yellow = 0;
         $tasks->green = 0;
+        $tasks->lightgreen = 0;
         foreach ($tasks as $key => $value) 
         {
             $date1 = new DateTime($value->duedate);
             $d = date_diff($now, $date1);
             //dd($now, $date1, $d, $d->days);
-            if($d->days > 30 && $d->invert == 0) //for the dashboard
+            if($d->days > 90 && $d->invert == 0) //for the dashboard
                 $tasks->green++;
-            if($d->days <= 30 && $d->invert == 0)
+            elseif($d->days <= 30 && $d->days > 7 && $d->invert == 0) //for the dashboard
+                $tasks->lightgreen++;
+            elseif($d->days <= 7 && $d->invert == 0)
                 $tasks->yellow++;
             if($d->invert)
                 $tasks->red++;
@@ -81,7 +84,7 @@ class HomeController extends Controller
         $other_task = count($tasks) - ($poc->task + $cco->task);
         //dd($other_task);
         $tasks->remaining = $other_task;
-        //dd($cco);
+        //dd($tasks);
         return view('home', compact('tasks', 'poc', 'cco'));
     }
 }

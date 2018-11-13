@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12" style="margin-bottom: 100px;">
@@ -35,8 +33,8 @@
                                     <div class="row">
                                         <div class="col-md-6 col-lg-4">
                                             <div class="statistic__item">
-                                                <h2 class="number">{{ $poc->task }} tasks </h2>
-                                                <span class="desc">in {{ $poc->project }} projects as Consultant</span>
+                                                <h2 class="number"><?php echo e($poc->task); ?> tasks </h2>
+                                                <span class="desc">in <?php echo e($poc->project); ?> projects as Consultant</span>
                                                 <div class="icon">
                                                     <i class="zmdi zmdi-calendar-note"></i>
                                                 </div>
@@ -44,8 +42,8 @@
                                         </div>
                                         <div class="col-md-6 col-lg-4">
                                             <div class="statistic__item">
-                                                <h2 class="number">{{ $cco->task }} tasks</h2>
-                                                <span class="desc">in {{ $cco->project }} projects as CCO</span>
+                                                <h2 class="number"><?php echo e($cco->task); ?> tasks</h2>
+                                                <span class="desc">in <?php echo e($cco->project); ?> projects as CCO</span>
                                                 <div class="icon">
                                                     <i class="zmdi zmdi-calendar-note"></i>
                                                 </div>
@@ -53,7 +51,7 @@
                                         </div>
                                         <div class="col-md-6 col-lg-4">
                                             <div class="statistic__item">
-                                                <h2 class="number">{{ $tasks->remaining }} tasks </h2>
+                                                <h2 class="number"><?php echo e($tasks->remaining); ?> tasks </h2>
                                                 <span class="desc">in other projects assigned</span>
                                                 <div class="icon">
                                                     <i class="zmdi zmdi-calendar-note"></i>
@@ -70,7 +68,7 @@
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--red">
-                                            <h2 class="number">{{ $tasks->red }}</h2>
+                                            <h2 class="number"><?php echo e($tasks->red); ?></h2>
                                             <span class="desc" style="color: white;">tasks past due date</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-calendar-note"></i>
@@ -79,7 +77,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--orange">
-                                            <h2 class="number">{{ $tasks->yellow }}</h2>
+                                            <h2 class="number"><?php echo e($tasks->yellow); ?></h2>
                                             <span class="desc" style="color: white;">7 days to due</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-calendar-note"></i>
@@ -88,7 +86,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                            <h2 class="number">{{ $tasks->lightgreen }}</h2>
+                                            <h2 class="number"><?php echo e($tasks->lightgreen); ?></h2>
                                             <span class="desc" style="color: white;">30 days to due</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-calendar-note"></i>
@@ -97,7 +95,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="statistic__item statistic__item--green">
-                                            <h2 class="number">{{ $tasks->green }}</h2>
+                                            <h2 class="number"><?php echo e($tasks->green); ?></h2>
                                             <span class="desc" style="color: white;">greater than 90 days to complete</span>
                                             <div class="icon">
                                                 <i class="zmdi zmdi-calendar-note"></i>
@@ -119,7 +117,7 @@
                                         <label class="form-control-label"><b>Name</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->name }} {{ $user1->lastname }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->name); ?> <?php echo e($user1->lastname); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -127,7 +125,7 @@
                                         <label class="form-control-label"><b>Email</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +135,7 @@
                                         <label class="form-control-label"><b>User Type</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->user_type }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->user_type); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -145,7 +143,7 @@
                                         <label class="form-control-label"><b>Date of Birth</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->dateofbirth }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->dateofbirth); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +153,7 @@
                                         <label class="form-control-label"><b>Company</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->company }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->company); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -163,7 +161,7 @@
                                         <label class="form-control-label"><b>Orgnization</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->organization }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->organization); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +171,7 @@
                                         <label class="form-control-label"><b>Phone Number</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->phonenumber }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->phonenumber); ?></label>
                                     </div>
                                 </div>
                                 <!-- <div class="row col-lg-6">
@@ -181,19 +179,19 @@
                                         <label class="form-control-label"><b>Status</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div> -->
                             </div>
 
                             
                         </div>
-                        @if($user1->verification_token)
+                        <?php if($user1->verification_token): ?>
                         <div class="card-footer"> 
-                            <a href="{{ route('users.approve', $user1->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">Approve</a>
-                            <a href="{{ route('users.reject', $user1->id) }}" class="btn btn-danger pull-left" style="margin-right: 3px;color:white;">Reject</a>                       
+                            <a href="<?php echo e(route('users.approve', $user1->id)); ?>" class="btn btn-info pull-left" style="margin-right: 3px;color:white;">Approve</a>
+                            <a href="<?php echo e(route('users.reject', $user1->id)); ?>" class="btn btn-danger pull-left" style="margin-right: 3px;color:white;">Reject</a>                       
                         </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
 
                     <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
@@ -211,7 +209,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($project_users as $project_userkey => $user1)                    
+                                    <?php $__currentLoopData = $project_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project_userkey => $user1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                    
                                     <tr class="tr-shadow">
                                         <!-- <td>
                                             <label class="au-checkbox">
@@ -219,19 +217,19 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $user1->name }}</td>
-                                        <td>{{ $user1->pocname }}</td>                        
-                                        <td>{{ $user1->cconame }}</td>                        
-                                        <td>{{ $user1->duedate }}</td>
+                                        <td><?php echo e($user1->name); ?></td>
+                                        <td><?php echo e($user1->pocname); ?></td>                        
+                                        <td><?php echo e($user1->cconame); ?></td>                        
+                                        <td><?php echo e($user1->duedate); ?></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <a href="{{ route('projects.show', $user1->project_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>                                                
                                             </div>
                                         </td>
                                     </tr>                                    
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>                        
@@ -246,9 +244,9 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label class=" form-control-label">
-                                        @foreach ($signed as $key => $value)
-                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a>
-                                        @endforeach
+                                        <?php $__currentLoopData = $signed; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e(route('profile.show', $value['id'])); ?>" target="_blank">Download <?php echo e($value->project); ?> Signed Document</a>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </label>
                                 </div>
                                 
@@ -267,19 +265,21 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label style="width: 50%;">
-                                        @if(count($status) > 0)
-                                        @foreach ($status as $key => $value)
-                                            @if($value->status)
+                                        <?php if(count($status) > 0): ?>
+                                        <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($value->status): ?>
                                                 <div class="alert alert-success col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>
-                                            @else
+                                            <?php else: ?>
                                                 <div class="alert alert-secondary col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>                                            
-                                            @endif
-                                        @endforeach
-                                        @endif
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                                 
@@ -296,4 +296,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

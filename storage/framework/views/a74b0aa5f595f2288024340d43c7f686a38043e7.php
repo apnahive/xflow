@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,11 +6,12 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    <?php if(session('status')): ?>
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            <?php echo e(session('status')); ?>
+
                         </div>
-                    @endif
+                    <?php endif; ?>
 
                     You are logged in!
                 </div>
@@ -32,7 +31,7 @@
                                     <span class="au-breadcrumb-span">You are here:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="{{ route('home') }}">Home</a>
+                                            <a href="<?php echo e(route('home')); ?>">Home</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -62,16 +61,16 @@
             <!-- END WELCOME-->
 
             <!-- STATISTIC-->
-            @role('Admin')
-            @else
+            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+            <?php else: ?>
             <section class="statistic">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="statistic__item">
-                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $poc->task }} tasks </a> </h2>
-                                    <span class="desc">in <a href="{{ route('projects.index') }}">{{ $poc->project }} projects as Consultant</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('tasks.index')); ?>"><?php echo e($poc->task); ?> tasks </a> </h2>
+                                    <span class="desc">in <a href="<?php echo e(route('projects.index')); ?>"><?php echo e($poc->project); ?> projects as Consultant</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -79,8 +78,8 @@
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="statistic__item">
-                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $cco->task }} tasks </a></h2>
-                                    <span class="desc">in <a href="{{ route('projects.index') }}">{{ $cco->project }} projects as CCO</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('tasks.index')); ?>"><?php echo e($cco->task); ?> tasks </a></h2>
+                                    <span class="desc">in <a href="<?php echo e(route('projects.index')); ?>"><?php echo e($cco->project); ?> projects as CCO</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -88,7 +87,7 @@
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="statistic__item">
-                                    <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $tasks->remaining }} tasks </a></h2>
+                                    <h2 class="number"><a href="<?php echo e(route('tasks.index')); ?>"><?php echo e($tasks->remaining); ?> tasks </a></h2>
                                     <span class="desc">in other projects assigned</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
@@ -100,14 +99,14 @@
                     </div>
                 </div>
             </section>
-            @endrole
+            <?php endif; ?>
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
-                                <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $tasks->red }}</a></h2>
-                                <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">tasks past due date</a></span>
+                                <h2 class="number"><a href="<?php echo e(route('calender.show', 'past')); ?>" style="color: white;"><?php echo e($tasks->red); ?></a></h2>
+                                <span class="desc"><a href="<?php echo e(route('calender.show', 'past')); ?>" style="color: white;">tasks past due date</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -115,8 +114,8 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--orange">
-                                <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $tasks->yellow }}</a></h2>
-                                <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">7 days to due</a></span>
+                                <h2 class="number"><a href="<?php echo e(route('calender.show', '7-days')); ?>" style="color: white;"><?php echo e($tasks->yellow); ?></a></h2>
+                                <span class="desc"><a href="<?php echo e(route('calender.show', '7-days')); ?>" style="color: white;">7 days to due</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -124,8 +123,8 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $tasks->lightgreen }}</a></h2>
-                                <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">30 days to due</a></span>
+                                <h2 class="number"><a href="<?php echo e(route('calender.show', '30-days')); ?>" style="color: white;"><?php echo e($tasks->lightgreen); ?></a></h2>
+                                <span class="desc"><a href="<?php echo e(route('calender.show', '30-days')); ?>" style="color: white;">30 days to due</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -133,8 +132,8 @@
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--green">
-                                <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $tasks->green }}</a></h2>
-                                <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">greater than 90 days to complete</a></span>
+                                <h2 class="number"><a href="<?php echo e(route('calender.show', 'future')); ?>" style="color: white;"><?php echo e($tasks->green); ?></a></h2>
+                                <span class="desc"><a href="<?php echo e(route('calender.show', 'future')); ?>" style="color: white;">greater than 90 days to complete</a></span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
                                 </div>
@@ -156,4 +155,6 @@
             
             <!-- END STATISTIC-->
         </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

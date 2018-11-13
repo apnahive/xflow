@@ -101,7 +101,7 @@ class ProfileController extends Controller
     {
         //dd('download is hitted');
         
-        //ini_set('max_execution_time', 900);
+        ini_set('max_execution_time', 900);
         $signed = Form_sign::find($id);
         $id1 = $signed->user_id;
 
@@ -136,11 +136,22 @@ class ProfileController extends Controller
 
         $sign = Form_sign::find($id);
         //dd($signed, $sign, $id1, $form);
-        $path = storage_path('form_sign/'.$sign->sign);
-        
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        if($sign->sign)
+        {
+            $path = storage_path('form_sign/'.$sign->sign);
+            
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+        else
+        {
+            $path = null;
+            
+            $type = null;
+            $data = null;
+            $base64 = null;   
+        }
 
 
         //dd($user_forms);
@@ -151,6 +162,7 @@ class ProfileController extends Controller
             'images' => true
         ])->loadView('form-signed', compact('form', 'form_files', 'id1', 'sign', 'user_forms', 'base64'));
         
+        //return view('form-signed', compact('form', 'form_files', 'id1', 'sign', 'user_forms', 'base64'));
         //dd($pdf);
 
         return $pdf->download($filename);

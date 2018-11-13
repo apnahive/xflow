@@ -8,6 +8,8 @@ use Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Form_sign;
 use App\Project;
+use App\Task;
+use DateTime;
 use App\Project_form;
 use App\Project_user;
 use Mail;
@@ -128,9 +130,53 @@ class UserxController extends Controller
                 $value1->cconame = $cco->name;
             }
         }
+        $now = new \DateTime();
+        $tasks = Task::where('assignee', $id)->get();
+        $tasks->red = 0;
+        $tasks->yellow = 0;
+        $tasks->green = 0;
+        $tasks->lightgreen = 0;
+        foreach ($tasks as $key => $value) 
+        {
+            $date1 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            //dd($now, $date1, $d, $d->days);
+            if($d->days > 90 && $d->invert == 0) //for the dashboard
+                $tasks->green++;
+            elseif($d->days <= 30 && $d->days > 7 && $d->invert == 0) //for the dashboard
+                $tasks->lightgreen++;
+            elseif($d->days <= 7 && $d->invert == 0)
+                $tasks->yellow++;
+            if($d->invert)
+                $tasks->red++;
+        }
+
+        $poc = Project::where('poc', $id)->get();
+        $poc->task = 0;
+        $poc->project = count($poc);
+        foreach ($poc as $pockey => $value) 
+        {
+            $poctask = Task::where('assignee', $id)->where('project_id', $value->id)->get();
+            $poc->task = $poc->task + count($poctask);
+        }
+
+        $cco = Project::where('cco', $id)->get();
+        $cco->task = 0;
+        $cco->project = count($poc);
+        foreach ($cco as $ccokey => $value1) 
+        {
+            $ccotask = Task::where('assignee', $id)->where('project_id', $value1->id)->get();
+            $cco->task = $cco->task + count($ccotask);
+        }
+
+        $other_task = count($tasks) - ($poc->task + $cco->task);
+        //dd($other_task);
+        $tasks->remaining = $other_task;
+
+
 
         //dd($project_users);
-        return view('userx.show', compact('user1', 'signed', 'status', 'project_users'));
+        return view('userx.show', compact('user1', 'signed', 'status', 'project_users', 'tasks', 'poc', 'cco'));
     }
 
     /**
