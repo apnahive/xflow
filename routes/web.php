@@ -28,13 +28,13 @@ Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerif
 
 Route::resource('profile', 'ProfileController');
 //Route::get('download-document/{userid}/{formid}', 'ProfileController@download')->name('profile.download');
-//Route::resource('users', 'UserController');
+Route::resource('userroles', 'UserController');
 Route::resource('users', 'UserxController');
 Route::get('users/sort/{feild}/{type}', 'UserxController@sort')->name('users.sort'); //for sorting
 Route::get('users/approve/{id}', 'UserxController@approve')->name('users.approve');
 Route::get('users/reject/{id}', 'UserxController@reject')->name('users.reject');
-//Route::resource('roles', 'RoleController');
-//Route::resource('permissions', 'PermissionController');
+Route::resource('roles', 'RoleController');
+Route::resource('permissions', 'PermissionController');
 Route::resource('projects', 'ProjectController');
 Route::get('projects/sort/{feild}/{type}', 'ProjectController@sort')->name('projects.sort'); //for sorting
 Route::resource('tasks', 'TaskController');

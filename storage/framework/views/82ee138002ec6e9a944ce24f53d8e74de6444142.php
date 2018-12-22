@@ -105,10 +105,12 @@
                                 </li>
                             </ul> -->
                         </li>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                        <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('projects.index')); ?>">
                                 <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
+                        <?php endif; ?>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('users.index')); ?>">
@@ -119,22 +121,30 @@
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
                         <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        <?php endif; ?>                        
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -229,11 +239,13 @@
                                     <a href="index4.html">Dashboard 4</a>
                                 </li>
                             </ul> -->
-                        </li>
+                        </li>                        
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                         <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('projects.index')); ?>">
                                 <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
+                        <?php endif; ?>                        
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('users.index')); ?>">
@@ -244,22 +256,31 @@
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
                         <?php endif; ?>
+
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        <?php endif; ?>                        
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>

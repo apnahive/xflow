@@ -30,8 +30,10 @@ class CalenderController extends Controller
         else
         {
             //$projects = Project::where('poc', $id1)
-            $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
-            $tasks = Task::where('assignee', $id1)->orWhere('project_id', $projects)->select('duedate')->distinct()->get(); 
+            //$projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+            //removed from below query ->orWhere('project_id', $projects)
+            $tasks = Task::where('assignee', $id1)->select('duedate')->distinct()->get(); 
+            //dd($tasks);
             //$tasks = Task::select('duedate')->distinct()->get();
         }
 
@@ -48,8 +50,10 @@ class CalenderController extends Controller
             }
             else
             {                
-                $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
-                $taskcount = Task::where('duedate', $task->duedate)->where('assignee', $id1)->whereIn('status', [1,2])->orWhere('project_id', $projects)->get();                
+                //$projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+
+                // removed from below query ->orWhere('project_id', $projects)
+                $taskcount = Task::where('duedate', $task->duedate)->where('assignee', $id1)->whereIn('status', [1,2])->get();                
             }
             
             $count = count($taskcount);
@@ -123,7 +127,11 @@ class CalenderController extends Controller
         
         $calendar = Calendar::addEvents($events);
         //dd($calendar);
-        return view('calender.index', compact('calendar'));
+        if (Auth::user()->hasPermissionTo('view calender'))
+            return view('calender.index', compact('calendar'));
+        else
+            return view('errors.401');
+        //return view('calender.index', compact('calendar'));
     }
 
     /**
@@ -353,7 +361,11 @@ class CalenderController extends Controller
         
         $assignedto = User::whereIn('id', $assigned1)->get();
         //dd($assignedto);
-        return view('calender.show', compact('tasks', 'users', 'managedby', 'assignedto'));
+        if (Auth::user()->hasPermissionTo('view calender'))
+            return view('calender.show', compact('tasks', 'users', 'managedby', 'assignedto'));
+        else
+            return view('errors.401');
+        //return view('calender.show', compact('tasks', 'users', 'managedby', 'assignedto'));
     }
 
     /**

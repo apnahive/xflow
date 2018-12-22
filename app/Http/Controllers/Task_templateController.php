@@ -73,7 +73,7 @@ class Task_templateController extends Controller
         $task->name = $request->name;
         $task->detail = $request->detail;
         $task->save();
-        Alert::success('Success', 'You have successfully created Template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        /*Alert::success('Success', 'You have successfully created Template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);*/
         return redirect()->route('task_templates.index')->with('success', 'You have successfully created Template');
     }
 

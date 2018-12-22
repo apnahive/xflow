@@ -97,8 +97,13 @@ class ProjectController extends Controller
         {
             $projects->can_create = 0;
         }
-        //dd($projects);
-        return view('projects.index', compact('projects'));
+        //dd(Auth::user()->hasPermissionTo('client view'));
+        /*$permissions = $checkadmins->permissions;
+        dd($permissions);*/
+        if (Auth::user()->hasPermissionTo('client view'))
+            return view('projects.index', compact('projects'));
+        else
+            return view('errors.401');
     }
 
     public function sort($feild, $type)
@@ -166,7 +171,11 @@ class ProjectController extends Controller
             $projects->can_create = 0;
         }
         //dd($projects);
-        return view('projects.index', compact('projects'));
+        if (Auth::user()->hasPermissionTo('client view'))
+            return view('projects.index', compact('projects'));
+        else
+            return view('errors.401');
+        //return view('projects.index', compact('projects'));
     }
 
     /**
@@ -185,7 +194,11 @@ class ProjectController extends Controller
         $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         if($checkadmins)
         {
-            return view('projects.create', compact('users', 'can_create'));
+            if (Auth::user()->hasPermissionTo('client create'))
+                return view('projects.create', compact('users', 'can_create'));
+            else
+                return view('errors.401');
+            
         }
         else
         {
@@ -307,7 +320,8 @@ class ProjectController extends Controller
                     /*$project->can_edit = 0;
                     $project->can_view = 0;
                     $project->can_delete = 0;*/
-                    return view('errors.401');
+                    //return view('errors.401');
+                    // Removed because a user can see can view project
                 }
             }
             if(count($project_users) == 0)
@@ -403,7 +417,11 @@ class ProjectController extends Controller
             $sign_value->name = $sign_name->name.' '.$sign_name->lastname;
         }
        // dd($selected_users);
-        return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign', 'sections'));
+
+        if (Auth::user()->hasPermissionTo('client view'))            
+            return view('projects.show', compact('project', 'tasks', 'users', 'selected_users', 'files', 'attestation', 'form_files', 'form_sign', 'sections'));
+        else
+            return view('errors.401');
     }
 
     /**

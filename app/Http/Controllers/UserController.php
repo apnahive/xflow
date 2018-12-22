@@ -72,7 +72,7 @@ class UserController extends Controller {
             }
         }        
     //Redirect to the users.index view and display message
-        return redirect()->route('users.index')
+        return redirect()->route('userroles.index')
             ->with('flash_message',
              'User successfully added.');
     }
@@ -84,7 +84,7 @@ class UserController extends Controller {
     * @return \Illuminate\Http\Response
     */
     public function show($id) {
-        return redirect('users'); 
+        return redirect('userroles'); 
     }
 
     /**
@@ -126,7 +126,7 @@ class UserController extends Controller {
         else {
             $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         }
-        return redirect()->route('users.index')
+        return redirect()->route('userroles.index')
             ->with('flash_message',
              'User successfully edited.');
     }
@@ -142,7 +142,7 @@ class UserController extends Controller {
         $user = User::findOrFail($id); 
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->route('userroles.index')
             ->with('flash_message',
              'User successfully deleted.');
     }

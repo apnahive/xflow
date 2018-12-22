@@ -105,6 +105,7 @@ class UserxController extends Controller
             $value->project = $project->name;
         }
         $status = Form_sign::where('user_id', $id)->get();
+        //dd($status);
         if(count($status))
         {
             foreach ($status as $key => $value) 

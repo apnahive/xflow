@@ -105,10 +105,12 @@
                                 </li>
                             </ul> -->
                         </li>
+                        @can('client view')
                        <li class="{{ request()->is('projects') ? 'active' : '' }}">
                             <a href="{{ route('projects.index') }}">
                                 <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
+                        @endcan
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
@@ -119,22 +121,30 @@
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
                         @endrole
+                        @can('view calender')
                         <li class="{{ request()->is('calender') ? 'active' : '' }}">
                             <a href="{{ route('calender.index') }}">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
+                        @endcan
+                        @can('task view')
                         <li class="{{ request()->is('tasks') ? 'active' : '' }}">
                             <a href="{{ route('tasks.index') }}">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
+                        @endcan
+                        @can('xflow view')
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
+                        @endcan
+                        @can('checklist view')
                         <li class="{{ request()->is('checklists') ? 'active' : '' }}">
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -230,10 +240,12 @@
                                 </li>
                             </ul> -->
                         </li>
+                        @can('client view')
                         <li class="{{ request()->is('projects') ? 'active' : '' }}">
                             <a href="{{ route('projects.index') }}">
                                 <i class="fab fa-product-hunt"></i>Client</a>
                         </li>
+                        @endcan
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
@@ -244,22 +256,30 @@
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
                         @endrole
+                        @can('view calender')
                         <li class="{{ request()->is('calender') ? 'active' : '' }}">
                             <a href="{{ route('calender.index') }}">
                                 <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
+                        @endcan
+                        @can('task view')
                         <li class="{{ request()->is('tasks') ? 'active' : '' }}">
                             <a href="{{ route('tasks.index') }}">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
+                        @endcan
+                        @can('xflow view')
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
+                        @endcan
+                        @can('checklist view')
                         <li class="{{ request()->is('checklists') ? 'active' : '' }}">
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>

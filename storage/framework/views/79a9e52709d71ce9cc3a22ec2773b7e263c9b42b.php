@@ -117,7 +117,12 @@
                     
                     </div>
                     <div class="col-12 col-md-9">
+                        <?php if($sign->electronic_signature): ?>
+                        <span style="font-size: 18px;font-style:  italic;">Initials</span>
+                        <input type="text" name="signed" value="<?php echo e(old('initial', $sign['electronic_signature'])); ?>" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">                        
+                        <?php else: ?>
                         <img src="<?php echo e($base64); ?>" style="height:100px;"></img>
+                        <?php endif; ?>
                     </div>                     
                 </div>
                 <div class="row form-group">

@@ -140,7 +140,11 @@ class TaskController extends Controller
         
         $assignedto = User::whereIn('id', $assigned1)->get();
         //dd($assignedto);
-        return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+        if (Auth::user()->hasPermissionTo('task view'))
+            return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+        else
+            return view('errors.401');
+        //return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
     }
     public function sort($feild, $type)
     {
@@ -253,7 +257,11 @@ class TaskController extends Controller
         
         $assignedto = User::whereIn('id', $assigned1)->get();
         //dd($assignedto);
-        return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+        if (Auth::user()->hasPermissionTo('task view'))
+            return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
+        else
+            return view('errors.401');
+        //return view('tasks.index', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto'));
     }
     public function search(Request $request)
     {
@@ -438,7 +446,11 @@ class TaskController extends Controller
         
         $assignedto = User::whereIn('id', $assigned1)->get();
         //dd($search->status);
-        return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto', 'search'));
+        if (Auth::user()->hasPermissionTo('task view'))
+            return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto', 'search'));
+        else
+            return view('errors.401');
+        //return view('tasks.search', compact('tasks', 'task_templates', 'users', 'managedby', 'assignedto', 'search'));
     }
 
     /**
@@ -461,7 +473,11 @@ class TaskController extends Controller
             $projects = Project::where('poc', $id1)->orWhere('cco', $id1)->get();
         }
         //dd($projects);
-        return view('tasks.create', compact('projects'));
+        if (Auth::user()->hasPermissionTo('task create'))
+            return view('tasks.create', compact('projects'));
+        else
+            return view('errors.401');
+        //return view('tasks.create', compact('projects'));
     }
 
     /**
@@ -570,7 +586,11 @@ class TaskController extends Controller
         else
             $task->allow = 0;
         //dd($task);
-        return view('tasks.show', compact('task', 'now'));
+        if (Auth::user()->hasPermissionTo('task view'))
+            return view('tasks.show', compact('task', 'now'));
+        else
+            return view('errors.401');
+        //return view('tasks.show', compact('task', 'now'));
     }
 
     /**

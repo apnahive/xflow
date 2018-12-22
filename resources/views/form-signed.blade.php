@@ -115,7 +115,12 @@
                     
                     </div>
                     <div class="col-12 col-md-9">
+                        @if($sign->electronic_signature)
+                        <span style="font-size: 18px;font-style:  italic;">Initials</span>
+                        <input type="text" name="signed" value="{{ old('initial', $sign['electronic_signature']) }}" placeholder="Please put your initials here .." style="border: 1px black solid;padding: 5px;width: 30%;">                        
+                        @else
                         <img src="{{ $base64 }}" style="height:100px;"></img>
+                        @endif
                     </div>                     
                 </div>
                 <div class="row form-group">
