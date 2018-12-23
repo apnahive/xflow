@@ -78,3 +78,15 @@ Route::get('images/{slug}', [
 
 
 Route::post('search', 'SearchController@search')->name('search');
+
+
+
+
+
+
+
+
+
+//job routes
+
+Route::resource('jobs', 'JobController');

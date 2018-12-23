@@ -133,13 +133,13 @@
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
@@ -269,13 +269,13 @@
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
                         <li>
                             <a href="#">
                                 <i class="fas fa-cogs"></i>Xflow</a>
                         </li>
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
