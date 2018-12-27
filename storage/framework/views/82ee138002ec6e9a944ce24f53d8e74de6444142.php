@@ -120,6 +120,10 @@
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
+                        <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('userroles.index')); ?>">
+                                <i class="fas fa-users"></i>User Roles</a>
+                        </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
@@ -144,7 +148,23 @@
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
-                        <?php endif; ?>                        
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.create')); ?>">
+                                <i class="fas fa-users"></i>Post a Jobs</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.index')); ?>">
+                                <i class="fas fa-users"></i>View Jobs</a>
+                        </li>
+                        <?php endif; ?>  
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                        <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('profiles.create')); ?>">
+                                <i class="fas fa-users"></i>Candidate Profile</a>
+                        </li>                        
+                        <?php endif; ?>
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -255,6 +275,10 @@
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
+                        <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('userroles.index')); ?>">
+                                <i class="fas fa-users"></i>User Roles</a>
+                        </li>
                         <?php endif; ?>
 
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
@@ -280,7 +304,23 @@
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
-                        <?php endif; ?>                        
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.create')); ?>">
+                                <i class="fas fa-users"></i>Post a Jobs</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.index')); ?>">
+                                <i class="fas fa-users"></i>View Jobs</a>
+                        </li>
+                        <?php endif; ?>  
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                        <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('profiles.create')); ?>">
+                                <i class="fas fa-users"></i>Candidate Profile</a>
+                        </li>                        
+                        <?php endif; ?>
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>

@@ -120,6 +120,10 @@
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
+                        <li class="{{ request()->is('userroles') ? 'active' : '' }}">
+                            <a href="{{ route('userroles.index') }}">
+                                <i class="fas fa-users"></i>User Roles</a>
+                        </li>
                         @endrole
                         @can('view calender')
                         <li class="{{ request()->is('calender') ? 'active' : '' }}">
@@ -144,7 +148,23 @@
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
-                        @endcan                        
+                        @endcan
+                        @can('can create job')
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.create') }}">
+                                <i class="fas fa-users"></i>Post a Jobs</a>
+                        </li>
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.index') }}">
+                                <i class="fas fa-users"></i>View Jobs</a>
+                        </li>
+                        @endcan  
+                        @can('can apply job')
+                        <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                            <a href="{{ route('profiles.create') }}">
+                                <i class="fas fa-users"></i>Candidate Profile</a>
+                        </li>                        
+                        @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -255,6 +275,10 @@
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
+                        <li class="{{ request()->is('userroles') ? 'active' : '' }}">
+                            <a href="{{ route('userroles.index') }}">
+                                <i class="fas fa-users"></i>User Roles</a>
+                        </li>
                         @endrole
 
                         @can('view calender')
@@ -280,7 +304,23 @@
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
-                        @endcan                        
+                        @endcan
+                        @can('can create job')
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.create') }}">
+                                <i class="fas fa-users"></i>Post a Jobs</a>
+                        </li>
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.index') }}">
+                                <i class="fas fa-users"></i>View Jobs</a>
+                        </li>
+                        @endcan  
+                        @can('can apply job')
+                        <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                            <a href="{{ route('profiles.create') }}">
+                                <i class="fas fa-users"></i>Candidate Profile</a>
+                        </li>                        
+                        @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
