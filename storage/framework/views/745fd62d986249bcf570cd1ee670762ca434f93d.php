@@ -1,18 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
-<!-- <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<?php $__env->startSection('content'); ?>
+<!-- <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a> -->
 
 
 
 <div class="table-data__tool">
     <div class="table-data__tool-left">
-        <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+        <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
             Back</button></a>
     </div>
     <div class="table-data__tool-right">
-        <a href="{{ route('profiles.edit', $profile['id']) }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">Edit</button></a>
+        <a href="<?php echo e(route('profiles.edit', $profile['id'])); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">Edit</button></a>
     </div>
 </div>
 
@@ -28,7 +26,8 @@
                             <label for="title" class=" form-control-label">Profile Title</label>
                         </div>
                         <div class="col-12 col-md-9">                            
-                            {{ $profile['title'] }}
+                            <?php echo e($profile['title']); ?>
+
                         </div>
                     </div>
                     <div class="row form-group">
@@ -36,7 +35,8 @@
                             <label for="employer" class=" form-control-label">Current Employer</label>
                         </div>
                         <div class="col-12 col-md-9">                            
-                            {{ $profile['employer'] }}
+                            <?php echo e($profile['employer']); ?>
+
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -44,15 +44,15 @@
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
                         <div class="col-12 col-md-9">                            
-                            @if($profile['experience_level'] == 1)
+                            <?php if($profile['experience_level'] == 1): ?>
                                 Entry Level
-                            @elseif($profile['experience_level'] == 2)
+                            <?php elseif($profile['experience_level'] == 2): ?>
                                 Intermediate Level
-                            @elseif($profile['experience_level'] == 3)
+                            <?php elseif($profile['experience_level'] == 3): ?>
                                 Expert Level
-                            @else
+                            <?php else: ?>
                                 Not Selected
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -61,31 +61,31 @@
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
                         </div>
                         <div class="col-12 col-md-9">                            
-                            @if($profile['experience_years'] == 1)
+                            <?php if($profile['experience_years'] == 1): ?>
                                 0 Years
-                            @elseif($profile['experience_years'] == 2)
+                            <?php elseif($profile['experience_years'] == 2): ?>
                                 1 Years
-                            @elseif($profile['experience_years'] == 3)
+                            <?php elseif($profile['experience_years'] == 3): ?>
                                 2 Years
-                            @elseif($profile['experience_years'] == 4)
+                            <?php elseif($profile['experience_years'] == 4): ?>
                                 3 Years
-                            @elseif($profile['experience_years'] == 5)
+                            <?php elseif($profile['experience_years'] == 5): ?>
                                 4 Years
-                            @elseif($profile['experience_years'] == 6)
+                            <?php elseif($profile['experience_years'] == 6): ?>
                                 5 Years
-                            @elseif($profile['experience_years'] == 7)
+                            <?php elseif($profile['experience_years'] == 7): ?>
                                 6 Years
-                            @elseif($profile['experience_years'] == 8)
+                            <?php elseif($profile['experience_years'] == 8): ?>
                                 7 Years
-                            @elseif($profile['experience_years'] == 9)
+                            <?php elseif($profile['experience_years'] == 9): ?>
                                 8 Years
-                            @elseif($profile['experience_years'] == 10)
+                            <?php elseif($profile['experience_years'] == 10): ?>
                                 9 Years
-                            @elseif($profile['experience_years'] == 11)
+                            <?php elseif($profile['experience_years'] == 11): ?>
                                 10 Years
-                            @else
+                            <?php else: ?>
                                 Not Selected
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -95,13 +95,13 @@
                             <label for="active" class=" form-control-label">Are you Active?</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            @if($profile['active'] == 1)
+                            <?php if($profile['active'] == 1): ?>
                                 Yes
-                            @elseif($profile['active'] == 2)
+                            <?php elseif($profile['active'] == 2): ?>
                                 No
-                            @else
+                            <?php else: ?>
                                 Not Selected
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                          
                     </div>
@@ -111,7 +111,8 @@
                             <label for="state" class=" form-control-label">Current State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->state }}
+                            <?php echo e($profile->state); ?>
+
                         </div>
                     </div>
                     <div class="row form-group">
@@ -119,7 +120,8 @@
                             <label for="city" class=" form-control-label">Current City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->city }}
+                            <?php echo e($profile->city); ?>
+
                         </div>
                     </div>
 
@@ -134,7 +136,8 @@
                             <label for="state1" class=" form-control-label">State/City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->state1 }}, {{ $profile->city1 }}
+                            <?php echo e($profile->state1); ?>, <?php echo e($profile->city1); ?>
+
                         </div>
                     </div>                    
                     </div>
@@ -146,7 +149,8 @@
                             <label for="state2" class=" form-control-label">State/City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->state2 }}, {{ $profile->city2 }}
+                            <?php echo e($profile->state2); ?>, <?php echo e($profile->city2); ?>
+
                         </div>
                     </div>                    
                     </div>
@@ -158,7 +162,8 @@
                             <label for="state3" class=" form-control-label">State/City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->state3 }}, {{ $profile->city3 }}
+                            <?php echo e($profile->state3); ?>, <?php echo e($profile->city3); ?>
+
                         </div>
                     </div>                    
                     </div>
@@ -170,7 +175,8 @@
                             <label for="state4" class=" form-control-label">State/City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile->state4 }}, {{ $profile->city4 }}
+                            <?php echo e($profile->state4); ?>, <?php echo e($profile->city4); ?>
+
                         </div>
                     </div>                    
                     </div>
@@ -184,19 +190,19 @@
                             <label for="qualification" class=" form-control-label">Qualification And Education</label>
                         </div>
                         <div class="col-12 col-md-9">
-                             @if($profile['qualification'] == 1)
+                             <?php if($profile['qualification'] == 1): ?>
                                 Graduate
-                            @elseif($profile['qualification'] == 2)
+                            <?php elseif($profile['qualification'] == 2): ?>
                                 Post Graduate
-                            @elseif($profile['qualification'] == 3)
+                            <?php elseif($profile['qualification'] == 3): ?>
                                 PHD
-                            @elseif($profile['qualification'] == 4)
+                            <?php elseif($profile['qualification'] == 4): ?>
                                 No College Degree
-                            @elseif($profile['qualification'] == 5)
+                            <?php elseif($profile['qualification'] == 5): ?>
                                 Diploma
-                            @else
+                            <?php else: ?>
                                 Not Selected
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -206,29 +212,29 @@
                             <label for="certificate" class=" form-control-label">Certificate</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            @if($profile['certificate'] == 1)
+                            <?php if($profile['certificate'] == 1): ?>
                                 Engineering
-                            @elseif($profile['certificate'] == 2)
+                            <?php elseif($profile['certificate'] == 2): ?>
                                 Architecture
-                            @elseif($profile['certificate'] == 3)
+                            <?php elseif($profile['certificate'] == 3): ?>
                                 Science
-                            @elseif($profile['certificate'] == 4)
+                            <?php elseif($profile['certificate'] == 4): ?>
                                 Computer
-                            @elseif($profile['certificate'] == 5)
+                            <?php elseif($profile['certificate'] == 5): ?>
                                 Business
-                            @elseif($profile['certificate'] == 6)
+                            <?php elseif($profile['certificate'] == 6): ?>
                                 Design
-                            @elseif($profile['certificate'] == 7)
+                            <?php elseif($profile['certificate'] == 7): ?>
                                 Construction
-                            @elseif($profile['certificate'] == 8)
+                            <?php elseif($profile['certificate'] == 8): ?>
                                 Political
-                            @elseif($profile['certificate'] == 9)
+                            <?php elseif($profile['certificate'] == 9): ?>
                                 Math
-                            @elseif($profile['certificate'] == 10)
+                            <?php elseif($profile['certificate'] == 10): ?>
                                 Technical
-                            @else
+                            <?php else: ?>
                                 Not Selected
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -237,7 +243,8 @@
                             <label for="skills" class=" form-control-label">Skills</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile['skills'] }}
+                            <?php echo e($profile['skills']); ?>
+
                         </div>
                     </div>
                     
@@ -246,7 +253,8 @@
                             <label for="salary_expected" class=" form-control-label">Salary Expected</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            {{ $profile['salary_expected'] }}
+                            <?php echo e($profile['salary_expected']); ?>
+
                         </div>
                     </div>
                     
@@ -256,4 +264,6 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

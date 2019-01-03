@@ -44,7 +44,7 @@
 
     
 
-    <?php echo e(Form::submit('Add', array('class' => 'btn btn-primary'))); ?>
+    <?php echo e(Form::submit('Update', array('class' => 'btn btn-primary'))); ?>
 
 
     <?php echo e(Form::close()); ?>

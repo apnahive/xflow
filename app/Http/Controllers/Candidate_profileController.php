@@ -33,6 +33,16 @@ class Candidate_profileController extends Controller
      */
     public function create()
     {
+        $id1 = Auth::id();
+        if(Profile::where('user_id', '=', $id1)->exists())
+        {
+            $profile = Profile::where('user_id', '=', $id1)->first();
+            //dd($profile);
+            return redirect()->route('profiles.show', $profile->id);
+        }
+        
+        
+
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
         //dd($cities);
@@ -119,7 +129,14 @@ class Candidate_profileController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = Profile::find($id);
+        $states = State::all();
+        $cities = City::select('city')->distinct()->get();
+        //dd($cities);
+        if (Auth::user()->hasPermissionTo('can apply job'))
+            return view('candidates.show', compact('states', 'cities', 'profile'));
+        else
+            return view('errors.401');
     }
 
     /**
@@ -130,7 +147,15 @@ class Candidate_profileController extends Controller
      */
     public function edit($id)
     {
-        //
+        //dd('candidate edit');
+        $profile = Profile::find($id);
+        $states = State::all();
+        $cities = City::select('city')->distinct()->get();
+        //dd($cities);
+        if (Auth::user()->hasPermissionTo('can apply job'))
+            return view('candidates.edit', compact('states', 'cities', 'profile'));
+        else
+            return view('errors.401');
     }
 
     /**
