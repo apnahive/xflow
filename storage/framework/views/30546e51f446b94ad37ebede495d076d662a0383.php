@@ -144,9 +144,9 @@
                                 <option value="5" <?php echo e($job['qualification'] == '5' ? 'selected' : ''); ?>>Diploma</option>
                                 
                             </select>                            
-                            <?php if($errors->has('experience_level')): ?>
+                            <?php if($errors->has('qualification')): ?>
                                 <span class="help-block error">
-                                    <strong><?php echo e($errors->first('experience_level')); ?></strong>
+                                    <strong><?php echo e($errors->first('qualification')); ?></strong>
                                 </span>
                             <?php endif; ?>
                         </div>

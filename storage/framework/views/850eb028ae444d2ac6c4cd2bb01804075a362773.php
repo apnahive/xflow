@@ -1,9 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12">
@@ -20,9 +17,9 @@
                          aria-selected="true"><i class="fab fa-product-hunt"></i>Details</a>
                         <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-tasks"></i>Shortlisted</a>
-                        <a class="nav-item nav-link {{ old('tab') == 'custom-nav-xflow' ? 'active' : '' }}" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-xflow' ? 'active' : ''); ?>" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
                          aria-selected="false"><i class="fas fa-cogs"></i>Interviews</a>
-                        <a class="nav-item nav-link {{ old('tab') == 'custom-nav-notes' ? 'active' : '' }}" id="custom-nav-notes-tab" data-toggle="tab" href="#custom-nav-notes" role="tab" aria-controls="custom-nav-notes"
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-notes' ? 'active' : ''); ?>" id="custom-nav-notes-tab" data-toggle="tab" href="#custom-nav-notes" role="tab" aria-controls="custom-nav-notes"
                          aria-selected="false"><i class="far fa-file"></i>Notes</a>
                     </div>
                 </nav>
@@ -34,7 +31,7 @@
                                     <label for="name" class=" form-control-label"><b>Title</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $job['title'] }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($job['title']); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -42,7 +39,7 @@
                                     <label for="description" class=" form-control-label"><b>Description</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label">{{ $job->description }}</label>
+                                    <label for="description" class=" form-control-label"><?php echo e($job->description); ?></label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
@@ -51,15 +48,15 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="poc" class=" form-control-label">
-                                        @if($job['experience_level'] == 1)
+                                        <?php if($job['experience_level'] == 1): ?>
                                             Entry Level
-                                        @elseif($job['experience_level'] == 2)
+                                        <?php elseif($job['experience_level'] == 2): ?>
                                             Intermediate Level
-                                        @elseif($job['experience_level'] == 3)
+                                        <?php elseif($job['experience_level'] == 3): ?>
                                             Expert Level 
-                                        @else
+                                        <?php else: ?>
                                             Not Selected
-                                        @endif
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                             </div>                    
@@ -69,31 +66,31 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="cco" class=" form-control-label">
-                                        @if($job['experience_years'] == 1)
+                                        <?php if($job['experience_years'] == 1): ?>
                                             0 Years
-                                        @elseif($job['experience_years'] == 2)
+                                        <?php elseif($job['experience_years'] == 2): ?>
                                             1 Years
-                                        @elseif($job['experience_years'] == 3)
+                                        <?php elseif($job['experience_years'] == 3): ?>
                                             2 Years
-                                        @elseif($job['experience_years'] == 4)
+                                        <?php elseif($job['experience_years'] == 4): ?>
                                             3 Years
-                                        @elseif($job['experience_years'] == 5)
+                                        <?php elseif($job['experience_years'] == 5): ?>
                                             4 Years
-                                        @elseif($job['experience_years'] == 6)
+                                        <?php elseif($job['experience_years'] == 6): ?>
                                             5 Years
-                                        @elseif($job['experience_years'] == 7)
+                                        <?php elseif($job['experience_years'] == 7): ?>
                                             6 Years
-                                        @elseif($job['experience_years'] == 8)
+                                        <?php elseif($job['experience_years'] == 8): ?>
                                             7 Years
-                                        @elseif($job['experience_years'] == 9)
+                                        <?php elseif($job['experience_years'] == 9): ?>
                                             8 Years
-                                        @elseif($job['experience_years'] == 10)
+                                        <?php elseif($job['experience_years'] == 10): ?>
                                             9 Years
-                                        @elseif($job['experience_years'] == 11)
+                                        <?php elseif($job['experience_years'] == 11): ?>
                                             10 Years
-                                        @else
+                                        <?php else: ?>
                                             Not Selected
-                                        @endif
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                             </div>                            
@@ -103,7 +100,8 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job->state }}
+                                        <?php echo e($job->state); ?>
+
                                     </label>
                                 </div>
                             </div>
@@ -113,7 +111,8 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job->city }}
+                                        <?php echo e($job->city); ?>
+
                                     </label>
                                 </div>
                             </div>
@@ -123,19 +122,19 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        @if($job['qualification'] == 1)
+                                        <?php if($job['qualification'] == 1): ?>
                                             Graduate
-                                        @elseif($job['qualification'] == 2)
+                                        <?php elseif($job['qualification'] == 2): ?>
                                             Post Graduate
-                                        @elseif($job['qualification'] == 3)
+                                        <?php elseif($job['qualification'] == 3): ?>
                                             PHD
-                                        @elseif($job['qualification'] == 4)
+                                        <?php elseif($job['qualification'] == 4): ?>
                                             No College Degree
-                                        @elseif($job['qualification'] == 5)
+                                        <?php elseif($job['qualification'] == 5): ?>
                                             Diploma
-                                        @else
+                                        <?php else: ?>
                                             Not Selected
-                                        @endif
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                             </div>
@@ -145,29 +144,29 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        @if($job['certificate'] == 1)
+                                        <?php if($job['certificate'] == 1): ?>
                                             Engineering
-                                        @elseif($job['certificate'] == 2)
+                                        <?php elseif($job['certificate'] == 2): ?>
                                             Architecture
-                                        @elseif($job['certificate'] == 3)
+                                        <?php elseif($job['certificate'] == 3): ?>
                                             Science
-                                        @elseif($job['certificate'] == 4)
+                                        <?php elseif($job['certificate'] == 4): ?>
                                             Computer
-                                        @elseif($job['certificate'] == 5)
+                                        <?php elseif($job['certificate'] == 5): ?>
                                             Business
-                                        @elseif($job['certificate'] == 6)
+                                        <?php elseif($job['certificate'] == 6): ?>
                                             Design
-                                        @elseif($job['certificate'] == 7)
+                                        <?php elseif($job['certificate'] == 7): ?>
                                             Construction
-                                        @elseif($job['certificate'] == 8)
+                                        <?php elseif($job['certificate'] == 8): ?>
                                             Political
-                                        @elseif($job['certificate'] == 9)
+                                        <?php elseif($job['certificate'] == 9): ?>
                                             Math
-                                        @elseif($job['certificate'] == 10)
+                                        <?php elseif($job['certificate'] == 10): ?>
                                             Technical
-                                        @else
+                                        <?php else: ?>
                                             Not Selected
-                                        @endif
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                             </div>
@@ -177,7 +176,8 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job['start_date'] }}
+                                        <?php echo e($job['start_date']); ?>
+
                                     </label>
                                 </div>
                             </div>
@@ -187,7 +187,8 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job['skills'] }}
+                                        <?php echo e($job['skills']); ?>
+
                                     </label>
                                 </div>
                             </div>
@@ -197,7 +198,8 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job['salary_offered'] }}
+                                        <?php echo e($job['salary_offered']); ?>
+
                                     </label>
                                 </div>
                             </div>
@@ -220,51 +222,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($shortlisted as $shortkey => $short)
+                                <?php $__currentLoopData = $shortlisted; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shortkey => $short): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td>{{ $short->name }} {{ $short->lastname }}</td>
-                                        <td>{{ $short->title }}</td>
-                                        <td>{{ $short->skills }}</td>
+                                        <td><?php echo e($short->name); ?> <?php echo e($short->lastname); ?></td>
+                                        <td><?php echo e($short->title); ?></td>
+                                        <td><?php echo e($short->skills); ?></td>
                                         <td>
-                                            @if($short['qualification'] == 1)
+                                            <?php if($short['qualification'] == 1): ?>
                                                 Graduate
-                                            @elseif($short['qualification'] == 2)
+                                            <?php elseif($short['qualification'] == 2): ?>
                                                 Post Graduate
-                                            @elseif($short['qualification'] == 3)
+                                            <?php elseif($short['qualification'] == 3): ?>
                                                 PHD
-                                            @elseif($short['qualification'] == 4)
+                                            <?php elseif($short['qualification'] == 4): ?>
                                                 No College Degree
-                                            @elseif($short['qualification'] == 5)
+                                            <?php elseif($short['qualification'] == 5): ?>
                                                 Diploma
-                                            @else
+                                            <?php else: ?>
                                                 Not Selected
-                                            @endif
+                                            <?php endif; ?>
                                         </td>
                                         <td>
                                             <div class="table-data-feature">
-                                            <a href="{{ route('profiles.show', $short->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                            <a href="<?php echo e(route('profiles.show', $short->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button></a>
                                             
-                                            <!-- <a href="{{ route('jobs.edit', $short->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Invite">
+                                            <!-- <a href="<?php echo e(route('jobs.edit', $short->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Invite">
                                                 <i class="fas fa-user-plus"></i>
                                                 <!-- <i class="zmdi zmdi-edit"></i> 
                                             </button></a> -->
 
-                                            <button class="item" data-toggle="modal" data-target="#interview{{$short->id}}" data-backdrop="false" title="Invite">
+                                            <button class="item" data-toggle="modal" data-target="#interview<?php echo e($short->id); ?>" data-backdrop="false" title="Invite">
                                                 <i class="fas fa-user-plus"></i>
                                             </button>
 
-                                            <form action="{{ route('interviewed.update', $short->id) }}" method="POST">
+                                            <form action="<?php echo e(route('interviewed.update', $short->id)); ?>" method="POST">
                                             <input type="hidden" name="_method" value="PUT">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="job_id" value="{{ $job['id'] }}">
+                                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                            <input type="hidden" name="job_id" value="<?php echo e($job['id']); ?>">
                                             
-                                            <div class="modal fade" id="interview{{$short->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$short->id}}" aria-hidden="true">
+                                            <div class="modal fade" id="interview<?php echo e($short->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($short->id); ?>" aria-hidden="true">
                                               <div class="modal-dialog" role="document" style="max-width: 1024px;">
                                                 <div class="modal-content" style="text-align: left;">
                                                   <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Interview {{ $short->name }} {{ $short->lastname }}</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Interview <?php echo e($short->name); ?> <?php echo e($short->lastname); ?></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                       <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -277,12 +279,12 @@
                                                             <label for="date1" class=" form-control-label"> Date 1</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date1" type="date" class="form-control" name="date1" value="{{ old('date1') }}" required autofocus>
-                                                            @if ($errors->has('date1'))
+                                                            <input id="date1" type="date" class="form-control" name="date1" value="<?php echo e(old('date1')); ?>" required autofocus>
+                                                            <?php if($errors->has('date1')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('date1') }}</strong>
+                                                                    <strong><?php echo e($errors->first('date1')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -292,12 +294,12 @@
                                                             <label for="time1" class=" form-control-label"> Time 1</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="time1" type="time" class="form-control" name="time1" value="{{ old('time1') }}" required autofocus>
-                                                            @if ($errors->has('time1'))
+                                                            <input id="time1" type="time" class="form-control" name="time1" value="<?php echo e(old('time1')); ?>" required autofocus>
+                                                            <?php if($errors->has('time1')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('time1') }}</strong>
+                                                                    <strong><?php echo e($errors->first('time1')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -309,12 +311,12 @@
                                                             <label for="date2" class=" form-control-label"> Date 2</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date2" type="date" class="form-control" name="date2" value="{{ old('date2') }}" required autofocus>
-                                                            @if ($errors->has('date2'))
+                                                            <input id="date2" type="date" class="form-control" name="date2" value="<?php echo e(old('date2')); ?>" required autofocus>
+                                                            <?php if($errors->has('date2')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('date2') }}</strong>
+                                                                    <strong><?php echo e($errors->first('date2')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -324,12 +326,12 @@
                                                             <label for="time2" class=" form-control-label"> Time 2</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="time2" type="time" class="form-control" name="time2" value="{{ old('time2') }}" required autofocus>
-                                                            @if ($errors->has('time2'))
+                                                            <input id="time2" type="time" class="form-control" name="time2" value="<?php echo e(old('time2')); ?>" required autofocus>
+                                                            <?php if($errors->has('time2')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('time2') }}</strong>
+                                                                    <strong><?php echo e($errors->first('time2')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -341,12 +343,12 @@
                                                             <label for="date3" class=" form-control-label"> Date 3</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date3" type="date" class="form-control" name="date3" value="{{ old('date3') }}" required autofocus>
-                                                            @if ($errors->has('date3'))
+                                                            <input id="date3" type="date" class="form-control" name="date3" value="<?php echo e(old('date3')); ?>" required autofocus>
+                                                            <?php if($errors->has('date3')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('date3') }}</strong>
+                                                                    <strong><?php echo e($errors->first('date3')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -356,12 +358,12 @@
                                                             <label for="time3" class=" form-control-label"> Time 3</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="time3" type="time" class="form-control" name="time3" value="{{ old('time3') }}" required autofocus>
-                                                            @if ($errors->has('time3'))
+                                                            <input id="time3" type="time" class="form-control" name="time3" value="<?php echo e(old('time3')); ?>" required autofocus>
+                                                            <?php if($errors->has('time3')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('time3') }}</strong>
+                                                                    <strong><?php echo e($errors->first('time3')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -375,15 +377,15 @@
                                                         <div class="col-12 col-md-9">
                                                             <select name="state" id="state" class="form-control chosen"  required>
                                                                 <option value="0">Please select</option>
-                                                                @foreach ($states as $state) 
-                                                                    <option value="{{$state->state}}">{{$state->state}}</option>
-                                                                @endforeach
+                                                                <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?></option>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </select>
-                                                            @if ($errors->has('state'))
+                                                            <?php if($errors->has('state')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('state') }}</strong>
+                                                                    <strong><?php echo e($errors->first('state')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -395,15 +397,15 @@
                                                         <div class="col-12 col-md-9">
                                                             <select name="city" id="city" class="form-control chosen"  required>
                                                                 <option value="0">Please select</option>
-                                                                @foreach ($cities as $city) 
-                                                                    <option value="{{$city->city}}">{{$city->city}}</option>
-                                                                @endforeach
+                                                                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?></option>
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </select>
-                                                            @if ($errors->has('city'))
+                                                            <?php if($errors->has('city')): ?>
                                                                 <span class="help-block error">
-                                                                    <strong>{{ $errors->first('city') }}</strong>
+                                                                    <strong><?php echo e($errors->first('city')); ?></strong>
                                                                 </span>
-                                                            @endif 
+                                                            <?php endif; ?> 
                                                         </div>
                                                     </div>
                                                     </div>
@@ -432,17 +434,17 @@
                                             </form>
 
                                             
-                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm{{$short->id}}" data-backdrop="false">
+                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($short->id); ?>" data-backdrop="false">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button> -->
 
                                             
 
-                                            <form action="{{ route('jobs.destroy', $short->id) }}" method="POST">
+                                            <form action="<?php echo e(route('jobs.destroy', $short->id)); ?>" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                             
-                                            <div class="modal fade" id="confirm{{$short->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$short->id}}" aria-hidden="true">
+                                            <div class="modal fade" id="confirm<?php echo e($short->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($short->id); ?>" aria-hidden="true">
                                               <div class="modal-dialog" role="document">
                                                 <div class="modal-content" style="text-align: left;">
                                                   <div class="modal-header">
@@ -465,7 +467,7 @@
                                         </div>
                                         </td>
                                     </tr>
-                                @endforeach    
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
                                 </tbody>
                             </table>
                         </div>
@@ -492,7 +494,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($interviews as $key => $value)
+                                    <?php $__currentLoopData = $interviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     
                                     <tr class="tr-shadow">
                                         <!-- <td>
@@ -501,13 +503,13 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $value->name }}</td>
-                                        <td>{{ $value->experience }}</td>                        
-                                        <td>{{ $value->skills }}</td>                        
-                                        <td>{{ $value->salary_expected }}</td>
+                                        <td><?php echo e($value->name); ?></td>
+                                        <td><?php echo e($value->experience); ?></td>                        
+                                        <td><?php echo e($value->skills); ?></td>                        
+                                        <td><?php echo e($value->salary_expected); ?></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <a href="{{ route('profiles.show', $value->candidate_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                <a href="<?php echo e(route('profiles.show', $value->candidate_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>
                                                 
@@ -524,7 +526,7 @@
                                     </tr>
                                     <tr class="spacer"></tr>
                                     
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                 </tbody>
                             </table>
@@ -542,4 +544,5 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

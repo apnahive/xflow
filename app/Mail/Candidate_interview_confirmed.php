@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Form_sign extends Mailable
+class Candidate_interview_confirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,9 +16,9 @@ class Form_sign extends Mailable
      *
      * @return void
      */
-    public function __construct($form, $user)
+    public function __construct($job, $user)
     {
-        $this->form = $form;
+        $this->job = $job;
         $this->user = $user;
     }
 
@@ -29,14 +29,11 @@ class Form_sign extends Mailable
      */
     public function build()
     {
-        //dd($this->form);
         $address = 'noreply@xflow.com'; 
         $name = 'X-Flow'; 
-        $subject = 'Project Form need sign'; 
-        return $this->view('emails.sign')->with('form',$this->form)->with('user',$this->user)
+        $subject = 'Candidate has confirmed the date of interview'; 
+        return $this->view('emails.interview_confirmed')->with('job',$this->job)->with('user',$this->user)
         ->from($address, $name) 
         ->subject($subject);
-
-        /*return $this->view('view.name');*/
     }
 }

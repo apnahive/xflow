@@ -8,10 +8,7 @@
     <div class="table-data__tool-left">
         <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
             Back</button></a>
-    </div>
-    <div class="table-data__tool-right">
-        <a href="<?php echo e(route('profiles.edit', $profile['id'])); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">Edit</button></a>
-    </div>
+    </div>    
 </div>
 
 <div class="row" style="margin-bottom: 100px;">
@@ -19,8 +16,89 @@
         <div class="card">
             <div class="card-header">
                 <strong>Candidate Profile</strong>
-            </div>
+            </div>            
+
             <div class="card-body card-block">
+                <div class="row" style="margin: 0 0;">
+                <a href="<?php echo e(route('candidate_detail.edit', $profile['id'])); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    Edit</button></a>
+                </div>
+                <h3 class="title-5 m-b-35">Personal Details</h3>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">Name</label>
+                        </div>
+                        <div class="col-12 col-md-9">                            
+                            <?php echo e($user->name); ?> <?php echo e($user->lastname); ?>
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">Email</label>
+                        </div>
+                        <div class="col-12 col-md-9">                            
+                            <?php echo e($user->email); ?>
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">Phone</label>
+                        </div>
+                        <div class="col-12 col-md-9">                            
+                            <?php echo e($user->phonenumber); ?>
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">Address</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <?php if($details): ?>
+                            <?php echo e($details->address); ?>
+
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">Zipcode</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <?php if($details): ?>
+                            <?php echo e($details->zip); ?>
+
+                            <?php endif; ?>
+                            
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">State</label>
+                        </div>
+                        <div class="col-12 col-md-9">                            
+                            <?php echo e($profile->state); ?>
+
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class=" form-control-label">City</label>
+                        </div>
+                        <div class="col-12 col-md-9">                            
+                            <?php echo e($profile->city); ?>
+
+                        </div>
+                    </div>
+
+                <div class="row" style="margin: 0 0;">
+                <a href="<?php echo e(route('profiles.edit', $profile['id'])); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    Edit</button></a>
+                </div>
+                <h3 class="title-5 m-b-35">Professional Details</h3>
+
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="title" class=" form-control-label">Profile Title</label>
@@ -49,7 +127,7 @@
                             <?php elseif($profile['experience_level'] == 2): ?>
                                 Intermediate Level
                             <?php elseif($profile['experience_level'] == 3): ?>
-                                Expert Level
+                                Expert Level 
                             <?php else: ?>
                                 Not Selected
                             <?php endif; ?>
@@ -190,7 +268,7 @@
                             <label for="qualification" class=" form-control-label">Qualification And Education</label>
                         </div>
                         <div class="col-12 col-md-9">
-                             <?php if($profile['qualification'] == 1): ?>
+                            <?php if($profile['qualification'] == 1): ?>
                                 Graduate
                             <?php elseif($profile['qualification'] == 2): ?>
                                 Post Graduate

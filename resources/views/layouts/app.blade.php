@@ -163,7 +163,11 @@
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
                             <a href="{{ route('profiles.create') }}">
                                 <i class="fas fa-users"></i>Candidate Profile</a>
-                        </li>                        
+                        </li>
+                        <li class="{{ request()->is('interviewed') ? 'active' : '' }}">
+                            <a href="{{ route('interviewed.index') }}">
+                                <i class="fas fa-users"></i>Interviews</a>
+                        </li>
                         @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -319,6 +323,10 @@
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
                             <a href="{{ route('profiles.create') }}">
                                 <i class="fas fa-users"></i>Candidate Profile</a>
+                        </li>
+                        <li class="{{ request()->is('interviewed') ? 'active' : '' }}">
+                            <a href="{{ route('interviewed.index') }}">
+                                <i class="fas fa-users"></i>Interviews</a>
                         </li>                        
                         @endcan
                         <!-- <li class="has-sub">

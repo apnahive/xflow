@@ -44,7 +44,7 @@
         </table>
     </div>
 
-    <a href="<?php echo e(route('users.create')); ?>" class="btn btn-success">Add User</a>
+    <!-- <a href="<?php echo e(route('users.create')); ?>" class="btn btn-success">Add User</a> -->
 
 </div>
 

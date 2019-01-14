@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\State;
 use App\City;
+use App\User;
 use App\Profile;
+use App\Candidate_detail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Candidate_profileController extends Controller
@@ -38,7 +40,7 @@ class Candidate_profileController extends Controller
         {
             $profile = Profile::where('user_id', '=', $id1)->first();
             //dd($profile);
-            return redirect()->route('profiles.show', $profile->id);
+            return redirect()->route('profiles.show', $id1);
         }
         
         
@@ -129,12 +131,18 @@ class Candidate_profileController extends Controller
      */
     public function show($id)
     {
-        $profile = Profile::find($id);
+        $profile = Profile::where('user_id', $id)->first();
+        //dd($profile);
+        $details = Candidate_detail::where('user_id', $profile->user_id)->first();
+        $user = User::find($profile->user_id);
+
+
+        
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
         //dd($cities);
         if (Auth::user()->hasPermissionTo('can apply job'))
-            return view('candidates.show', compact('states', 'cities', 'profile'));
+            return view('candidates.show', compact('states', 'cities', 'profile', 'user', 'details'));
         else
             return view('errors.401');
     }
@@ -167,7 +175,62 @@ class Candidate_profileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title'=> 'required|max:191', 
+            'employer'=> 'required|max:191',            
+            'experience_level'=> 'numeric|min:1',
+            'experience_years'=> 'numeric|min:1',
+            'active'=> 'numeric|min:1',
+            'state'=> 'required|max:191', 
+            'city'=> 'required|max:191', 
+            'state1'=> 'required|max:191', 
+            'city1'=> 'required|max:191', 
+            'state2'=> 'required|max:191', 
+            'city2'=> 'required|max:191', 
+            'state3'=> 'required|max:191', 
+            'city3'=> 'required|max:191', 
+            'state4'=> 'required|max:191', 
+            'city4'=> 'required|max:191', 
+            'qualification'=> 'numeric|min:1',
+            'certificate'=> 'numeric|min:1',            
+            'skills'=> 'required|max:191',
+            'salary_expected'=> 'numeric|min:1',
+            ],
+            [
+                'experience_level.min' => 'Please choose a Experience.',
+                'experience_years.min' => 'Please choose a Years.',
+                'qualification.min' => 'Please choose a qualification.',
+                'certificate.min' => 'Please choose a certificate.',
+                'active.min' => 'Please choose a status.',
+            ]
+        );
+        //$id1 = Auth::id();
+
+        $profile = Profile::find($id);
+        $profile->title = $request->title;
+        $profile->employer = $request->employer;
+        $profile->experience_level = $request->experience_level;
+        $profile->experience_years = $request->experience_years;
+        $profile->active = $request->active;
+        $profile->state = $request->state;
+        $profile->city = $request->city;
+        $profile->state1 = $request->state1;
+        $profile->city1 = $request->city1;
+        $profile->state2 = $request->state2;
+        $profile->city2 = $request->city2;
+        $profile->state3 = $request->state3;
+        $profile->city3 = $request->city3;
+        $profile->state4 = $request->state4;
+        $profile->city4 = $request->city4;
+        $profile->qualification = $request->qualification;
+        $profile->certificate = $request->certificate;
+        $profile->skills = $request->skills;
+        $profile->salary_expected = $request->salary_expected;
+        //$profile->user_id = $id1;
+        $profile->save();
+
+        Alert::success('Success', 'You have successfully updated Profile')->showConfirmButton('Ok','#3085d6')->autoClose(25000);
+        return redirect()->route('profiles.show', $id);
     }
 
     /**

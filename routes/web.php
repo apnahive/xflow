@@ -90,4 +90,8 @@ Route::post('search', 'SearchController@search')->name('search');
 //job routes
 
 Route::resource('jobs', 'JobController');
+Route::get('shortlisted/{id}/{records}', 'JobController@shortlisted')->name('jobs.shortlisted');
+Route::resource('interviewed', 'Interview_scheduleController');
 Route::resource('profiles', 'Candidate_profileController');
+Route::resource('candidate_detail', 'Candidate_detailController');
+Route::resource('client_profiles', 'Client_profileController');

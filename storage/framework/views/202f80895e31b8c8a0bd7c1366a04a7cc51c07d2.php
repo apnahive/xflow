@@ -5,11 +5,10 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Edit Candidate Profile</strong>
+                <strong>Candidate Profile</strong>
             </div>            
-            <form action="<?php echo e(route('profiles.update', $profile['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
-            <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+            <form action="<?php echo e(route('profiles.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
 
             <div class="card-body card-block">
                     <div class="row form-group">
@@ -17,7 +16,7 @@
                             <label for="title" class=" form-control-label">Profile Title</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Job Title" class="form-control" value="<?php echo e(old('title', $profile['title'])); ?>" required>
+                            <input type="text" id="title" name="title" placeholder="Job Title" class="form-control" required>
                             <?php if($errors->has('title')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('title')); ?></strong>
@@ -30,7 +29,7 @@
                             <label for="employer" class=" form-control-label">Current Employer</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="employer" name="employer" placeholder="Current Employer" class="form-control" value="<?php echo e(old('employer', $profile['employer'])); ?>"  required>
+                            <input type="text" id="employer" name="employer" placeholder="Current Employer" class="form-control" required>
                             <?php if($errors->has('employer')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('employer')); ?></strong>
@@ -58,9 +57,9 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_level" id="experience_level" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['experience_level'] == 1 ? 'selected' : ''); ?>>Entry Level</option>
-                                <option value="2" <?php echo e($profile['experience_level'] == 2 ? 'selected' : ''); ?>>Inermediate Level</option>
-                                <option value="3" <?php echo e($profile['experience_level'] == 3 ? 'selected' : ''); ?>>Expert Level</option>
+                                <option value="1">Entry Level</option>
+                                <option value="2">Inermediate Level</option>
+                                <option value="3">Expert Level</option>
                                 
                             </select>                            
                             <?php if($errors->has('experience_level')): ?>
@@ -78,17 +77,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['experience_years'] == 1 ? 'selected' : ''); ?>>0 Years</option>
-                                <option value="2" <?php echo e($profile['experience_years'] == 2 ? 'selected' : ''); ?>>1 Years</option>
-                                <option value="3" <?php echo e($profile['experience_years'] == 3 ? 'selected' : ''); ?>>2 Years</option>
-                                <option value="4" <?php echo e($profile['experience_years'] == 4 ? 'selected' : ''); ?>>3 Years</option>
-                                <option value="5" <?php echo e($profile['experience_years'] == 5 ? 'selected' : ''); ?>>4 Years</option>
-                                <option value="6" <?php echo e($profile['experience_years'] == 6 ? 'selected' : ''); ?>>5 Years</option>
-                                <option value="7" <?php echo e($profile['experience_years'] == 7 ? 'selected' : ''); ?>>6 Years</option>
-                                <option value="8" <?php echo e($profile['experience_years'] == 8 ? 'selected' : ''); ?>>7 Years</option>
-                                <option value="9" <?php echo e($profile['experience_years'] == 9 ? 'selected' : ''); ?>>8 Years</option>
-                                <option value="10" <?php echo e($profile['experience_years'] == 10 ? 'selected' : ''); ?>>9 Years</option>
-                                <option value="11" <?php echo e($profile['experience_years'] == 11 ? 'selected' : ''); ?>>10+ Years</option>
+                                <option value="1">0 Years</option>
+                                <option value="2">1 Years</option>
+                                <option value="3">2 Years</option>
+                                <option value="4">3 Years</option>
+                                <option value="5">4 Years</option>
+                                <option value="6">5 Years</option>
+                                <option value="7">6 Years</option>
+                                <option value="8">7 Years</option>
+                                <option value="9">8 Years</option>
+                                <option value="10">9 Years</option>
+                                <option value="11">10+ Years</option>
 
                             </select>                            
                             <?php if($errors->has('experience_years')): ?>
@@ -107,8 +106,8 @@
                         <div class="col-12 col-md-9">
                             <select name="active" id="active" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['active'] == 1 ? 'selected' : ''); ?>>Yes</option>
-                                <option value="2" <?php echo e($profile['active'] == 2 ? 'selected' : ''); ?>>No</option>   
+                                <option value="1">Yes</option>
+                                <option value="2">No</option>   
                                 
                             </select>                            
                             <?php if($errors->has('active')): ?>
@@ -128,7 +127,7 @@
                             <select name="state" id="state" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?>
+                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
@@ -147,7 +146,7 @@
                             <select name="city" id="city" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?>
+                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?>
 
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
@@ -174,7 +173,7 @@
                             <select name="state1" id="state1" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state1'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?></option>
+                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('state1')): ?>
@@ -192,7 +191,7 @@
                             <select name="city1" id="city1" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city1'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?></option>
+                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('city1')): ?>
@@ -215,7 +214,7 @@
                             <select name="state2" id="state2" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state2'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?></option>
+                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('state2')): ?>
@@ -233,7 +232,7 @@
                             <select name="city2" id="city2" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city2'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?></option>
+                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('city2')): ?>
@@ -258,7 +257,7 @@
                             <select name="state3" id="state3" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state3'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?></option>
+                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('state3')): ?>
@@ -276,7 +275,7 @@
                             <select name="city3" id="city3" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city3'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?></option>
+                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('city3')): ?>
@@ -298,7 +297,7 @@
                             <select name="state4" id="state4" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state4'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?></option>
+                                    <option value="<?php echo e($state->state); ?>"><?php echo e($state->state); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('state4')): ?>
@@ -316,7 +315,7 @@
                             <select name="city4" id="city4" class="form-control chosen">
                                 <option value="0">Please select</option>
                                 <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city4'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?></option>
+                                    <option value="<?php echo e($city->city); ?>"><?php echo e($city->city); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
                             <?php if($errors->has('city4')): ?>
@@ -344,11 +343,11 @@
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['qualification'] == 1 ? 'selected' : ''); ?>>Graduate</option>
-                                <option value="2" <?php echo e($profile['qualification'] == 2 ? 'selected' : ''); ?>>Post Graduate</option>
-                                <option value="3" <?php echo e($profile['qualification'] == 3 ? 'selected' : ''); ?>>PHD</option>
-                                <option value="4" <?php echo e($profile['qualification'] == 4 ? 'selected' : ''); ?>>No College Degree</option>
-                                <option value="5" <?php echo e($profile['qualification'] == 5 ? 'selected' : ''); ?>>Diploma</option>
+                                <option value="1">Graduate</option>
+                                <option value="2">Post Graduate</option>
+                                <option value="3">PHD</option>
+                                <option value="4">No College Degree</option>
+                                <option value="5">Diploma</option>
                                 
                             </select>                            
                             <?php if($errors->has('experience_level')): ?>
@@ -367,16 +366,16 @@
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['certificate'] == 1 ? 'selected' : ''); ?>>Engineering</option>
-                                <option value="2" <?php echo e($profile['certificate'] == 2 ? 'selected' : ''); ?>>Architecture</option>
-                                <option value="3" <?php echo e($profile['certificate'] == 3 ? 'selected' : ''); ?>>Science</option>
-                                <option value="4" <?php echo e($profile['certificate'] == 4 ? 'selected' : ''); ?>>Computer</option>
-                                <option value="5" <?php echo e($profile['certificate'] == 5 ? 'selected' : ''); ?>>Business</option>
-                                <option value="6" <?php echo e($profile['certificate'] == 6 ? 'selected' : ''); ?>>Design</option>
-                                <option value="7" <?php echo e($profile['certificate'] == 7 ? 'selected' : ''); ?>>Construction</option>
-                                <option value="8" <?php echo e($profile['certificate'] == 8 ? 'selected' : ''); ?>>Political</option>
-                                <option value="9" <?php echo e($profile['certificate'] == 9 ? 'selected' : ''); ?>>Math</option>
-                                <option value="10" <?php echo e($profile['certificate'] == 10 ? 'selected' : ''); ?>>Technical</option>
+                                <option value="1">Engineering</option>
+                                <option value="2">Architecture</option>
+                                <option value="3">Science</option>
+                                <option value="4">Computer</option>
+                                <option value="5">Business</option>
+                                <option value="6">Design</option>
+                                <option value="7">Construction</option>
+                                <option value="8">Political</option>
+                                <option value="9">Math</option>
+                                <option value="10">Technical</option>
                                 
                             </select>                            
                             <?php if($errors->has('certificate')): ?>
@@ -444,7 +443,7 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <div id="tags">
-                            <input type="text" id="skills" name="skills" placeholder="Skills" class="form-control" value="<?php echo e(old('skills', $profile['skills'])); ?>"  required>
+                            <input type="text" id="skills" name="skills" placeholder="Skills" class="form-control" required>
                             </div>
                             <?php if($errors->has('skills')): ?>
                                 <span class="help-block error">
@@ -459,7 +458,7 @@
                             <label for="salary_expected" class=" form-control-label">Salary Expected</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="salary_expected" name="salary_expected" placeholder="Salary Expected" class="form-control" value="<?php echo e(old('salary_expected', $profile['salary_expected'])); ?>"  required>
+                            <input type="text" id="salary_expected" name="salary_expected" placeholder="Salary Expected" class="form-control" required>
                             <?php if($errors->has('salary_expected')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('salary_expected')); ?></strong>

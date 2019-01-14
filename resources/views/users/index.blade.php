@@ -45,7 +45,7 @@
         </table>
     </div>
 
-    <a href="{{ route('users.create') }}" class="btn btn-success">Add User</a>
+    <!-- <a href="{{ route('users.create') }}" class="btn btn-success">Add User</a> -->
 
 </div>
 

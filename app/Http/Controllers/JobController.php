@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use App\State;
 use App\City;
 use App\Job;
+use App\Profile;
+use App\Interview_schedule;
+use App\User;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JobController extends Controller
@@ -68,6 +71,7 @@ class JobController extends Controller
         
         
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -132,6 +136,8 @@ class JobController extends Controller
         $job->user_id = $id1;
         $job->save();
 
+
+
         Alert::success('Success', 'You have successfully created Job')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('jobs.create');
 
@@ -145,8 +151,95 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        $job = Job::find($id);
+        //dd($job);
+        $states = State::all();
+        $cities = City::select('city')->distinct()->get();
+        //dd($cities);
+        /*$tags = $job->skills->toArray();
+        $tags = implode(', ', $tags);
+        dd('$tags');*/
+        $profile_exist = Profile::select('user_id')->get();
+        //$shortlisted = User::permission('can apply job')->get();
+        $shortlisted = User::whereIn('id', $profile_exist)->limit(3)->get();
+        //dd($shortlisted);
+        foreach ($shortlisted as $key => $value) 
+        {
+            $profile = Profile::where('user_id', $value->id)->first();
+            //dd($profile);
+            $value->title = $profile->title;
+            $value->skills = $profile->skills;
+            $value->qualification = $profile->qualification;
+        }
+        //dd($shortlisted);
+
+        $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id')->distinct()->get();
+        foreach ($interviews as $key => $value) 
+        {
+            $user = User::find($value->candidate_id);
+
+            $value->name = $user->name.' '.$user->lastname;
+            $profile = Profile::where('user_id', $value->candidate_id)->first();
+            switch ($profile->experience_level) 
+            {
+                case '1':
+                    $value->experience = 'Entry Level';
+                    break;
+                case '2':
+                    $value->experience = 'Inermediate Level';
+                    break;
+                case '3':
+                    $value->experience = 'Expert Level';
+                    break;
+            }
+            $value->skills = $profile->skills;
+            $value->salary_expected = $profile->salary_expected;
+
+        }
+
+        //dd($interviews);
+
+
+
+        if (Auth::user()->hasPermissionTo('can create job'))
+            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted', 'interviews'));
+        else
+            return view('errors.401');
+
     }
+    public function shortlisted($id, $records)
+    {
+        $job = Job::find($id);
+        //dd($job);
+        $states = State::all();
+        $cities = City::select('city')->distinct()->get();
+        //dd($cities);
+        /*$tags = $job->skills->toArray();
+        $tags = implode(', ', $tags);
+        dd('$tags');*/
+        $profile_exist = Profile::select('user_id')->get();
+        //$shortlisted = User::permission('can apply job')->get();
+        if($records == '10')
+            $shortlisted = User::whereIn('id', $profile_exist)->limit(10)->get();
+        elseif($records == 'all')
+            $shortlisted = User::whereIn('id', $profile_exist)->get();
+        //dd($shortlisted);
+        foreach ($shortlisted as $key => $value) 
+        {
+            $profile = Profile::where('user_id', $value->id)->first();
+            //dd($profile);
+            $value->title = $profile->title;
+            $value->skills = $profile->skills;
+            $value->qualification = $profile->qualification;
+        }
+        //dd($shortlisted);
+
+        if (Auth::user()->hasPermissionTo('can create job'))
+            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted'));
+        else
+            return view('errors.401');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
