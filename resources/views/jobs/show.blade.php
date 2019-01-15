@@ -222,7 +222,7 @@
                                 <tbody>
                                 @foreach ($shortlisted as $shortkey => $short)
                                     <tr>
-                                        <td>{{ $short->name }} {{ $short->lastname }}</td>
+                                        <td>{{ $short->name }}</td>
                                         <td>{{ $short->title }}</td>
                                         <td>{{ $short->skills }}</td>
                                         <td>

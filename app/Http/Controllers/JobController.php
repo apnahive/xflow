@@ -10,6 +10,7 @@ use App\Job;
 use App\Profile;
 use App\Interview_schedule;
 use App\User;
+use App\Job_shortlisted;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JobController extends Controller
@@ -29,7 +30,15 @@ class JobController extends Controller
         $state = State::all();
         $cities = City::paginate(10);
         //dd($cities);
-        $jobs = Job::all();
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+    
+        if($checkadmins)        
+            $jobs = Job::all();
+        else
+            $jobs = Job::where('user_id', $id1)->get();
+
         foreach ($jobs as $jobkey => $value) 
         {
             switch ($value->experience_level) 
@@ -136,6 +145,52 @@ class JobController extends Controller
         $job->user_id = $id1;
         $job->save();
 
+        $profile_exist = Profile::select('user_id')->get();
+        foreach ($profile_exist as $key => $value) 
+        {
+            $shortlisted = new Job_shortlisted;
+            $shortlisted->job_id = $job->id;
+            $shortlisted->user_id = $value->user_id;
+            //select profile to give points
+            $profile = Profile::where('user_id', $value->user_id)->first();
+            $points = 0;
+            //location
+            if($job->state == $profile->state1 && $job->city == $profile->city1)
+                $points = $points + 1;
+            elseif($job->state == $profile->state2 && $job->city == $profile->city2)
+                $points = $points + 1;
+            elseif($job->state == $profile->state3 && $job->city == $profile->city3)
+                $points = $points + 1;
+            elseif($job->state == $profile->state4 && $job->city == $profile->city4)
+                $points = $points + 1;
+            else
+            {}
+            //skills
+            $cskills = explode(', ', $profile->skills);
+            $jskills = explode(', ', $job->skills);
+            foreach ($cskills as $cskillkey => $cskill) 
+            {
+                foreach ($jskills as $jskillkey => $jskill) 
+                {
+                    if($jskill == $cskill)
+                        $points = $points + 1;
+                }
+            }
+            //
+            if($job->certificate == $profile->certificate)
+                $points = $points + 1;
+
+            if($job->qualification == $profile->qualification)
+                $points = $points + 1;
+
+            $experience = $profile->experience_years - 1;
+            $points = $points + $experience;
+
+            //points calculated
+            $shortlisted->points = $points;
+            $shortlisted->save();
+        }
+
 
 
         Alert::success('Success', 'You have successfully created Job')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
@@ -159,14 +214,25 @@ class JobController extends Controller
         /*$tags = $job->skills->toArray();
         $tags = implode(', ', $tags);
         dd('$tags');*/
-        $profile_exist = Profile::select('user_id')->get();
+        //$profile_exist = Profile::select('user_id')->get();
         //$shortlisted = User::permission('can apply job')->get();
-        $shortlisted = User::whereIn('id', $profile_exist)->limit(3)->get();
+        /*$tags = $job->skills;
+        $tags = explode(', ', $tags);
+        foreach ($tags as $cskillkey => $cskill) 
+        {
+            dd($cskill);
+        }
+        dd($tags);*/
+        $shortlisted = Job_shortlisted::where('job_id', $id)->orderBy('points', 'DESC')->limit(3)->get();
+        //User::whereIn('id', $profile_exist)->limit(3)->get();
         //dd($shortlisted);
         foreach ($shortlisted as $key => $value) 
         {
-            $profile = Profile::where('user_id', $value->id)->first();
-            //dd($profile);
+            $profile = Profile::where('user_id', $value->user_id)->first();
+            
+            $usershortlisted = User::where('id', $value->user_id)->first();
+            //dd($usershortlisted);
+            $value->name = $usershortlisted->name.' '.$usershortlisted->lastname;
             $value->title = $profile->title;
             $value->skills = $profile->skills;
             $value->qualification = $profile->qualification;
@@ -207,38 +273,7 @@ class JobController extends Controller
             return view('errors.401');
 
     }
-    public function shortlisted($id, $records)
-    {
-        $job = Job::find($id);
-        //dd($job);
-        $states = State::all();
-        $cities = City::select('city')->distinct()->get();
-        //dd($cities);
-        /*$tags = $job->skills->toArray();
-        $tags = implode(', ', $tags);
-        dd('$tags');*/
-        $profile_exist = Profile::select('user_id')->get();
-        //$shortlisted = User::permission('can apply job')->get();
-        if($records == '10')
-            $shortlisted = User::whereIn('id', $profile_exist)->limit(10)->get();
-        elseif($records == 'all')
-            $shortlisted = User::whereIn('id', $profile_exist)->get();
-        //dd($shortlisted);
-        foreach ($shortlisted as $key => $value) 
-        {
-            $profile = Profile::where('user_id', $value->id)->first();
-            //dd($profile);
-            $value->title = $profile->title;
-            $value->skills = $profile->skills;
-            $value->qualification = $profile->qualification;
-        }
-        //dd($shortlisted);
-
-        if (Auth::user()->hasPermissionTo('can create job'))
-            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted'));
-        else
-            return view('errors.401');
-    }
+    
 
 
     /**

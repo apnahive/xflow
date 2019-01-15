@@ -224,7 +224,7 @@
                                 <tbody>
                                 <?php $__currentLoopData = $shortlisted; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $shortkey => $short): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($short->name); ?> <?php echo e($short->lastname); ?></td>
+                                        <td><?php echo e($short->name); ?></td>
                                         <td><?php echo e($short->title); ?></td>
                                         <td><?php echo e($short->skills); ?></td>
                                         <td>

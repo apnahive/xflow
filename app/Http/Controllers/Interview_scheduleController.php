@@ -164,6 +164,7 @@ class Interview_scheduleController extends Controller
             'time3' => 'date_format:H:i',
             'state'=> 'required|max:191', 
             'city'=> 'required|max:191', 
+            'address'=> 'required|max:2048',
         ));
         $interview1 = new Interview_schedule;
         $interview2 = new Interview_schedule;
@@ -175,6 +176,7 @@ class Interview_scheduleController extends Controller
         $interview1->time = $request->time1;
         $interview1->state = $request->state;
         $interview1->city = $request->city;
+        $interview1->address = $request->address;
         $interview1->active = 1;
 
         $interview2->job_id = $request->job_id;
@@ -183,6 +185,7 @@ class Interview_scheduleController extends Controller
         $interview2->time = $request->time2;
         $interview2->state = $request->state;
         $interview2->city = $request->city;
+        $interview2->address = $request->address;
         $interview2->active = 1;
 
         $interview3->job_id = $request->job_id;
@@ -191,6 +194,7 @@ class Interview_scheduleController extends Controller
         $interview3->time = $request->time3;
         $interview3->state = $request->state;
         $interview3->city = $request->city;
+        $interview3->address = $request->address;
         $interview3->active = 1;
 
         $interview1->save();
