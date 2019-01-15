@@ -205,7 +205,7 @@
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
-                        <a href="#"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <a href="{{ route('shortlisted.shortlist', $job->id) }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             Shortlist</button></a>
                         </div>    
                         <div class="table-responsive table-responsive-data2">
