@@ -255,7 +255,7 @@
                                                 <i class="fas fa-user-plus"></i>
                                             </button>
 
-                                            <form action="{{ route('interviewed.update', $short->id) }}" method="POST">
+                                            <form action="{{ route('interviewed.update', $short->user_id) }}" method="POST"> 
                                             <input type="hidden" name="_method" value="PUT">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="job_id" value="{{ $job['id'] }}">
@@ -465,9 +465,13 @@
                                         </div>
                                         </td>
                                     </tr>
-                                @endforeach    
+                                @endforeach
                                 </tbody>
                             </table>
+                            <div class="row" style="margin: 25px 0;">
+                                <a href="{{ route('shortlisted.shortlist', $job->id.'-10') }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                    View More</button></a>
+                            </div>    
                         </div>
                         
                     </div>
@@ -532,7 +536,72 @@
                         </div>                                                
                     </div>
                     <div class="tab-pane fade" id="custom-nav-notes" role="tabpanel" aria-labelledby="custom-nav-notes-tab">
-                        
+                        <div class="table-responsive table-responsive-data2" style="margin-bottom: 0px;">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>
+                                            <label class="au-checkbox">
+                                                <input type="checkbox">
+                                                <span class="au-checkmark"></span>
+                                            </label>
+                                        </th> -->
+                                        <th style="width: 25%;">Name</th> 
+                                        <th style="width: 75%;">Notes</th>
+                                        <!-- <th>Skills</th>
+                                        <th>Salary Expected</th> -->
+                                        <!-- <th>status</th>
+                                        <th>price</th> -->
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($notes as $key => $value)
+                                    <tr class="tr-shadow">
+                                        <!-- <td>
+                                            <label class="au-checkbox">
+                                                <input type="checkbox">
+                                                <span class="au-checkmark"></span>
+                                            </label>
+                                        </td> -->
+                                        <td style="width: 25%;">{{ $value->name }}</td>
+                                        <td style="width: 75%;">
+                                            @if($value->note_scheduled)
+                                            <h6><strong>Scheduled Notes</strong> </h6><br>
+                                            {{ $value->note_scheduled }}<br>
+                                            @endif
+                                            @if($value->note_interviewed)
+                                            <h6><strong>Interviewed Notes</strong> </h6><br>
+                                            {{ $value->note_interviewed }}<br>
+                                            @endif
+                                            @if($value->note_finallized)
+                                            <h6><strong>Finallized Notes</strong> </h6><br>
+                                            {{ $value->note_finallized }}<br>
+                                            @endif
+
+                                            <div class="row" style="margin: 25px 0;">
+                                                <a href="{{ route('job_notes.edit', $job->id.'-'.$value->candidate_id) }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                                    Add Notes</button></a>
+                                            </div>    
+
+                                        </td>                        
+                                        <!-- <td>{{ $value->skills }}</td>                        
+                                        <td>{{ $value->salary_expected }}</td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <a href="{{ route('profiles.show', $value->candidate_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                </button></a>
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            
+                        </div>                        
                     </div>
                 </div>
 

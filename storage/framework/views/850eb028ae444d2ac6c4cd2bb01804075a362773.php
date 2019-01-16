@@ -257,7 +257,7 @@
                                                 <i class="fas fa-user-plus"></i>
                                             </button>
 
-                                            <form action="<?php echo e(route('interviewed.update', $short->id)); ?>" method="POST">
+                                            <form action="<?php echo e(route('interviewed.update', $short->user_id)); ?>" method="POST"> 
                                             <input type="hidden" name="_method" value="PUT">
                                             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                             <input type="hidden" name="job_id" value="<?php echo e($job['id']); ?>">
@@ -467,9 +467,13 @@
                                         </div>
                                         </td>
                                     </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>    
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
+                            <div class="row" style="margin: 25px 0;">
+                                <a href="<?php echo e(route('shortlisted.shortlist', $job->id.'-10')); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                    View More</button></a>
+                            </div>    
                         </div>
                         
                     </div>
@@ -534,7 +538,72 @@
                         </div>                                                
                     </div>
                     <div class="tab-pane fade" id="custom-nav-notes" role="tabpanel" aria-labelledby="custom-nav-notes-tab">
-                        
+                        <div class="table-responsive table-responsive-data2" style="margin-bottom: 0px;">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>
+                                            <label class="au-checkbox">
+                                                <input type="checkbox">
+                                                <span class="au-checkmark"></span>
+                                            </label>
+                                        </th> -->
+                                        <th style="width: 25%;">Name</th> 
+                                        <th style="width: 75%;">Notes</th>
+                                        <!-- <th>Skills</th>
+                                        <th>Salary Expected</th> -->
+                                        <!-- <th>status</th>
+                                        <th>price</th> -->
+                                        <!-- <th></th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $notes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr class="tr-shadow">
+                                        <!-- <td>
+                                            <label class="au-checkbox">
+                                                <input type="checkbox">
+                                                <span class="au-checkmark"></span>
+                                            </label>
+                                        </td> -->
+                                        <td style="width: 25%;"><?php echo e($value->name); ?></td>
+                                        <td style="width: 75%;">
+                                            <?php if($value->note_scheduled): ?>
+                                            <h6><strong>Scheduled Notes</strong> </h6><br>
+                                            <?php echo e($value->note_scheduled); ?><br>
+                                            <?php endif; ?>
+                                            <?php if($value->note_interviewed): ?>
+                                            <h6><strong>Interviewed Notes</strong> </h6><br>
+                                            <?php echo e($value->note_interviewed); ?><br>
+                                            <?php endif; ?>
+                                            <?php if($value->note_finallized): ?>
+                                            <h6><strong>Finallized Notes</strong> </h6><br>
+                                            <?php echo e($value->note_finallized); ?><br>
+                                            <?php endif; ?>
+
+                                            <div class="row" style="margin: 25px 0;">
+                                                <a href="<?php echo e(route('job_notes.edit', $job->id.'-'.$value->candidate_id)); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                                    Add Notes</button></a>
+                                            </div>    
+
+                                        </td>                        
+                                        <!-- <td><?php echo e($value->skills); ?></td>                        
+                                        <td><?php echo e($value->salary_expected); ?></td>
+                                        <td>
+                                            <div class="table-data-feature">
+                                                <a href="<?php echo e(route('profiles.show', $value->candidate_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                </button></a>
+                                            </div>
+                                        </td> -->
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                </tbody>
+                            </table>
+                            
+                        </div>                        
                     </div>
                 </div>
 

@@ -277,6 +277,10 @@
                         @endforeach    
                         </tbody>
                     </table>
+                    <div class="row" style="margin: 25px 0;">
+                        <a href="{{ route('shortlisted.show', $job->id.'-all') }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            View More</button></a>
+                    </div>
                 </div>
 
 

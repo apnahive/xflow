@@ -240,8 +240,10 @@ class JobController extends Controller
         //dd($shortlisted);
 
         $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id')->distinct()->get();
+
         foreach ($interviews as $key => $value) 
         {
+            //dd($value->candidate_id);
             $user = User::find($value->candidate_id);
 
             $value->name = $user->name.' '.$user->lastname;
@@ -263,12 +265,18 @@ class JobController extends Controller
 
         }
 
-        //dd($interviews);
+        $notes = Interview_schedule::where('job_id', $id)->where('scheduled', 1)->get();
+        foreach ($notes as $key => $value) 
+        {
+            $user = User::find($value->candidate_id);
+            $value->name = $user->name.' '.$user->lastname;
+        }
+        //dd($notes);
 
 
 
         if (Auth::user()->hasPermissionTo('can create job'))
-            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted', 'interviews'));
+            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted', 'interviews', 'notes'));
         else
             return view('errors.401');
 

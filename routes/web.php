@@ -98,3 +98,4 @@ Route::resource('client_profiles', 'Client_profileController');
 
 Route::resource('shortlisted', 'Job_shortlistedController');
 Route::get('shortlist/{id}', 'Job_shortlistedController@shortlist')->name('shortlisted.shortlist');
+Route::resource('job_notes', 'Job_notesController');

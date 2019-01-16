@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -8,7 +6,7 @@
         <h3 class="title-5 m-b-35">Recuriters</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
-                <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Back</button></a>
                 <!-- <div class="rs-select2--light rs-select2--md">
                     <select class="js-select2" name="property">
@@ -31,7 +29,7 @@
             </div>
             <div class="table-data__tool-right">
                 <!-- 
-                <a href="{{ route('jobs.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="<?php echo e(route('jobs.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Client</button></a>
                  -->                
             </div>
@@ -56,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($profiles as $key => $value)
+                    <?php $__currentLoopData = $profiles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     
                     <tr class="tr-shadow">
                         <!-- <td>
@@ -65,12 +63,12 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $value->name }}</td>
-                        <td>{{ $value->company_name }}</td>                        
-                        <td>{{ $value->jobs }}</td>
+                        <td><?php echo e($value->name); ?></td>
+                        <td><?php echo e($value->company_name); ?></td>                        
+                        <td><?php echo e($value->jobs); ?></td>
                         <td>
                             <div class="table-data-feature">
-                                <a href="{{ route('client_profiles.show', $value->user_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('client_profiles.show', $value->user_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
                                 
@@ -80,7 +78,7 @@
                     </tr>
                     <tr class="spacer"></tr>
                     
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
             </table>
@@ -91,4 +89,6 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

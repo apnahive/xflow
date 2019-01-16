@@ -107,19 +107,25 @@ class Job_shortlistedController extends Controller
             $shortlisted->points = $points;
             $shortlisted->save();
         }
-        return redirect()->route('shortlisted.show', $id);        
+        return redirect()->route('shortlisted.show', $id.'-3');        
     }
 
     public function show($id)
     {
-        $job = Job::find($id);
         
+        $ids = explode('-', $id);
+        /*if($ids[1] == null)
+        dd('none found');*/
+        $job = Job::find($ids[0]);
+        //dd($job);
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
         
 
-
-        $shortlisted = Job_shortlisted::where('job_id', $id)->orderBy('points', 'DESC')->limit(3)->get();
+        if($ids[1] == 'all')
+            $shortlisted = Job_shortlisted::where('job_id', $id)->orderBy('points', 'DESC')->get();
+        else
+            $shortlisted = Job_shortlisted::where('job_id', $id)->orderBy('points', 'DESC')->limit($ids[1])->get();
         
         foreach ($shortlisted as $key => $value) 
         {

@@ -171,7 +171,7 @@ class Interview_scheduleController extends Controller
         $interview3 = new Interview_schedule;
 
         $interview1->job_id = $request->job_id;
-        $interview1->candidate_id = $id;
+        $interview1->candidate_id = $id; 
         $interview1->date = $request->date1;
         $interview1->time = $request->time1;
         $interview1->state = $request->state;

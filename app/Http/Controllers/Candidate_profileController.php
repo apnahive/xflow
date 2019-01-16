@@ -25,7 +25,51 @@ class Candidate_profileController extends Controller
 
     public function index()
     {
-        //
+        $profiles= Profile::all();
+        foreach ($profiles as $key => $value) 
+        {
+            $user = User::find($value->user_id);
+            $value->name = $user->name.' '.$user->lastname;
+
+            switch ($value->experience_level) 
+            {
+                case '1':
+                    $value->experience = 'Entry Level';
+                    break;
+                case '2':
+                    $value->experience = 'Inermediate Level';
+                    break;
+                case '3':
+                    $value->experience = 'Expert Level';
+                    break;
+            }
+            switch ($value->qualification) 
+            {
+                case '1':
+                    $value->qualifications = 'Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'Post Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'PHD';
+                    break;
+                case '1':
+                    $value->qualifications = 'No College Degree';
+                    break;
+                case '1':
+                    $value->qualifications = 'Diploma';
+                    break;
+            }
+        }
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
+            return view('candidates.index', compact('profiles'));
+        else
+            return view('errors.401');
     }
 
     /**
