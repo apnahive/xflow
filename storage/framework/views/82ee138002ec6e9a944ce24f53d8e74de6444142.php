@@ -158,8 +158,20 @@
                             <a href="<?php echo e(route('client_profiles.index')); ?>">
                                 <i class="fas fa-users"></i>Recuriters</a>
                         </li>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.index')); ?>">
+                                <i class="fas fa-users"></i>Jobs</a>
+                        </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                        <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
+                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
+                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                        </li>
                         <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('jobs.create')); ?>">
                                 <i class="fas fa-users"></i>Post a Jobs</a>
@@ -328,8 +340,16 @@
                             <a href="<?php echo e(route('client_profiles.index')); ?>">
                                 <i class="fas fa-users"></i>Recuriters</a>
                         </li>
+                        <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('jobs.index')); ?>">
+                                <i class="fas fa-users"></i>Jobs</a>
+                        </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                        <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
+                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                        </li>
                         <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('jobs.create')); ?>">
                                 <i class="fas fa-users"></i>Post a Jobs</a>

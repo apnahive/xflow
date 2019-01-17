@@ -12,6 +12,7 @@ use App\Task;
 use DateTime;
 use App\Project_form;
 use App\Project_user;
+use Hash;
 use Mail;
 use App\Mail\User_approved;
 use App\Mail\User_rejected;
@@ -188,7 +189,8 @@ class UserxController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('userx.edit', compact('user'));
     }
 
     /**
@@ -200,7 +202,29 @@ class UserxController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, array(           
+           'old_password' => 'required|string|min:6',
+           'new_password' => 'required|string|min:6',
+           'password_confirmation' => 'required|string|same:new_password',
+        ));
+
+        $profile = User::find($id);
+        $old_password = $request->old_password;
+        $cpassword = $profile->password;
+        if (Hash::check($old_password, $cpassword)) 
+        {
+            //store in database
+            $profile->password = Hash::make($request->new_password);
+            $profile->save();
+            //return redirect()->route('profile')->with('success','Password is updated sucessfully');
+            Alert::success('Success', 'Password is Updated')->showConfirmButton('Ok','#3085d6')->autoClose(25000);
+            return redirect()->route('home');
+        }
+        else
+        {
+            Alert::error('Failed', 'Password is not matched')->showConfirmButton('Ok','#3085d6')->autoClose(25000);
+            return redirect()->back()->with('password','Password is not matched');
+        }
     }
 
     /**

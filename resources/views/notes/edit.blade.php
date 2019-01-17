@@ -19,7 +19,7 @@
                     
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="note" class=" form-control-label">Note</label>
+                            <label for="note" class="form-control-label">Note</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <textarea name="note" id="note" rows="3" placeholder="Add Note..." class="form-control" required>{!! $note !!}</textarea>

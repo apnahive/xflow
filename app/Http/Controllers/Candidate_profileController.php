@@ -274,7 +274,7 @@ class Candidate_profileController extends Controller
         $profile->save();
 
         Alert::success('Success', 'You have successfully updated Profile')->showConfirmButton('Ok','#3085d6')->autoClose(25000);
-        return redirect()->route('profiles.show', $id);
+        return redirect()->route('profiles.show', $profile->user_id);
     }
 
     /**

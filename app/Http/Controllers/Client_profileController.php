@@ -102,7 +102,7 @@ class Client_profileController extends Controller
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
         //dd($cities);
-        if (Auth::user()->hasPermissionTo('can apply job'))
+        if (Auth::user()->hasPermissionTo('can create job'))
             return view('client_profiles.show', compact('states', 'cities', 'user', 'details'));
         else
             return view('errors.401');

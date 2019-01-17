@@ -158,8 +158,16 @@
                             <a href="{{ route('client_profiles.index') }}">
                                 <i class="fas fa-users"></i>Recuriters</a>
                         </li>
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.index') }}">
+                                <i class="fas fa-users"></i>Jobs</a>
+                        </li>
                         @endrole
                         @can('can create job')
+                        <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                            <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
+                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                        </li>
                         <li class="{{ request()->is('jobs') ? 'active' : '' }}">
                             <a href="{{ route('jobs.create') }}">
                                 <i class="fas fa-users"></i>Post a Jobs</a>
@@ -327,8 +335,16 @@
                             <a href="{{ route('client_profiles.index') }}">
                                 <i class="fas fa-users"></i>Recuriters</a>
                         </li>
+                        <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                            <a href="{{ route('jobs.index') }}">
+                                <i class="fas fa-users"></i>Jobs</a>
+                        </li>
                         @endrole
                         @can('can create job')
+                        <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                            <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
+                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                        </li>
                         <li class="{{ request()->is('jobs') ? 'active' : '' }}">
                             <a href="{{ route('jobs.create') }}">
                                 <i class="fas fa-users"></i>Post a Jobs</a>
