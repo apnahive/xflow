@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
@@ -11,9 +9,9 @@
             <div class="card-header">
                 <strong>Edit</strong> Checklist Template Item
             </div>            
-            <form action="{{ route('checklist_for_templates.update', $checklist_for_template['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('checklist_for_templates.update', $checklist_for_template['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div class="card-body card-block">
                     
                     <div class="row form-group">
@@ -21,13 +19,13 @@
                             <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="{{ old('name', $checklist_for_template['title']) }}">
+                            <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<?php echo e(old('name', $checklist_for_template['title'])); ?>">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('name'))
+                            <?php if($errors->has('name')): ?>
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                     </div>
                     
@@ -38,15 +36,15 @@
                         <div class="col-12 col-md-9">
                             <select name="template_id" id="template_id" class="custom-select form-control chosen">
                                 <option value="0">Please select</option>
-                                @foreach ($checklist_templates as $checklist_template) 
-                                    <option value="{{$checklist_template->id}}" {{ $checklist_for_template['template_id'] == $checklist_template->id ? 'selected' : '' }}>{{$checklist_template->title}}</option>
-                                @endforeach
+                                <?php $__currentLoopData = $checklist_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checklist_template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($checklist_template->id); ?>" <?php echo e($checklist_for_template['template_id'] == $checklist_template->id ? 'selected' : ''); ?>><?php echo e($checklist_template->title); ?></option>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('template_id'))
+                            <?php if($errors->has('template_id')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('template_id') }}</strong>
+                                    <strong><?php echo e($errors->first('template_id')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
             </div>
@@ -60,4 +58,5 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Http\Request;
+use App\City;
+use App\State;
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,9 +60,7 @@ Route::post('taskss/allcopy', 'TaskController@deleteCopies')->name('tasks.delete
 
 Route::resource('fileupload', 'FileUploadController');
 Route::resource('calender', 'CalenderController');
-Route::resource('checklists', 'ChecklistController');
-Route::resource('checklist_templates', 'Checklist_templateController');
-Route::resource('checklist_for_templates', 'Checklist_for_templateController');
+
 
 
 Route::get('images/{slug}', [
@@ -70,6 +71,22 @@ Route::get('images/{slug}', [
 
 
 Route::post('search', 'SearchController@search')->name('search');
+
+
+
+
+//checklist 
+
+Route::resource('checklists', 'ChecklistController');
+Route::get('add_checklist', 'ChecklistController@add')->name('checklists.add');
+Route::resource('checklist_templates', 'Checklist_templateController');
+Route::resource('checklist_for_templates', 'Checklist_for_templateController');
+
+Route::resource('assign_checklist', 'Assign_checklistController');
+
+Route::resource('sublists', 'SublistController');
+Route::get('sublist/{id}', 'SublistController@add')->name('sublists.add');
+
 
 
 //Users routes
@@ -104,3 +121,18 @@ Route::resource('client_profiles', 'Client_profileController');
 Route::resource('shortlisted', 'Job_shortlistedController');
 Route::get('shortlist/{id}', 'Job_shortlistedController@shortlist')->name('shortlisted.shortlist');
 Route::resource('job_notes', 'Job_notesController');
+
+
+
+
+//state city routes
+
+Route::get('/information/create/ajax-state',function(Request $request)
+{
+	//$request = Request
+    $state = $request->state_id;
+    $state_id = State::where('state', $state)->first();
+    $subcategories = City::where('state_code','=',$state_id->state_code)->get();
+    return $subcategories;
+
+});

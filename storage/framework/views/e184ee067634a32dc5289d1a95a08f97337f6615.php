@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<?php $__env->startSection('content'); ?>
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 <div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
@@ -9,9 +7,9 @@
             <div class="card-header">
                 <strong>Edit Candidate Profile</strong>
             </div>            
-            <form action="{{ route('candidate_detail.update', $profile['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('candidate_detail.update', $profile['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
 
             <div class="card-body card-block">
                     <div class="row form-group">
@@ -19,12 +17,12 @@
                             <label for="name" class=" form-control-label">First Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="{{ old('name', $user['name']) }}" required>
-                            @if ($errors->has('name'))
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<?php echo e(old('name', $user['name'])); ?>" required>
+                            <?php if($errors->has('name')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -32,12 +30,12 @@
                             <label for="lastname" class=" form-control-label">Last Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="lastname" name="lastname" placeholder="Last Name" class="form-control" value="{{ old('lastname', $user['lastname']) }}" required>
-                            @if ($errors->has('lastname'))
+                            <input type="text" id="lastname" name="lastname" placeholder="Last Name" class="form-control" value="<?php echo e(old('lastname', $user['lastname'])); ?>" required>
+                            <?php if($errors->has('lastname')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                    <strong><?php echo e($errors->first('lastname')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -45,12 +43,12 @@
                             <label for="email" class=" form-control-label">Email</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="{{ old('email', $user['email']) }}" disabled>
-                            @if ($errors->has('email'))
+                            <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<?php echo e(old('email', $user['email'])); ?>" disabled>
+                            <?php if($errors->has('email')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('email') }}</strong>
+                                    <strong><?php echo e($errors->first('email')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -58,12 +56,12 @@
                             <label for="phonenumber" class=" form-control-label">Phone Number</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number" class="form-control" value="{{ old('phonenumber', $user['phonenumber']) }}" required>
-                            @if ($errors->has('phonenumber'))
+                            <input type="text" id="phonenumber" name="phonenumber" placeholder="Phone Number" class="form-control" value="<?php echo e(old('phonenumber', $user['phonenumber'])); ?>" required>
+                            <?php if($errors->has('phonenumber')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('phonenumber') }}</strong>
+                                    <strong><?php echo e($errors->first('phonenumber')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -71,12 +69,12 @@
                             <label for="address" class=" form-control-label">Address</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="{{ old('address', $details['address']) }}" required>
-                            @if ($errors->has('lastname'))
+                            <input type="text" id="address" name="address" placeholder="Address" class="form-control" value="<?php echo e(old('address', $details['address'])); ?>" required>
+                            <?php if($errors->has('lastname')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('lastname') }}</strong>
+                                    <strong><?php echo e($errors->first('lastname')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -84,12 +82,12 @@
                             <label for="zip" class=" form-control-label">Zipcode</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="zip" name="zip" placeholder="Zipcode" class="form-control" value="{{ old('zip', $details['zip']) }}" required>
-                            @if ($errors->has('zip'))
+                            <input type="text" id="zip" name="zip" placeholder="Zipcode" class="form-control" value="<?php echo e(old('zip', $details['zip'])); ?>" required>
+                            <?php if($errors->has('zip')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('zip') }}</strong>
+                                    <strong><?php echo e($errors->first('zip')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -99,15 +97,16 @@
                         <div class="col-12 col-md-9">
                             <select name="state" id="state" class="form-control">
                                 <option value="0">Please select</option>
-                                @foreach ($states as $state) 
-                                    <option value="{{$state->state}}" {{ $profile['state'] == $state->state ? 'selected' : '' }}>{{$state->state}}
-                                @endforeach
+                                <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($state->state); ?>" <?php echo e($profile['state'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('state'))
+                            <?php if($errors->has('state')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('state') }}</strong>
+                                    <strong><?php echo e($errors->first('state')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -117,15 +116,16 @@
                         <div class="col-12 col-md-9">
                             <select name="city" id="city" class="form-control">
                                 <option value="0">Please select</option>
-                                @foreach ($cities as $city) 
-                                    <option value="{{$city->city}}" {{ $profile['city'] == $city->city ? 'selected' : '' }}>{{$city->city}}
-                                @endforeach
+                                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($city->city); ?>" <?php echo e($profile['city'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('city'))
+                            <?php if($errors->has('city')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('city') }}</strong>
+                                    <strong><?php echo e($errors->first('city')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -169,7 +169,7 @@
     $('#state').on('change', function(e){
         var state_id = e.target.value;
 
-        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+        $.get('<?php echo e(url('information')); ?>/create/ajax-state?state_id=' + state_id, function(data) {
             //console.log(data);
             $('#city').empty();
             $.each(data, function(index,subCatObj){
@@ -179,4 +179,6 @@
         });
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

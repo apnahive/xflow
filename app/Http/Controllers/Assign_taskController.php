@@ -48,7 +48,7 @@ class Assign_taskController extends Controller
     public function store(Request $request)
     {
      ///dd(request()->all());
-         $this->validate($request, array(
+        $this->validate($request, array(
             'task_id'=> 'numeric|min:1',
             'duedate'=> 'required|date',
             'assignee'=> 'numeric|min:1',

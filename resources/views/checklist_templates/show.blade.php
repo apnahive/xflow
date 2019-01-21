@@ -38,7 +38,7 @@
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row">
                             <div class="col-md-12">                                
-                                <h3 class="title-5 m-b-35">Tasks</h3>
+                                <h3 class="title-5 m-b-35">Checklist</h3>
                                 
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
@@ -57,16 +57,15 @@
                                                 <!-- <td></td>                        
                                                 <td></td> -->
                                                 <td>
-                                                    <!-- <div class="table-data-feature">
-                                                        <a href="{{ route('task_for_templates.show', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
-                                                            <i class="zmdi zmdi-mail-send"></i>
-                                                        </button></a>
-                                                        <a href="{{ route('task_for_templates.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <div class="table-data-feature">
+                                                        
+                                                        <a href="{{ route('checklist_for_templates.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button></a>
-                                                        <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
+                                                        
+                                                        <!-- <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
                                                             <i class="zmdi zmdi-delete"></i>
-                                                        </button>
+                                                        </button> -->
 
                                                         <form id="{{$value->id}}" action="" method="POST" style="display: none;">
                                                         <input type="hidden" name="_method" value="DELETE">
@@ -91,7 +90,7 @@
                                                             </div>
                                                           </div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="spacer"></tr>

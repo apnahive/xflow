@@ -16,7 +16,7 @@
                 <a href="{{ route('checklist_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
                 <a href="{{ route('checklist_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Add Task to Template</button></a>
+                                            <i class="zmdi zmdi-plus"></i>Add Checklist to Template</button></a>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -33,7 +33,7 @@
                     <tr>
                         
                         <th>Checklist</th>
-                        <!-- <th>Detail</th>                         -->
+                        <!-- <th>Detail</th>-->
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>

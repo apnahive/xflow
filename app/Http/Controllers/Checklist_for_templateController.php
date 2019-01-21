@@ -74,7 +74,9 @@ class Checklist_for_templateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $checklist_templates = Checklist_template::all();
+        $checklist_for_template = Checklist_for_template::find($id);
+        return view('checklist_for_templates.edit', compact('checklist_templates', 'checklist_for_template'));
     }
 
     /**
@@ -86,7 +88,21 @@ class Checklist_for_templateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'template_id'=> 'numeric|min:1',
+            'title'=> 'required|max:20',
+            ],
+            [
+                'template_id.min' => 'Please select a template.',
+            ]
+        );
+        $checklist = Checklist_for_template::find($id);
+        $checklist->template_id = $request->template_id;
+        $checklist->title = $request->title;        
+        
+        $checklist->save();
+        Alert::success('Success', 'You have successfully updated Checklist item')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('checklists.index')->with('success', 'You have successfully added Checklist');
     }
 
     /**

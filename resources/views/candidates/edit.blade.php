@@ -127,7 +127,7 @@
                             <label for="state" class=" form-control-label">Current State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state" id="state" class="form-control chosen">
+                            <select name="state" id="state" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}" {{ $profile['state'] == $state->state ? 'selected' : '' }}>{{$state->state}}
@@ -145,7 +145,7 @@
                             <label for="city" class=" form-control-label">Current City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city" id="city" class="form-control chosen">
+                            <select name="city" id="city" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}" {{ $profile['city'] == $city->city ? 'selected' : '' }}>{{$city->city}}
@@ -157,6 +157,8 @@
                                 </span>
                             @endif 
                         </div>
+<!-- samar -->
+                        
                     </div>
 
                     
@@ -171,7 +173,7 @@
                             <label for="state1" class=" form-control-label">State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state1" id="state1" class="form-control chosen">
+                            <select name="state1" id="state1" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}" {{ $profile['state1'] == $state->state ? 'selected' : '' }}>{{$state->state}}</option>
@@ -189,7 +191,7 @@
                             <label for="city1" class=" form-control-label">City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city1" id="city1" class="form-control chosen">
+                            <select name="city1" id="city1" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}" {{ $profile['city1'] == $city->city ? 'selected' : '' }}>{{$city->city}}</option>
@@ -212,7 +214,7 @@
                             <label for="state2" class=" form-control-label">State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state2" id="state2" class="form-control chosen">
+                            <select name="state2" id="state2" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}" {{ $profile['state2'] == $state->state ? 'selected' : '' }}>{{$state->state}}</option>
@@ -230,7 +232,7 @@
                             <label for="city2" class=" form-control-label">City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city2" id="city2" class="form-control chosen">
+                            <select name="city2" id="city2" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}" {{ $profile['city2'] == $city->city ? 'selected' : '' }}>{{$city->city}}</option>
@@ -255,7 +257,7 @@
                             <label for="state3" class=" form-control-label">State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state3" id="state3" class="form-control chosen">
+                            <select name="state3" id="state3" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}" {{ $profile['state3'] == $state->state ? 'selected' : '' }}>{{$state->state}}</option>
@@ -273,7 +275,7 @@
                             <label for="city3" class=" form-control-label">City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city3" id="city3" class="form-control chosen">
+                            <select name="city3" id="city3" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}" {{ $profile['city3'] == $city->city ? 'selected' : '' }}>{{$city->city}}</option>
@@ -295,7 +297,7 @@
                             <label for="state4" class=" form-control-label">State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state4" id="state4" class="form-control chosen">
+                            <select name="state4" id="state4" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}" {{ $profile['state4'] == $state->state ? 'selected' : '' }}>{{$state->state}}</option>
@@ -313,7 +315,7 @@
                             <label for="city4" class=" form-control-label">City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city4" id="city4" class="form-control chosen">
+                            <select name="city4" id="city4" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}" {{ $profile['city4'] == $city->city ? 'selected' : '' }}>{{$city->city}}</option>
@@ -388,56 +390,7 @@
                          
                     </div>
 
-                    <!-- <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="start_date" class=" form-control-label">Start Date</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <input id="start_date" type="date" class="form-control" name="start_date" value="{{ old('start_date') }}" required autofocus>
-                            @if ($errors->has('start_date'))
-                                <span class="help-block error">
-                                    <strong>{{ $errors->first('start_date') }}</strong>
-                                </span>
-                            @endif 
-                        </div>
-                    </div> -->
-                    <!-- <style type="text/css">
-                        #tags{
-                          float:left;
-                          border:1px solid #ccc;
-                          padding:4px;
-                          font-family:Arial;
-                        }
-                        #tags span.tag{
-                          cursor:pointer;
-                          display:block;
-                          float:left;
-                          color:#555;
-                          background:#add;
-                          padding:5px 10px;
-                          padding-right:30px;
-                          margin:4px;
-                        }
-                        #tags span.tag:hover{
-                          opacity:0.7;
-                        }
-                        #tags span.tag:after{
-                         position:absolute;
-                         content:"×";
-                         border:1px solid;
-                         border-radius:10px;
-                         padding:0 4px;
-                         margin:3px 0 10px 7px;
-                         font-size:10px;
-                        }
-                        #tags input{
-                          background:#eee;
-                          border:0;
-                          margin:4px;
-                          padding:7px;
-                          width:auto;
-                        }
-                    </style> -->
+                   
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="skills" class=" form-control-label">Skills</label>
@@ -482,22 +435,73 @@
     </div>
 </div>
 
-<!-- <script type="text/javascript">
-    $(function(){
-      $('#tags input').on('focusout', function(){    
-        var txt= this.value.replace(/[^a-zA-Z0-9\+\-\.\#]/g,''); // allowed characters list
-        if(txt) $(this).before('<span class="tag">'+ txt +'</span>');
-        this.value="";
-        this.focus();
-      }).on('keyup',function( e ){
-        // comma|enter (add more keyCodes delimited with | pipe)
-        if(/(188|13)/.test(e.which)) $(this).focusout();
-      });
+<script type="text/javascript">
+    
+    $('#state').on('change', function(e){
+        var state_id = e.target.value;
 
-      $('#tags').on('click','.tag',function(){
-         if( confirm("Really delete this tag?") ) $(this).remove(); 
-      });
-
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
     });
-</script> -->
+
+    //state 1
+    $('#state1').on('change', function(e){
+        var state_id = e.target.value;
+
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city1').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city1').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
+    });
+    //state 2
+    $('#state2').on('change', function(e){
+        var state_id = e.target.value;
+
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city2').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city2').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
+    });
+    //state 3
+    $('#state3').on('change', function(e){
+        var state_id = e.target.value;
+
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city3').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city3').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
+    });
+    //state 4
+    $('#state4').on('change', function(e){
+        var state_id = e.target.value;
+
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city4').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city4').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
+    });
+</script>
+
 @endsection

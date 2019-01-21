@@ -92,7 +92,7 @@
                             <label for="state" class=" form-control-label">State</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="state" id="state" class="form-control chosen">
+                            <select name="state" id="state" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($states as $state) 
                                     <option value="{{$state->state}}">{{$state->state}}
@@ -110,7 +110,7 @@
                             <label for="city" class=" form-control-label">City</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="city" id="city" class="form-control chosen">
+                            <select name="city" id="city" class="form-control">
                                 <option value="0">Please select</option>
                                 @foreach ($cities as $city) 
                                     <option value="{{$city->city}}">{{$city->city}}
@@ -290,4 +290,19 @@
 
     });
 </script> -->
+<script type="text/javascript">
+    
+    $('#state').on('change', function(e){
+        var state_id = e.target.value;
+
+        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+            //console.log(data);
+            $('#city').empty();
+            $.each(data, function(index,subCatObj){
+                $('#city').append('<option value='+subCatObj.city+'>'+subCatObj.city+'</option>');
+            });
+             //$(".chosen").chosen(); 
+        });
+    });
+</script>
 @endsection

@@ -1,9 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12" style="margin-bottom: 100px;">
@@ -30,7 +27,7 @@
                                     <label for="name" class=" form-control-label"><b>Title</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $checklist->title }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($checklist->title); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -38,7 +35,7 @@
                                     <label for="name" class=" form-control-label"><b>Due Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $checklist->duedate }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($checklist->duedate); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -46,7 +43,7 @@
                                     <label for="name" class=" form-control-label"><b>Assigned To</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $checklist->assignto }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($checklist->assignto); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -54,14 +51,14 @@
                                     <label for="name" class=" form-control-label"><b>Created By</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $checklist->createdby }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($checklist->createdby); ?></label>
                                 </div>
                             </div>
                         </div>                        
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
                         <div class="row" style="margin: 25px 0;">
-                        <a href="{{ route('sublists.add', $checklist->id) }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <a href="<?php echo e(route('sublists.add', $checklist->id)); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                             Add Sublist Item</button></a>
                         </div>    
                         <div class="row">
@@ -79,7 +76,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($sublists as $sublistkey => $value)
+                                            <?php $__currentLoopData = $sublists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sublistkey => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr class="tr-shadow">
                                                 <!-- <td>
                                                     <label class="au-checkbox">
@@ -87,7 +84,7 @@
                                                         <span class="au-checkmark"></span>
                                                     </label>
                                                 </td> -->
-                                                <td>{{ $value->title }}</td>
+                                                <td><?php echo e($value->title); ?></td>
                                                 <!-- <td></td> -->
                                                 <!-- <td></td>                        
                                                 <td></td> -->
@@ -97,13 +94,13 @@
                                                             <i class="zmdi zmdi-mail-send"></i>
                                                         </button></a> -->
                                                         
-                                                        <a href="{{ route('sublists.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                        <a href="<?php echo e(route('sublists.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button></a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -121,4 +118,5 @@
 </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -148,6 +148,10 @@
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        <li class="{{ request()->is('checklist_templates') ? 'active' : '' }}">
+                            <a href="{{ route('checklist_templates.index') }}">
+                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
+                        </li>
                         @endcan
                         @role('Admin')
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
@@ -329,6 +333,10 @@
                         <li class="{{ request()->is('checklists') ? 'active' : '' }}">
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
+                        </li>
+                        <li class="{{ request()->is('checklist_templates') ? 'active' : '' }}">
+                            <a href="{{ route('checklist_templates.index') }}">
+                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
                         </li>
                         @endcan
                         @role('Admin')

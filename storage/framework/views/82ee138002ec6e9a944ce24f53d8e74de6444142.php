@@ -148,6 +148,10 @@
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
                         </li>
+                        <li class="<?php echo e(request()->is('checklist_templates') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklist_templates.index')); ?>">
+                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
+                        </li>
                         <?php endif; ?>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
@@ -329,6 +333,10 @@
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('checklist_templates') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklist_templates.index')); ?>">
+                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
                         </li>
                         <?php endif; ?>
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
