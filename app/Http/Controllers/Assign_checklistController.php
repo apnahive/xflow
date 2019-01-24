@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Checklist;
+use App\Checklist_item;
 use App\Checklist_for_template;
 use App\User;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -93,31 +94,30 @@ class Assign_checklistController extends Controller
         $this->validate($request, [            
             'template'=> 'numeric|min:1',
             'duedate'=> 'required|date',
-            'assign'=> 'numeric|min:1',
             ],
             [
-                'assign.min' => 'Please choose a user.',
                 'template.min' => 'Please choose a template.',
             ]
         );
         
         $templates = Checklist_for_template::where('template_id', $request->template)->get();
         //dd($template);
-        $id1 = Auth::id();
+        //$id1 = Auth::id();
+        $checklist = Checklist::find($id);
 
         foreach ($templates as $key => $value) 
         {
-            $checklist = new Checklist;        
-            $checklist->title = $value->title;
-            $checklist->assignee = $request->assign;
-            $checklist->duedate = $request->duedate;        
-            $checklist->status = 0;
-            $checklist->user_id = $id1;
-            $checklist->save();
+            $item = new Checklist_item;
+            $item->title = $value->title;
+            $item->duedate = $request->duedate;
+            $item->checklist_id = $id;
+            $item->assignee = $checklist->assignee;
+            $item->status = 0;
+            $item->save();
         }
 
-        Alert::success('Success', 'You have successfully created Checklist from the template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('checklists.index');
+        Alert::success('Success', 'You have successfully added items to Checklist from the template')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('checklists.show', $id);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Checklist;
+use App\Checklist_item;
 use App\Checklist_template;
 use App\Sublist;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -25,20 +26,21 @@ class ChecklistController extends Controller
 
     public function index()
     {
+        $id1 = Auth::id();
         //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
         $useradmin = User::role('Admin')->select('id')->get();        
         $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
 
-        $checklists = Checklist::all();
+        $checklists = Checklist::where('assignee', $id1)->orWhere('user_id', $id1)->get();
         foreach ($checklists as $key => $value) 
         {
             $userx = User::find($value->assignee);
             //dd($userx);
             $value->user = $userx->name;
-            if(Sublist::where('checklist_id', $value->id)->exists())
+            /*if(Sublist::where('checklist_id', $value->id)->exists())
                 $value->sublist = 1;
             else
-                $value->sublist = 0;
+                $value->sublist = 0;*/
 
         }
         //dd($checklists);
@@ -57,13 +59,13 @@ class ChecklistController extends Controller
         $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         return view('checklists.create', compact('users'));
     }
-    public function add()
+    public function add($id)
     {        
         //$users = User::where('verified', 1)->where('id', '<>', 1)->get();
         $useradmin = User::role('Admin')->select('id')->get();        
         $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
         $templates = Checklist_template::all();
-        return view('checklists.add', compact('users', 'templates'));
+        return view('checklists.add', compact('users', 'templates', 'id'));
     }
 
     /**
@@ -108,13 +110,31 @@ class ChecklistController extends Controller
     {
         $checklist = Checklist::find($id);
         $assignto = User::find($checklist->assignee);
-        $createdby = User::find($checklist->user_id);
         $checklist->assignto = $assignto->name.' '.$assignto->lastname;
-        $checklist->createdby = $createdby->name.' '.$createdby->lastname;
-        //dd($checklist);
-        $sublists = Sublist::where('checklist_id', $id)->get();
+        /*
+        $createdby = User::find($checklist->user_id);
         
-        return view('checklists.show', compact('checklist', 'sublists'));
+        $checklist->createdby = $createdby->name.' '.$createdby->lastname;
+        $sublists = Sublist::where('checklist_id', $id)->get();*/
+        
+        $items = Checklist_item::where('checklist_id', $id)->where('status', 0)->orderBy('duedate', 'ASC')->get();
+        $items1 = Checklist_item::where('checklist_id', $id)->where('status', 1)->orderBy('duedate', 'ASC')->get();
+        foreach ($items as $key => $value) 
+        {
+            if(Sublist::where('item_id', $value->id)->exists())
+                $value->sublist = 1;
+            else
+                $value->sublist = 0;
+        }
+        foreach ($items1 as $key => $value) 
+        {
+            if(Sublist::where('item_id', $value->id)->exists())
+                $value->sublist = 1;
+            else
+                $value->sublist = 0;
+        }
+
+        return view('checklists.show', compact('items', 'id', 'items1', 'checklist'));
     }
 
     /**

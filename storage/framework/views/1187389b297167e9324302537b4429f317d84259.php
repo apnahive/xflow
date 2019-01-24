@@ -8,10 +8,10 @@
         <!-- DATA TABLE -->
         <h3 class="title-5 m-b-35">Checklists</h3>
         <div class="table-data__tool">
-            <div class="table-data__tool-left">
-                <a href="<?php echo e(route('checklists.add')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+            <!-- <div class="table-data__tool-left">
+                <a href=""><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add From Template</button></a>
-            </div>
+            </div> -->
             <div class="table-data__tool-right">                
                 <a href="<?php echo e(route('checklists.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Checklists</button></a>
@@ -21,14 +21,14 @@
             <table class="table table-data2">
                 <thead>                    
                     <tr>
-                        <th>
+                        <!-- <th>
                             <label class="au-checkbox">
                                 <input type="checkbox" id="checkAll" disabled="disabled">
                                 <span class="au-checkmark"></span>
                             </label>
-                        </th>
+                        </th> -->
                         <th>Checklists</th>
-                        <th>Sublist</th>
+                        <th>Assigned To</th>
                         <th>Due Date</th>
                         <!-- <th>Managed By</th>
                         <th>Assigned To</th> -->
@@ -40,17 +40,15 @@
                 <tbody>
                     <?php $__currentLoopData = $checklists; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checklistkey => $checklist): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="tr-shadow">
-                        <td>
+                        <!-- <td>
                             <label class="au-checkbox">
                                 <input type="checkbox">
                                 <span class="au-checkmark"></span>
                             </label>
-                        </td>
+                        </td> -->
                         <td><?php echo e($checklist->title); ?></td>
                         <td>
-                            <?php if($checklist->sublist == 1): ?>
-                                <i class="fas fa-check" style="color: #63c76a;"></i>
-                            <?php endif; ?> 
+                            <?php echo e($checklist->user); ?> 
                         </td>
                         <td><?php echo e($checklist->duedate); ?></td>                        
                         <!-- <td></td>                        

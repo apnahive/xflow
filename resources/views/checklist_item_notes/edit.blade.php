@@ -9,37 +9,36 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Sublist
+                <strong>Edit</strong> Sublist
             </div>            
-            <form action="{{ route('sublists.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
-            <input type="hidden" name="item_id" value="{{ $id }}">
+            <form action="{{ route('checklist_item_notes.update', $note['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Title</label>
+                            <label for="note" class=" form-control-label">Notes</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control">
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
+                            <textarea name="note" id="note" rows="3" placeholder="Description..." class="form-control">{!! $note->note !!}</textarea>
+                            @if ($errors->has('note'))
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong>{{ $errors->first('note') }}</strong>
                                 </span>
                             @endif 
                         </div>
                     </div>
+                    
+                    
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">
-                    <i class="fa fa-dot-circle-o"></i> Submit
-                </button>
-                <button type="reset" class="btn btn-danger btn-sm">
-                    <i class="fa fa-ban"></i> Reset
-                </button>
+                    <i class="fa fa-dot-circle-o"></i> Update
+                </button>                
             </div>
             </form>
         </div>        
     </div>
 </div>
+
 @endsection

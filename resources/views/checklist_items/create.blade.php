@@ -9,11 +9,11 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Sublist
+                <strong>Create</strong> Checklist Item
             </div>            
-            <form action="{{ route('sublists.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('checklist_items.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             {{ csrf_field() }}
-            <input type="hidden" name="item_id" value="{{ $id }}">
+            <input type="hidden" name="checklist_id" value="{{ $id }}">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -25,6 +25,19 @@
                             @if ($errors->has('title'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('title') }}</strong>
+                                </span>
+                            @endif 
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="duedate" class=" form-control-label">Due Date</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="duedate" type="date" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
+                            @if ($errors->has('duedate'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('duedate') }}</strong>
                                 </span>
                             @endif 
                         </div>

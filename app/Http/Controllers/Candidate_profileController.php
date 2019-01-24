@@ -219,6 +219,7 @@ class Candidate_profileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd(request()->all());
         $this->validate($request, [
             'title'=> 'required|max:191', 
             'employer'=> 'required|max:191',            

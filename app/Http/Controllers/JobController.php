@@ -240,7 +240,7 @@ class JobController extends Controller
         //dd($shortlisted);
 
         $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id')->distinct()->get();
-
+        //dd($interviews);
         foreach ($interviews as $key => $value) 
         {
             //dd($value->candidate_id);
@@ -248,6 +248,7 @@ class JobController extends Controller
 
             $value->name = $user->name.' '.$user->lastname;
             $profile = Profile::where('user_id', $value->candidate_id)->first();
+            //dd($value->candidate_id, $profile);
             switch ($profile->experience_level) 
             {
                 case '1':

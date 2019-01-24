@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Sublist;
+use App\User;
+use App\Checklist_item;
+use App\Checklist_item_note;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
-class SublistController extends Controller
+class Checklist_item_noteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         //
@@ -36,7 +33,8 @@ class SublistController extends Controller
 
     public function add($id)
     {
-        return view('sublists.create', compact('id'));
+        //dd('add is hitted');
+        return view('checklist_item_notes.create', compact('id'));
     }
 
     /**
@@ -47,20 +45,18 @@ class SublistController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(request()->all());
         $this->validate($request, array(            
-            'title'=> 'required|max:191',
+            'note'=> 'required|max:2048',
         ));
-        $sublist = new Sublist;
-        $sublist->title = $request->title;
-        $sublist->item_id = $request->item_id;
-        $sublist->status = 0;
-        $sublist->save();
+        $notes = new Checklist_item_note;
+        $notes->note = $request->note;
+        $notes->item_id = $request->item_id;
+        $notes->save();
 
         
         //Mail::to($user1['email'])->send(new Task_assigned($user1, $task));
 
-        Alert::success('Success', 'You have added sublist to checklist')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        Alert::success('Success', 'You have added note to checklist item')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('checklist_items.show', $request->item_id);
     }
 
@@ -72,7 +68,7 @@ class SublistController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -83,8 +79,8 @@ class SublistController extends Controller
      */
     public function edit($id)
     {
-        $sublist = Sublist::find($id);
-        return view('sublists.edit', compact('sublist'));
+        $note = Checklist_item_note::find($id);
+        return view('checklist_item_notes.edit', compact('note'));
     }
 
     /**
@@ -97,17 +93,17 @@ class SublistController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, array(            
-            'title'=> 'required|max:191',
+            'note'=> 'required|max:2048',
         ));
-        $sublist = Sublist::find($id);
-        $sublist->title = $request->title;
-        $sublist->save();
+        $notes = Checklist_item_note::find($id);
+        $notes->note = $request->note;
+        $notes->save();
 
         
         //Mail::to($user1['email'])->send(new Task_assigned($user1, $task));
 
-        Alert::success('Success', 'You have sucessfully updated sublist')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('checklist_items.show', $sublist->item_id);
+        Alert::success('Success', 'You have sucessfully updated Notes')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('checklist_items.show', $notes->item_id);
     }
 
     /**

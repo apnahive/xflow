@@ -9,7 +9,7 @@
             <div class="card-header">
                 <strong>Add</strong> Checklist from Template
             </div>            
-            <form action="<?php echo e(route('assign_checklist.update', 'template')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('assign_checklist.update', $id)); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div class="card-body card-block">                    
@@ -31,7 +31,7 @@
                             <?php endif; ?> 
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="assign" class=" form-control-label">Assign</label>
                         </div>
@@ -48,7 +48,7 @@
                                 </span>
                             <?php endif; ?> 
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="duedate" class=" form-control-label">Due Date</label>

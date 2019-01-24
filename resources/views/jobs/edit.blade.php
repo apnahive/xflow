@@ -3,7 +3,39 @@
 
 @section('content')
 
-<a href="{{ route('projects.index') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<style type="text/css">
+    .bootstrap-tagsinput {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        display: block;
+        padding: 4px 6px;
+        color: #555;
+        vertical-align: middle;
+        border-radius: 4px;
+        max-width: 100%;
+        line-height: 22px;
+        cursor: text;
+    }
+    .bootstrap-tagsinput input {
+        border: none;
+        box-shadow: none;
+        outline: none;
+        background-color: transparent;
+        padding: 0 6px;
+        margin: 0;
+        width: auto;
+        max-width: inherit;
+    }
+    .label-info {
+        background-color: #5bc0de;
+        color: white;
+        padding: 1px 13px;
+    }
+</style>
+
+<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 
 <div class="row" style="margin-bottom: 100px;">
@@ -238,7 +270,7 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <div id="tags">
-                            <input type="text" id="skills" name="skills" placeholder="Skills" value="{{ old('skills', $job['skills']) }}" class="form-control" required>
+                            <input type="text" id="skills" name="skills" placeholder="Skills" value="{{ old('skills', $job['skills']) }}" class="form-control" data-role="tagsinput" required>
                             </div>
                             @if ($errors->has('skills'))
                                 <span class="help-block error">

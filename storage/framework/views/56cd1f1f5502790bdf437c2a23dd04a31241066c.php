@@ -1,32 +1,30 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Sublist
+                <strong>Add</strong> Notes
             </div>            
-            <form action="{{ route('sublists.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
-            <input type="hidden" name="item_id" value="{{ $id }}">
+            <form action="<?php echo e(route('checklist_item_notes.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
+            <input type="hidden" name="item_id" value="<?php echo e($id); ?>">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Title</label>
+                            <label for="note" class=" form-control-label">Notes</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control">
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
+                            <textarea name="note" id="note" rows="3" placeholder="Add note..." class="form-control" required></textarea>
+                            <?php if($errors->has('note')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong><?php echo e($errors->first('note')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
             </div>
@@ -42,4 +40,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

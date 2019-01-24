@@ -120,10 +120,10 @@
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
-                        <li class="{{ request()->is('userroles') ? 'active' : '' }}">
+                        <!-- <li class="{{ request()->is('userroles') ? 'active' : '' }}">
                             <a href="{{ route('userroles.index') }}">
                                 <i class="fas fa-users"></i>User Roles</a>
-                        </li>
+                        </li> -->
                         @endrole
                         @can('view calender')
                         <li class="{{ request()->is('calender') ? 'active' : '' }}">
@@ -170,11 +170,7 @@
                         @can('can create job')
                         <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
                             <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
-                        </li>
-                        <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
-                            <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                                <i class="fas fa-users"></i>Client Profile</a>
                         </li>
                         <li class="{{ request()->is('jobs') ? 'active' : '' }}">
                             <a href="{{ route('jobs.create') }}">
@@ -305,10 +301,10 @@
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
-                        <li class="{{ request()->is('userroles') ? 'active' : '' }}">
+                        <!-- <li class="{{ request()->is('userroles') ? 'active' : '' }}">
                             <a href="{{ route('userroles.index') }}">
                                 <i class="fas fa-users"></i>User Roles</a>
-                        </li>
+                        </li> -->
                         @endrole
 
                         @can('view calender')
@@ -356,7 +352,7 @@
                         @can('can create job')
                         <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
                             <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                                <i class="fas fa-users"></i>Client Profile</a>
                         </li>
                         <li class="{{ request()->is('jobs') ? 'active' : '' }}">
                             <a href="{{ route('jobs.create') }}">

@@ -120,10 +120,10 @@
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
-                        <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
+                        <!-- <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('userroles.index')); ?>">
                                 <i class="fas fa-users"></i>User Roles</a>
-                        </li>
+                        </li> -->
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
@@ -170,11 +170,7 @@
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
                         <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
-                        </li>
-                        <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                                <i class="fas fa-users"></i>Client Profile</a>
                         </li>
                         <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('jobs.create')); ?>">
@@ -305,10 +301,10 @@
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
                         </li>
-                        <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
+                        <!-- <li class="<?php echo e(request()->is('userroles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('userroles.index')); ?>">
                                 <i class="fas fa-users"></i>User Roles</a>
-                        </li>
+                        </li> -->
                         <?php endif; ?>
 
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
@@ -356,7 +352,7 @@
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
                         <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
-                                <i class="fas fa-users"></i>Recuriter Profile</a>
+                                <i class="fas fa-users"></i>Client Profile</a>
                         </li>
                         <li class="<?php echo e(request()->is('jobs') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('jobs.create')); ?>">

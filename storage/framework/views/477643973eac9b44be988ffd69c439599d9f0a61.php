@@ -7,12 +7,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Sublist
+                <strong>Create</strong> Checklist Item
             </div>            
-            <form action="<?php echo e(route('sublists.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('checklist_items.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <?php echo e(csrf_field()); ?>
 
-            <input type="hidden" name="item_id" value="<?php echo e($id); ?>">
+            <input type="hidden" name="checklist_id" value="<?php echo e($id); ?>">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -24,6 +24,19 @@
                             <?php if($errors->has('title')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('title')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="duedate" class=" form-control-label">Due Date</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
+                            <?php if($errors->has('duedate')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
                                 </span>
                             <?php endif; ?> 
                         </div>

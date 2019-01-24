@@ -9,22 +9,21 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Sublist
+                <strong>Add</strong> Notes
             </div>            
-            <form action="{{ route('sublists.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('checklist_item_notes.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             {{ csrf_field() }}
             <input type="hidden" name="item_id" value="{{ $id }}">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Title</label>
+                            <label for="note" class=" form-control-label">Notes</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control">
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
+                            <textarea name="note" id="note" rows="3" placeholder="Add note..." class="form-control" required></textarea>
+                            @if ($errors->has('note'))
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong>{{ $errors->first('note') }}</strong>
                                 </span>
                             @endif 
                         </div>

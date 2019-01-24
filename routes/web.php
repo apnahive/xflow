@@ -13,6 +13,7 @@
 use Illuminate\Http\Request;
 use App\City;
 use App\State;
+use App\Checklist_item;
 
 Route::get('/', function () {
     return view('welcome');
@@ -78,7 +79,9 @@ Route::post('search', 'SearchController@search')->name('search');
 //checklist 
 
 Route::resource('checklists', 'ChecklistController');
-Route::get('add_checklist', 'ChecklistController@add')->name('checklists.add');
+Route::resource('checklist_items', 'Checklist_itemController');
+Route::get('checklist_item/{id}', 'Checklist_itemController@add')->name('checklist_item.add');
+Route::get('add_checklist/{id}', 'ChecklistController@add')->name('checklists.add');
 Route::resource('checklist_templates', 'Checklist_templateController');
 Route::resource('checklist_for_templates', 'Checklist_for_templateController');
 
@@ -86,6 +89,8 @@ Route::resource('assign_checklist', 'Assign_checklistController');
 
 Route::resource('sublists', 'SublistController');
 Route::get('sublist/{id}', 'SublistController@add')->name('sublists.add');
+Route::resource('checklist_item_notes', 'Checklist_item_noteController');
+Route::get('checklist_item_note/{id}', 'Checklist_item_noteController@add')->name('checklist_item_notes.add');
 
 
 
@@ -135,4 +140,47 @@ Route::get('/information/create/ajax-state',function(Request $request)
     $subcategories = City::where('state_code','=',$state_id->state_code)->get();
     return $subcategories;
 
+});
+
+// Star checklist items route
+ 
+Route::get('/information/unstar/ajax-state',function(Request $request)
+{
+	//$request = Request
+    $item_id = $request->item_id;
+    $ids = explode('-', $item_id);
+    //dd($item_id);
+    $item = Checklist_item::find($ids[1]);
+    $item->star = 0;
+    $item->save();
+    
+    return $item;
+});
+
+Route::get('/information/star/ajax-state',function(Request $request)
+{
+	//$request = Request
+    $item_id = $request->item_id;
+    $ids = explode('-', $item_id);
+    //dd($item_id);
+    $item = Checklist_item::find($ids[1]);
+    $item->star = 1;
+    $item->save();
+    
+    return $item;
+});
+
+//checklist item complete route 
+
+Route::get('/information/checklist_item/ajax-state',function(Request $request)
+{
+	//$request = Request
+    $item_id = $request->item_id;
+    $ids = explode('-', $item_id);
+    //dd($item_id);
+    $item = Checklist_item::find($ids[1]);
+    $item->status = 1;
+    $item->save();
+    
+    return $item;
 });
