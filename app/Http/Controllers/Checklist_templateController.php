@@ -39,7 +39,7 @@ class Checklist_templateController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(            
-            'name'=> 'required|max:20',            
+            'name'=> 'required|max:191',            
         ));
         $checklist = new Checklist_template;
         $checklist->title = $request->name;        
@@ -84,7 +84,7 @@ class Checklist_templateController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, array(            
-            'name'=> 'required|max:20',            
+            'name'=> 'required|max:191',            
         ));
         $checklist = Checklist_template::find($id); 
         $checklist->title = $request->name;        

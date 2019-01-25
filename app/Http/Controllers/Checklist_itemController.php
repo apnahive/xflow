@@ -62,6 +62,7 @@ class Checklist_itemController extends Controller
         $item->checklist_id = $request->checklist_id;
         $item->assignee = $checklist->assignee;
         $item->status = 0;
+        $item->star = 0;
         $item->save();
 
         Alert::success('Success', 'You have successfully created Checklist Item')->showConfirmButton('Ok','#3085d6')->autoClose(15000);

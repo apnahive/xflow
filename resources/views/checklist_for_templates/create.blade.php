@@ -13,6 +13,7 @@
             </div>            
             <form action="{{ route('checklist_for_templates.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             {{ csrf_field() }}
+            <input type="hidden" name="template_id" value="{{ $id }}">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -28,24 +29,7 @@
                             @endif 
                         </div>
                     </div>                    
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="template_id" class=" form-control-label">Template</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="template_id" id="template_id" class="custom-select form-control chosen">
-                                <option value="0">Please select</option>
-                                @foreach ($checklist_templates as $checklist_template) 
-                                    <option value="{{$checklist_template->id}}">{{$checklist_template->title}}</option>
-                                @endforeach
-                            </select>
-                            @if ($errors->has('template_id'))
-                                <span class="help-block error">
-                                    <strong>{{ $errors->first('template_id') }}</strong>
-                                </span>
-                            @endif 
-                        </div>
-                    </div>
+                    
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">

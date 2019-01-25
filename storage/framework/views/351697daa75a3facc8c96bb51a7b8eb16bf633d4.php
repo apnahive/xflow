@@ -33,6 +33,11 @@
                         </div>                        
                     </div>
                     <div class="tab-pane fade" id="custom-nav-task" role="tabpanel" aria-labelledby="custom-nav-task-tab">
+                        <div class="row" style="margin: 25px 0;">
+                        <a href="<?php echo e(route('checklist_for_template.add', $checklist->id)); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            Add Template Item</button></a>
+                        </div>    
+                        
                         <div class="row">
                             <div class="col-md-12">                                
                                 <h3 class="title-5 m-b-35">Checklist</h3>

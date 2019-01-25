@@ -113,6 +113,7 @@ class Assign_checklistController extends Controller
             $item->checklist_id = $id;
             $item->assignee = $checklist->assignee;
             $item->status = 0;
+            $item->star = 0;
             $item->save();
         }
 

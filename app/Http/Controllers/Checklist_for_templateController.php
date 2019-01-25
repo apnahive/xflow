@@ -30,6 +30,12 @@ class Checklist_for_templateController extends Controller
         return view('checklist_for_templates.create', compact('checklist_templates'));
     }
 
+    public function add($id)
+    {
+        //$checklist_templates = Checklist_template::all();
+        return view('checklist_for_templates.create', compact('id'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +46,7 @@ class Checklist_for_templateController extends Controller
     {
         $this->validate($request, [
             'template_id'=> 'numeric|min:1',
-            'title'=> 'required|max:20',
+            'title'=> 'required|max:191',
             ],
             [
                 'template_id.min' => 'Please select a template.',
@@ -52,7 +58,7 @@ class Checklist_for_templateController extends Controller
         
         $checklist->save();
         Alert::success('Success', 'You have successfully added Checklist')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('checklists.index')->with('success', 'You have successfully added Checklist');
+        return redirect()->route('checklist_templates.show', $checklist->template_id)->with('success', 'You have successfully added Checklist');
     }
 
     /**
@@ -74,9 +80,9 @@ class Checklist_for_templateController extends Controller
      */
     public function edit($id)
     {
-        $checklist_templates = Checklist_template::all();
+        //$checklist_templates = Checklist_template::all();
         $checklist_for_template = Checklist_for_template::find($id);
-        return view('checklist_for_templates.edit', compact('checklist_templates', 'checklist_for_template'));
+        return view('checklist_for_templates.edit', compact('checklist_for_template'));
     }
 
     /**
@@ -90,19 +96,19 @@ class Checklist_for_templateController extends Controller
     {
         $this->validate($request, [
             'template_id'=> 'numeric|min:1',
-            'title'=> 'required|max:20',
+            'title'=> 'required|max:191',
             ],
             [
                 'template_id.min' => 'Please select a template.',
             ]
         );
         $checklist = Checklist_for_template::find($id);
-        $checklist->template_id = $request->template_id;
+        //$checklist->template_id = $request->template_id;
         $checklist->title = $request->title;        
         
         $checklist->save();
         Alert::success('Success', 'You have successfully updated Checklist item')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('checklists.index')->with('success', 'You have successfully added Checklist');
+        return redirect()->route('checklist_templates.show', $checklist->template_id)->with('success', 'You have successfully added Checklist');
     }
 
     /**

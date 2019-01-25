@@ -84,6 +84,7 @@ Route::get('checklist_item/{id}', 'Checklist_itemController@add')->name('checkli
 Route::get('add_checklist/{id}', 'ChecklistController@add')->name('checklists.add');
 Route::resource('checklist_templates', 'Checklist_templateController');
 Route::resource('checklist_for_templates', 'Checklist_for_templateController');
+Route::get('checklist_for_template/{id}', 'Checklist_for_templateController@add')->name('checklist_for_template.add');
 
 Route::resource('assign_checklist', 'Assign_checklistController');
 

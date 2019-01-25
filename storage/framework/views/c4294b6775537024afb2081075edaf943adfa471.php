@@ -12,6 +12,7 @@
             <form action="<?php echo e(route('checklist_for_templates.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <?php echo e(csrf_field()); ?>
 
+            <input type="hidden" name="template_id" value="<?php echo e($id); ?>">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -27,24 +28,7 @@
                             <?php endif; ?> 
                         </div>
                     </div>                    
-                    <div class="row form-group">
-                        <div class="col col-md-3">
-                            <label for="template_id" class=" form-control-label">Template</label>
-                        </div>
-                        <div class="col-12 col-md-9">
-                            <select name="template_id" id="template_id" class="custom-select form-control chosen">
-                                <option value="0">Please select</option>
-                                <?php $__currentLoopData = $checklist_templates; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $checklist_template): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
-                                    <option value="<?php echo e($checklist_template->id); ?>"><?php echo e($checklist_template->title); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </select>
-                            <?php if($errors->has('template_id')): ?>
-                                <span class="help-block error">
-                                    <strong><?php echo e($errors->first('template_id')); ?></strong>
-                                </span>
-                            <?php endif; ?> 
-                        </div>
-                    </div>
+                    
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">
