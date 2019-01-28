@@ -65,7 +65,13 @@
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
-                                            <tr>                                                
+                                            <tr>
+                                                <th style="width: 10%;">
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox" id="checkAll" disabled="disabled">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </th>
                                                 <th>Sub-list</th>
                                                 <!-- <th>Category</th>
                                                 <th>Estimated Time</th> -->
@@ -74,13 +80,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($sublists as $sublistkey => $value)
-                                            <tr class="tr-shadow">
-                                                <!-- <td>
+                                            <tr @if($value->status == 1) class="tr-shadow ticked" @else class="tr-shadow" @endif>
+                                                <td style="width: 10%;">
                                                     <label class="au-checkbox">
-                                                        <input type="checkbox">
+                                                        <input type="checkbox" class="item-check" id="item-{{ $value->id }}" @if($value->status == 1) checked="checked" disabled="disabled" @endif>
                                                         <span class="au-checkmark"></span>
                                                     </label>
-                                                </td> -->
+                                                </td>
                                                 <td>{{ $value->title }}</td>
                                                 <!-- <td></td> -->
                                                 <!-- <td></td>                        
@@ -166,6 +172,32 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    .checked {
+        color: orange;
+    }
+    .ticked {
+        text-decoration:line-through;
+    }
+</style>
+<script type="text/javascript">
+    $('.item-check').on('change', function(e){
+
+        var item_id = e.target.id;
+        $(this).attr("disabled", true);
+
+        var ru = $(this).closest('.tr-shadow');
+        $(ru).addClass('ticked');
+        
+        $.get('{{ url('information') }}/sublist_item/ajax-state?item_id=' + item_id, function(data) {
+            console.log(data);
+        });
+        
+        console.log(item_id);
+        console.log(ru);
+    });
+</script>
 
 
 @endsection

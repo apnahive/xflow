@@ -43,13 +43,13 @@
                         
                         <div class="row">
                             <div class="col-md-12">                                
-                                <h3 class="title-5 m-b-35">Checklist</h3>
+                                <!-- <h3 class="title-5 m-b-35">Checklist</h3> -->
                                 
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>                                                
-                                                <th>Checklist</th>
+                                                <th>Checklist Items</th>
                                                 <!-- <th>Category</th>
                                                 <th>Estimated Time</th> -->
                                                 <th></th>

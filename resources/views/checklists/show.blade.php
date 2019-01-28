@@ -54,7 +54,7 @@
                         <td>{{ $value->duedate }}</td>
                         <td>
                             @if($value->sublist == 1)
-                                <i class="fas fa-list" style="color: #63c76a;float: right;"></i>
+                                <a href="{{ route('checklist_items.show', $value->id) }}"><i class="fas fa-list" style="color: #63c76a;float: right;" data-toggle="tooltip" title="Sublist"></i></a>
                             @endif
                         </td>
                         <!-- <td></td>                        
@@ -122,7 +122,7 @@
                         <td>{{ $value->duedate }}</td>
                         <td>
                             @if($value->sublist == 1)
-                                <i class="fas fa-list" style="color: #63c76a;float: right;"></i>
+                                <a href="{{ route('checklist_items.show', $value->id) }}"><i class="fas fa-list" style="color: #63c76a;float: right;" data-toggle="tooltip" title="Sublist"></i></a>
                             @endif
                         </td>                        
                         <!-- <td></td>                        

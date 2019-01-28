@@ -194,7 +194,7 @@ class JobController extends Controller
 
 
         Alert::success('Success', 'You have successfully created Job')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('jobs.create');
+        return redirect()->route('jobs.show', $job->id);
 
     }
 

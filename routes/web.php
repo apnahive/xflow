@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\City;
 use App\State;
 use App\Checklist_item;
+use App\Sublist;
 
 Route::get('/', function () {
     return view('welcome');
@@ -180,6 +181,21 @@ Route::get('/information/checklist_item/ajax-state',function(Request $request)
     $ids = explode('-', $item_id);
     //dd($item_id);
     $item = Checklist_item::find($ids[1]);
+    $item->status = 1;
+    $item->save();
+    
+    return $item;
+});
+
+//sublist item complete
+
+Route::get('/information/sublist_item/ajax-state',function(Request $request)
+{
+    //$request = Request
+    $item_id = $request->item_id;
+    $ids = explode('-', $item_id);
+    //dd($item_id);
+    $item = Sublist::find($ids[1]);
     $item->status = 1;
     $item->save();
     

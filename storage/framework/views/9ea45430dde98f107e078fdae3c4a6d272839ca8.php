@@ -50,7 +50,7 @@
                             <label for="duedate" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
+                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo e(old('duedate', $checklist['duedate'])); ?>" required autofocus>
                             <?php if($errors->has('duedate')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('duedate')); ?></strong>

@@ -52,7 +52,7 @@
                         <td><?php echo e($value->duedate); ?></td>
                         <td>
                             <?php if($value->sublist == 1): ?>
-                                <i class="fas fa-list" style="color: #63c76a;float: right;"></i>
+                                <a href="<?php echo e(route('checklist_items.show', $value->id)); ?>"><i class="fas fa-list" style="color: #63c76a;float: right;" data-toggle="tooltip" title="Sublist"></i></a>
                             <?php endif; ?>
                         </td>
                         <!-- <td></td>                        
@@ -120,7 +120,7 @@
                         <td><?php echo e($value->duedate); ?></td>
                         <td>
                             <?php if($value->sublist == 1): ?>
-                                <i class="fas fa-list" style="color: #63c76a;float: right;"></i>
+                                <a href="<?php echo e(route('checklist_items.show', $value->id)); ?>"><i class="fas fa-list" style="color: #63c76a;float: right;" data-toggle="tooltip" title="Sublist"></i></a>
                             <?php endif; ?>
                         </td>                        
                         <!-- <td></td>                        
