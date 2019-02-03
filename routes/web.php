@@ -74,8 +74,12 @@ Route::get('images/{slug}', [
 
 Route::post('search', 'SearchController@search')->name('search');
 
-
-
+//team
+Route::resource('teams', 'TeamController');
+Route::resource('teammembers', 'TeamMemberController');
+Route::get('add_members/{id}', 'TeamMemberController@add')->name('teammembers.add');
+//xflow
+Route::resource('xflows', 'XflowController');
 
 //checklist 
 

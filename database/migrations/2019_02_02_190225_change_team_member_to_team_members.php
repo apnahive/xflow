@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddElectronicSignatureToFormSignsTable extends Migration
+class ChangeTeamMemberToTeamMembers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddElectronicSignatureToFormSignsTable extends Migration
      */
     public function up()
     {
-        Schema::table('form_signs', function (Blueprint $table) {
-            $table->string('electronic_signature')->nullable();
-        });
+        Schema::rename('team_member', 'team_members');
     }
 
     /**
@@ -25,6 +23,6 @@ class AddElectronicSignatureToFormSignsTable extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('form_signs');
+        Schema::dropIfExists('team_members');
     }
 }

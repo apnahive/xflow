@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddElectronicSignatureToFormSignsTable extends Migration
+class AddUserIdColumnToXflowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddElectronicSignatureToFormSignsTable extends Migration
      */
     public function up()
     {
-        Schema::table('form_signs', function (Blueprint $table) {
-            $table->string('electronic_signature')->nullable();
+        Schema::table('xflows', function (Blueprint $table) {
+            //
+            $table->integer('user_id');
         });
     }
 
@@ -25,6 +26,8 @@ class AddElectronicSignatureToFormSignsTable extends Migration
      */
     public function down()
     {
-         Schema::dropIfExists('form_signs');
+        Schema::table('xflows', function (Blueprint $table) {
+            //
+        });
     }
 }
