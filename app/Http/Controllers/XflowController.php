@@ -161,6 +161,7 @@ class XflowController extends Controller
 
     public function status($id)
     {
+        //dd('status changing');
         $xflow = Xflow::find($id);
         switch ($xflow->status) 
         {

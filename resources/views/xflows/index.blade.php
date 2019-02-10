@@ -101,7 +101,7 @@
                                 </button>
                                 @endif
 
-                                <form id="{{$value->id}}" action="{{ route('xflows.status', $value->id) }}" method="GET" style="display: none;">
+                                <form id="{{$value->id}}" action="{{ route('xflows.status', $value->id) }}" style="display: none;">
                                 
                                 </form>
                                 <div class="modal fade" id="status{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">

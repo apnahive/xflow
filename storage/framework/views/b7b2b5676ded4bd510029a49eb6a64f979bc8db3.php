@@ -99,7 +99,7 @@
                                 </button>
                                 <?php endif; ?>
 
-                                <form id="<?php echo e($value->id); ?>" action="<?php echo e(route('xflows.status', $value->id)); ?>" method="GET" style="display: none;">
+                                <form id="<?php echo e($value->id); ?>" action="<?php echo e(route('xflows.status', $value->id)); ?>" style="display: none;">
                                 
                                 </form>
                                 <div class="modal fade" id="status<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
