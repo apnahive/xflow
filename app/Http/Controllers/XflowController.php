@@ -8,6 +8,7 @@ use App\User;
 use App\Team;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use DateTime;
 
 class XflowController extends Controller
 {
@@ -25,6 +26,7 @@ class XflowController extends Controller
     {
         //
         $id1 = Auth::id();
+        $now = new \DateTime();
         //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
         $useradmin = User::role('Admin')->select('id')->get();        
         $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
@@ -33,16 +35,58 @@ class XflowController extends Controller
         foreach ($xflows as $key => $value) 
         {
             $userx = User::find($value->assignee);
-            //dd($userx);
-            $value->user = $userx->name;
-            /*if(Sublist::where('checklist_id', $value->id)->exists())
-                $value->sublist = 1;
+            $value->assignto = $userx->name.' '.$userx->lastname;
+            $team = Team::find($value->team_id);
+            $value->team = $team->name;
+            switch ($value->status) 
+            {
+                case 0: 
+                    $value->statuss = 'Pending';
+                    break;
+                case 1: 
+                    $value->statuss = 'Initiated';
+                    break;
+                case 2: 
+                    $value->statuss = 'In-work';
+                    break;
+                case 3: 
+                    $value->statuss = 'Finishing';
+                    break;
+                case 4: 
+                    $value->statuss = 'Completed';
+                    break;
+                
+                default:
+                    # code... pending, initiated, inwork, finishing, complete
+                    break;
+            }
+
+            //for the timeline
+            $date1 = new DateTime($value->startdate);
+            $date2 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            $d1 = date_diff($date1, $date2);
+            $d2 = date_diff($now, $date2);
+            //dd($d->days, $d->invert);
+            if($d->invert == 0)
+            {
+
+                $value->remaining = $d1->days.' days';
+            }
             else
-                $value->sublist = 0;*/
+            {
+                if($d2->invert == 0)
+                {
+                    $value->remaining = $d2->days.' days';
+                }
+                else
+                    $value->remaining = 'past due date';
+            }
 
        }
-        //dd($checklists);
-        return view('xflows.index', compact('xflows','users'));
+        //dd($xflows);
+        return view('xflows.index', compact('xflows'));
+
     }
 
     /**
@@ -77,7 +121,8 @@ class XflowController extends Controller
             'assign-team'=> 'numeric|min:1',             
             ],
             [
-                'assign.min' => 'Please choose a user.',                
+                'assign.min' => 'Please choose a user.',
+                'assignteam.min' => 'Please choose a Team.',                
             ]
         );
 
@@ -104,9 +149,43 @@ class XflowController extends Controller
      * @param  \App\xflow  $xflow
      * @return \Illuminate\Http\Response
      */
-    public function show(xflow $xflow)
+    public function show($id)
     {
-        //
+        $xflow = Xflow::find($id);
+        $team = Team::find($xflow->team_id);
+        $user = User::find($xflow->assignee);
+
+        //dd($xflow);
+        return view('xflows.show', compact('user','team', 'xflow'));
+    }
+
+    public function status($id)
+    {
+        $xflow = Xflow::find($id);
+        switch ($xflow->status) 
+        {
+            case 0:
+                $xflow->status = 1;       
+                break;
+            case 1:
+                $xflow->status = 2;       
+                break;
+            case 2:
+                $xflow->status = 3;       
+                break;
+            case 3:
+                $xflow->status = 4;       
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        $xflow->save();
+
+        Alert::success('Success', 'You have successfully updated Xflow status')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('xflows.index');
+        
     }
 
     /**
@@ -115,9 +194,15 @@ class XflowController extends Controller
      * @param  \App\xflow  $xflow
      * @return \Illuminate\Http\Response
      */
-    public function edit(xflow $xflow)
+    public function edit($id)
     {
-        //
+        $xflow = Xflow::find($id);
+        $teams = Team::all();
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
+        //dd($xflow);
+        return view('xflows.edit', compact('users','teams', 'xflow'));
     }
 
     /**
@@ -127,9 +212,37 @@ class XflowController extends Controller
      * @param  \App\xflow  $xflow
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, xflow $xflow)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [            
+            'title'=> 'required|max:191',
+            'description'=> 'required|max:191',
+            'duedate'=> 'required|date',
+            'startdate'=> 'required|date',
+            'assign'=> 'numeric|min:1',
+            'assign-team'=> 'numeric|min:1',             
+            ],
+            [
+                'assign.min' => 'Please choose a user.',
+                'assignteam.min' => 'Please choose a Team.',
+            ]
+        );
+
+        //$id1 = Auth::id();
+
+        $xflow = Xflow::find($id);        
+        $xflow->title = $request->title;
+        $xflow->description = $request->description;
+        $xflow->assignee = $request->assign;
+        $xflow->team_id = $request->assignteam;
+        $xflow->duedate = $request->duedate;
+        $xflow->startdate = $request->startdate;  
+        //status to be pending, initiated, inwork, finishing, complete      
+        //$xflow->status = 0;
+        //$xflow->user_id = $id1;
+        $xflow->save();
+        Alert::success('Success', 'You have successfully updated Xflow')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('xflows.index')->with('success', 'You have successfully created Xflow');
     }
 
     /**

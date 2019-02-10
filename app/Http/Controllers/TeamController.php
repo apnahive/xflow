@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Team;
+use App\Team_member;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeamController extends Controller
@@ -50,7 +51,7 @@ class TeamController extends Controller
     {
         
         //dd(request()->all());
-         $this->validate($request, [            
+        $this->validate($request, [            
             'title'=> 'required|max:191',
             ]
         );
@@ -69,19 +70,41 @@ class TeamController extends Controller
    
     public function show($id)
     {
-        return view('teams.create', compact('users'));
+        $team = Team::find($id);
+        $team_members = Team_member::where('team_id', $id)->get();
+        foreach ($team_members as $key => $value) 
+        {
+            $user = User::find($value->user_id);
+            $value->name = $user->name.' '.$user->lastname;
+        }
+        //dd($team_members);
+        return view('teams.show', compact('team', 'team_members'));
     }
 
     
-    public function edit(xflow $xflow)
+    public function edit($id)
     {
-        //
+        //dd('test');
+        $team = Team::find($id);
+        return view('teams.edit', compact('team'));
     }
 
    
-    public function update(Request $request, xflow $xflow)
+    public function update(Request $request, $id)
     {
-        //
+        //dd(request()->all());
+        $this->validate($request, [            
+            'title'=> 'required|max:191',
+            ]
+        );
+
+        
+
+        $team = Team::find($id);        
+        $team->name = $request->title;
+        $team->save();
+        Alert::success('Success', 'You have successfully Updated team')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('teams.index')->with('success', 'You have successfully created Team');
     }
 
     

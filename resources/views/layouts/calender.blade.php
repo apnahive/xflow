@@ -137,10 +137,14 @@
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         @endcan
-                        @can('xflow view')
+                         @can('xflow view')
                         <li class="{{ request()->is('xflows') ? 'active' : '' }}">
                             <a href="{{ route('xflows.index') }}">
                             <i class="fas fa-cogs"></i>Xflow</a>
+                        </li>                        
+                        <li class="{{ request()->is('teams') ? 'active' : '' }}">
+                            <a href="{{ route('teams.index') }}">
+                            <i class="fas fa-cogs"></i>Team</a>
                         </li>
                         @endcan
                         @can('checklist view')
@@ -318,10 +322,15 @@
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         @endcan
-                        @can('xflow view')
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-cogs"></i>Xflow</a>
+                         @can('xflow view')
+                        <li class="{{ request()->is('xflows') ? 'active' : '' }}">
+                            <a href="{{ route('xflows.index') }}">
+                            <i class="fas fa-cogs"></i>Xflow</a>
+                        </li>
+                       
+                        <li class="{{ request()->is('teams') ? 'active' : '' }}">
+                            <a href="{{ route('teams.index') }}">
+                            <i class="fas fa-cogs"></i>Team</a>
                         </li>
                         @endcan
                         @can('checklist view')

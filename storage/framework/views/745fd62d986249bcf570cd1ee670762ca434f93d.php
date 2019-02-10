@@ -20,8 +20,10 @@
 
             <div class="card-body card-block">
                 <div class="row" style="margin: 0 0;">
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
                 <a href="<?php echo e(route('candidate_detail.edit', $profile['id'])); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Edit</button></a>
+                <?php endif; ?>
                 </div>
                 <h3 class="title-5 m-b-35">Personal Details</h3>
                     <div class="row form-group">
@@ -94,8 +96,10 @@
                     </div>
 
                 <div class="row" style="margin: 0 0;">
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
                 <a href="<?php echo e(route('profiles.edit', $profile['id'])); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Edit</button></a>
+                <?php endif; ?>
                 </div>
                 <h3 class="title-5 m-b-35">Professional Details</h3>
 
@@ -335,6 +339,87 @@
 
                         </div>
                     </div>
+
+                <div class="row" style="margin: 0 0;">
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                <a href="<?php echo e(route('candidate_experiences.create')); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    Add Experience</button></a>
+                <?php endif; ?>
+                </div>
+                <h3 class="title-5 m-b-35">Experience Details</h3>
+                <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>Project Name</th> 
+                                <th>Working Hours</th> 
+                                <!-- <th>Expert level</th>
+                                <th>Skills</th>
+                                <th>Qualification</th> -->
+                                <!-- <th>status</th>
+                                <th>price</th> -->
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $__currentLoopData = $experiences; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            
+                            <tr class="tr-shadow">
+                                <td><?php echo e($value->title); ?></td>
+                                <td><?php echo e($value->hours); ?></td>
+                                
+                                <td>
+                                    <div class="table-data-feature">
+                                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                                        <a href="<?php echo e(route('candidate_experiences.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button></a>
+                                        
+                                        
+                                        <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($value->id); ?>" data-backdrop="false">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+
+                                        
+
+                                        <form id="<?php echo e($value->id); ?>" action="" method="POST" style="display: none;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                        </form>
+                                        <div class="modal fade" id="confirm<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content" style="text-align: left;">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Experience</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Under Development
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Experience</button>
+                                                <a onclick="event.preventDefault(); document.getElementById( <?php echo e($value->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        
+                                        
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                        </tbody>
+                    </table>
+                    
+                </div>
                     
             </div>            
         </div>        

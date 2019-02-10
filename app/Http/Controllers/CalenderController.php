@@ -9,6 +9,8 @@ use App\User;
 use App\Project;
 use App\Project_user;
 use DateTime;
+use App\xflow;
+use App\Team;
 use Illuminate\Support\Facades\Auth;
 
 class CalenderController extends Controller
@@ -133,6 +135,121 @@ class CalenderController extends Controller
             return view('errors.401');
         //return view('calender.index', compact('calendar'));
     }
+    public function xflow_index()
+    {        
+        $events = [];
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
+            $tasks = xflow::select('duedate')->distinct()->get();
+        else
+        {
+            //$projects = Project::where('poc', $id1)
+            //$projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+            //removed from below query ->orWhere('project_id', $projects)
+            $tasks = xflow::where('assignee', $id1)->select('duedate')->distinct()->get(); 
+            //dd($tasks);
+            //$tasks = Task::select('duedate')->distinct()->get();
+        }
+
+        
+
+        foreach ($tasks as $taskkey => $task) 
+        {
+            if($checkadmins)
+            {
+                $taskcount = xflow::where('duedate', $task->duedate)->get();
+                /*if(!$taskcount)
+                    $taskcount[0]->time = floor($taskcount[0]->estimated_time_to_complete/60);*/
+                //dd($taskcount);
+            }
+            else
+            {                
+                //$projects = Project::where('poc', $id1)->orWhere('cco', $id1)->select('id')->get();
+
+                // removed from below query ->orWhere('project_id', $projects)
+                $taskcount = xflow::where('duedate', $task->duedate)->where('assignee', $id1)->get();                
+            }
+            
+            $count = count($taskcount);
+            //dd($count);
+            if($count == 1)
+            {
+                $taskcount[0]->time = floor($taskcount[0]->estimated_time_to_complete/60);
+                //dd($taskcount[0]->estimated_time_to_complete);
+                $events[] = \Calendar::event(
+                    $count.' xflow due',
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('xflow.calender_date', $task->duedate),
+                     ]
+                );    
+            }
+            elseif($count == 0)
+            {
+                $events[] = \Calendar::event(
+                    'Xflow completed',
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('xflow.calender_date', $task->duedate),
+                     ]
+                );    
+            }
+            else
+            {
+                /*$time = 0;
+                foreach ($taskcount as $countkey => $value) 
+                {
+                    $time = $time + $value->estimated_time_to_complete;    
+                } 
+                $taskcount->time = floor($time/60);*/
+                //dd($taskcount->time);
+
+                $events[] = \Calendar::event(
+                    $count.' xflow due',
+                    true,
+                    new \DateTime($task->duedate),
+                    new \DateTime($task->duedate),
+                    1,            
+                     [
+                         'color' => '#59bd60',
+                         'url' => route('xflow.calender_date', $task->duedate),
+                     ]
+                );    
+
+            }
+
+            
+        }
+        //dd($tasks);
+        
+
+       /* $events[] = \Calendar::event(
+            "Valentine's Day", //event title
+            true, //full day event?
+            new \DateTime('2018-09-14'), //start time (you can also use Carbon instead of DateTime)
+            new \DateTime('2018-09-14'), //end time (you can also use Carbon instead of DateTime)
+            'stringEventId' //optionally, you can specify an event ID
+        );*/
+        
+        $calendar = Calendar::addEvents($events);
+        //dd($calendar);
+        if (Auth::user()->hasPermissionTo('view calender'))
+            return view('calender.index', compact('calendar'));
+        else
+            return view('errors.401');
+        //return view('calender.index', compact('calendar'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -161,6 +278,71 @@ class CalenderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function xflow_show($id)
+    {
+        //dd('date hitted');
+        $id1 = Auth::id();
+        $now = new \DateTime();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
+        $xflows = xflow::where('duedate', $id)->get();
+        foreach ($xflows as $key => $value) 
+        {
+            $userx = User::find($value->assignee);
+            $value->assignto = $userx->name.' '.$userx->lastname;
+            $team = Team::find($value->team_id);
+            $value->team = $team->name;
+            switch ($value->status) 
+            {
+                case 0: 
+                    $value->statuss = 'Pending';
+                    break;
+                case 1: 
+                    $value->statuss = 'Initiated';
+                    break;
+                case 2: 
+                    $value->statuss = 'In-work';
+                    break;
+                case 3: 
+                    $value->statuss = 'Finishing';
+                    break;
+                case 4: 
+                    $value->statuss = 'Completed';
+                    break;
+                
+                default:
+                    # code... pending, initiated, inwork, finishing, complete
+                    break;
+            }
+
+            //for the timeline
+            $date1 = new DateTime($value->startdate);
+            $date2 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            $d1 = date_diff($date1, $date2);
+            $d2 = date_diff($now, $date2);
+            //dd($d->days, $d->invert);
+            if($d->invert == 0)
+            {
+
+                $value->remaining = $d1->days.' days';
+            }
+            else
+            {
+                if($d2->invert == 0)
+                {
+                    $value->remaining = $d2->days.' days';
+                }
+                else
+                    $value->remaining = 'past due date';
+            }
+
+       }
+        //dd($xflows);
+        return view('calender.xflow_show', compact('xflows'));
+    }
     public function show($id)
     {
         //dd($id);

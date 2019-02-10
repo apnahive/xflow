@@ -62,6 +62,8 @@ Route::post('taskss/allcopy', 'TaskController@deleteCopies')->name('tasks.delete
 
 Route::resource('fileupload', 'FileUploadController');
 Route::resource('calender', 'CalenderController');
+Route::get('calender_xflow', 'CalenderController@xflow_index')->name('xflow.calender');
+Route::get('calender_xflow/{id}', 'CalenderController@xflow_show')->name('xflow.calender_date');
 
 
 
@@ -80,6 +82,7 @@ Route::resource('teammembers', 'TeamMemberController');
 Route::get('add_members/{id}', 'TeamMemberController@add')->name('teammembers.add');
 //xflow
 Route::resource('xflows', 'XflowController');
+Route::get('xflow_status/{id}', 'XflowController@status')->name('xflows.status');
 
 //checklist 
 
@@ -127,6 +130,7 @@ Route::resource('jobs', 'JobController');
 Route::resource('interviewed', 'Interview_scheduleController');
 Route::resource('profiles', 'Candidate_profileController');
 Route::resource('candidate_detail', 'Candidate_detailController');
+Route::resource('candidate_experiences', 'Candidate_experienceController');
 Route::resource('client_profiles', 'Client_profileController');
 
 Route::resource('shortlisted', 'Job_shortlistedController');

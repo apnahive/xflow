@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
@@ -18,16 +16,16 @@
                                 </style> -->
 
                             <!-- <h3 class="title-5 m-b-35">Add users to the Team</h3> -->
-                                <link href="{{ asset('css/select.css') }}" rel="stylesheet">
+                                <link href="<?php echo e(asset('css/select.css')); ?>" rel="stylesheet">
 
-                                <form action="{{ route('teammembers.update', $team['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="<?php echo e(route('teammembers.update', $team['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <input type="hidden" name="_method" value="PUT">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <div class="subject-info-box-1">
                                       <select multiple="true" id="lstBox1" name="no_user[]" class="form-control">
-                                        @foreach ($users as $userkey => $user)
-                                        <option value="{{ $user->id }}">{{ $user->name }} {{ $user->lastname }}</option>
-                                        @endforeach
+                                        <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userkey => $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></option>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </select>
                                 </div>
 
@@ -40,9 +38,9 @@
 
                               <div class="subject-info-box-2">
                                   <select multiple="true" id="lstBox2" name="users[]" class="form-control" >
-                                    @foreach ($selected_users as $key => $selected_user)
-                                    <option value="{{ $selected_user->id }}">{{ $selected_user->name }} {{ $selected_user->lastname }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $selected_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $selected_user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <option value="<?php echo e($selected_user->id); ?>"><?php echo e($selected_user->name); ?> <?php echo e($selected_user->lastname); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 29px;">
@@ -53,7 +51,7 @@
                             <div class="clearfix"></div>    
 
                               <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-                              <script src="{{ asset('js/select.js') }}" defer></script>
+                              <script src="<?php echo e(asset('js/select.js')); ?>" defer></script>
                               
 
                                 <!-- <script>       
@@ -70,4 +68,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

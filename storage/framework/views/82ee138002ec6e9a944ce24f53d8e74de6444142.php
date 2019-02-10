@@ -138,9 +138,13 @@
                         </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-cogs"></i>Xflow</a>
+                        <li class="<?php echo e(request()->is('xflows') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('xflows.index')); ?>">
+                            <i class="fas fa-cogs"></i>Xflow</a>
+                        </li>                        
+                        <li class="<?php echo e(request()->is('teams') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('teams.index')); ?>">
+                            <i class="fas fa-cogs"></i>Team</a>
                         </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
@@ -320,11 +324,17 @@
                         </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-cogs"></i>Xflow</a>
+                        <li class="<?php echo e(request()->is('xflows') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('xflows.index')); ?>">
+                            <i class="fas fa-cogs"></i>Xflow</a>
+                        </li>
+                       
+                        <li class="<?php echo e(request()->is('teams') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('teams.index')); ?>">
+                            <i class="fas fa-cogs"></i>Team</a>
                         </li>
                         <?php endif; ?>
+
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">

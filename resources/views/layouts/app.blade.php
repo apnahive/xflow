@@ -141,9 +141,7 @@
                         <li class="{{ request()->is('xflows') ? 'active' : '' }}">
                             <a href="{{ route('xflows.index') }}">
                             <i class="fas fa-cogs"></i>Xflow</a>
-                        </li>
-                        @endcan
-                        @can('team view')
+                        </li>                        
                         <li class="{{ request()->is('teams') ? 'active' : '' }}">
                             <a href="{{ route('teams.index') }}">
                             <i class="fas fa-cogs"></i>Team</a>

@@ -21,8 +21,9 @@ class TeamMemberController extends Controller
     {
         //
         $team = Team::find($id);
-        $users = User::where('verified', 1)->get();  //samar- to remove selected users.
         $teammember = Team_member::where('team_id', $id)->select('user_id')->get();
+        $users = User::where('verified', 1)->whereNotIn('id', $teammember)->get();  //samar- to remove selected users.
+        
         $selected_users = User::whereIn('id', $teammember)->get();
         return view('teams.add', compact('team','users','selected_users'));
     }
@@ -91,22 +92,22 @@ class TeamMemberController extends Controller
        // dd($no_users);
         if($users)
         {
-        foreach ($users as $key => $value) 
-        {
-            if(Team_member::where('user_id', '=', $value)->where('team_id', '=', $team->id)->exists())
+            foreach ($users as $key => $value) 
             {
+                if(Team_member::where('user_id', '=', $value)->where('team_id', '=', $team->id)->exists())
+                {
 
+                }
+                else
+                {
+                    $team_member = new Team_member;
+                    $team_member->team_id = $team->id;
+                    $team_member->user_id = $value;
+                   
+                    $team_member->save();    
+                }
+                
             }
-            else
-            {
-                $team_member = new Team_member;
-                $team_member->team_id = $team->id;
-                $team_member->user_id = $value;
-               
-                $team_member->save();    
-            }
-            
-        }
         }
         if($no_users)
         {

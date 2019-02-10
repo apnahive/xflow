@@ -22,8 +22,10 @@
 
             <div class="card-body card-block">
                 <div class="row" style="margin: 0 0;">
+                @can('can apply job')
                 <a href="{{ route('candidate_detail.edit', $profile['id']) }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Edit</button></a>
+                @endcan
                 </div>
                 <h3 class="title-5 m-b-35">Personal Details</h3>
                     <div class="row form-group">
@@ -89,8 +91,10 @@
                     </div>
 
                 <div class="row" style="margin: 0 0;">
+                @can('can apply job')
                 <a href="{{ route('profiles.edit', $profile['id']) }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Edit</button></a>
+                @endcan
                 </div>
                 <h3 class="title-5 m-b-35">Professional Details</h3>
 
@@ -320,6 +324,87 @@
                             {{ $profile['salary_expected'] }}
                         </div>
                     </div>
+
+                <div class="row" style="margin: 0 0;">
+                @can('can apply job')
+                <a href="{{ route('candidate_experiences.create') }}"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    Add Experience</button></a>
+                @endcan
+                </div>
+                <h3 class="title-5 m-b-35">Experience Details</h3>
+                <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>Project Name</th> 
+                                <th>Working Hours</th> 
+                                <!-- <th>Expert level</th>
+                                <th>Skills</th>
+                                <th>Qualification</th> -->
+                                <!-- <th>status</th>
+                                <th>price</th> -->
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($experiences as $key => $value)
+                            
+                            <tr class="tr-shadow">
+                                <td>{{ $value->title }}</td>
+                                <td>{{ $value->hours }}</td>
+                                
+                                <td>
+                                    <div class="table-data-feature">
+                                        @can('can apply job')
+                                        <a href="{{ route('candidate_experiences.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </button></a>
+                                        
+                                        
+                                        <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+
+                                        
+
+                                        <form id="{{$value->id}}" action="" method="POST" style="display: none;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        </form>
+                                        <div class="modal fade" id="confirm{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content" style="text-align: left;">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Experience</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+                                                Under Development
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Experience</button>
+                                                <a onclick="event.preventDefault(); document.getElementById( {{$value->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! Delete it</button></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        @endcan
+                                        
+                                        
+                                        
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="spacer"></tr>
+                            
+                            @endforeach
+
+                        </tbody>
+                    </table>
+                    
+                </div>
                     
             </div>            
         </div>        

@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="row" style="margin-bottom: 100px;">
@@ -17,7 +15,7 @@
                             <label for="title" class=" form-control-label">Title</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $xflow['title'] }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($xflow['title']); ?></label>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -25,7 +23,7 @@
                             <label for="description" class=" form-control-label">Description</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $xflow['description'] }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($xflow['description']); ?></label>
                             
                         </div>
                     </div> 
@@ -34,7 +32,7 @@
                             <label for="assign" class=" form-control-label">Assign User</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $user->name }} {{ $user->lastname }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?></label>
                             
                         </div>
                     </div>
@@ -43,7 +41,7 @@
                             <label for="assignteam" class=" form-control-label">Assign Team</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $team->name }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($team->name); ?></label>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -51,7 +49,7 @@
                             <label for="startdate" class=" form-control-label">Start Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $xflow['startdate'] }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($xflow['startdate']); ?></label>
                             
                         </div>
                     </div>
@@ -60,7 +58,7 @@
                             <label for="duedate" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <label for="title" class=" form-control-label">{{ $xflow['duedate'] }}</label>
+                            <label for="title" class=" form-control-label"><?php echo e($xflow['duedate']); ?></label>
                             
                         </div>
                     </div>
@@ -73,4 +71,5 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

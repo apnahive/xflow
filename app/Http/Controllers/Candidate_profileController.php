@@ -9,6 +9,7 @@ use App\City;
 use App\User;
 use App\Profile;
 use App\Candidate_detail;
+use App\Candidate_experience;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Candidate_profileController extends Controller
@@ -180,15 +181,18 @@ class Candidate_profileController extends Controller
         $details = Candidate_detail::where('user_id', $profile->user_id)->first();
         $user = User::find($profile->user_id);
 
+        //experience
 
+        $experiences = Candidate_experience::where('user_id', $id)->get();
         
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
         //dd($cities);
-        if (Auth::user()->hasPermissionTo('can apply job'))
-            return view('candidates.show', compact('states', 'cities', 'profile', 'user', 'details'));
+        return view('candidates.show', compact('states', 'cities', 'profile', 'user', 'details', 'experiences'));
+        /*if (Auth::user()->hasPermissionTo('can apply job'))
+            
         else
-            return view('errors.401');
+            return view('errors.401');*/
     }
 
     /**
