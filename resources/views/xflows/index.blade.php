@@ -44,7 +44,7 @@
                 </thead>
                 <tbody>
                     @foreach ($xflows as $key => $value)
-                    <tr class="tr-shadow">
+                    <tr class="tr-shadow" @if($value->color == 1) style="border-left: 3px solid #fa4251;" @elseif($value->color == 2) style="border-left: 3px solid #ffa037;" @elseif($value->color == 3) style="border-left: 3px solid #00ad5f;" @elseif($value->color == 4) style="border-left: 3px solid #777272;" @endif>
                         <!-- <td>
                             <label class="au-checkbox">
                                 <input type="checkbox">
@@ -101,9 +101,9 @@
                                 </button>
                                 @endif
 
-                                <form id="{{$value->id}}" action="{{ route('xflows.status', $value->id) }}" style="display: none;">
+                                <!-- <form id="{{$value->id}}" action="{{ route('xflows.status', $value->id) }}" style="display: none;">
                                 
-                                </form>
+                                </form> -->
                                 <div class="modal fade" id="status{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -122,7 +122,7 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll Change later</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( {{$value->id}} ).submit();"><button type="button" class="btn btn-primary" >Yes! change it</button></a>
+                                        <a href="{{ route('xflows.status', $value->id) }}"><button type="button" class="btn btn-primary" >Yes! change it</button></a>
                                       </div>
                                     </div>
                                   </div>

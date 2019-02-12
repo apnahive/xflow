@@ -112,6 +112,7 @@ Route::resource('profile', 'ProfileController');
 //Route::get('download-document/{userid}/{formid}', 'ProfileController@download')->name('profile.download');
 Route::resource('userroles', 'UserController');
 Route::resource('users', 'UserxController');
+Route::post('users/search', 'UserxController@search')->name('users.search');
 Route::get('users/sort/{feild}/{type}', 'UserxController@sort')->name('users.sort'); //for sorting
 Route::get('users/approve/{id}', 'UserxController@approve')->name('users.approve');
 Route::get('users/reject/{id}', 'UserxController@reject')->name('users.reject');

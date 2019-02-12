@@ -34,6 +34,55 @@ class UserxController extends Controller
         //$users = User::where('id', '!=', 1)->paginate(15); 
         return view('userx.index')->with('users', $users);
     }
+    public function search(Request $request)
+    {
+        //dd(request()->all());
+        $useradmin = User::role('Admin')->select('id')->get();
+
+        //dd($request->type);
+        if($request->name == null && $request->email == null && ctype_digit(strval($request->type)))
+        {
+            dd('not found');
+            return redirect()->route('users.index');
+        }
+        else
+        {
+            $search = $request;
+            //dd($request->type);
+            //dd(!$request->type == 0);
+            if($request->type == 0)
+            {
+                $search->type = $request->type;
+                $search->email = null;
+                $search->name = null;
+                //dd('type');
+                $users = User::where('user_type', 'like', $request->type)->get();                
+            }
+            if($request->email)
+            {
+                $search->name = null;
+                $search->email = $request->email;
+                $search->type = null;
+                
+                $users = User::where('email', 'like', '%'.$request->email.'%')->get();
+                //dd($tasks);
+            }
+            if($request->name)
+            {
+                $search->name = $request->name;
+                $search->email = null;
+                $search->type = null;
+                
+                $users = User::where('name', 'like', '%'.$request->name.'%')->orWhere('lastname', 'like', '%'.$request->name.'%')->get();
+                //dd($tasks);
+            }
+        }
+
+
+        //$users = User::whereNotIn('id', $useradmin)->paginate(15);
+        //$users = User::where('id', '!=', 1)->paginate(15); 
+        return view('userx.search', compact('users', 'search'));
+    }
     public function sort($feild, $type)
     {
         $useradmin = User::role('Admin')->select('id')->get();        

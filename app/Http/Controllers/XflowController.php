@@ -68,6 +68,17 @@ class XflowController extends Controller
             $d1 = date_diff($date1, $date2);
             $d2 = date_diff($now, $date2);
             //dd($d->days, $d->invert);
+
+            //for color coding 
+            if($d2->days > 3)
+                $value->color = 3;
+            if($d2->days <= 3)
+                $value->color = 2;
+            if($d2->invert)
+                $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
+
             if($d->invert == 0)
             {
 

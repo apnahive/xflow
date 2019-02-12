@@ -42,7 +42,7 @@
                 </thead>
                 <tbody>
                     <?php $__currentLoopData = $xflows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr class="tr-shadow">
+                    <tr class="tr-shadow" <?php if($value->color == 1): ?> style="border-left: 3px solid #fa4251;" <?php elseif($value->color == 2): ?> style="border-left: 3px solid #ffa037;" <?php elseif($value->color == 3): ?> style="border-left: 3px solid #00ad5f;" <?php elseif($value->color == 4): ?> style="border-left: 3px solid #777272;" <?php endif; ?>>
                         <!-- <td>
                             <label class="au-checkbox">
                                 <input type="checkbox">
@@ -99,9 +99,9 @@
                                 </button>
                                 <?php endif; ?>
 
-                                <form id="<?php echo e($value->id); ?>" action="<?php echo e(route('xflows.status', $value->id)); ?>" style="display: none;">
+                                <!-- <form id="<?php echo e($value->id); ?>" action="<?php echo e(route('xflows.status', $value->id)); ?>" style="display: none;">
                                 
-                                </form>
+                                </form> -->
                                 <div class="modal fade" id="status<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
@@ -120,7 +120,7 @@
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll Change later</button>
-                                        <a onclick="event.preventDefault(); document.getElementById( <?php echo e($value->id); ?> ).submit();"><button type="button" class="btn btn-primary" >Yes! change it</button></a>
+                                        <a href="<?php echo e(route('xflows.status', $value->id)); ?>"><button type="button" class="btn btn-primary" >Yes! change it</button></a>
                                       </div>
                                     </div>
                                   </div>

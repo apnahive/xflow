@@ -17,6 +17,52 @@
         <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
             <table class="table table-data2">
                 <thead>
+                    <form action="<?php echo route('users.search'); ?>" method="POST" role="search" class="search-des">
+                    <?php echo e(csrf_field()); ?>
+
+                    <div class="search-task">
+                        <div class="col-md-3">
+                            <input id="name" type="text" class="col-md-12" name="name" value="<?php echo e(old('name')); ?>" placeholder="Name" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <!-- <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
+                                <select class="js-select2" id="assigned" name="assigned">
+                                    <option value="0" selected="selected">Assigned To</option>
+                                                                    
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div> -->
+                        </div>
+                        <div class="col-md-3">
+                            <input id="email" type="text" class="col-md-12" name="email" value="<?php echo e(old('email')); ?>" placeholder="Email" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <!-- <div class="rs-select2--light rs-select2--md" style="margin-top: 10px;width: 100%;font-weight: 600;font-size: 16px;">
+                                <select class="js-select2" id="status" name="status">
+                                    <option value="0" selected="selected">Status</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Initiated</option>
+                                    <option value="3">Completed</option>                                    
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>  -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rs-select2--light rs-select2--md" style="width: 100%;font-weight: 600;font-size: 16px;">
+                                <select class="js-select2" id="type" name="type">
+                                    <option value="0" selected="selected">User Type</option>
+                                    <option value="Investment Advisor">Investment Advisor</option>
+                                    <option value="Private Funds">Private Funds</option>
+                                    <option value="Broker Dealer">Broker Dealer</option>
+                                    <option value="Private Equity">Private Equity</option>
+                                    <option value="Consultant">Consultant</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>                            
+                        </div>  
+                        <div class="col-md-3">
+                            <div class="rs-select2--light rs-select2--md" style="width: 100%;font-weight: 600;font-size: 16px;">
+                                <button type="submit" class="btn btn-md btn-info" style="width: 100%;color: white;background-color: #4272d7;border-radius: 1px;font-size: 16px;"><i class="zmdi zmdi-search"></i> Search</button>
+                            </div>                            
+                        </div>                        
+                    </div>
+                    </form>
                     <tr>                        
                         <th><a href="<?php echo e(route('users.sort', ['name', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="<?php echo e(route('users.sort', ['name', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th><a href="<?php echo e(route('users.sort', ['email', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Email <a href="<?php echo e(route('users.sort', ['email', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>

@@ -2,8 +2,7 @@
 
 @section('content')
 
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
-                    Back</button></a>
+
 
 @if($tasks->admin == 1 || $tasks->poc == 1)
 
@@ -15,6 +14,8 @@
         <h3 class="title-5 m-b-35">Tasks</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
+                <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
                 <!-- <div class="rs-select2--light rs-select2--md">
                     <select class="js-select2" name="property">
                         <option selected="selected">All Properties</option>
