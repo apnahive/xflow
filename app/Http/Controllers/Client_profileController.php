@@ -39,6 +39,27 @@ class Client_profileController extends Controller
             return view('errors.401');
     }
 
+    public function sort($feild, $type)
+    {
+        $profiles = Client_profile::join('users', 'client_profiles.user_id', '=', 'users.id')->select('users.name', 'users.lastname', 'client_profiles.id', 'client_profiles.company_name', 'client_profiles.user_id')->orderBy($feild, $type)->paginate(15);
+        foreach ($profiles as $key => $value) 
+        {
+            $user = User::find($value->user_id);
+            $value->name = $user->name.' '.$user->lastname;
+            $jobs = Job::where('user_id', $value->user_id)->count();
+            $value->jobs = $jobs;
+            
+        }
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
+            return view('client_profiles.index', compact('profiles'));
+        else
+            return view('errors.401');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

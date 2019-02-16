@@ -100,6 +100,85 @@ class XflowController extends Controller
 
     }
 
+
+    public function sort($feild, $type)
+    {
+        //
+        $id1 = Auth::id();
+        $now = new \DateTime();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
+        $xflows = xflow::where('assignee', $id1)->orWhere('user_id', $id1)->orderBy($feild, $type)->get();
+        foreach ($xflows as $key => $value) 
+        {
+            $userx = User::find($value->assignee);
+            $value->assignto = $userx->name.' '.$userx->lastname;
+            $team = Team::find($value->team_id);
+            $value->team = $team->name;
+            switch ($value->status) 
+            {
+                case 0: 
+                    $value->statuss = 'Pending';
+                    break;
+                case 1: 
+                    $value->statuss = 'Initiated';
+                    break;
+                case 2: 
+                    $value->statuss = 'In-work';
+                    break;
+                case 3: 
+                    $value->statuss = 'Finishing';
+                    break;
+                case 4: 
+                    $value->statuss = 'Completed';
+                    break;
+                
+                default:
+                    # code... pending, initiated, inwork, finishing, complete
+                    break;
+            }
+
+            //for the timeline
+            $date1 = new DateTime($value->startdate);
+            $date2 = new DateTime($value->duedate);
+            $d = date_diff($now, $date1);
+            $d1 = date_diff($date1, $date2);
+            $d2 = date_diff($now, $date2);
+            //dd($d->days, $d->invert);
+
+            //for color coding 
+            if($d2->days > 3)
+                $value->color = 3;
+            if($d2->days <= 3)
+                $value->color = 2;
+            if($d2->invert)
+                $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
+
+            if($d->invert == 0)
+            {
+
+                $value->remaining = $d1->days.' days';
+            }
+            else
+            {
+                if($d2->invert == 0)
+                {
+                    $value->remaining = $d2->days.' days';
+                }
+                else
+                    $value->remaining = 'past due date';
+            }
+
+       }
+        //dd($xflows);
+        return view('xflows.index', compact('xflows'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

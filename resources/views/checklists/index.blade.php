@@ -29,7 +29,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Checklists</th>
+                        <th><a href="{{ route('checklists.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Checklists <a href="{{ route('checklists.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Assigned To</th>
                         <th>Due Date</th>
                         <!-- <th>Managed By</th>

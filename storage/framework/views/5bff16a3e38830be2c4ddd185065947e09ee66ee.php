@@ -12,7 +12,7 @@
             <form action="<?php echo e(route('teams.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <?php echo e(csrf_field()); ?>
 
-            <div class="card-body card-block">                    
+            <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="title" class=" form-control-label">Team Title</label>

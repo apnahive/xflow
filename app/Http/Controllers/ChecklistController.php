@@ -47,6 +47,29 @@ class ChecklistController extends Controller
         return view('checklists.index', compact('checklists', 'users'));
     }
 
+    public function sort($feild, $type)
+    {
+        $id1 = Auth::id();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
+        $checklists = Checklist::where('assignee', $id1)->orWhere('user_id', $id1)->orderBy($feild, $type)->get();
+        foreach ($checklists as $key => $value) 
+        {
+            $userx = User::find($value->assignee);
+            //dd($userx);
+            $value->user = $userx->name;
+            /*if(Sublist::where('checklist_id', $value->id)->exists())
+                $value->sublist = 1;
+            else
+                $value->sublist = 0;*/
+
+        }
+        //dd($checklists);
+        return view('checklists.index', compact('checklists', 'users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

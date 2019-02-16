@@ -73,6 +73,55 @@ class Candidate_profileController extends Controller
             return view('errors.401');
     }
 
+    public function sort($feild, $type)
+    {
+        $profiles= Profile::join('users', 'profiles.user_id', '=', 'users.id')->select('users.name', 'users.lastname', 'profiles.id', 'profiles.title', 'profiles.experience_level', 'profiles.qualification', 'profiles.skills', 'profiles.user_id')->orderBy($feild, $type)->paginate(15);
+        foreach ($profiles as $key => $value) 
+        {
+            $user = User::find($value->user_id);
+            $value->name = $user->name.' '.$user->lastname;
+
+            switch ($value->experience_level) 
+            {
+                case '1':
+                    $value->experience = 'Entry Level';
+                    break;
+                case '2':
+                    $value->experience = 'Inermediate Level';
+                    break;
+                case '3':
+                    $value->experience = 'Expert Level';
+                    break;
+            }
+            switch ($value->qualification) 
+            {
+                case '1':
+                    $value->qualifications = 'Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'Post Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'PHD';
+                    break;
+                case '1':
+                    $value->qualifications = 'No College Degree';
+                    break;
+                case '1':
+                    $value->qualifications = 'Diploma';
+                    break;
+            }
+        }
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+
+        if($checkadmins)
+            return view('candidates.index', compact('profiles'));
+        else
+            return view('errors.401');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

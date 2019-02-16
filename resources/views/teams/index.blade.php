@@ -32,7 +32,7 @@
                 <thead>
                     <tr>
                         
-                        <th>Team</th>
+                        <th><a href="{{ route('teams.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Team <a href="{{ route('teams.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <!-- <th>Detail</th>-->
                         <!-- <th>status</th>
                         <th>price</th> -->

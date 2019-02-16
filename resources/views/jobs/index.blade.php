@@ -46,7 +46,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Title</th> 
+                        <th><a href="{{ route('jobs.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="{{ route('jobs.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
                         <th>Expert level</th>
                         <th>Skills</th>
                         <th>Qualification</th>

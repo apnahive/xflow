@@ -29,7 +29,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Title</th>
+                        <th><a href="<?php echo e(route('xflows.sort', ['title', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="<?php echo e(route('xflows.sort', ['title', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Assigned To</th>
                         <th>Team</th>
                         <th>Status</th>

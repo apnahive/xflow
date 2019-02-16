@@ -16,7 +16,13 @@ class Checklist_templateController extends Controller
      */
     public function index()
     {
-        $checklists = Checklist_template::all();
+        $checklists = Checklist_template::paginate(15);
+        return view('checklist_templates.index', compact('checklists'));  
+    }
+
+    public function sort($feild, $type)
+    {
+        $checklists = Checklist_template::orderBy($feild, $type)->paginate(15);
         return view('checklist_templates.index', compact('checklists'));  
     }
 

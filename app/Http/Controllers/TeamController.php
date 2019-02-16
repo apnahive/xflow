@@ -34,6 +34,19 @@ class TeamController extends Controller
         return view('teams.index', compact('teams', 'users'));
     }
 
+    public function sort($feild, $type)
+    {
+        $id1 = Auth::id();
+        //$users = User::where('verified', 1)->where('id', '<>', 1)->get();        
+        $useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::where('verified', 1)->whereNotIn('id', $useradmin)->get();
+
+        $teams = Team::where('user_id', $id1)->orderBy($feild, $type)->get();
+        
+        //dd($teams);
+        return view('teams.index', compact('teams', 'users'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

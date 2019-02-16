@@ -20,6 +20,7 @@
     </div>
 </div> -->
  <!-- PAGE CONTENT-->
+        
         <div class="page-content--bgf7" style="margin-bottom: 100px;">
             <!-- BREADCRUMB-->
             <section class="au-breadcrumb2">
@@ -61,6 +62,7 @@
             <!-- END WELCOME-->
 
             <!-- STATISTIC-->
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
             <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
             <?php else: ?>
             <section class="statistic">
@@ -151,6 +153,79 @@
                     </div>
                 </div>
             </section>
+            <?php endif; ?>
+            <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+            <section class="statistic">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-6">
+                                <div class="statistic__item statistic__item--blue">
+                                    <h2 class="number"><a href="#" style="color: white;">Total Job Post </a> </h2>
+                                    <span class="desc"><a href="#" style="color: white;">2</a></span>
+                                    <div class="icon">
+                                        <i class="ion ion-bag"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><a href="#" style="color: white;">Total Qualified Candidate</a></h2>
+                                    <span class="desc"><a href="#" style="color: white;">0</a></span>
+                                    <div class="icon">
+                                        <i class="ion ion-stats-bars"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div id="piechart"></div>
+
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+            <script type="text/javascript">
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            // Draw the chart and set the chart values
+            function drawChart() {
+
+              var record=<?php echo json_encode($pie); ?>;
+              console.log(record);
+
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Source');
+              data.addColumn('number', 'Total_Signup');
+              for(var k in record)
+              {
+                var v = record[k];
+               
+                data.addRow([k,v]);
+                console.log(v);
+              }
+              /*var data = google.visualization.arrayToDataTable([
+                $pie,
+              ['Task', 'Hours per Day'],
+              ['Work', 8],
+              ['Eat', 2],
+              ['TV', 4],
+              ['Gym', 2],
+              ['Sleep', 8]
+            ]);*/
+
+              // Optional; add a title and set the width and height of the chart
+              var options = {'title':'Skill with Jobs', 'width':550, 'height':400};
+
+              // Display the chart inside the <div> element with id="piechart"
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+              chart.draw(data, options);
+            }
+            </script>
+            <?php endif; ?> -->
+
 
             
             <!-- END STATISTIC-->

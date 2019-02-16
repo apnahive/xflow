@@ -37,6 +37,7 @@ Route::get('projects/sort/{feild}/{type}', 'ProjectController@sort')->name('proj
 Route::resource('tasks', 'TaskController');
 Route::get('tasks/sort/{feild}/{type}', 'TaskController@sort')->name('tasks.sort'); //for sorting
 Route::resource('task_templates', 'Task_templateController');
+Route::get('task_templates/sort/{feild}/{type}', 'Task_templateController@sort')->name('task_templates.sort'); //for sorting
 Route::resource('task_for_templates', 'Task_for_templateController');
 
 Route::resource('add_task', 'Add_taskController');
@@ -78,19 +79,23 @@ Route::post('search', 'SearchController@search')->name('search');
 
 //team
 Route::resource('teams', 'TeamController');
+Route::get('teams/sort/{feild}/{type}', 'TeamController@sort')->name('teams.sort'); 
 Route::resource('teammembers', 'TeamMemberController');
 Route::get('add_members/{id}', 'TeamMemberController@add')->name('teammembers.add');
 //xflow
 Route::resource('xflows', 'XflowController');
+Route::get('xflows/sort/{feild}/{type}', 'XflowController@sort')->name('xflows.sort'); 
 Route::get('xflow_status/{id}', 'XflowController@status')->name('xflows.status');
 
 //checklist 
 
 Route::resource('checklists', 'ChecklistController');
+Route::get('checklists/sort/{feild}/{type}', 'ChecklistController@sort')->name('checklists.sort'); 
 Route::resource('checklist_items', 'Checklist_itemController');
 Route::get('checklist_item/{id}', 'Checklist_itemController@add')->name('checklist_item.add');
 Route::get('add_checklist/{id}', 'ChecklistController@add')->name('checklists.add');
 Route::resource('checklist_templates', 'Checklist_templateController');
+Route::get('checklist_templates/sort/{feild}/{type}', 'Checklist_templateController@sort')->name('checklist_templates.sort'); 
 Route::resource('checklist_for_templates', 'Checklist_for_templateController');
 Route::get('checklist_for_template/{id}', 'Checklist_for_templateController@add')->name('checklist_for_template.add');
 
@@ -109,6 +114,7 @@ Route::get('email-verification/error', 'Auth\RegisterController@getVerificationE
 Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
 
 Route::resource('profile', 'ProfileController');
+
 //Route::get('download-document/{userid}/{formid}', 'ProfileController@download')->name('profile.download');
 Route::resource('userroles', 'UserController');
 Route::resource('users', 'UserxController');
@@ -127,12 +133,15 @@ Route::resource('permissions', 'PermissionController');
 //job routes
 
 Route::resource('jobs', 'JobController');
+Route::get('jobs/sort/{feild}/{type}', 'JobController@sort')->name('jobs.sort'); 
 //Route::get('shortlisted/{id}/{records}', 'JobController@shortlisted')->name('jobs.shortlisted');
 Route::resource('interviewed', 'Interview_scheduleController');
 Route::resource('profiles', 'Candidate_profileController');
+Route::get('profiles/sort/{feild}/{type}', 'Candidate_profileController@sort')->name('profiles.sort'); 
 Route::resource('candidate_detail', 'Candidate_detailController');
 Route::resource('candidate_experiences', 'Candidate_experienceController');
 Route::resource('client_profiles', 'Client_profileController');
+Route::get('client_profiles/sort/{feild}/{type}', 'Client_profileController@sort')->name('client_profiles.sort'); 
 
 Route::resource('shortlisted', 'Job_shortlistedController');
 Route::get('shortlist/{id}', 'Job_shortlistedController@shortlist')->name('shortlisted.shortlist');

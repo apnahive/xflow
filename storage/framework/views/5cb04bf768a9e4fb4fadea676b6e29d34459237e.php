@@ -1,13 +1,14 @@
 <?php $__env->startSection('content'); ?>
 
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+                    Back</button></a>
+                    
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Jobs</h3>
+        <h3 class="title-5 m-b-35">Task Template</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
-                <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    Back</button></a>
                 <!-- <div class="rs-select2--light rs-select2--md">
                     <select class="js-select2" name="property">
                         <option selected="selected">All Properties</option>
@@ -28,10 +29,18 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                <!-- 
-                <a href="<?php echo e(route('jobs.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    <i class="zmdi zmdi-plus"></i>Add New Client</button></a>
-                 -->                
+                <a href="<?php echo e(route('task_templates.create')); ?>" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <i class="zmdi zmdi-plus"></i>Add New Template</button></a>
+                <a href="<?php echo e(route('task_for_templates.create')); ?>" style="margin-top: 10px;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>Add Task to Template</button></a>
+                <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                    <select class="js-select2" name="type">
+                        <option selected="selected">Export</option>
+                        <option value="">Option 1</option>
+                        <option value="">Option 2</option>
+                    </select>
+                    <div class="dropDownSelect2"></div>
+                </div> -->
             </div>
         </div>
         <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
@@ -44,18 +53,15 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th><a href="<?php echo e(route('jobs.sort', ['title', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="<?php echo e(route('jobs.sort', ['title', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th> 
-                        <th>Expert level</th>
-                        <th>Skills</th>
-                        <th>Qualification</th>
+                        <th><a href="<?php echo e(route('task_templates.sort', ['name', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Task <a href="<?php echo e(route('task_templates.sort', ['name', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th>
+                        <th>Detail</th>                        
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $__currentLoopData = $jobs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobkey => $job): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    
+                    <?php $__currentLoopData = $tasks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $taskkey => $task): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr class="tr-shadow">
                         <!-- <td>
                             <label class="au-checkbox">
@@ -63,51 +69,46 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td><?php echo e($job->title); ?></td>
-                        <td><?php echo e($job->experience); ?></td>                        
-                        <td><?php echo e($job->skills); ?></td>                        
-                        <td><?php echo e($job->qualifications); ?></td>
+                        <td><?php echo e($task->name); ?></td>
+                        <td><?php echo e($task->detail); ?></td>                        
                         <td>
                             <div class="table-data-feature">
-                                <a href="<?php echo e(route('jobs.show', $job->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('task_templates.show', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
-                                
-                                <a href="<?php echo e(route('jobs.edit', $job->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <a href="<?php echo e(route('task_templates.edit', $task->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                
-                                <!-- <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($job->id); ?>" data-backdrop="false">
+                                <button class="item" data-toggle="modal" data-target="#temp<?php echo e($task->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
-                                </button> -->
+                                </button>
 
-                                
+                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($task->id); ?>">Delete</button> -->
 
-                                <form action="<?php echo e(route('jobs.destroy', $job->id)); ?>" method="POST">
+                                <form action="<?php echo e(route('task_templates.destroy', $task->id)); ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                 
-                                <div class="modal fade" id="confirm<?php echo e($job->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($job->id); ?>" aria-hidden="true">
+                                <div class="modal fade" id="temp<?php echo e($task->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($task->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Job</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Task Template</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        You are going to delete Job. All the associated records will be deleted. You won't be able to revert these changes!
+                                        You are going to delete Task Template. All the associated records will be deleted. You won't be able to revert these changes! 
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Job</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Template</button>
                                         <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                                 </form>
-                                
 
 
 
@@ -118,17 +119,15 @@
                         </td>
                     </tr>
                     <tr class="spacer"></tr>
-                    
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
                 </tbody>
             </table>
-            
+            <?php echo $tasks->render(); ?>
+
         </div>
         <!-- END DATA TABLE -->
     </div>
 </div>
-
 
 <?php $__env->stopSection(); ?>
 

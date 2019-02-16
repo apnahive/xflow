@@ -81,6 +81,62 @@ class JobController extends Controller
         
     }
 
+    public function sort($feild, $type)
+    {
+        $state = State::all();
+        $cities = City::paginate(10);
+        //dd($cities);
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+    
+        if($checkadmins)        
+            $jobs = Job::orderBy($feild, $type)->paginate(15);
+        else
+            $jobs = Job::where('user_id', $id1)->orderBy($feild, $type)->paginate(15);
+
+        foreach ($jobs as $jobkey => $value) 
+        {
+            switch ($value->experience_level) 
+            {
+                case '1':
+                    $value->experience = 'Entry Level';
+                    break;
+                case '2':
+                    $value->experience = 'Inermediate Level';
+                    break;
+                case '3':
+                    $value->experience = 'Expert Level';
+                    break;
+            }
+            switch ($value->qualification) 
+            {
+                case '1':
+                    $value->qualifications = 'Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'Post Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'PHD';
+                    break;
+                case '1':
+                    $value->qualifications = 'No College Degree';
+                    break;
+                case '1':
+                    $value->qualifications = 'Diploma';
+                    break;
+            }
+        }
+        //dd($jobs);
+        if (Auth::user()->hasPermissionTo('can create job'))
+            return view('jobs.index', compact('jobs'));
+        else
+            return view('errors.401');
+        
+        
+    }
+
 
     /**
      * Show the form for creating a new resource.

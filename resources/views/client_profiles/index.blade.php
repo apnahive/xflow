@@ -46,8 +46,8 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Name</th> 
-                        <th>Company Name</th>
+                        <th><a href="{{ route('client_profiles.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="{{ route('client_profiles.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
+                        <th><a href="{{ route('client_profiles.sort', ['company_name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Company Name <a href="{{ route('client_profiles.sort', ['company_name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Total Jobs</th>
                         
                         <!-- <th>status</th>

@@ -55,7 +55,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th>Task</th>
+                        <th><a href="{{ route('task_templates.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Task <a href="{{ route('task_templates.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <th>Detail</th>                        
                         <!-- <th>status</th>
                         <th>price</th> -->

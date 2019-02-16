@@ -32,7 +32,7 @@
                 <thead>
                     <tr>
                         
-                        <th>Checklist</th>
+                        <th><a href="{{ route('checklist_templates.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Checklist <a href="{{ route('checklist_templates.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th>
                         <!-- <th>Detail</th>-->
                         <!-- <th>status</th>
                         <th>price</th> -->

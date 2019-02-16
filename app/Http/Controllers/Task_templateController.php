@@ -37,6 +37,24 @@ class Task_templateController extends Controller
         }        
     }
 
+    public function sort($feild, $type)
+    {
+        $id1 = Auth::id();
+        $checkadmin = User::find($id1);        
+        $checkadmins = $checkadmin->hasRole('Admin');
+        if($checkadmins)
+        {
+            $tasks = Task_template::orderBy($feild, $type)->paginate(15);
+            return view('task_templates.index', compact('tasks'));    
+        }
+        else
+        {
+            return view('errors.401');
+        } 
+        /*$useradmin = User::role('Admin')->select('id')->get();        
+        $users = User::whereNotIn('id', $useradmin)->orderBy($feild, $type)->paginate(15);*/
+    }
+
     /**
      * Show the form for creating a new resource.
      *
