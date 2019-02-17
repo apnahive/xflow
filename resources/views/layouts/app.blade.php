@@ -265,7 +265,7 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <div class="account2" style="padding-bottom: 0;">
                     <div class="image">
-                        <img src="{{ asset('assets/images/icon/CWI_Logo.png') }}" alt="John Doe">
+                        <img src="{{ asset('assets/images/icon/jlm_logo.png') }}" alt="John Doe">
                     </div>
                     <!-- <h4 class="name">john doe</h4>
                     <a href="#">Sign out</a> -->
