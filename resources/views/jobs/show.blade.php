@@ -556,6 +556,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if(count($notes) > 0)
                                     @foreach ($notes as $key => $value)
                                     <tr class="tr-shadow">
                                         <!-- <td>
@@ -597,7 +598,7 @@
                                     </tr>
                                     <tr class="spacer"></tr>
                                     @endforeach
-
+                                    @endif
                                 </tbody>
                             </table>
                             

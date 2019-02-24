@@ -328,7 +328,7 @@ class JobController extends Controller
             $user = User::find($value->candidate_id);
             $value->name = $user->name.' '.$user->lastname;
         }
-        //dd($notes);
+        //dd($cities, $job, $shortlisted, $interviews, $notes);
 
 
 

@@ -91,7 +91,26 @@ class RegisterController extends Controller
     }
     public function register(Request $request)
     {
+        //dd(request()->all());
+        if(User::where('email', $request->email)->exists())
+        {
+            $usercheck = User::where('email', $request->email)->first();
+            if($usercheck->verification_token)
+            {
+                return back()->withAlert('Email is already in use & is pending for admin approval. Please contact admin for more details');
+            }
+            else
+            {
+                if($usercheck->verified == 1)
+                    return back()->withAlert('Email is already in use. Please use it to login.');
+                else
+                    return back()->withAlert('Email is already in use & is rejected by admin. Please contact admin for more details');
+            }
+        }
+        
+
         $this->validator($request->all())->validate();
+
         $user = $this->create($request->all());
         UserVerification::generate($user);
         Mail::to('dev.sadiquee@gmail.com')->send(new Approve_user($user));
