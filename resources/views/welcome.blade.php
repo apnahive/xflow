@@ -27,7 +27,7 @@
     padding-right: 20px;
     }
            .carousel-item {
-                height: 461px;
+                height: 660px;
                 margin-top: 72px;
     }
     .bgg-dark {
@@ -73,7 +73,7 @@
   <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bgg-dark fixed-top" style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);>
+    <nav class="navbar navbar-expand-lg navbar-dark bgg-dark fixed-top" style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);"">
       <div class="container">
          <a class="logo" href="index.html">
             <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-flow" />
@@ -114,23 +114,43 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('{{ asset('assets/images/slider/s1.jpg') }}')">
+          <div class="carousel-item active" style="background-image: url('{{ asset('assets/images/slider/s1.png') }}')">
+            <div class="carousel-caption d-none d-md-block">
+             
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s2.png') }}')">
+            <div class="carousel-caption d-none d-md-block">
+             
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s3.png') }}')">
+            <div class="carousel-caption d-none d-md-block">
+             
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s4.png') }}')">
+            <div class="carousel-caption d-none d-md-block">
+             
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s5.png') }}')">
             <div class="carousel-caption d-none d-md-block">
              
             </div>
           </div>
           <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s2.jpg') }}')">
+          <!-- <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s2.jpg') }}')">
             <div class="carousel-caption d-none d-md-block">
              
             </div>
-          </div>
+          </div> -->
           <!-- Slide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s3.jpg') }}')">
-            <div class="carousel-caption d-none d-md-block">
+          <!-- <div class="carousel-item" style="background-image: url('{{ asset('assets/images/slider/s3.jpg') }}')">
+            <div class="carousel-caption d-none d-md-block"> 
              
             </div>
-          </div>
+          </div> -->
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
