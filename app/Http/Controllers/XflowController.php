@@ -6,6 +6,8 @@ use App\xflow;
 use Illuminate\Http\Request;
 use App\User;
 use App\Team;
+use App\Project;
+use App\Team_member;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
@@ -244,9 +246,26 @@ class XflowController extends Controller
         $xflow = Xflow::find($id);
         $team = Team::find($xflow->team_id);
         $user = User::find($xflow->assignee);
+        $teammember = Team_member::where('team_id', $team->id)->select('user_id')->get();
+        $users = User::whereIn('id', $teammember)->get();
+        if(Team_member::where('team_id', $team->id)->where('user_id', $user->id)->exists())
+        {}
+        else
+        {
+            $users->push($user);
+        }
+        
 
-        //dd($xflow);
-        return view('xflows.show', compact('user','team', 'xflow'));
+        foreach ($users as $key => $value) 
+        {
+            $poc = Project::where('poc', $value->id)->get();
+            $cco = Project::where('cco', $value->id)->get();
+            $value->pocs = $poc;
+            $value->ccos = $cco;
+        }
+
+        //dd($users);
+        return view('xflows.show', compact('user','team', 'xflow', 'users'));
     }
 
     public function status($id)
