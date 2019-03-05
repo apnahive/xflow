@@ -95,11 +95,14 @@
     .bgg-dark {
     background-color: #ffffff!important;
     }
+    .nav-link:hover, .nav-link:focus {
+      color: #555!important;
+    }
     .navbar-dark .navbar-nav .nav-link {
     color: #555;
     }
     .navbar-dark .navbar-nav .active>.nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show>.nav-link {
-    color: #4272d7;
+    color: #4272d7; 
     }
 @font-face {
   src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/polar.otf");
@@ -118,7 +121,7 @@ html, body {
 }
 
 body {
-  background: #000;
+  background: #fff;
 }
 
 svg {
@@ -249,14 +252,20 @@ svg {
 }
 .slide:nth-child(1) .slide__bg {
   left: 0;
+  background-size: cover;
   background-image: url("/assets/images/slider/hd1.png");
 }
 .slide:nth-child(1) .slide__overlay-path {
-  fill: #e99c7e;
+  fill: #da7e5a;
 }
 @media (max-width: 991px) {
+  .slide:nth-child(1) .slide__bg {  
+      background-size: contain;    
+      background-repeat: no-repeat;
+      background-image: url("/assets/images/slider/hd1.jpg");
+    }
   .slide:nth-child(1) .slide__text {
-    background-color: rgba(233, 156, 126, 0.8);
+    background-color: #da7e5a;
   }
 }
 .slide:nth-child(2) {
@@ -264,14 +273,20 @@ svg {
 }
 .slide:nth-child(2) .slide__bg {
   left: -50%;
-  background-image: url("/assets/images/slider/hd2.png");
+  background-size: cover;
+  background-image: url("/assets/images/slider/hd2.jpg");
 }
 .slide:nth-child(2) .slide__overlay-path {
-  fill: #e1ccae;
+  fill: #826b4b;
 }
 @media (max-width: 991px) {
+  .slide:nth-child(2) .slide__bg {  
+      background-size: contain;    
+      background-repeat: no-repeat;
+      background-image: url("/assets/images/slider/hdd2.jpg");
+    }
   .slide:nth-child(2) .slide__text {
-    background-color: rgba(225, 204, 174, 0.8);
+    background-color: #826b4b;
   }
 }
 .slide:nth-child(3) {
@@ -279,14 +294,20 @@ svg {
 }
 .slide:nth-child(3) .slide__bg {
   left: -100%;
-  background-image: url("/assets/images/slider/hd3.png");
+  background-size: cover;
+  background-image: url("/assets/images/slider/hd3.jpg");
 }
 .slide:nth-child(3) .slide__overlay-path {
-  fill: #adc5cd;
+  fill: #567a88;
 }
 @media (max-width: 991px) {
+  .slide:nth-child(3) .slide__bg {  
+      background-size: contain;    
+      background-repeat: no-repeat;
+      background-image: url("/assets/images/slider/hdd3.jpg");
+    }
   .slide:nth-child(3) .slide__text {
-    background-color: rgba(173, 197, 205, 0.8);
+    background-color: #567a88;
   }
 }
 .slide:nth-child(4) {
@@ -294,14 +315,20 @@ svg {
 }
 .slide:nth-child(4) .slide__bg {
   left: -150%;
-  background-image: url("/assets/images/slider/hd4.png");
+  background-size: cover;
+  background-image: url("/assets/images/slider/hd4.jpg");
 }
 .slide:nth-child(4) .slide__overlay-path {
-  fill: #cbc6c3;
+  fill: #6f625b;
 }
 @media (max-width: 991px) {
+  .slide:nth-child(4) .slide__bg {  
+      background-size: contain;    
+      background-repeat: no-repeat;
+      background-image: url("/assets/images/slider/hdd4.jpg");
+    }
   .slide:nth-child(4) .slide__text {
-    background-color: rgba(203, 198, 195, 0.8);
+    background-color: #6f625b;
   }
 }
 
@@ -310,14 +337,20 @@ svg {
 }
 .slide:nth-child(5) .slide__bg {
   left: -200%;
-  background-image: url("/assets/images/slider/hd5.png");
+  background-size: cover;
+  background-image: url("/assets/images/slider/hd5.jpg");
 }
 .slide:nth-child(5) .slide__overlay-path {
   fill: #4950d8;
 }
 @media (max-width: 991px) {
+  .slide:nth-child(5) .slide__bg {  
+      background-size: contain;    
+      background-repeat: no-repeat;
+      background-image: url("/assets/images/slider/hdd5.jpg");
+    }
   .slide:nth-child(5) .slide__text {
-    background-color: rgba(225, 204, 174, 0.8);
+    background-color: #4950d8;
   }
 }
 .slide__content {
@@ -392,6 +425,7 @@ svg {
 .slide__text-desc {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 1.8rem;
+  text-align: justify;
   margin-bottom: 1.5rem;
 }
 @media (max-width: 991px) {
@@ -445,7 +479,7 @@ svg {
   <body style="overflow: scroll;overflow-x: hidden;">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bgg-dark fixed-top" style="box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);"">
+    <nav class="navbar navbar-expand-lg navbar-dark bgg-dark fixed-top" style="    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.28);">
       <div class="container">
          <a class="logo" href="index.html">
             <img src="{{ asset('assets/images/icon/logo-blue.png') }}" alt="X-flow" />
@@ -542,7 +576,7 @@ svg {
         <div class="slide__text">
           <h2 class="slide__text-heading">Executive Calender</h2>
           <p class="slide__text-desc">The Executive Calendar provides insight on tasks deemed important. The tasks that are being displayed are related to the users assigned. The executive can drill down on a task amd make edits as necessary. If a task requires long term management a xflow can be assigned.</p>
-          <!-- <a class="slide__text-link">Project link</a> -->
+          
         </div>
       </div>
     </div>
