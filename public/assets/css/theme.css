@@ -4957,9 +4957,9 @@ section {
 .statistic__item {
     border: 1px solid #e5e5e5;
     background: #fff;
-    padding: 20px 30px;
+    padding: 10px 10px;
     position: relative;
-    min-height: 180px;
+    min-height: 120px;
     overflow: hidden;
     margin-bottom: 40px;
 }
@@ -4971,7 +4971,7 @@ section {
 }
 
 .statistic__item h2 {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 300;
     color: #4272d7;
 }
@@ -4983,7 +4983,7 @@ section {
 }
 
 .statistic__item .desc {
-    font-size: 18px;
+    font-size: 12px;
     text-transform: uppercase;
     font-weight: 300;
     color: rgba(128, 128, 128, 0.6);
@@ -4998,12 +4998,12 @@ section {
 .statistic__item .icon {
     display: inline-block;
     position: absolute;
-    bottom: -50px;
-    right: -7px;
+    bottom: 6px;
+    right: 7px;
 }
 
 .statistic__item .icon i {
-    font-size: 180px;
+    font-size: 33px;
     color: #808080;
     opacity: .2;
     line-height: 1;

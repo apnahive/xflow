@@ -9,6 +9,7 @@ use App\User;
 use App\Project;
 use App\Profile;
 use App\Job;
+use App\Interview_schedule;
 use DateTime;
 
 use RealRashid\SweetAlert\Facades\Alert;
@@ -138,7 +139,81 @@ class HomeController extends Controller
             //dd($value->skillcount);
             
        }
-        //dd($pie);
-        return view('home', compact('tasks', 'poc', 'cco', 'pie')); 
+
+       $interviews = Interview_schedule::where('scheduled', 1)->get();
+       $job_id = Interview_schedule::where('scheduled', 1)->select('job_id')->distinct()->get();
+       $jobs = Job::whereIn('id', $job_id)->get();
+
+        $interviews->red = 0;
+        $interviews->yellow = 0;
+        $interviews->green = 0;
+        $interviews->lightgreen = 0;
+       foreach ($interviews as $key => $value) 
+       {        
+            $date2 = new DateTime($value->date);
+            $d1 = date_diff($now, $date2);
+            //dd($now, $date1, $d, $d->days);
+            if($d1->days > 7 && $d1->invert == 0) //for the dashboard
+                $interviews->green++;
+            elseif($d1->days <= 7 && $d1->days > 3 && $d1->invert == 0) //for the dashboard
+                $interviews->lightgreen++;
+            elseif($d1->days <= 3 && $d1->invert == 0)
+                $interviews->yellow++;
+            if($d1->invert)
+                $interviews->red++;
+       }
+
+        $jobs->red = 0;
+        $jobs->yellow = 0;
+        $jobs->green = 0;
+        $jobs->lightgreen = 0;
+       foreach ($jobs as $key => $value) 
+       {        
+            $date3 = new DateTime($value->start_date);
+            $d2 = date_diff($now, $date3);
+            //dd($now, $date1, $d, $d->days);
+            if($d2->days > 7 && $d2->invert == 0) //for the dashboard
+                $jobs->green++;
+            elseif($d2->days <= 7 && $d2->days > 3 && $d2->invert == 0) //for the dashboard
+                $jobs->lightgreen++;
+            elseif($d2->days <= 3 && $d2->invert == 0)
+                $jobs->yellow++;
+            if($d1->invert)
+                $jobs->red++;
+       }
+
+
+       //My tasks
+       $mytasks = Task::where('status', 1)->orderBy('duedate', 'ASC')->take(10)->get();
+       //$mytasks = Task::where('assignee', $id1)->where('status', 1)->orderBy('duedate', 'ASC')->take(10)->get();
+
+       foreach ($mytasks as $key => $value) {
+           $date4 = new DateTime($value->duedate);
+            $d4 = date_diff($now, $date4);
+            //dd($now, $date1, $d, $d->days);
+            if($d4->days > 3)
+                $value->color = 3;
+            if($d4->days <= 3)
+                $value->color = 2;
+            if($d4->invert)
+                $value->color = 1;
+            if($value->status == 3)
+                $value->color = 4;
+       }
+       $myjobs = Job::where('user_id', $id1)->get();
+       $myinterviews = Interview_schedule::where('scheduled', 1)->where('candidate_id', $id1)->get();
+       foreach ($myinterviews as $key => $value) 
+       {
+           $user = User::find($value->candidate_id);
+
+            $value->name = $user->name.' '.$user->lastname;
+       }
+
+       
+       //$mytasks = Task::where('assignee', $id1)->where('status', 1)->take(10)->get();
+       //dd($mytasks);
+
+        //dd($interviews, $job);
+        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews')); 
     }
 }

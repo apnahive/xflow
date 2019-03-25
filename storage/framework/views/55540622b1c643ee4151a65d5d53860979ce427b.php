@@ -241,11 +241,15 @@
                                             <td><?php echo e($value->state); ?></td>                        
                                             <td><?php echo e($value->city); ?></td>
                                             <td>
+                                                <?php if($accept == 0): ?>
                                                 <div class="table-data-feature">
                                                     <a href="<?php echo e(route('interviewed.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Accept">
-                                                        <i class="zmdi zmdi-mail-send"></i>
+                                                        <i class="zmdi zmdi-mail-send"></i> 
                                                     </button></a>
                                                 </div>
+                                                <?php else: ?>
+                                                 Interview scheduled
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
                                         <tr class="spacer"></tr>

@@ -93,12 +93,22 @@ class Interview_scheduleController extends Controller
 
         $cities = City::select('city')->distinct()->get();
 
-        $interviews = Interview_schedule::where('job_id', $id)->where('candidate_id', $id1)->get();
+        if(Interview_schedule::where('job_id', $id)->where('candidate_id', $id1)->where('scheduled', 1)->exists())
+        {
+            $interviews = Interview_schedule::where('job_id', $id)->where('candidate_id', $id1)->where('scheduled', 1)->get();
+            $accept = 1;
+        }
+        else
+        {
+            $interviews = Interview_schedule::where('job_id', $id)->where('candidate_id', $id1)->get();    
+            $accept = 0;
+        }
+        
 
-        //dd($interview);
+        //dd($interviews);
 
         if (Auth::user()->hasPermissionTo('can apply job'))
-            return view('interviewed.show', compact('job', 'states', 'cities', 'interviews'));
+            return view('interviewed.show', compact('job', 'states', 'cities', 'interviews', 'accept'));
         else
             return view('errors.401');
     }

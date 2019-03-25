@@ -20,7 +20,7 @@
         </div>
     </div>
 </div> -->
- <!-- PAGE CONTENT-->
+ <!-- PAGE CONTENT--> 
         
         <div class="page-content--bgf7" style="margin-bottom: 100px;">
             <!-- BREADCRUMB-->
@@ -60,10 +60,395 @@
                     </div>
                 </div>
             </section>
-            <!-- END WELCOME-->
+            <!-- END WELCOME--> 
+            <div class="row">
+            <section class="welcome p-t-10 col-md-6">
+                <div class="container">
+                     <div class="row">
+                            <div class="col-lg-12">
+                                <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                                        <div class="bg-overlay bg-overlay--blue"></div>
+                                        <h3>
+                                            <i class="zmdi zmdi-account-calendar"></i>My Top 10 Task</h3>
+                                        <!-- <button class="au-btn-plus">
+                                            <i class="zmdi zmdi-plus"></i>
+                                        </button> -->
+                                    </div>
+                                    <div class="au-task js-list-load">
+                                        <!-- <div class="au-task__title">
+                                            <p>Tasks for John Doe</p>
+                                        </div> -->
+                                        <div class="au-task-list js-scrollbar3" style="height: 400px;">
+                                            @if(count($mytasks) > 0)
+                                            @foreach ($mytasks as $taskkey => $task)
+                                            <div class="au-task__item"  @if($task->color == 1) style="border-left: 3px solid #fa4251;" @elseif($task->color == 2) style="border-left: 3px solid #ffa037;" @elseif($task->color == 3) style="border-left: 3px solid #00ad5f;" @elseif($task->color == 4) style="border-left: 3px solid #777272;" @endif>
+                                                <div class="au-task__item-inner">
+                                                    <h5 class="task">
+                                                        <a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a>
+                                                    </h5>
+                                                    <span class="time">Contract Date: {{ $task->duedate }}</span>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            @else
+                                                <div style="text-align: center;margin-top: 100px;">No Tasks Available</div>
+                                            @endif
+                                        </div>
+                                        <!-- <div class="au-task__footer">
+                                            <button class="au-btn au-btn-load js-load-btn">load more</button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                @can('xflow view')
+                @role('Admin')
+                @else
+                <section class="statistic">
+                    <div class="section__content section__content--p30">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="statistic__item">
+                                        <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $poc->task }} tasks </a> </h2>
+                                        <span class="desc">in <a href="{{ route('projects.index') }}">{{ $poc->project }} projects as Consultant</a></span>
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="statistic__item">
+                                        <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $cco->task }} tasks </a></h2>
+                                        <span class="desc">in <a href="{{ route('projects.index') }}">{{ $cco->project }} projects as CCO</a></span>
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="statistic__item">
+                                        <h2 class="number"><a href="{{ route('tasks.index') }}">{{ $tasks->remaining }} tasks </a></h2>
+                                        <span class="desc">in other projects assigned</span>
+                                        <div class="icon">
+                                            <i class="zmdi zmdi-calendar-note"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @endrole
+                <section class="statistic statistic2">
 
-            <!-- STATISTIC-->
-            @can('xflow view')
+                    <div class="container">
+                        <h3>Your Tasks</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--red">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $tasks->red }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">tasks past due date</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange">
+                                    <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $tasks->yellow }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">7 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                    <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $tasks->lightgreen }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">30 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $tasks->green }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">greater than 90 days to complete</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @endcan
+                @can('can apply job')
+                <section class="statistic statistic2">
+                    <div class="container">
+                        <h3>Your Interviews</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--red">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $interviews->red }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">interviews past due date</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange">
+                                    <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $interviews->yellow }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">3 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                    <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $interviews->lightgreen }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">7 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $interviews->green }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">more than 7 days for interview</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @endcan
+                @can('can create job')
+                <section class="statistic statistic2">
+                    <div class="container">
+                        <h3>Your Jobs</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--red">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $jobs->red }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">jobs past due date</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange">
+                                    <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $jobs->yellow }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">3 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                    <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $jobs->lightgreen }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">7 days to due</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $jobs->green }}</a></h2>
+                                    <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">more than 7 days for jobs</a></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                @endcan
+            </section>
+
+            <section class="welcome p-t-10 col-md-6">
+                <div class="container">
+                     <div class="row">
+                        <div class="col-md-6">
+                            <h3>Bid</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                                <table class="table table-data2">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>Consultant</th>
+                                            <th>CCO</th>
+                                            <th>Contract Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/QP</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/QP</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/QP</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/QP</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Pending Award</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                                <table class="table table-data2">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>Consultant</th>
+                                            <th>CCO</th>
+                                            <th>Contract Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        <tr class="tr-shadow">
+                                            <td>385</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/PI</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        <tr class="tr-shadow">
+                                            <td>SMC/LQ</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                     </div>
+                 </div>
+                 <div class="container">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <h3>Job Posting</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                                <table class="table table-data2">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>Consultant</th>
+                                            <th>CCO</th>
+                                            <th>Contract Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        @if(count($myjobs) > 0)
+                                        @foreach ($myjobs as $key => $value)
+                                        <tr class="tr-shadow">
+                                            <td><a href="{{ route('jobs.show', $value->id) }}">{{ $value->title }}</a></td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        @endforeach
+                                        @else
+                                            <div style="text-align: center;margin-top: 10px;">No Jobs Posted</div>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                     </div>
+                 </div>
+                 <div class="container">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <h3>Schedule Interviews</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                                <table class="table table-data2">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>Consultant</th>
+                                            <th>CCO</th>
+                                            <th>Contract Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        @if(count($myinterviews) > 0)
+                                        @foreach ($myinterviews as $key => $value)
+                                        <tr class="tr-shadow">
+                                            <td><a href="{{ route('profiles.show', $value->candidate_id) }}">{{ $value->name }}</a></td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        @endforeach
+                                        @else
+                                            <div style="text-align: center;margin-top: 10px;">No Schedule Interviews</div>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                     </div>
+                 </div>
+                 <div class="container">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <h3>Time</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                                <table class="table table-data2">
+                                    <thead>
+                                        <tr>
+                                            <th>Week</th>
+                                            <th>Month</th>
+                                            <th>Year</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="tr-shadow">
+                                            <td style="font-weight: 600;font-size: 28px;">16</td>
+                                            <td style="font-weight: 600;font-size: 28px;">46</td>
+                                            <td style="font-weight: 600;font-size: 28px;">144</td>
+                                            <td style="font-weight: 600;font-size: 28px;">1280</td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                     </div>
+                 </div>
+             </section>
+             </div>
+
+
+
+
+            <!-- @can('xflow view')
             @role('Admin')
             @else
             <section class="statistic">
@@ -104,7 +489,9 @@
             </section>
             @endrole
             <section class="statistic statistic2">
+
                 <div class="container">
+                    <h3>Your Tasks</h3>
                     <div class="row">
                         <div class="col-md-6 col-lg-3">
                             <div class="statistic__item statistic__item--red">
@@ -142,19 +529,103 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-6 col-lg-3">
-                            <div class="statistic__item statistic__item--red">
-                                <h2 class="number">$1,060,386</h2>
-                                <span class="desc">total earnings</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-money"></i>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </section>
             @endcan
+            @can('can apply job')
+            <section class="statistic statistic2">
+                <div class="container">
+                    <h3>Your Interviews</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $interviews->red }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">interviews past due date</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $interviews->yellow }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">3 days to due</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $interviews->lightgreen }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">7 days to due</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $interviews->green }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">more than 7 days for interview</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @endcan
+            @can('can create job')
+            <section class="statistic statistic2">
+                <div class="container">
+                    <h3>Your Jobs</h3>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $jobs->red }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">jobs past due date</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $jobs->yellow }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">3 days to due</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $jobs->lightgreen }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">7 days to due</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="statistic__item statistic__item--green">
+                                <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $jobs->green }}</a></h2>
+                                <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">more than 7 days for jobs</a></span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @endcan -->
+
+
+
             <!-- @can('can apply job')
             <section class="statistic">
                 <div class="section__content section__content--p30">

@@ -105,59 +105,25 @@
                                 </li>
                             </ul> -->
                         </li>
-                        @can('client view')
-                       <li class="{{ request()->is('projects') ? 'active' : '' }}">
-                            <a href="{{ route('projects.index') }}">
-                                <i class="fab fa-product-hunt"></i>Client</a>
-                        </li>
-                        @endcan
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
                                 <i class="fas fa-users"></i>Users</a>
                         </li>
-                        <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
+                        <!-- <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
-                        </li>
+                        </li> -->
                         <!-- <li class="{{ request()->is('userroles') ? 'active' : '' }}">
                             <a href="{{ route('userroles.index') }}">
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         @endrole
-                        @can('view calender')
-                        <li class="{{ request()->is('calender') ? 'active' : '' }}">
-                            <a href="{{ route('calender.index') }}">
-                                <i class="fas fa-calendar-alt"></i>Calender</a>
-                        </li>
-                        @endcan
-                        @can('task view')
-                        <li class="{{ request()->is('tasks') ? 'active' : '' }}">
-                            <a href="{{ route('tasks.index') }}">
-                                <i class="fas fa-tasks"></i>Tasks</a>
-                        </li>
-                        @endcan
-                        @can('xflow view')
-                        <li class="{{ request()->is('xflows') ? 'active' : '' }}">
-                            <a href="{{ route('xflows.index') }}">
-                            <i class="fas fa-cogs"></i>Xflow</a>
-                        </li>                        
-                        <li class="{{ request()->is('teams') ? 'active' : '' }}">
-                            <a href="{{ route('teams.index') }}">
-                            <i class="fas fa-cogs"></i>Team</a>
-                        </li>
-                        @endcan
-                        @can('checklist view')
-                        <li class="{{ request()->is('checklists') ? 'active' : '' }}">
-                            <a href="{{ route('checklists.index') }}">
-                                <i class="fas fa-map-signs"></i>Checklists</a>
-                        </li>
-                        <li class="{{ request()->is('checklist_templates') ? 'active' : '' }}">
-                            <a href="{{ route('checklist_templates.index') }}">
-                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
-                        </li>
-                        @endcan
-                        @role('Admin')
+                        
+                        
+                        
+                        
+                        <!-- @role('Admin')
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
                             <a href="{{ route('profiles.index') }}">
                                 <i class="fas fa-users"></i>Candidates</a>
@@ -193,6 +159,122 @@
                         <li class="{{ request()->is('interviewed') ? 'active' : '' }}">
                             <a href="{{ route('interviewed.index') }}">
                                 <i class="fas fa-users"></i>Interviews</a>
+                        </li>
+                        @endcan -->
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                @can('client view')
+                               <li class="{{ request()->is('projects') ? 'active' : '' }}">
+                                    <a href="{{ route('projects.index') }}">
+                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                </li>
+                                @endcan
+                                @can('task view')
+                                <li class="{{ request()->is('tasks') ? 'active' : '' }}">
+                                    <a href="{{ route('tasks.index') }}">
+                                        <i class="fas fa-tasks"></i>Tasks</a>
+                                </li>
+                                @endcan
+                                @role('Admin')
+                                <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
+                                    <a href="{{ route('task_templates.index') }}">
+                                        <i class="fas fa-folder-open"></i>Task Template</a>
+                                </li>
+                                @endrole
+                                @can('xflow view')
+                                <li class="{{ request()->is('xflows') ? 'active' : '' }}">
+                                    <a href="{{ route('xflows.index') }}">
+                                    <i class="fas fa-cogs"></i>Xflow</a>
+                                </li>                        
+                                <li class="{{ request()->is('teams') ? 'active' : '' }}">
+                                    <a href="{{ route('teams.index') }}">
+                                    <i class="fas fa-cogs"></i>Team</a>
+                                </li>
+                                @endcan
+                                @can('checklist view')
+                                <li class="{{ request()->is('checklists') ? 'active' : '' }}">
+                                    <a href="{{ route('checklists.index') }}">
+                                        <i class="fas fa-map-signs"></i>Checklists</a>
+                                </li>
+                                <li class="{{ request()->is('checklist_templates') ? 'active' : '' }}">
+                                    <a href="{{ route('checklist_templates.index') }}">
+                                        <i class="fas fa-map-signs"></i>Checklist Templates</a>
+                                </li>
+                                @endcan 
+                            </ul>
+                        </li> 
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Human Resource</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                @role('Admin')
+                                <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('profiles.index') }}">
+                                        <i class="fas fa-users"></i>Candidates</a>
+                                </li>
+                                <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('client_profiles.index') }}">
+                                        <i class="fas fa-users"></i>Recuriters</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.index') }}">
+                                        <i class="fas fa-users"></i>Jobs</a>
+                                </li>
+                                @endrole
+                                 @can('can create job')
+                                 @role('Admin')
+                                @else
+                                <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
+                                        <i class="fas fa-users"></i>Client Profile</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.create') }}">
+                                        <i class="fas fa-users"></i>Post a Jobs</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.index') }}">
+                                        <i class="fas fa-users"></i>View Jobs</a>
+                                </li>
+                                @endrole
+                                @endcan
+                                @can('can apply job')
+                                @role('Admin')
+                                @else
+                                <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('profiles.create') }}">
+                                        <i class="fas fa-users"></i>Candidate Profile</a>
+                                </li>
+                                <li class="{{ request()->is('interviewed') ? 'active' : '' }}">
+                                    <a href="{{ route('interviewed.index') }}">
+                                        <i class="fas fa-users"></i>Interviews</a>
+                                </li>
+                                @endrole                        
+                                @endcan
+
+                                <!-- <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Business Development</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="#">Bids</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pending Award</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @can('view calender')
+                        <li class="{{ request()->is('calender') ? 'active' : '' }}">
+                            <a href="{{ route('calender.index') }}">
+                                <i class="fas fa-calendar-alt"></i>Calender</a>
                         </li>
                         @endcan
                         <!-- <li class="has-sub">
@@ -290,40 +372,30 @@
                                 </li>
                             </ul> -->
                         </li>                        
-                        @can('client view')
-                        <li class="{{ request()->is('projects') ? 'active' : '' }}">
-                            <a href="{{ route('projects.index') }}">
-                                <i class="fab fa-product-hunt"></i>Client</a>
-                        </li>
-                        @endcan                        
+                        
                         @role('Admin')
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
                                 <i class="fas fa-users"></i>Users</a>
                         </li>
-                        <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
+                        <!-- <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
-                        </li>
+                        </li> -->
                         <!-- <li class="{{ request()->is('userroles') ? 'active' : '' }}">
                             <a href="{{ route('userroles.index') }}">
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         @endrole
 
-                        @can('view calender')
-                        <li class="{{ request()->is('calender') ? 'active' : '' }}">
-                            <a href="{{ route('calender.index') }}">
-                                <i class="fas fa-calendar-alt"></i>Calender</a>
-                        </li>
-                        @endcan
-                        @can('task view')
+                        
+                        <!-- @can('task view')
                         <li class="{{ request()->is('tasks') ? 'active' : '' }}">
                             <a href="{{ route('tasks.index') }}">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
-                        @endcan
-                        @can('xflow view')
+                        @endcan -->
+                        <!-- @can('xflow view')
                         <li class="{{ request()->is('xflows') ? 'active' : '' }}">
                             <a href="{{ route('xflows.index') }}">
                             <i class="fas fa-cogs"></i>Xflow</a>
@@ -333,9 +405,9 @@
                             <a href="{{ route('teams.index') }}">
                             <i class="fas fa-cogs"></i>Team</a>
                         </li>
-                        @endcan
+                        @endcan -->
 
-                        @can('checklist view')
+                        <!-- @can('checklist view')
                         <li class="{{ request()->is('checklists') ? 'active' : '' }}">
                             <a href="{{ route('checklists.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
@@ -344,8 +416,8 @@
                             <a href="{{ route('checklist_templates.index') }}">
                                 <i class="fas fa-map-signs"></i>Checklist Templates</a>
                         </li>
-                        @endcan
-                        @role('Admin')
+                        @endcan -->
+                        <!-- @role('Admin')
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
                             <a href="{{ route('profiles.index') }}">
                                 <i class="fas fa-users"></i>Candidates</a>
@@ -358,8 +430,8 @@
                             <a href="{{ route('jobs.index') }}">
                                 <i class="fas fa-users"></i>Jobs</a>
                         </li>
-                        @endrole
-                        @can('can create job')
+                        @endrole -->
+                        <!-- @can('can create job')
                         <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
                             <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
                                 <i class="fas fa-users"></i>Client Profile</a>
@@ -372,8 +444,8 @@
                             <a href="{{ route('jobs.index') }}">
                                 <i class="fas fa-users"></i>View Jobs</a>
                         </li>
-                        @endcan  
-                        @can('can apply job')
+                        @endcan   -->
+                        <!-- @can('can apply job')
                         <li class="{{ request()->is('profiles') ? 'active' : '' }}">
                             <a href="{{ route('profiles.create') }}">
                                 <i class="fas fa-users"></i>Candidate Profile</a>
@@ -382,6 +454,134 @@
                             <a href="{{ route('interviewed.index') }}">
                                 <i class="fas fa-users"></i>Interviews</a>
                         </li>                        
+                        @endcan -->
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                @can('client view')
+                               <li class="{{ request()->is('projects') ? 'active' : '' }}">
+                                    <a href="{{ route('projects.index') }}">
+                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                </li>
+                                @endcan
+                                @can('task view')
+                                <li class="{{ request()->is('tasks') ? 'active' : '' }}">
+                                    <a href="{{ route('tasks.index') }}">
+                                        <i class="fas fa-tasks"></i>Tasks</a>
+                                </li>
+                                @endcan
+                                @role('Admin')
+                                <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
+                                    <a href="{{ route('task_templates.index') }}">
+                                        <i class="fas fa-folder-open"></i>Task Template</a>
+                                </li>
+                                @endrole
+                                @can('xflow view')
+                                <li class="{{ request()->is('xflows') ? 'active' : '' }}">
+                                    <a href="{{ route('xflows.index') }}">
+                                    <i class="fas fa-cogs"></i>Xflow</a>
+                                </li>                        
+                                <li class="{{ request()->is('teams') ? 'active' : '' }}">
+                                    <a href="{{ route('teams.index') }}">
+                                    <i class="fas fa-cogs"></i>Team</a>
+                                </li>
+                                @endcan
+                                @can('checklist view')
+                                <li class="{{ request()->is('checklists') ? 'active' : '' }}">
+                                    <a href="{{ route('checklists.index') }}">
+                                        <i class="fas fa-map-signs"></i>Checklists</a>
+                                </li>
+                                <li class="{{ request()->is('checklist_templates') ? 'active' : '' }}">
+                                    <a href="{{ route('checklist_templates.index') }}">
+                                        <i class="fas fa-map-signs"></i>Checklist Templates</a>
+                                </li>
+                                @endcan 
+                            </ul>
+                        </li> 
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Human Resource
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                @role('Admin')
+                                <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('profiles.index') }}">
+                                        <i class="fas fa-users"></i>Candidates</a>
+                                </li>
+                                <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('client_profiles.index') }}">
+                                        <i class="fas fa-users"></i>Recuriters</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.index') }}">
+                                        <i class="fas fa-users"></i>Jobs</a>
+                                </li>
+                                @endrole
+                                 @can('can create job')
+                                 @role('Admin')
+                                @else
+                                <li class="{{ request()->is('client_profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('client_profiles.show', Auth::user()->id) }}">
+                                        <i class="fas fa-users"></i>Client Profile</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.create') }}">
+                                        <i class="fas fa-users"></i>Post a Jobs</a>
+                                </li>
+                                <li class="{{ request()->is('jobs') ? 'active' : '' }}">
+                                    <a href="{{ route('jobs.index') }}">
+                                        <i class="fas fa-users"></i>View Jobs</a>
+                                </li>
+                                @endrole
+                                @endcan
+                                @can('can apply job')
+                                @role('Admin')
+                                @else
+                                <li class="{{ request()->is('profiles') ? 'active' : '' }}">
+                                    <a href="{{ route('profiles.create') }}">
+                                        <i class="fas fa-users"></i>Candidate Profile</a>
+                                </li>
+                                <li class="{{ request()->is('interviewed') ? 'active' : '' }}">
+                                    <a href="{{ route('interviewed.index') }}">
+                                        <i class="fas fa-users"></i>Interviews</a>
+                                </li>
+                                @endrole                        
+                                @endcan
+
+                                <!-- <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li> -->
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Business Development
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#">Bids</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pending Award</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @can('view calender')
+                        <li class="{{ request()->is('calender') ? 'active' : '' }}">
+                            <a href="{{ route('calender.index') }}">
+                                <i class="fas fa-calendar-alt"></i>Calender</a>
+                        </li>
                         @endcan
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">

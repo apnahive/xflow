@@ -558,6 +558,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if(count($notes) > 0): ?>
                                     <?php $__currentLoopData = $notes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="tr-shadow">
                                         <!-- <td>
@@ -599,7 +600,7 @@
                                     </tr>
                                     <tr class="spacer"></tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                             

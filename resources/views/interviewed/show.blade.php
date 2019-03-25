@@ -239,11 +239,15 @@
                                             <td>{{ $value->state }}</td>                        
                                             <td>{{ $value->city }}</td>
                                             <td>
+                                                @if($accept == 0)
                                                 <div class="table-data-feature">
                                                     <a href="{{ route('interviewed.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Accept">
-                                                        <i class="zmdi zmdi-mail-send"></i>
+                                                        <i class="zmdi zmdi-mail-send"></i> 
                                                     </button></a>
                                                 </div>
+                                                @else
+                                                 Interview scheduled
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr class="spacer"></tr>
