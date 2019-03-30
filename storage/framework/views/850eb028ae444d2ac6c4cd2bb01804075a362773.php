@@ -21,10 +21,22 @@
                          aria-selected="false"><i class="fas fa-cogs"></i>Interviews</a>
                         <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-notes' ? 'active' : ''); ?>" id="custom-nav-notes-tab" data-toggle="tab" href="#custom-nav-notes" role="tab" aria-controls="custom-nav-notes"
                          aria-selected="false"><i class="far fa-file"></i>Notes</a>
+                        <!-- <?php if($job->status == 1): ?>
+                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-candidates' ? 'active' : ''); ?>" id="custom-nav-candidates-tab" data-toggle="tab" href="#custom-nav-candidates" role="tab" aria-controls="custom-nav-candidates"
+                         aria-selected="false"><i class="far fa-user"></i>Candidates</a>
+                        <?php endif; ?> -->
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
+                        <div style="text-align:left;margin:auto;margin-top: 10px;margin-right: 0;">
+                            <?php if($job->status == 1): ?>
+                            <div style="font-size: 21px;">
+                                <i class="far fa-thumbs-up"></i> Awarded to <a href="<?php echo e(route('profiles.show', $award->candidate_id)); ?>"><?php echo e($award->candidate); ?></a>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        
                         <div class="card-body card-block">
                             <div class="row form-group">
                                 <div class="col col-md-3">
@@ -606,6 +618,33 @@
                             
                         </div>                        
                     </div>
+                    <!--<?php if($job->status == 1): ?>
+                    <div class="tab-pane fade" id="custom-nav-candidates" role="tabpanel" aria-labelledby="custom-nav-candidates-tab">
+                         <div class="table-responsive table-responsive-data2" style="margin-bottom: 0px;">
+                            <table class="table table-data2">
+                                <thead>
+                                    <tr>
+                                       
+                                        <th style="width: 25%;">Name</th> 
+                                        <th style="width: 75%;">Notes</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr class="tr-shadow">
+                                    
+                                                     
+                                        
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div> 
+                    </div>
+                    <?php endif; ?> -->                       
                 </div>
 
             </div>

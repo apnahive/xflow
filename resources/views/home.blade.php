@@ -22,9 +22,10 @@
 </div> -->
  <!-- PAGE CONTENT--> 
         
-        <div class="page-content--bgf7" style="margin-bottom: 100px;">
+        <div class="page-content--bgf7" style="margin-bottom: 10px;">
+
             <!-- BREADCRUMB-->
-            <section class="au-breadcrumb2">
+            <section class="au-breadcrumb2" style="padding-top: 10px;padding-bottom: 0px; ">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -46,10 +47,12 @@
                     </div>
                 </div>
             </section>
+        </div>
+
             <!-- END BREADCRUMB-->
 
             <!-- WELCOME-->
-            <section class="welcome p-t-10">
+            <!-- <section class="welcome p-t-10">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -59,22 +62,22 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!-- END WELCOME--> 
             <div class="row">
             <section class="welcome p-t-10 col-md-6">
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <div class="container">
                      <div class="row">
                             <div class="col-lg-12">
                                 <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
-                                    <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                                    <h3 style="margin: 24px;">
+                                            <i class="zmdi zmdi-account-calendar"></i> My Top 10 Task</h3>
+                                    <!-- <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
                                         <div class="bg-overlay bg-overlay--blue"></div>
-                                        <h3>
-                                            <i class="zmdi zmdi-account-calendar"></i>My Top 10 Task</h3>
-                                        <!-- <button class="au-btn-plus">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button> -->
-                                    </div>
+                                        
+                                        
+                                    </div> -->
                                     <div class="au-task js-list-load">
                                         <!-- <div class="au-task__title">
                                             <p>Tasks for John Doe</p>
@@ -103,9 +106,12 @@
                             </div>
                         </div>
                 </div>
+                </div>
+                
                 @can('xflow view')
                 @role('Admin')
                 @else
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic">
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
@@ -142,11 +148,13 @@
                         </div>
                     </div>
                 </section>
+                </div>
                 @endrole
-                <section class="statistic statistic2">
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                <section class="statistic statistic2" style="padding-top: 1px;">
 
                     <div class="container">
-                        <h3>Your Tasks</h3>
+                        <h3 style="margin: 24px;">Your Tasks</h3>
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
@@ -187,11 +195,13 @@
                         </div>
                     </div>
                 </section>
+                </div>
                 @endcan
                 @can('can apply job')
-                <section class="statistic statistic2">
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
-                        <h3>Your Interviews</h3>
+                        <h3 style="margin: 24px;">Your Interviews</h3>
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
@@ -232,11 +242,13 @@
                         </div>
                     </div>
                 </section>
+                </div>
                 @endcan
                 @can('can create job')
-                <section class="statistic statistic2">
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
-                        <h3>Your Jobs</h3>
+                        <h3 style="margin: 24px;">Your Jobs</h3>
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
@@ -277,6 +289,8 @@
                         </div>
                     </div>
                 </section>
+                </div>
+                
                 @endcan
             </section>
 
@@ -284,8 +298,9 @@
                 <div class="container">
                      <div class="row">
                         <div class="col-md-6">
+                            <div class="page-content--bgf7" style="margin-bottom: 30px;padding: 15px;">
                             <h3>Bid</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
                                         <tr>
@@ -304,22 +319,16 @@
                                             <td>SMC/QP</td>
                                         </tr>
                                         <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/QP</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/QP</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
 
                         </div>
                         <div class="col-md-6">
+                            <div class="page-content--bgf7" style="margin-bottom: 30px;padding: 15px;">
                             <h3>Pending Award</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
                                         <tr>
@@ -338,22 +347,21 @@
                                             <td>SMC/PI</td>
                                         </tr>
                                         <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/LQ</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
 
                         </div>
                      </div>
                  </div>
+                
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3>Job Posting</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
                                         <tr>
@@ -381,11 +389,13 @@
                         </div>
                      </div>
                  </div>
+                </div>
+                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3>Schedule Interviews</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                            <h3 style="margin: 24px;">Schedule Interviews</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
                                         <tr>
@@ -413,11 +423,13 @@
                         </div>
                      </div>
                  </div>
+                </div>
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3>Time</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                            <h3 style="margin: 24px;">Time</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <thead>
                                         <tr>
@@ -442,6 +454,7 @@
                         </div>
                      </div>
                  </div>
+                </div>
              </section>
              </div>
 

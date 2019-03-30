@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\State;
 use App\City;
 use App\Job;
+use App\Job_award;
 use App\Profile;
 use App\Interview_schedule;
 use App\User;
@@ -38,6 +39,10 @@ class JobController extends Controller
             $jobs = Job::all();
         else
             $jobs = Job::where('user_id', $id1)->get();
+
+
+        $profile_exist = Profile::select('user_id')->get();
+        $candidates = User::whereIn('id', $profile_exist)->get();
 
         foreach ($jobs as $jobkey => $value) 
         {
@@ -74,7 +79,7 @@ class JobController extends Controller
         }
         //dd($jobs);
         if (Auth::user()->hasPermissionTo('can create job'))
-            return view('jobs.index', compact('jobs'));
+            return view('jobs.index', compact('jobs', 'candidates'));
         else
             return view('errors.401');
         
@@ -137,6 +142,25 @@ class JobController extends Controller
         
     }
 
+    public function award(Request $request)
+    {
+        //dd(request()->all());
+        $job = Job::find($request->job_id);
+        $job->status = 1;
+        
+
+        $award = new Job_award;
+        $award->job_id = $request->job_id;
+        $award->candidate_id = $request->hire;
+        $award->client_id = $job->user_id;
+        $award->save();
+        $job->save();
+
+        //dd($job);
+        //Job_award
+        Alert::success('Success', 'You have successfully hired for a Job')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('jobs.index');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -199,6 +223,7 @@ class JobController extends Controller
         $job->skills = $request->skills;
         $job->salary_offered = $request->salary_offered;
         $job->user_id = $id1;
+        $job->status = 0;
         $job->save();
 
         $profile_exist = Profile::select('user_id')->get();
@@ -330,10 +355,21 @@ class JobController extends Controller
         }
         //dd($cities, $job, $shortlisted, $interviews, $notes);
 
+        if($job->status == 1)
+        {
+            $award = Job_award::where('job_id', $job->id)->first();
+            $candidate = User::find($award->candidate_id);
+            $award->candidate = $candidate->name.' '.$candidate->lastname;
+        }
+        else
+        {
+            $award = null;
+        }
+
 
 
         if (Auth::user()->hasPermissionTo('can create job'))
-            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted', 'interviews', 'notes'));
+            return view('jobs.show', compact('states', 'cities', 'job', 'shortlisted', 'interviews', 'notes', 'award'));
         else
             return view('errors.401');
 

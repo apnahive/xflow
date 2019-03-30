@@ -146,6 +146,8 @@ Route::get('client_profiles/sort/{feild}/{type}', 'Client_profileController@sort
 Route::resource('shortlisted', 'Job_shortlistedController');
 Route::get('shortlist/{id}', 'Job_shortlistedController@shortlist')->name('shortlisted.shortlist');
 Route::resource('job_notes', 'Job_notesController');
+Route::post('job_award', 'JobController@award')->name('jobs.award');
+
 
 
 

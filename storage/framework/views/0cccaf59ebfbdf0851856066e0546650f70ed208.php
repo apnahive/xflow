@@ -105,12 +105,7 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
-                       <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('projects.index')); ?>">
-                                <i class="fab fa-product-hunt"></i>Client</a>
-                        </li>
-                        <?php endif; ?>
+                        
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('users.index')); ?>">
@@ -125,12 +120,7 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
-                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('calender.index')); ?>">
-                                <i class="fas fa-calendar-alt"></i>Calender</a>
-                        </li>
-                        <?php endif; ?>
+                        
                         <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
@@ -199,6 +189,12 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                               <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                               <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
+                                    <a href="<?php echo e(route('projects.index')); ?>">
+                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                </li>
+                                <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                                 <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('tasks.index')); ?>">
@@ -236,7 +232,7 @@
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Human Resource</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                                 <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('profiles.index')); ?>">
@@ -287,6 +283,24 @@
                                 </li> -->
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Business Development</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="#">Bids</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pending Award</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
+                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('calender.index')); ?>">
+                                <i class="fas fa-calendar-alt"></i>Calender</a>
+                        </li>
+                        <?php endif; ?>
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
@@ -382,12 +396,7 @@
                                 </li>
                             </ul> -->
                         </li>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
-                        <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('projects.index')); ?>">
-                                <i class="fab fa-product-hunt"></i>Client</a>
-                        </li>
-                        <?php endif; ?>
+                        
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('users.index')); ?>">
@@ -402,12 +411,7 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         <?php endif; ?>
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
-                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('calender.index')); ?>">
-                                <i class="fas fa-calendar-alt"></i>Calender</a>
-                        </li>
-                        <?php endif; ?>
+                        
                         <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
@@ -476,7 +480,13 @@
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management</a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                               <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
+                                    <a href="<?php echo e(route('projects.index')); ?>">
+                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                </li>
+                                <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                                 <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('tasks.index')); ?>">
@@ -565,6 +575,24 @@
                                 </li> -->
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Business Development</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="#">Bids</a>
+                                </li>
+                                <li>
+                                    <a href="#">Pending Award</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
+                        <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('calender.index')); ?>">
+                                <i class="fas fa-calendar-alt"></i>Calender</a>
+                        </li>
+                        <?php endif; ?>
                         <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Pages</a>
