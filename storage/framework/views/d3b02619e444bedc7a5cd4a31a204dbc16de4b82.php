@@ -7,7 +7,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Add/Update</strong> Members to Team
+                <strong>Assign</strong> Users to Work_Order
             </div>            
             <div >
             <div class="card-body card-block">
@@ -18,7 +18,7 @@
                             <!-- <h3 class="title-5 m-b-35">Add users to the Team</h3> -->
                                 <link href="<?php echo e(asset('css/select.css')); ?>" rel="stylesheet">
 
-                                <form action="<?php echo e(route('teammembers.update', $team['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="<?php echo e(route('work_order_assign.update', $work_order['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
                                     <input type="hidden" name="_method" value="PUT">
                                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <div class="subject-info-box-1">
@@ -44,7 +44,7 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 29px;">
-                                <i class="fa fa-dot-circle-o"></i> Update Members to Team
+                                <i class="fa fa-dot-circle-o"></i> Assign Users to Work Order
                             </button>                
                         </form>
 

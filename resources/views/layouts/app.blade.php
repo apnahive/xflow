@@ -110,6 +110,10 @@
                             <a href="{{ route('users.index') }}">
                                 <i class="fas fa-users"></i>Users</a>
                         </li>
+                        <li class="{{ request()->is('work_orders') ? 'active' : '' }}">
+                            <a href="{{ route('work_orders.index') }}">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
                         <!-- <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
                             <a href="{{ route('task_templates.index') }}">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
@@ -377,6 +381,10 @@
                         <li class="{{ request()->is('users') ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
                                 <i class="fas fa-users"></i>Users</a>
+                        </li>
+                        <li class="{{ request()->is('work_orders') ? 'active' : '' }}">
+                            <a href="{{ route('work_orders.index') }}">
+                                <i class="fas fa-users"></i>Work Order</a>
                         </li>
                         <!-- <li class="{{ request()->is('task_templates') ? 'active' : '' }}">
                             <a href="{{ route('task_templates.index') }}">
