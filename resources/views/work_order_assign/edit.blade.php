@@ -9,39 +9,32 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Edit</strong> Work Order Details
+                <strong>Edit</strong> Hours
             </div>            
-            <form action="{{ route('work_orders.update', $work_order['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('work_order_hour.update', $work_order_hours['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Title</label>
+                            <label for="title" class=" form-control-label">Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Work Order Title" class="form-control" value="{{ old('name', $work_order['title']) }}" required>
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('title'))
-                                <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
-                                </span>
-                            @endif 
+                            <label for="title" class=" form-control-label">{!! $work_order_hours->date !!}</label>
                         </div>
                     </div>
                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="description" class=" form-control-label">Description</label>
+                            <label for="description" class=" form-control-label">Hours</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control"  value="{{ old('name', $work_order['description']) }}" required>{!! $work_order->description !!}</textarea>
-                            <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            @if ($errors->has('description'))
+                            <input id="hours" type="text" class="form-control" name="hours" value="{{ old('title', $work_order_hours['hours']) }}" required autofocus>
+                                @if ($errors->has('hours'))
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('description') }}</strong>
+                                    <strong>{{ $errors->first('hours') }}</strong>
                                 </span>
-                            @endif 
+                                @endif 
                         </div>
                     </div>
                     

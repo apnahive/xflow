@@ -12,10 +12,13 @@
                 <a href=""><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add From Template</button></a>
             </div> -->
+            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
             <div class="table-data__tool-right">                
                 <a href="<?php echo e(route('checklists.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Checklists</button></a>
             </div>
+            <?php endif; ?>
+            
         </div> 
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">

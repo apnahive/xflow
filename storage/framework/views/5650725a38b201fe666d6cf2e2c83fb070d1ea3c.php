@@ -7,30 +7,26 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create</strong> Team
+                <strong>Create</strong> Checklist Template
             </div>            
-            <form action="<?php echo e(route('teams.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('checklist_templates.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <?php echo e(csrf_field()); ?>
 
-            <div class="card-body card-block">
+            <div class="card-body card-block">                    
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="title" class=" form-control-label">Team Title</label>
+                            <label for="name" class=" form-control-label">Name</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Title" class="form-control">
+                            <input type="text" id="name" name="name" placeholder="Name" class="form-control">
                             <!-- <small class="form-text text-muted">This is a help text</small> -->
-                            <?php if($errors->has('title')): ?>
+                            <?php if($errors->has('name')): ?>
                                 <span class="help-block error">
-                                    <strong><?php echo e($errors->first('title')); ?></strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
                             <?php endif; ?> 
                         </div>
-                    </div>
-                    
-                    <script type="text/javascript">
-                          $(".chosen").chosen();
-                    </script>
+                    </div>                    
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary btn-sm">

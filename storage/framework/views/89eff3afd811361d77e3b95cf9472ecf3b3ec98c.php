@@ -10,6 +10,7 @@
         <div class="table-data__tool">
             <div class="table-data__tool-left">                
             </div>
+            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
             <div class="table-data__tool-right">
                 <a href="<?php echo e(route('work_orders.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Work Order</button></a>
@@ -24,6 +25,7 @@
                     <div class="dropDownSelect2"></div>
                 </div> -->
             </div>
+            <?php endif; ?>
         </div>
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">

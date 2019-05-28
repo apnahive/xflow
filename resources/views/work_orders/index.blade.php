@@ -12,6 +12,7 @@
         <div class="table-data__tool">
             <div class="table-data__tool-left">                
             </div>
+            @role('Admin')
             <div class="table-data__tool-right">
                 <a href="{{ route('work_orders.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Work Order</button></a>
@@ -26,6 +27,7 @@
                     <div class="dropDownSelect2"></div>
                 </div> -->
             </div>
+            @endrole
         </div>
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2">

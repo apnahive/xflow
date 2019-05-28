@@ -52,7 +52,7 @@ class WorkOrderController extends Controller
     public function store(Request $request)
     {
         
-        //dd(request()->all());
+       // dd(request()->all());
         $this->validate($request, [            
             'title'=> 'required|max:191',
             ]
@@ -99,6 +99,7 @@ class WorkOrderController extends Controller
     {
         //dd('test');
         $work_order = work_order::find($id);
+        //dd($work_order);
         return view('work_orders.edit', compact('work_order'));
     }
 
@@ -106,17 +107,18 @@ class WorkOrderController extends Controller
     public function update(Request $request, $id)
     {
         //dd(request()->all());
-        /*$this->validate($request, [            
+        $this->validate($request, [            
             'title'=> 'required|max:191',
             ]
         );
 
         
 
-        $team = Team::find($id);        
-        $team->name = $request->title;
-        $team->save();
-        Alert::success('Success', 'You have successfully Updated team')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('teams.index')->with('success', 'You have successfully created Team');*/
+        $work_order = work_order::find($id);        
+        $work_order->title = $request->title;
+        $work_order->description = $request->description;
+        $work_order->save();
+        Alert::success('Success', 'You have successfully updated work order details')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('work_orders.index')->with('success', 'You have successfully updated work order details');
     }
 }

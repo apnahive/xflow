@@ -123,7 +123,12 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         @endrole
-                        
+                        @role('workuser')
+                        <li class="{{ request()->is('work_orders') ? 'active' : '' }}">
+                            <a href="{{ route('work_order_assign.index') }}">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
+                        @endrole
                         
                         
                         
@@ -394,6 +399,12 @@
                             <a href="{{ route('userroles.index') }}">
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
+                        @endrole
+                        @role('workuser')
+                        <li class="{{ request()->is('work_orders') ? 'active' : '' }}">
+                            <a href="{{ route('work_order_assign.index') }}">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
                         @endrole
 
                         

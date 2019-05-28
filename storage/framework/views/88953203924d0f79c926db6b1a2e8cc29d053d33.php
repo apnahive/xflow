@@ -47,8 +47,8 @@
      $('#nav-tab a[href="#<?php echo e(old('tab')); ?>"-tab]').tab('show')
      });     
     </script>
-    <!-- <script src="<?php echo e(asset('js/app.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('js/app.js')); ?>" defer></script> -->
     <!-- Commented for calender to work -->
 
     <!-- Fonts -->
@@ -105,6 +105,7 @@
                                 </li>
                             </ul> -->
                         </li>
+                        
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('users.index')); ?>">
@@ -123,16 +124,34 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         <?php endif; ?>
-                        <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
-                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('work_order_assign.index')); ?>">
-                                <i class="fas fa-users"></i>Work Order</a>
+                        
+                        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
+                        <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('tasks.index')); ?>">
+                                <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
                         <?php endif; ?>
-                        
-                        
-                        
-                        <!-- <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
+                        <li class="<?php echo e(request()->is('xflows') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('xflows.index')); ?>">
+                            <i class="fas fa-cogs"></i>Xflow</a>
+                        </li>                        
+                        <li class="<?php echo e(request()->is('teams') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('teams.index')); ?>">
+                            <i class="fas fa-cogs"></i>Team</a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
+                        <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklists.index')); ?>">
+                                <i class="fas fa-map-signs"></i>Checklists</a>
+                        </li>
+                        <li class="<?php echo e(request()->is('checklist_templates') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('checklist_templates.index')); ?>">
+                                <i class="fas fa-map-signs"></i>Checklist Templates</a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('profiles.index')); ?>">
                                 <i class="fas fa-users"></i>Candidates</a>
@@ -174,7 +193,7 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                               <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('projects.index')); ?>">
                                         <i class="fab fa-product-hunt"></i>Client</a>
@@ -380,7 +399,7 @@
                                     <a href="index4.html">Dashboard 4</a>
                                 </li>
                             </ul> -->
-                        </li>                        
+                        </li>
                         
                         <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('users') ? 'active' : ''); ?>">
@@ -400,21 +419,14 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         <?php endif; ?>
-                        <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
-                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
-                            <a href="<?php echo e(route('work_order_assign.index')); ?>">
-                                <i class="fas fa-users"></i>Work Order</a>
-                        </li>
-                        <?php endif; ?>
-
                         
                         <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
                         <li class="<?php echo e(request()->is('tasks') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('tasks.index')); ?>">
                                 <i class="fas fa-tasks"></i>Tasks</a>
                         </li>
-                        <?php endif; ?> -->
-                        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
+                        <?php endif; ?>
+                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
                         <li class="<?php echo e(request()->is('xflows') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('xflows.index')); ?>">
                             <i class="fas fa-cogs"></i>Xflow</a>
@@ -424,9 +436,8 @@
                             <a href="<?php echo e(route('teams.index')); ?>">
                             <i class="fas fa-cogs"></i>Team</a>
                         </li>
-                        <?php endif; ?> -->
-
-                        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('checklist view')): ?>
                         <li class="<?php echo e(request()->is('checklists') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('checklists.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklists</a>
@@ -435,8 +446,8 @@
                             <a href="<?php echo e(route('checklist_templates.index')); ?>">
                                 <i class="fas fa-map-signs"></i>Checklist Templates</a>
                         </li>
-                        <?php endif; ?> -->
-                        <!-- <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                        <?php endif; ?>
+                        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                         <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('profiles.index')); ?>">
                                 <i class="fas fa-users"></i>Candidates</a>
@@ -449,8 +460,8 @@
                             <a href="<?php echo e(route('jobs.index')); ?>">
                                 <i class="fas fa-users"></i>Jobs</a>
                         </li>
-                        <?php endif; ?> -->
-                        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
                         <li class="<?php echo e(request()->is('client_profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('client_profiles.show', Auth::user()->id)); ?>">
                                 <i class="fas fa-users"></i>Client Profile</a>
@@ -463,8 +474,8 @@
                             <a href="<?php echo e(route('jobs.index')); ?>">
                                 <i class="fas fa-users"></i>View Jobs</a>
                         </li>
-                        <?php endif; ?>   -->
-                        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                        <?php endif; ?>  
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
                         <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('profiles.create')); ?>">
                                 <i class="fas fa-users"></i>Candidate Profile</a>
@@ -472,17 +483,13 @@
                         <li class="<?php echo e(request()->is('interviewed') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('interviewed.index')); ?>">
                                 <i class="fas fa-users"></i>Interviews</a>
-                        </li>                        
+                        </li>
                         <?php endif; ?> -->
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Project Management
-                                <span class="arrow" style="float: right;">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
+                                <i class="fas fa-copy"></i>Project Management</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
+                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('projects.index')); ?>">
                                         <i class="fab fa-product-hunt"></i>Client</a>
@@ -524,11 +531,7 @@
                         </li> 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Human Resource
-                                <span class="arrow" style="float: right;">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
+                                <i class="fas fa-copy"></i>Human Resource</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                                 <li class="<?php echo e(request()->is('profiles') ? 'active' : ''); ?>">
@@ -582,11 +585,7 @@
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Business Development
-                                <span class="arrow" style="float: right;">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
+                                <i class="fas fa-copy"></i>Business Development</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
                                     <a href="#">Bids</a>
@@ -672,7 +671,7 @@
                             <form class="form-header" action="<?php echo route('search'); ?>" method="POST" role="search"> 
                                 <?php echo e(csrf_field()); ?>
 
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for clients &amp; tasks..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for projects &amp; tasks..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>

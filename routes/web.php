@@ -92,6 +92,8 @@ Route::resource('work_orders', 'WorkOrderController');
 Route::get('work_orders/sort/{feild}/{type}', 'WorkOrderController@sort')->name('work_orders.sort');
 Route::get('assign_user/{id}', 'WorkOrderAssignedController@assign')->name('work_orders.assign');
 Route::resource('work_order_assign', 'WorkOrderAssignedController');
+Route::resource('work_order_hour', 'WorkOrderHourController');
+Route::post('work_order_assign/search', 'WorkOrderHourController@search')->name('work_order_assign.search');
 
 //checklist 
 
