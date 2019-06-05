@@ -62,7 +62,7 @@
                                         <thead>
                                             <tr>                                                
                                                 <th>User</th>
-                                                <th>Latest Entry Date</th>
+                                                <!-- <th>Latest Entry Date</th> -->
                                                 <th>Total Hours</th>
                                                 <th></th>
                                             </tr>
@@ -71,9 +71,21 @@
                                             @foreach ($users_assigned as $key => $value)
                                             <tr class="tr-shadow">                                                
                                                 <td>{{ $value->name }}</td>
-                                                <td>N/A</td>                        
-                                                <td>0</td>
+                                                <!-- <td>N/A</td>         -->                
+                                                <td>{{ $value->hours }}</td>
                                                 <td>
+                                                    <!-- <form method="POST" action="{!! route('work_order_hour.showhours', [$value->work_order_id, $value->user_id]) !!}" accept-charset="UTF-8">
+                                                        
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" name="user_id" value="{{ $value->user_id }}" />
+                                                    <input type="hidden" name="work_order_id" value="{{ $value->work_order_id }}">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Review Details"><i class="zmdi zmdi-mail-send"></i></button>
+                                                    
+                                                    </form> -->
+
+                                                    <a href="{{ route('work_order_hour.showhours', [$value->work_order_id, $value->user_id]) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Review Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                    </button></a>
                                                     <!-- <div class="table-data-feature">
                                                          @role('Admin')
                                                         <a href="{{ route('task_for_templates.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">

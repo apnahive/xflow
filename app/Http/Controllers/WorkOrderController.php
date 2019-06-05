@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\User;
 use App\work_order;
+use App\work_order_hour;
 use App\work_order_assigned;
 
 class WorkOrderController extends Controller
@@ -75,24 +76,30 @@ class WorkOrderController extends Controller
     	$work_order = work_order::find($id);
 
         $users_assigned = work_order_assigned::where('work_order_id', $id)->paginate(15);
-        
+        //dd($users_assigned);
         foreach ($users_assigned as $key => $value) {
           	$user = User::find($value->user_id);
             $value->name = $user->name.' '.$user->lastname;
+            $work_order_hours = work_order_hour::where('work_order_id', $value->work_order_id)->where('user_id', $value->user_id)->sum('hours');
+            $value->hours = $work_order_hours;
+            /*$work_order_hours_id = work_order_hour::where('work_order_id', $value->work_order_id)->where('user_id', $value->user_id)->get();
+            $value->hours_id = $work_order_hours_id->id;*/
         }
         //dd($work_order);
+       // dd($users_assigned);
        return view('work_orders.show', compact('work_order', 'users_assigned')); 
         //return view('task_templates.show', compact('task', 'task_templates'));
      /*   $team = Team::find($id);
         $team_members = Team_member::where('team_id', $id)->get();
         foreach ($team_members as $key => $value) 
-        {
+ {
             $user = User::find($value->user_id);
             $value->name = $user->name.' '.$user->lastname;
         }*/
         //dd($team_members);
         //return view('work_orders.show'/*, compact('team', 'team_members')*/);
     }
+
 
     
     public function edit($id)

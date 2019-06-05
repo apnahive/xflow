@@ -268,7 +268,7 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Business Development</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
@@ -279,7 +279,7 @@
                                     <a href="#">Pending Award</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">
@@ -580,7 +580,7 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Business Development
                                 <span class="arrow" style="float: right;">
@@ -595,7 +595,7 @@
                                     <a href="#">Pending Award</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">

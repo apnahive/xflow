@@ -127,10 +127,11 @@
                                             <tr class="tr-shadow">                                                
                                                 <td><?php echo e($value->date); ?></td>
                                                 <td><?php echo e($value->hours); ?></td>                        
-                                                <td>Pending</td>
+                                                <td><?php echo e($value->statusis); ?></td>
                                                 <td>
                                                     <div class="table-data-feature">
-                                                         <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
+                                                        <?php if($value->status === 0): ?>
+                                                        <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
                                                         <a href="<?php echo e(route('work_order_assign.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                             <i class="zmdi zmdi-edit"></i>
                                                         </button></a>
@@ -138,9 +139,6 @@
                                                         <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($value->id); ?>" data-backdrop="false">
                                                             <i class="zmdi zmdi-delete"></i>
                                                         </button>
-
-                                                        
-
                                                         <form action="<?php echo e(route('task_for_templates.destroy', $value->id)); ?>" method="POST">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
@@ -166,8 +164,93 @@
                                                             </div>
                                                           </div>
                                                         </div>
-                                                        </form>
-                                                    </div>
+                                                      </form>
+                                                      <?php if($value->commentis === 1): ?>
+                                                      <button class="item" data-toggle="modal" data-target="#comment<?php echo e($value->id); ?>" data-backdrop="false">
+                                                            <i class="zmdi zmdi-comment-alert"></i>
+                                                      </button>
+                                                        <div class="modal fade" id="comment<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
+                                                          <div class="modal-dialog" role="document">
+                                                            <div class="modal-content" style="text-align: left;">
+                                                              <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Comment by Admin</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                              </div>
+                                                              <div class="modal-body"><?php echo e($value->comment); ?></div>
+                                                              <div class="modal-footer">
+                                                                
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                   <?php endif; ?>
+
+                                                    <?php endif; ?>
+                                                    <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                                                    
+                                                        <a href="<?php echo e(route('work_order_hour.approve', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Approve">
+                                                            <i class="zmdi zmdi-check-circle"></i>
+                                                        </button></a>
+
+                                                        <a href="<?php echo e(route('work_order_hour.reject', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Reject">
+                                                            <i class="zmdi zmdi-block"></i>
+                                                        </button></a>
+                                                        <!-- -popup -->
+                                                        <button class="item" data-toggle="modal" data-target="#comment<?php echo e($value->id); ?>" data-backdrop="false">
+                                                            <i class="zmdi zmdi-comment-alert"></i>
+                                                        </button>
+                                                        <div class="modal fade" id="comment<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <form action="<?php echo e(route('work_order_hour.comment')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                                    <?php echo e(csrf_field()); ?>
+
+                                                                        <input type="hidden" name="hour_id" value="<?php echo e($value->id); ?>">
+                                                                        <div class="modal-content" style="text-align: left;">
+                                                                          <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                              <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                          </div>
+                                                                          <div class="modal-body">
+                                                                            <div class="row form-group">
+                                                                                <div class="col col-md-3">
+                                                                                    <label for="assignee" class=" form-control-label">Comment</label>
+                                                                                </div>
+                                                                                <?php if($value->commentis === 1): ?>
+                                                                                <div class="col-12 col-md-9">
+                                                                                    <label for="assignee" class=" form-control-label"><?php echo e($value->comment); ?></label>
+                                                                                </div>
+                                                                                <?php else: ?>
+                                                                                <div class="col-12 col-md-9">
+                                                                                    <textarea name="description" id="description" rows="3" placeholder="Your entry is still pending because..." class="form-control" required></textarea>
+                                                                                                        <!-- <small class="form-text text-muted">This is a help text</small> -->
+                                                                                                        <?php if($errors->has('description')): ?>
+                                                                                                            <span class="help-block error">
+                                                                                                                <strong><?php echo e($errors->first('description')); ?></strong>
+                                                                                                            </span>
+                                                                                                        <?php endif; ?> 
+                                                                                </div>
+
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                          </div>
+                                                                          <?php if($value->commentis === 0): ?>
+                                                                          <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                                                <i class="fa fa-dot-circle-o"></i> Submit
+                                                                            </button>
+                                                                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
+                                                                          </div>
+                                                                          <?php endif; ?>
+                                                                        </div>
+                                                                        </form>
+                                                                      </div>
+                                                                    </div>              
+                                                                <?php endif; ?>
+                </div>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>

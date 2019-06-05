@@ -40,7 +40,7 @@
                                                 <label for="assignee" class=" form-control-label">Select Date</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input id="date" type="date" class="form-control" name="date" value="{{ old('duedate') }}" required autofocus>
+                                                <input id="date" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date" value="{{ old('duedate') }}" required autofocus>
                                                 @if ($errors->has('date'))
                                                     <span class="help-block error">
                                                         <strong>{{ $errors->first('date') }}</strong>

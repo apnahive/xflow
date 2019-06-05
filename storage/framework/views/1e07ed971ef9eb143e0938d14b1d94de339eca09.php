@@ -294,66 +294,7 @@
             </section>
 
             <section class="welcome p-t-10 col-md-6">
-                <div class="container">
-                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="page-content--bgf7" style="margin-bottom: 30px;padding: 15px;">
-                            <h3>Bid</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
-                                <table class="table table-data2">
-                                    <!-- <thead>
-                                        <tr>
-                                            <th>Consultant</th>
-                                            <th>CCO</th>
-                                            <th>Contract Date</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead> -->
-                                    <tbody>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/QP</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/QP</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="page-content--bgf7" style="margin-bottom: 30px;padding: 15px;">
-                            <h3>Pending Award</h3>
-                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
-                                <table class="table table-data2">
-                                    <!-- <thead>
-                                        <tr>
-                                            <th>Consultant</th>
-                                            <th>CCO</th>
-                                            <th>Contract Date</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead> -->
-                                    <tbody>
-                                        <tr class="tr-shadow">
-                                            <td>385</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                        <tr class="tr-shadow">
-                                            <td>SMC/PI</td>
-                                        </tr>
-                                        <tr class="spacer"></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        </div>
-                     </div>
-                 </div>
+                <!-- Big and pending award removed -->
                 
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">

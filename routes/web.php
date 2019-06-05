@@ -93,7 +93,11 @@ Route::get('work_orders/sort/{feild}/{type}', 'WorkOrderController@sort')->name(
 Route::get('assign_user/{id}', 'WorkOrderAssignedController@assign')->name('work_orders.assign');
 Route::resource('work_order_assign', 'WorkOrderAssignedController');
 Route::resource('work_order_hour', 'WorkOrderHourController');
+Route::get('work_order_hour/showhours/{work_order_id}/{user_id}', 'WorkOrderHourController@showhours')->name('work_order_hour.showhours');
 Route::post('work_order_assign/search', 'WorkOrderHourController@search')->name('work_order_assign.search');
+Route::get('work_order_hour/approve/{id}', 'WorkOrderHourController@approve')->name('work_order_hour.approve');
+Route::get('work_order_hour/reject/{id}', 'WorkOrderHourController@reject')->name('work_order_hour.reject');
+Route::post('work_order_hour/comment', 'WorkOrderHourController@comment')->name('work_order_hour.comment');
 
 //checklist 
 

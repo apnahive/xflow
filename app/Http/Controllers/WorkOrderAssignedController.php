@@ -106,8 +106,9 @@ class WorkOrderAssignedController extends Controller
     }
      public function show($id)
     {
-       // dd($id);
+        
         $id1 = Auth::id();
+        //dd($id1);
         $work_order = work_order::find($id);
         $work_order_hours = work_order_hour::where('work_order_id', $id)->where('user_id', $id1)->orderBy('date', 'desc')->paginate(15);
         $users_assigned = work_order_assigned::where('work_order_id', $id)->paginate(15);
@@ -115,7 +116,29 @@ class WorkOrderAssignedController extends Controller
         foreach ($users_assigned as $key => $value) {
             $user = User::find($value->user_id);
             $value->name = $user->name.' '.$user->lastname;
-        }
+          }
+        foreach ($work_order_hours as $key => $value) {
+                if ($value->status === 1)
+                {
+                    $value->statusis = 'Approved';
+                }
+                elseif ($value->status === 2){
+                    $value->statusis = 'Rejected';
+                } 
+                else{
+                    $value->statusis = 'Pending';
+                }
+                
+                if($value->comment){
+                    $value->commentis = 1;   
+                }
+                else{
+                    $value->commentis = 0;      
+                }
+
+                $user = User::find($value->user_id);
+                $value->name = $user->name.' '.$user->lastname;
+              }
         //dd($work_order_hours);
        return view('work_order_assign.show', compact('work_order_hours', 'work_order')); 
         //return view('task_templates.show', compact('task', 'task_templates'));

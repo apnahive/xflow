@@ -59,7 +59,7 @@
                                         <thead>
                                             <tr>                                                
                                                 <th>User</th>
-                                                <th>Latest Entry Date</th>
+                                                <!-- <th>Latest Entry Date</th> -->
                                                 <th>Total Hours</th>
                                                 <th></th>
                                             </tr>
@@ -68,9 +68,22 @@
                                             <?php $__currentLoopData = $users_assigned; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr class="tr-shadow">                                                
                                                 <td><?php echo e($value->name); ?></td>
-                                                <td>N/A</td>                        
-                                                <td>0</td>
+                                                <!-- <td>N/A</td>         -->                
+                                                <td><?php echo e($value->hours); ?></td>
                                                 <td>
+                                                    <!-- <form method="POST" action="<?php echo route('work_order_hour.showhours', [$value->work_order_id, $value->user_id]); ?>" accept-charset="UTF-8">
+                                                        
+                                                        <?php echo e(csrf_field()); ?>
+
+                                                        <input type="hidden" name="user_id" value="<?php echo e($value->user_id); ?>" />
+                                                    <input type="hidden" name="work_order_id" value="<?php echo e($value->work_order_id); ?>">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Review Details"><i class="zmdi zmdi-mail-send"></i></button>
+                                                    
+                                                    </form> -->
+
+                                                    <a href="<?php echo e(route('work_order_hour.showhours', [$value->work_order_id, $value->user_id])); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Review Details">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                    </button></a>
                                                     <!-- <div class="table-data-feature">
                                                          <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                                                         <a href="<?php echo e(route('task_for_templates.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
