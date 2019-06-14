@@ -65,6 +65,25 @@ class WorkOrderHourController extends Controller
     $work_order_hours = work_order_hour::where('work_order_id','=',$request->work_order_id)->whereBetween('date', array($start, $end))->get();
     //dd($work_order_hours);
     //return response()->json($dates);
+    foreach ($work_order_hours as $key => $value) {
+                if ($value->status === 1)
+                {
+                    $value->statusis = 'Approved';
+                }
+                elseif ($value->status === 2){
+                    $value->statusis = 'Rejected';
+                } 
+                else{
+                    $value->statusis = 'Pending';
+                }
+                if($value->comment){
+                    $value->commentis = 1;   
+                }
+                else{
+                    $value->commentis = 0;      
+                }
+              }
+        //dd($work_order_hours);
         return view('work_order_assign.search', compact('work_order_hours', 'work_order_id'));
     }
 
@@ -74,7 +93,7 @@ class WorkOrderHourController extends Controller
     $id1 = Auth::id();
             //dd($id1);
             $work_order = work_order::find($work_order_id);
-            $work_order_hours = work_order_hour::where('work_order_id', $work_order_id)->where('user_id', $user_id)->orderBy('date', 'desc')->paginate(15);
+            $work_order_hours = work_order_hour::where('work_order_id', $work_order_id)->where('user_id', $user_id)->orderByRaw("FIELD(status , '0', '1', '2') ASC")->orderBy('date', 'desc')->paginate(15);
             $users_assigned = work_order_assigned::where('work_order_id', $work_order_id)->paginate(15);
             
             foreach ($work_order_hours as $key => $value) {
@@ -99,6 +118,7 @@ class WorkOrderHourController extends Controller
                 $value->name = $user->name.' '.$user->lastname;
               }
             //dd($work_order_hours);
+              //dd($work_order);
            return view('work_order_assign.show', compact('work_order_hours', 'work_order')); 
        
     }
@@ -116,7 +136,7 @@ class WorkOrderHourController extends Controller
             $work_order_hours = work_order_hour::where('work_order_id', $value->work_order_id)->where('user_id', $value->user_id)->sum('hours');
             $value->hours = $work_order_hours;
         }
-        dd($users_assigned);
+        //dd($users_assigned);
        return view('work_orders.show', compact('work_order', 'users_assigned')); 
         //return view('task_templates.show', compact('task', 'task_templates'));
      /*   $team = Team::find($id);
@@ -137,6 +157,40 @@ class WorkOrderHourController extends Controller
         $work_order->status = 1;
         $work_order->save();
         Alert::success('Success', 'You have successfully Approved Hours')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('work_order_hour.showhours', [$work_order->work_order_id, $work_order->user_id]);
+       
+    }
+    public function approveMany(Request $request)
+    {
+        //dd(request()->all());
+        $work_order = work_order_hour::find($request->workorder);
+        $work_orders = work_order_hour::where('work_order_id', $request->workorder)->get();
+        //dd($work_orders);
+        foreach ($work_orders as $key => $value) 
+        {
+            $name = $value->id;
+            //dd($name);
+            if($request->$name == 'true')
+            {
+                $work_order = work_order_hour::find($name);
+                switch($request->submitbutton) {
+                    case 'approve': 
+                        //approve action
+                        $work_order->status = 1;
+                    break;
+
+                    case 'reject': 
+                        //reject action
+                        $work_order->status = 2;
+                    break;
+                    }
+                //$work_order->status = 1;
+                $work_order->save();
+            }
+        }
+
+
+        Alert::success('Success', 'You have successfully Updated Entries')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('work_order_hour.showhours', [$work_order->work_order_id, $work_order->user_id]);
        
     }

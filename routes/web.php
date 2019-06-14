@@ -98,6 +98,7 @@ Route::post('work_order_assign/search', 'WorkOrderHourController@search')->name(
 Route::get('work_order_hour/approve/{id}', 'WorkOrderHourController@approve')->name('work_order_hour.approve');
 Route::get('work_order_hour/reject/{id}', 'WorkOrderHourController@reject')->name('work_order_hour.reject');
 Route::post('work_order_hour/comment', 'WorkOrderHourController@comment')->name('work_order_hour.comment');
+Route::post('work_order_hour/approveMany', 'WorkOrderHourController@approveMany')->name('work_order_hour.approvemany');
 
 //checklist 
 

@@ -142,6 +142,7 @@ class Add_taskController extends Controller
         $project = Project::find($request->project);
         //dd($template, $project);
         $templates = Task_for_template::where('task_template_id', $id)->get();
+        //dd($templates);
         foreach ($templates as $templatekey => $value) 
         {
             $name = 'task'.$value->id;

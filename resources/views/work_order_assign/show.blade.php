@@ -5,9 +5,9 @@
 
 <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
+
+
                     
-
-
 <!-- <div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
         <div class="card">
@@ -111,13 +111,19 @@
                                     </div>
                                 </div> -->
                                 <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
-                                    <table class="table table-data2">
-                                        
-                                    </table>    
+                                    <form class="form-horizontal  form-material" method="POST" enctype="multipart/form-data" action="{{ route('work_order_hour.approvemany')}}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="workorder" value="{{ $work_order->id }}">
+                                  
                                     <table class="table table-data2">
                                         <thead>
-                           
-                                            <tr>                                                
+                                            <tr>
+                                                <th>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox" id="checkAll">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </th>                                                
                                                 <th>Date</th>
                                                 <th>Hours</th>
                                                 <th>Status</th>
@@ -126,70 +132,81 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($work_order_hours as $key => $value)
-                                            <tr class="tr-shadow">                                                
+                                            <tr class="tr-shadow">  
+                                                <td>
+                                                   
+                                                    <label class="au-checkbox">
+                                                        <!-- <input type="checkbox"> -->
+                                                         @if($value->status === 0)
+                                                        <input type="hidden" name="{{ $value->id }}" value="false">
+                                                        <input type="checkbox" id="{{ $value->id }}" value="true" name="{{ $value->id }}">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                 @endif
+                                                </td>                                              
                                                 <td>{{ $value->date }}</td>
                                                 <td>{{ $value->hours }}</td>                        
                                                 <td>{{ $value->statusis }}</td>
                                                 <td>
+                                                    @if($value->status === 0)
+                                                    
                                                     <div class="table-data-feature">
-                                                        @if($value->status === 0)
-                                                        @role('workuser')
-                                                        <a href="{{ route('work_order_assign.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                            <i class="zmdi zmdi-edit"></i>
-                                                        </button></a>
-
-                                                        <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                        <form action="{{ route('task_for_templates.destroy', $value->id) }}" method="POST">
-                                                        <input type="hidden" name="_method" value="DELETE">
-                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        
-                                                        <div class="modal fade" id="confirm{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
-                                                          <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" style="text-align: left;">
-                                                              <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Entry</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                  <span aria-hidden="true">&times;</span>
+                                                    @role('workuser')    
+                                                                <a href="{{ route('work_order_assign.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                    <i class="zmdi zmdi-edit"></i>
+                                                                </button></a>
+                                                                <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
+                                                                    <i class="zmdi zmdi-delete"></i>
                                                                 </button>
-                                                              </div>
-                                                              <div class="modal-body">
-                                                                You are going to delete hours entry. Are you sure?
+                                                                <form action="{{ route('task_for_templates.destroy', $value->id) }}" method="POST">
+                                                                    <input type="hidden" name="_method" value="DELETE">
+                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                    
+                                                                    <div class="modal fade" id="confirm{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                                      <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content" style="text-align: left;">
+                                                                          <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Delete Entry</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                              <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                          </div>
+                                                                          <div class="modal-body">
+                                                                            You are going to delete hours entry. Are you sure?
 
-                                                                You won't be able to revert these changes!
-                                                              </div>
-                                                              <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
-                                                                <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                      </form>
-                                                      @if($value->commentis === 1)
-                                                      <button class="item" data-toggle="modal" data-target="#comment{{$value->id}}" data-backdrop="false">
-                                                            <i class="zmdi zmdi-comment-alert"></i>
-                                                      </button>
-                                                        <div class="modal fade" id="comment{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
-                                                          <div class="modal-dialog" role="document">
-                                                            <div class="modal-content" style="text-align: left;">
-                                                              <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Comment by Admin</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                  <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                              </div>
-                                                              <div class="modal-body">{{ $value->comment }}</div>
-                                                              <div class="modal-footer">
-                                                                
-                                                              </div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                   @endif
-
-                                                    @endrole
+                                                                            You won't be able to revert these changes!
+                                                                          </div>
+                                                                          <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Task</button>
+                                                                            <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </form>
+                                                                @if($value->commentis === 1)
+                                                                    <button class="item" data-toggle="modal" data-target="#comment{{$value->id}}" data-backdrop="false">
+                                                                            <i class="zmdi zmdi-comment-alert"></i>
+                                                                    </button>
+                                                                    <div class="modal fade" id="comment{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                                      <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content" style="text-align: left;">
+                                                                          <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Comment by Admin</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                              <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                          </div>
+                                                                          <div class="modal-body">{{ $value->comment }}</div>
+                                                                          <div class="modal-footer">
+                                                                            
+                                                                          </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                         
+                                                                @endif
+                                                        @endrole
                                                     @role('Admin')
                                                     
                                                         <a href="{{ route('work_order_hour.approve', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Approve">
@@ -224,9 +241,9 @@
                                                                                 <div class="col-12 col-md-9">
                                                                                     <label for="assignee" class=" form-control-label">{{ $value->comment }}</label>
                                                                                 </div>
-                                                                                @else
+                                                                                @elseif($value->commentis === 0)
                                                                                 <div class="col-12 col-md-9">
-                                                                                    <textarea name="description" id="description" rows="3" placeholder="Your entry is still pending because..." class="form-control" required></textarea>
+                                                                                    <textarea name="description" id="description" placeholder="Your entry is still pending because..." class="form-control"></textarea>
                                                                                                         <!-- <small class="form-text text-muted">This is a help text</small> -->
                                                                                                         @if ($errors->has('description'))
                                                                                                             <span class="help-block error">
@@ -250,15 +267,32 @@
                                                                         </form>
                                                                       </div>
                                                                     </div>              
-                                                                @endif
-                </div>
                                                     @endrole
+                                                    @endif
+                                                </div>
+                                                    
                                                 </td>
                                             </tr>
                                             <tr class="spacer"></tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+                                        <div class="form-group">
+                                                <div class="col-md-8">
+                                                    @role('Admin')
+                                                    <button type="submit" name="submitbutton" value="approve" class="btn btn-info">
+                                                        Approve Selected
+                                                    </button>
+                                                    <button type="submit" name="submitbutton" value="reject" class="btn btn-info">
+                                                        Reject Selected
+                                                    </button>
+                                                    @endrole
+                                                </div>
+                                                <div class="col-md-8">
+                                                   
+                                                </div>
+                                        </div>
+                                    </form>
                                     
                                 </div>
                                 <!-- END DATA TABLE -->
@@ -274,5 +308,9 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+     $("#checkAll").click(function () {
+         $('input:checkbox').not(this).prop('checked', this.checked);
+     });
+</script>
 @endsection
