@@ -209,11 +209,16 @@ class HomeController extends Controller
             $value->name = $user->name.' '.$user->lastname;
        }
 
-       
+       //jobs whose date is past due date
+
+       $jobpast = Job::where('due_date', '<=', $now)->where('user_id', $id1)->get();
+       //dd($jobpast);
        //$mytasks = Task::where('assignee', $id1)->where('status', 1)->take(10)->get();
        //dd($mytasks);
-
+        $acandidates = User::role('Candidate')->get();
+        $aclient = User::role('Recuriter')->get();
+        $ajobs = Job::where('status', '=', 0)->get();
         //dd($interviews, $job);
-        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews')); 
+        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs')); 
     }
 }

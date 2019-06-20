@@ -3,7 +3,7 @@
 
 @section('content')
 
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="{{ route('jobs.index') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12">
@@ -51,10 +51,18 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label"><b>Description</b></label>
+                                    <label for="description" class=" form-control-label"><b>Responsibilities</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label">{{ $job->description }}</label>
+                                </div>
+                            </div>                    
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="description" class=" form-control-label"><b>Requirements</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="description" class=" form-control-label">{{ $job->requirements }}</label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
@@ -153,7 +161,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Certificate</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Field</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -185,11 +193,11 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Start Date</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Due Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job['start_date'] }}
+                                        {{ $job['due_date'] }}
                                     </label>
                                 </div>
                             </div>

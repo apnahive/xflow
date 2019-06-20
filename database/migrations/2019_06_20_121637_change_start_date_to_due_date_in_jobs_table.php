@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHourStatusToWorkOrderHoursTable extends Migration
+class ChangeStartDateToDueDateInJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddHourStatusToWorkOrderHoursTable extends Migration
      */
     public function up()
     {
-        Schema::table('work_order_hours', function (Blueprint $table) {
-            //
-            $table->integer('status');
-            $table->text('comment');
+        Schema::table('jobs', function (Blueprint $table) {
+            $table->renameColumn('start_date', 'due_date');
         });
     }
 

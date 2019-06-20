@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHourStatusToWorkOrderHoursTable extends Migration
+class MakeYearsOfExperienceInCandidateNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddHourStatusToWorkOrderHoursTable extends Migration
      */
     public function up()
     {
-        Schema::table('work_order_hours', function (Blueprint $table) {
-            //
-            $table->integer('status');
-            $table->text('comment');
+        Schema::table('profiles', function (Blueprint $table) {            
+            $table->string('experience_level')->nullable()->change();            
         });
     }
 
@@ -27,6 +25,6 @@ class AddHourStatusToWorkOrderHoursTable extends Migration
      */
     public function down()
     {
-        
+        //
     }
 }

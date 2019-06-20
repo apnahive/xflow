@@ -59,13 +59,26 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="description" class=" form-control-label">Description</label>
+                            <label for="description" class=" form-control-label">Responsibilities</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
+                            <textarea name="description" id="description" rows="3" placeholder="Responsibilities..." class="form-control" required></textarea>
                             @if ($errors->has('description'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif                            
+                        </div>
+                    </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="requirements" class=" form-control-label">Requirements</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="requirements" id="requirements" rows="3" placeholder="Requirements..." class="form-control" required></textarea>
+                            @if ($errors->has('requirements'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('requirements') }}</strong>
                                 </span>
                             @endif                            
                         </div>
@@ -184,7 +197,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="certificate" class=" form-control-label">Certificate</label>
+                            <label for="certificate" class=" form-control-label">Field</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">
@@ -212,13 +225,13 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="start_date" class=" form-control-label">Start Date</label>
+                            <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="start_date" type="date" class="form-control" name="start_date" value="{{ old('start_date') }}" required autofocus>
-                            @if ($errors->has('start_date'))
+                            <input id="due_date" type="date" class="form-control" name="due_date" value="{{ old('due_date') }}" required autofocus>
+                            @if ($errors->has('due_date'))
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('start_date') }}</strong>
+                                    <strong>{{ $errors->first('due_date') }}</strong>
                                 </span>
                             @endif 
                         </div>

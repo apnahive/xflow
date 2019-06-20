@@ -84,7 +84,7 @@
                             <?php endif; ?>                            
                         </div>
                     </div>                     -->
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
@@ -103,7 +103,7 @@
                             <?php endif; ?>
                         </div>
                          
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
@@ -111,17 +111,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($profile['experience_years'] == 1 ? 'selected' : ''); ?>>0 Years</option>
-                                <option value="2" <?php echo e($profile['experience_years'] == 2 ? 'selected' : ''); ?>>1 Years</option>
-                                <option value="3" <?php echo e($profile['experience_years'] == 3 ? 'selected' : ''); ?>>2 Years</option>
-                                <option value="4" <?php echo e($profile['experience_years'] == 4 ? 'selected' : ''); ?>>3 Years</option>
+                                <option value="1" <?php echo e($profile['experience_years'] == 1 ? 'selected' : ''); ?>>0-2 Years</option>
+                                <option value="2" <?php echo e($profile['experience_years'] == 2 ? 'selected' : ''); ?>>2-5 Years</option>
+                                <option value="5" <?php echo e($profile['experience_years'] == 3 ? 'selected' : ''); ?>>5+ Years</option>
+                                <!-- <option value="4" <?php echo e($profile['experience_years'] == 4 ? 'selected' : ''); ?>>3 Years</option>
                                 <option value="5" <?php echo e($profile['experience_years'] == 5 ? 'selected' : ''); ?>>4 Years</option>
                                 <option value="6" <?php echo e($profile['experience_years'] == 6 ? 'selected' : ''); ?>>5 Years</option>
                                 <option value="7" <?php echo e($profile['experience_years'] == 7 ? 'selected' : ''); ?>>6 Years</option>
                                 <option value="8" <?php echo e($profile['experience_years'] == 8 ? 'selected' : ''); ?>>7 Years</option>
                                 <option value="9" <?php echo e($profile['experience_years'] == 9 ? 'selected' : ''); ?>>8 Years</option>
                                 <option value="10" <?php echo e($profile['experience_years'] == 10 ? 'selected' : ''); ?>>9 Years</option>
-                                <option value="11" <?php echo e($profile['experience_years'] == 11 ? 'selected' : ''); ?>>10+ Years</option>
+                                <option value="11" <?php echo e($profile['experience_years'] == 11 ? 'selected' : ''); ?>>10+ Years</option> -->
 
                             </select>                            
                             <?php if($errors->has('experience_years')): ?>
@@ -194,9 +194,28 @@
                         
                     </div>
 
-                    
-                    <h5>City ready to re-location:</h5>
-                    <hr>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="relocation" class=" form-control-label">City ready to re-location</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="checkbox1" type="radio" name="relocation" value="1" <?php echo e($profile['relocation'] === "1" ? 'checked' : ''); ?>>
+                            <label for="checkbox1" style="padding-right: 50px;">
+                                Yes
+                            </label>
+                            <input id="checkbox2" type="radio" name="relocation" value="2" <?php echo e($profile['relocation'] === "2" ? 'checked' : ''); ?>>
+                            <label for="checkbox2">
+                                No
+                            </label>
+                            <?php if($errors->has('relocation')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('relocation')); ?></strong>
+                                </span>
+                            <?php endif; ?> 
+                        </div>
+                    </div>
+                    <!-- <h5>City ready to re-location:</h5> -->
+                    <!-- <hr> 
                     <div style="display: flex;">
                     <div class="col-md-6">
                     <h6><b>Option 1</b></h6>
@@ -363,7 +382,7 @@
                     </div>
                     </div>
                     </div>
-                    <hr>
+                    <hr> -->
 
 
 

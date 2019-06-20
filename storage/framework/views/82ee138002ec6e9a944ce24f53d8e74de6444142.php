@@ -110,6 +110,10 @@
                             <a href="<?php echo e(route('users.index')); ?>">
                                 <i class="fas fa-users"></i>Users</a>
                         </li>
+                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('work_orders.index')); ?>">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
                         <!-- <li class="<?php echo e(request()->is('task_templates') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
@@ -119,7 +123,12 @@
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
                         <?php endif; ?>
-                        
+                        <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
+                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('work_order_assign.index')); ?>">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
+                        <?php endif; ?>
                         
                         
                         
@@ -168,7 +177,7 @@
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('projects.index')); ?>">
-                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                        <i class="fab fa-product-hunt"></i>Projects</a>
                                 </li>
                                 <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
@@ -259,7 +268,7 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Business Development</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
@@ -270,7 +279,7 @@
                                     <a href="#">Pending Award</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">
@@ -378,6 +387,10 @@
                             <a href="<?php echo e(route('users.index')); ?>">
                                 <i class="fas fa-users"></i>Users</a>
                         </li>
+                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('work_orders.index')); ?>">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
                         <!-- <li class="<?php echo e(request()->is('task_templates') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('task_templates.index')); ?>">
                                 <i class="fas fa-folder-open"></i>Task Template</a>
@@ -386,6 +399,12 @@
                             <a href="<?php echo e(route('userroles.index')); ?>">
                                 <i class="fas fa-users"></i>User Roles</a>
                         </li> -->
+                        <?php endif; ?>
+                        <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>
+                        <li class="<?php echo e(request()->is('work_orders') ? 'active' : ''); ?>">
+                            <a href="<?php echo e(route('work_order_assign.index')); ?>">
+                                <i class="fas fa-users"></i>Work Order</a>
+                        </li>
                         <?php endif; ?>
 
                         
@@ -466,7 +485,7 @@
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
                                     <a href="<?php echo e(route('projects.index')); ?>">
-                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                        <i class="fab fa-product-hunt"></i>Projects</a>
                                 </li>
                                 <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('task view')): ?>
@@ -561,7 +580,7 @@
                                 </li> -->
                             </ul>
                         </li>
-                        <li class="has-sub">
+                        <!-- <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Business Development
                                 <span class="arrow" style="float: right;">
@@ -576,7 +595,7 @@
                                     <a href="#">Pending Award</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('view calender')): ?>
                         <li class="<?php echo e(request()->is('calender') ? 'active' : ''); ?>">
                             <a href="<?php echo e(route('calender.index')); ?>">

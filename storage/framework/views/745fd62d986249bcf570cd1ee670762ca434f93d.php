@@ -26,8 +26,8 @@
                          aria-selected="true"><i class="fab fa-product-hunt"></i>Candidate Profile</a>
                         <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-tasks"></i>Professional Details</a>
-                        <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-xflow' ? 'active' : ''); ?>" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
-                         aria-selected="false"><i class="fas fa-cogs"></i>Experience Details</a>
+                        <!-- <a class="nav-item nav-link <?php echo e(old('tab') == 'custom-nav-xflow' ? 'active' : ''); ?>" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
+                         aria-selected="false"><i class="fas fa-cogs"></i>Experience Details</a> -->
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -138,7 +138,7 @@
 
                                 </div>
                             </div>                    
-                            <div class="row form-group">
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="experience_level" class=" form-control-label">Experience Level</label>
                                 </div>
@@ -154,19 +154,19 @@
                                     <?php endif; ?>
                                 </div>
                                  
-                            </div>
+                            </div> -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="experience_years" class=" form-control-label">Experience in Years</label>
                                 </div>
                                 <div class="col-12 col-md-9">                            
                                     <?php if($profile['experience_years'] == 1): ?>
-                                        0 Years
+                                        0-2 Years
                                     <?php elseif($profile['experience_years'] == 2): ?>
-                                        1 Years
-                                    <?php elseif($profile['experience_years'] == 3): ?>
-                                        2 Years
-                                    <?php elseif($profile['experience_years'] == 4): ?>
+                                        2-5 Years
+                                    <?php elseif($profile['experience_years'] == 5): ?>
+                                        5+ Years
+                                    <!-- <?php elseif($profile['experience_years'] == 4): ?>
                                         3 Years
                                     <?php elseif($profile['experience_years'] == 5): ?>
                                         4 Years
@@ -181,7 +181,7 @@
                                     <?php elseif($profile['experience_years'] == 10): ?>
                                         9 Years
                                     <?php elseif($profile['experience_years'] == 11): ?>
-                                        10 Years
+                                        10 Years -->
                                     <?php else: ?>
                                         Not Selected
                                     <?php endif; ?>
@@ -224,8 +224,32 @@
                                 </div>
                             </div>
 
-                            
-                            <h5>City ready to re-location:</h5>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="relocation" class=" form-control-label">City ready to re-location</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <?php if($profile['relocation'] === "1"): ?>
+                                    Yes
+                                    <?php else: ?>
+                                    No
+                                    <?php endif; ?>
+                                    <!-- <input id="checkbox1" type="radio" name="relocation" value="1" <?php echo e($profile['relocation'] === "1" ? 'checked' : ''); ?>>
+                                    <label for="checkbox1" style="padding-right: 50px;">
+                                        Yes
+                                    </label>
+                                    <input id="checkbox2" type="radio" name="relocation" value="2" <?php echo e($profile['relocation'] === "2" ? 'checked' : ''); ?>>
+                                    <label for="checkbox2">
+                                        No
+                                    </label> -->
+                                    <?php if($errors->has('relocation')): ?>
+                                        <span class="help-block error">
+                                            <strong><?php echo e($errors->first('relocation')); ?></strong>
+                                        </span>
+                                    <?php endif; ?> 
+                                </div>
+                            </div>
+                            <!-- <h5>City ready to re-location:</h5>
                             <hr>
                             <div class="col-md-12">
                             <h6><b>Option 1</b></h6>
@@ -280,13 +304,13 @@
                             </div>                    
                             </div>
                             
-                            <hr>
+                            <hr> -->
 
                             
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="qualification" class=" form-control-label">Qualification And Education</label>
+                                    <label for="qualification" class=" form-control-label">Education</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <?php if($profile['qualification'] == 1): ?>
@@ -308,7 +332,7 @@
 
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="certificate" class=" form-control-label">Certificate</label>
+                                    <label for="certificate" class=" form-control-label">Field</label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <?php if($profile['certificate'] == 1): ?>
@@ -359,7 +383,7 @@
                         
                         
                     </div>
-                    <div class="tab-pane fade" id="custom-nav-xflow" role="tabpanel" aria-labelledby="custom-nav-xflow-tab">
+                    <!-- <div class="tab-pane fade" id="custom-nav-xflow" role="tabpanel" aria-labelledby="custom-nav-xflow-tab">
                         <div class="row" style="margin: 0 0;">
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
                         <a href="<?php echo e(route('candidate_experiences.create')); ?>"  style="text-align:right;margin:auto;margin-top: 10px;margin-right: 0;"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -373,11 +397,11 @@
                                     <tr>
                                         <th>Project Name</th> 
                                         <th>Working Hours</th> 
-                                        <!-- <th>Expert level</th>
+                                        <th>Expert level</th>
                                         <th>Skills</th>
-                                        <th>Qualification</th> -->
-                                        <!-- <th>status</th>
-                                        <th>price</th> -->
+                                        <th>Qualification</th> 
+                                        <th>status</th>
+                                        <th>price</th> 
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -440,7 +464,7 @@
                             </table>
                             
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

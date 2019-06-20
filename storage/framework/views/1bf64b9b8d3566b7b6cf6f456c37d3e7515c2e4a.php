@@ -68,7 +68,7 @@
                         <td><?php echo e($value->jobs); ?></td>
                         <td>
                             <div class="table-data-feature">
-                                <a href="<?php echo e(route('client_profiles.show', $value->user_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('client_profiles.show', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
                                 

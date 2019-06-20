@@ -102,13 +102,13 @@ class JobController extends Controller
 
         foreach ($jobs as $jobkey => $value) 
         {
-            switch ($value->experience_level) 
+            switch ($value->experience_years) 
             {
                 case '1':
                     $value->experience = 'Entry Level';
                     break;
                 case '2':
-                    $value->experience = 'Inermediate Level';
+                    $value->experience = 'Intermediate Level';
                     break;
                 case '3':
                     $value->experience = 'Expert Level';
@@ -191,13 +191,14 @@ class JobController extends Controller
         $this->validate($request, [
             'title'=> 'required|max:191', 
             'description'=> 'required|max:2048',
+            'requirements'=> 'required|max:2048',
             'experience_level'=> 'numeric|min:1',
             'experience_years'=> 'numeric|min:1',
             'state'=> 'required|max:191', 
             'city'=> 'required|max:191', 
             'qualification'=> 'numeric|min:1',
             'certificate'=> 'numeric|min:1',
-            'start_date'=> 'required|date',
+            'due_date'=> 'required|date',
             'skills'=> 'required|max:191', 
             'salary_offered'=> 'numeric|min:1',
             ],
@@ -213,13 +214,14 @@ class JobController extends Controller
         $job = new Job;
         $job->title = $request->title;
         $job->description = $request->description;
+        $job->requirements = $request->requirements;
         $job->experience_level = $request->experience_level;
         $job->experience_years = $request->experience_years;
         $job->state = $request->state;
         $job->city = $request->city;
         $job->qualification = $request->qualification;
         $job->certificate = $request->certificate;
-        $job->start_date = $request->start_date;
+        $job->due_date = $request->due_date;
         $job->skills = $request->skills;
         $job->salary_offered = $request->salary_offered;
         $job->user_id = $id1;
@@ -410,13 +412,14 @@ class JobController extends Controller
         $this->validate($request, [
             'title'=> 'required|max:191', 
             'description'=> 'required|max:2048',
+            'requirements'=> 'required|max:2048',
             'experience_level'=> 'numeric|min:1',
             'experience_years'=> 'numeric|min:1',
             'state'=> 'required|max:191', 
             'city'=> 'required|max:191', 
             'qualification'=> 'numeric|min:1',
             'certificate'=> 'numeric|min:1',
-            'start_date'=> 'required|date',
+            'due_date'=> 'required|date',
             'skills'=> 'required|max:191', 
             'salary_offered'=> 'numeric|min:1',
             ],
@@ -432,13 +435,14 @@ class JobController extends Controller
         $job = Job::find($id);
         $job->title = $request->title;
         $job->description = $request->description;
+        $job->requirements = $request->requirements;
         $job->experience_level = $request->experience_level;
         $job->experience_years = $request->experience_years;
         $job->state = $request->state;
         $job->city = $request->city;
         $job->qualification = $request->qualification;
         $job->certificate = $request->certificate;
-        $job->start_date = $request->start_date;
+        $job->due_date = $request->due_date;
         $job->skills = $request->skills;
         $job->salary_offered = $request->salary_offered;
         //$job->user_id = $id1;

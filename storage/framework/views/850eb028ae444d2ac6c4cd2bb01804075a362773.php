@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
 
-<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(route('jobs.index')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12">
@@ -48,10 +48,18 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label"><b>Description</b></label>
+                                    <label for="description" class=" form-control-label"><b>Responsibilities</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label"><?php echo e($job->description); ?></label>
+                                </div>
+                            </div>                    
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="description" class=" form-control-label"><b>Requirements</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="description" class=" form-control-label"><?php echo e($job->requirements); ?></label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
@@ -152,7 +160,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Certificate</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Field</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -184,11 +192,11 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Start Date</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Due Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        <?php echo e($job['start_date']); ?>
+                                        <?php echo e($job['due_date']); ?>
 
                                     </label>
                                 </div>

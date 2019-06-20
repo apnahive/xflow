@@ -48,7 +48,7 @@
                                 </td>
                                 <td>
                                     <div class="table-data-feature">
-                                    <a href="<?php echo e(route('profiles.show', $short->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                    <a href="<?php echo e(route('profiles.show', $short->user_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                         <i class="zmdi zmdi-mail-send"></i>
                                     </button></a>
                                     
@@ -61,7 +61,7 @@
                                         <i class="fas fa-user-plus"></i>
                                     </button>
 
-                                    <form action="<?php echo e(route('interviewed.update', $short->id)); ?>" method="POST">
+                                    <form action="<?php echo e(route('interviewed.update', $short->user_id)); ?>" method="POST">
                                     <input type="hidden" name="_method" value="PUT">
                                     <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                     <input type="hidden" name="job_id" value="<?php echo e($job['id']); ?>">

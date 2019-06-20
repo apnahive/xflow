@@ -196,7 +196,7 @@
                                @can('client view')
                                <li class="{{ request()->is('projects') ? 'active' : '' }}">
                                     <a href="{{ route('projects.index') }}">
-                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                        <i class="fab fa-product-hunt"></i>Projects</a>
                                 </li>
                                 @endcan
                                 @can('task view')
@@ -492,7 +492,7 @@
                                  @can('client view')
                                <li class="{{ request()->is('projects') ? 'active' : '' }}">
                                     <a href="{{ route('projects.index') }}">
-                                        <i class="fab fa-product-hunt"></i>Client</a>
+                                        <i class="fab fa-product-hunt"></i>Projects</a>
                                 </li>
                                 @endcan
                                 @can('task view')

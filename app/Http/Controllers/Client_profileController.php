@@ -20,12 +20,14 @@ class Client_profileController extends Controller
      */
     public function index()
     {
-        $profiles = Client_profile::all();
+        //$profiles = Client_profile::all();
+        $profiles = User::permission('can create job')->get();
+        //dd($profiles);
         foreach ($profiles as $key => $value) 
         {
-            $user = User::find($value->user_id);
+            $user = User::find($value->id);
             $value->name = $user->name.' '.$user->lastname;
-            $jobs = Job::where('user_id', $value->user_id)->count();
+            $jobs = Job::where('user_id', $value->id)->count();
             $value->jobs = $jobs;
             
         }
@@ -146,7 +148,7 @@ class Client_profileController extends Controller
         $states = State::all(); 
         $cities = City::select('city')->distinct()->get();
 
-        if (Auth::user()->hasPermissionTo('can apply job'))
+        if (Auth::user()->hasPermissionTo('can create job'))
             return view('client_profiles.edit', compact('states', 'cities', 'profile', 'user', 'details'));
         else
             return view('errors.401');

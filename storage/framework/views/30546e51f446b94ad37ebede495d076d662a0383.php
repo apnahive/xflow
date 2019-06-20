@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 <style type="text/css">
@@ -35,7 +32,7 @@
     }
 </style>
 
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 
 <div class="row" style="margin-bottom: 100px;">
@@ -44,21 +41,21 @@
             <div class="card-header">
                 <strong>Edit</strong> Client
             </div>            
-            <form action="{{ route('jobs.update', $job['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="<?php echo e(route('jobs.update', $job['id'])); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
             <input type="hidden" name="_method" value="PUT">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="title" class=" form-control-label">Job Title</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="title" name="title" placeholder="Job Title" class="form-control" value="{{ old('title', $job['title']) }}" required>
-                            @if ($errors->has('title'))
+                            <input type="text" id="title" name="title" placeholder="Job Title" class="form-control" value="<?php echo e(old('title', $job['title'])); ?>" required>
+                            <?php if($errors->has('title')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('title') }}</strong>
+                                    <strong><?php echo e($errors->first('title')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -66,12 +63,12 @@
                             <label for="description" class=" form-control-label">Responsibilities</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Responsibilities..." class="form-control" required>{!! $job->description !!}</textarea>
-                            @if ($errors->has('description'))
+                            <textarea name="description" id="description" rows="3" placeholder="Responsibilities..." class="form-control" required><?php echo $job->description; ?></textarea>
+                            <?php if($errors->has('description')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('description') }}</strong>
+                                    <strong><?php echo e($errors->first('description')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -79,12 +76,12 @@
                             <label for="requirements" class=" form-control-label">Requirements</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="requirements" id="requirements" rows="3" placeholder="Requirements..." class="form-control" required>{!! $job->requirements !!}</textarea>
-                            @if ($errors->has('requirements'))
+                            <textarea name="requirements" id="requirements" rows="3" placeholder="Requirements..." class="form-control" required><?php echo $job->requirements; ?></textarea>
+                            <?php if($errors->has('requirements')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('requirements') }}</strong>
+                                    <strong><?php echo e($errors->first('requirements')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -94,16 +91,16 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_level" id="experience_level" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" {{ $job['experience_level'] == '1' ? 'selected' : '' }}>Entry Level</option>
-                                <option value="2" {{ $job['experience_level'] == '2' ? 'selected' : '' }}>Inermediate Level</option>
-                                <option value="3" {{ $job['experience_level'] == '3' ? 'selected' : '' }}>Expert Level</option>
+                                <option value="1" <?php echo e($job['experience_level'] == '1' ? 'selected' : ''); ?>>Entry Level</option>
+                                <option value="2" <?php echo e($job['experience_level'] == '2' ? 'selected' : ''); ?>>Inermediate Level</option>
+                                <option value="3" <?php echo e($job['experience_level'] == '3' ? 'selected' : ''); ?>>Expert Level</option>
                                 
                             </select>                            
-                            @if ($errors->has('experience_level'))
+                            <?php if($errors->has('experience_level')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('experience_level') }}</strong>
+                                    <strong><?php echo e($errors->first('experience_level')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -114,24 +111,24 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" {{ $job['experience_years'] == '1' ? 'selected' : '' }}>0 Years</option>
-                                <option value="2" {{ $job['experience_years'] == '2' ? 'selected' : '' }}>1 Years</option>
-                                <option value="3" {{ $job['experience_years'] == '3' ? 'selected' : '' }}>2 Years</option>
-                                <option value="4" {{ $job['experience_years'] == '4' ? 'selected' : '' }}>3 Years</option>
-                                <option value="5" {{ $job['experience_years'] == '5' ? 'selected' : '' }}>4 Years</option>
-                                <option value="6" {{ $job['experience_years'] == '6' ? 'selected' : '' }}>5 Years</option>
-                                <option value="7" {{ $job['experience_years'] == '7' ? 'selected' : '' }}>6 Years</option>
-                                <option value="8" {{ $job['experience_years'] == '8' ? 'selected' : '' }}>7 Years</option>
-                                <option value="9" {{ $job['experience_years'] == '9' ? 'selected' : '' }}>8 Years</option>
-                                <option value="10" {{ $job['experience_years'] == '10' ? 'selected' : '' }}>9 Years</option>
-                                <option value="11" {{ $job['experience_years'] == '11' ? 'selected' : '' }}>10+ Years</option>
+                                <option value="1" <?php echo e($job['experience_years'] == '1' ? 'selected' : ''); ?>>0 Years</option>
+                                <option value="2" <?php echo e($job['experience_years'] == '2' ? 'selected' : ''); ?>>1 Years</option>
+                                <option value="3" <?php echo e($job['experience_years'] == '3' ? 'selected' : ''); ?>>2 Years</option>
+                                <option value="4" <?php echo e($job['experience_years'] == '4' ? 'selected' : ''); ?>>3 Years</option>
+                                <option value="5" <?php echo e($job['experience_years'] == '5' ? 'selected' : ''); ?>>4 Years</option>
+                                <option value="6" <?php echo e($job['experience_years'] == '6' ? 'selected' : ''); ?>>5 Years</option>
+                                <option value="7" <?php echo e($job['experience_years'] == '7' ? 'selected' : ''); ?>>6 Years</option>
+                                <option value="8" <?php echo e($job['experience_years'] == '8' ? 'selected' : ''); ?>>7 Years</option>
+                                <option value="9" <?php echo e($job['experience_years'] == '9' ? 'selected' : ''); ?>>8 Years</option>
+                                <option value="10" <?php echo e($job['experience_years'] == '10' ? 'selected' : ''); ?>>9 Years</option>
+                                <option value="11" <?php echo e($job['experience_years'] == '11' ? 'selected' : ''); ?>>10+ Years</option>
 
                             </select>                            
-                            @if ($errors->has('experience_years'))
+                            <?php if($errors->has('experience_years')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('experience_years') }}</strong>
+                                    <strong><?php echo e($errors->first('experience_years')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -143,15 +140,16 @@
                         <div class="col-12 col-md-9">
                             <select name="state" id="state" class="form-control">
                                 <option value="0">Please select</option>
-                                @foreach ($states as $state) 
-                                    <option value="{{$state->state}}" {{ $job['state'] == $state->state ? 'selected' : '' }}>{{$state->state}}
-                                @endforeach
+                                <?php $__currentLoopData = $states; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $state): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($state->state); ?>" <?php echo e($job['state'] == $state->state ? 'selected' : ''); ?>><?php echo e($state->state); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('state'))
+                            <?php if($errors->has('state')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('state') }}</strong>
+                                    <strong><?php echo e($errors->first('state')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <div class="row form-group">
@@ -161,15 +159,16 @@
                         <div class="col-12 col-md-9">
                             <select name="city" id="city" class="form-control">
                                 <option value="0">Please select</option>
-                                @foreach ($cities as $city) 
-                                    <option value="{{$city->city}}" {{ $job['city'] == $city->city ? 'selected' : '' }}>{{$city->city}}
-                                @endforeach
+                                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($city->city); ?>" <?php echo e($job['city'] == $city->city ? 'selected' : ''); ?>><?php echo e($city->city); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('city'))
+                            <?php if($errors->has('city')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('city') }}</strong>
+                                    <strong><?php echo e($errors->first('city')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -183,18 +182,18 @@
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" {{ $job['qualification'] == '1' ? 'selected' : '' }}>Graduate</option>
-                                <option value="2" {{ $job['qualification'] == '2' ? 'selected' : '' }}>Post Graduate</option>
-                                <option value="3" {{ $job['qualification'] == '3' ? 'selected' : '' }}>PHD</option>
-                                <option value="4" {{ $job['qualification'] == '4' ? 'selected' : '' }}>No College Degree</option>
-                                <option value="5" {{ $job['qualification'] == '5' ? 'selected' : '' }}>Diploma</option>
+                                <option value="1" <?php echo e($job['qualification'] == '1' ? 'selected' : ''); ?>>Graduate</option>
+                                <option value="2" <?php echo e($job['qualification'] == '2' ? 'selected' : ''); ?>>Post Graduate</option>
+                                <option value="3" <?php echo e($job['qualification'] == '3' ? 'selected' : ''); ?>>PHD</option>
+                                <option value="4" <?php echo e($job['qualification'] == '4' ? 'selected' : ''); ?>>No College Degree</option>
+                                <option value="5" <?php echo e($job['qualification'] == '5' ? 'selected' : ''); ?>>Diploma</option>
                                 
                             </select>                            
-                            @if ($errors->has('qualification'))
+                            <?php if($errors->has('qualification')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('qualification') }}</strong>
+                                    <strong><?php echo e($errors->first('qualification')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -206,23 +205,23 @@
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" {{ $job['certificate'] == '1' ? 'selected' : '' }}>Engineering</option>
-                                <option value="2" {{ $job['certificate'] == '2' ? 'selected' : '' }}>Architecture</option>
-                                <option value="3" {{ $job['certificate'] == '3' ? 'selected' : '' }}>Science</option>
-                                <option value="4" {{ $job['certificate'] == '4' ? 'selected' : '' }}>Computer</option>
-                                <option value="5" {{ $job['certificate'] == '5' ? 'selected' : '' }}>Business</option>
-                                <option value="6" {{ $job['certificate'] == '6' ? 'selected' : '' }}>Design</option>
-                                <option value="7" {{ $job['certificate'] == '7' ? 'selected' : '' }}>Construction</option>
-                                <option value="8" {{ $job['certificate'] == '8' ? 'selected' : '' }}>Political</option>
-                                <option value="9" {{ $job['certificate'] == '9' ? 'selected' : '' }}>Math</option>
-                                <option value="10" {{ $job['certificate'] == '10' ? 'selected' : '' }}>Technical</option>
+                                <option value="1" <?php echo e($job['certificate'] == '1' ? 'selected' : ''); ?>>Engineering</option>
+                                <option value="2" <?php echo e($job['certificate'] == '2' ? 'selected' : ''); ?>>Architecture</option>
+                                <option value="3" <?php echo e($job['certificate'] == '3' ? 'selected' : ''); ?>>Science</option>
+                                <option value="4" <?php echo e($job['certificate'] == '4' ? 'selected' : ''); ?>>Computer</option>
+                                <option value="5" <?php echo e($job['certificate'] == '5' ? 'selected' : ''); ?>>Business</option>
+                                <option value="6" <?php echo e($job['certificate'] == '6' ? 'selected' : ''); ?>>Design</option>
+                                <option value="7" <?php echo e($job['certificate'] == '7' ? 'selected' : ''); ?>>Construction</option>
+                                <option value="8" <?php echo e($job['certificate'] == '8' ? 'selected' : ''); ?>>Political</option>
+                                <option value="9" <?php echo e($job['certificate'] == '9' ? 'selected' : ''); ?>>Math</option>
+                                <option value="10" <?php echo e($job['certificate'] == '10' ? 'selected' : ''); ?>>Technical</option>
                                 
                             </select>                            
-                            @if ($errors->has('certificate'))
+                            <?php if($errors->has('certificate')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('certificate') }}</strong>
+                                    <strong><?php echo e($errors->first('certificate')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>
@@ -232,12 +231,12 @@
                             <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="due_date" type="date" class="form-control" name="due_date" value="{{ old('due_date', $job['due_date']) }}" required autofocus>
-                            @if ($errors->has('due_date'))
+                            <input id="due_date" type="date" class="form-control" name="due_date" value="<?php echo e(old('due_date', $job['due_date'])); ?>" required autofocus>
+                            <?php if($errors->has('due_date')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('due_date') }}</strong>
+                                    <strong><?php echo e($errors->first('due_date')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <!-- <style type="text/css">
@@ -283,13 +282,13 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <div id="tags">
-                            <input type="text" id="skills" name="skills" placeholder="Skills" value="{{ old('skills', $job['skills']) }}" class="form-control" data-role="tagsinput" required>
+                            <input type="text" id="skills" name="skills" placeholder="Skills" value="<?php echo e(old('skills', $job['skills'])); ?>" class="form-control" data-role="tagsinput" required>
                             </div>
-                            @if ($errors->has('skills'))
+                            <?php if($errors->has('skills')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('skills') }}</strong>
+                                    <strong><?php echo e($errors->first('skills')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     
@@ -298,12 +297,12 @@
                             <label for="salary_offered" class=" form-control-label">Salary Offered</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="salary_offered" name="salary_offered" value="{{ old('salary_offered', $job['salary_offered']) }}" placeholder="Salary Offered" class="form-control" required>
-                            @if ($errors->has('salary_offered'))
+                            <input type="text" id="salary_offered" name="salary_offered" value="<?php echo e(old('salary_offered', $job['salary_offered'])); ?>" placeholder="Salary Offered" class="form-control" required>
+                            <?php if($errors->has('salary_offered')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('salary_offered') }}</strong>
+                                    <strong><?php echo e($errors->first('salary_offered')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     
@@ -322,7 +321,7 @@
     $('#state').on('change', function(e){
         var state_id = e.target.value;
 
-        $.get('{{ url('information') }}/create/ajax-state?state_id=' + state_id, function(data) {
+        $.get('<?php echo e(url('information')); ?>/create/ajax-state?state_id=' + state_id, function(data) {
             //console.log(data);
             $('#city').empty();
             $.each(data, function(index,subCatObj){
@@ -333,4 +332,5 @@
     });
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

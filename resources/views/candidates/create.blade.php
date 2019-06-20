@@ -84,7 +84,7 @@
                             @endif                            
                         </div>
                     </div>                     -->
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
@@ -103,7 +103,7 @@
                             @endif
                         </div>
                          
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
@@ -111,17 +111,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1">0 Years</option>
-                                <option value="2">1 Years</option>
-                                <option value="3">2 Years</option>
-                                <option value="4">3 Years</option>
+                                <option value="1">0-2 Years</option>
+                                <option value="2">2-5 Years</option>
+                                <option value="5">5+ Years</option>
+                                <!-- <option value="4">3 Years</option>
                                 <option value="5">4 Years</option>
                                 <option value="6">5 Years</option>
                                 <option value="7">6 Years</option>
                                 <option value="8">7 Years</option>
                                 <option value="9">8 Years</option>
                                 <option value="10">9 Years</option>
-                                <option value="11">10+ Years</option>
+                                <option value="11">10+ Years</option> -->
 
                             </select>                            
                             @if ($errors->has('experience_years'))
@@ -190,9 +190,28 @@
                         </div>
                     </div>
 
-                    
-                    <h5>City ready to re-location:</h5>
-                    <hr>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="relocation" class=" form-control-label">City ready to re-location</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input id="checkbox1" type="radio" name="relocation" value="1">
+                            <label for="checkbox1" style="padding-right: 50px;">
+                                Yes
+                            </label>
+                            <input id="checkbox2" type="radio" name="relocation" value="2">
+                            <label for="checkbox2">
+                                No
+                            </label>
+                            @if ($errors->has('relocation'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('relocation') }}</strong>
+                                </span>
+                            @endif 
+                        </div>
+                    </div>
+                    <!-- <h5>City ready to re-location:</h5>
+                    <hr> 
                     <div style="display: flex;">
                     <div class="col-md-6">
                     <h6><b>Option 1</b></h6>
@@ -359,7 +378,7 @@
                     </div>
                     </div>
                     </div>
-                    <hr>
+                    <hr> -->
 
 
 
@@ -370,7 +389,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="qualification" class=" form-control-label">Qualification And Education</label>
+                            <label for="qualification" class=" form-control-label">Education</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
@@ -393,7 +412,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="certificate" class=" form-control-label">Certificate</label>
+                            <label for="certificate" class=" form-control-label">Field</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">

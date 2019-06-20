@@ -42,7 +42,7 @@ class UserxController extends Controller
         //dd($request->type);
         if($request->name == null && $request->email == null && ctype_digit(strval($request->type)))
         {
-            dd('not found');
+            //dd('not found');
             return redirect()->route('users.index');
         }
         else
@@ -50,7 +50,7 @@ class UserxController extends Controller
             $search = $request;
             //dd($request->type);
             //dd(!$request->type == 0);
-            if($request->type == 0)
+            if(!$request->type == 0)
             {
                 $search->type = $request->type;
                 $search->email = null;
