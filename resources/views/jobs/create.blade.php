@@ -85,6 +85,19 @@
                     </div>                    
                     <div class="row form-group">
                         <div class="col col-md-3">
+                            <label for="benefits" class=" form-control-label">Benefits</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="benefits" id="benefits" rows="3" placeholder="Benefits..." class="form-control" required></textarea>
+                            @if ($errors->has('benefits'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('benefits') }}</strong>
+                                </span>
+                            @endif                            
+                        </div>
+                    </div>                    
+                    <!-- <div class="row form-group">
+                        <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
                         <div class="col-12 col-md-9">
@@ -102,7 +115,7 @@
                             @endif
                         </div>
                          
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
@@ -110,17 +123,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1">0 Years</option>
-                                <option value="2">1 Years</option>
-                                <option value="3">2 Years</option>
-                                <option value="4">3 Years</option>
+                                <option value="1">0-2 Years</option>
+                                <option value="2">2-5 Years</option>
+                                <option value="5">5+ Years</option>
+                                <!-- <option value="4">3 Years</option>
                                 <option value="5">4 Years</option>
                                 <option value="6">5 Years</option>
                                 <option value="7">6 Years</option>
                                 <option value="8">7 Years</option>
                                 <option value="9">8 Years</option>
                                 <option value="10">9 Years</option>
-                                <option value="11">10+ Years</option>
+                                <option value="11">10+ Years</option> -->
 
                             </select>                            
                             @if ($errors->has('experience_years'))
@@ -174,7 +187,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="qualification" class=" form-control-label">Qualification And Education</label>
+                            <label for="qualification" class=" form-control-label">Education</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
@@ -291,10 +304,10 @@
                     
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="salary_offered" class=" form-control-label">Salary Offered</label>
+                            <label for="salary_offered" class=" form-control-label">Salary Range</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Offered" class="form-control" required>
+                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Range" class="form-control" required>
                             @if ($errors->has('salary_offered'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('salary_offered') }}</strong>

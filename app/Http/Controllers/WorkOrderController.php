@@ -9,6 +9,7 @@ use App\User;
 use App\work_order;
 use App\work_order_hour;
 use App\work_order_assigned;
+use DateTime;
 
 class WorkOrderController extends Controller
 {
@@ -68,6 +69,76 @@ class WorkOrderController extends Controller
         $work_order->save();
         Alert::success('Success', 'You have successfully created new Work Order')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('work_orders.index')->with('success', 'You have successfully created Work Order');
+    }
+
+    public function report($id)
+    {
+        $work_order = work_order::find($id);
+        return view('work_orders.report', compact('work_order')); 
+    }
+    public function report_download(Request $request)
+    {        
+       //dd(request()->all());
+        $this->validate($request, [            
+            'from_date'=> 'required|date|before:to_date',
+            'to_date'=> 'required|date|after:from_date'
+            ]
+        );
+        $work_order = work_order::find($request->work_order_id);
+        $users_assigned = work_order_assigned::where('work_order_id', $request->work_order_id)->get();
+        $data[] = null;
+        $row1[0] = 'Date';
+        $total[0] = 'Total';
+        foreach ($users_assigned as $key => $value) 
+        {
+            $user = User::find($value->user_id);
+            $row1[$key+1] = $user->name.' '.$user->lastname;
+            $total[$key+1] = 0;
+        }
+        //dd($row1);
+        $begin = new DateTime($request->from_date);
+        $end   = new DateTime($request->to_date);
+        $i = 0;
+        //$total[] = null;
+        while ($begin <= $end) 
+        {
+            
+            $rowsheet[0] = $begin->format("Y-m-d");
+            foreach ($users_assigned as $key => $value) 
+            {
+                $work_order_hours = work_order_hour::where('work_order_id','=',$request->work_order_id)->whereDate('date', $begin)->where('user_id', $value->user_id)->where('status', 1)->first();
+                if($work_order_hours)
+                {
+                    $rowsheet[$key+1] = $work_order_hours->hours;
+                    $total[$key+1] = $total[$key+1] + $work_order_hours->hours;
+                }
+                else
+                    $rowsheet[$key+1] = '';
+            }
+            $data[$i] = $rowsheet;
+            $begin->modify('+1 day');
+            $i++;
+        }
+        $last1 = '';
+        $rowlast[0] = 'Total';
+        foreach ($users_assigned as $key => $value) 
+        {
+            $rowlast[$key+1] = $total[$key+1];
+        }
+        /*for($i = $begin; $i <= $end; $i->modify('+1 day')){
+            $data[$i] = $i->format("Y-m-d");
+        }*/
+        //dd($data);
+        return \Excel::create('Work_order_report', function($excel) use ($data, $row1, $rowlast, $last1) {            
+            $excel->sheet('sheet name', function($sheet) use ($data, $row1, $rowlast, $last1)
+            {
+                $sheet->row(1, $row1);
+                $sheet->fromArray($data, null, 'A2', false, false);
+                $sheet->appendRow($last1);
+                $sheet->appendRow($rowlast);
+            });
+        })->download('xls');
+
     }
 
     public function show($id)

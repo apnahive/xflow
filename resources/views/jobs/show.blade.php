@@ -3,6 +3,8 @@
 
 @section('content')
 
+
+
 <a href="{{ route('jobs.index') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
@@ -64,8 +66,16 @@
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label">{{ $job->requirements }}</label>
                                 </div>
-                            </div>                    
+                            </div>
                             <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="benefits" class=" form-control-label"><b>Benefits</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="benefits" class=" form-control-label">{{ $job->benefits }}</label>
+                                </div>
+                            </div>                    
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="poc" class=" form-control-label"><b>Experience Level</b></label>
                                 </div>
@@ -82,20 +92,20 @@
                                         @endif
                                     </label>
                                 </div>
-                            </div>                    
+                            </div>                     -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="cco" class=" form-control-label"><b>CCO</b></label>
+                                    <label for="cco" class=" form-control-label"><b>Years of Experience</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="cco" class=" form-control-label">
                                         @if($job['experience_years'] == 1)
-                                            0 Years
+                                            0-2 Years
                                         @elseif($job['experience_years'] == 2)
-                                            1 Years
-                                        @elseif($job['experience_years'] == 3)
-                                            2 Years
-                                        @elseif($job['experience_years'] == 4)
+                                            2-5 Years
+                                        @elseif($job['experience_years'] == 5)
+                                            5+ Years
+                                        <!-- @elseif($job['experience_years'] == 4)
                                             3 Years
                                         @elseif($job['experience_years'] == 5)
                                             4 Years
@@ -110,7 +120,7 @@
                                         @elseif($job['experience_years'] == 10)
                                             9 Years
                                         @elseif($job['experience_years'] == 11)
-                                            10 Years
+                                            10 Years -->
                                         @else
                                             Not Selected
                                         @endif
@@ -139,7 +149,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Qualification And Education</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Education</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -213,7 +223,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Salary Offered</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Salary Range</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -235,7 +245,7 @@
                                         <th>Name</th>
                                         <th>Title</th>
                                         <th>Skills</th>
-                                        <th>Qualification</th>
+                                        <th>Education</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -507,7 +517,7 @@
                                             </label>
                                         </th> -->
                                         <th>Name</th> 
-                                        <th>Expert level</th>
+                                        <th>Experience level</th>
                                         <th>Skills</th>
                                         <th>Salary Expected</th>
                                         <!-- <th>status</th>
@@ -518,7 +528,7 @@
                                 <tbody>
                                     @foreach ($interviews as $key => $value)
                                     
-                                    <tr class="tr-shadow">
+                                    <tr>
                                         <!-- <td>
                                             <label class="au-checkbox">
                                                 <input type="checkbox">
@@ -544,8 +554,54 @@
                                                     <i class="zmdi zmdi-more"></i>
                                                 </button> -->
                                             </div>
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <ul class="timeline" id="timeline">
+                                              <li class="li complete">
+                                                <div class="timestamp">
+                                                  <span class="author">Invite Sent</span>
+                                                  <span class="date">{{ $value->created_at->format('m/d/Y') }}<span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Invite Sent </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li @if($value->accepted_date) complete @endif">
+                                                <div class="timestamp">
+                                                  <span class="author">Invite Accepted</span>
+                                                  <span class="date">@if($value->accepted_date) {{ $value->accepted_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Interview Scheduled  </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li @if($value->accepted_date) complete @endif">
+                                                <div class="timestamp">
+                                                  <span class="author">Interviewed</span>
+                                                  <span class="date">@if($value->accepted_date) {{ $value->interview_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Interview </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li @if($value->awarded) complete @endif">
+                                                <div class="timestamp">
+                                                  <span class="author">Feedback</span>
+                                                  <span class="date">@if($value->accepted_date) {{ $value->awarded_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Process Completed </h5>
+                                                </div>
+                                              </li>
+                                             </ul>
+                                            <hr>
                                         </td>
                                     </tr>
+
                                     <tr class="spacer"></tr>
                                     
                                     @endforeach

@@ -1,8 +1,14 @@
 <?php $__env->startSection('content'); ?>
-
+<div class="row">
+    <div class="col-md-6">
 <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
-                    
+                </div>
+                <div class="col-md-6">
+<a href="<?php echo e(route('work_orders.report', $work_order->id)); ?>" style="float: right;"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;float: right;">
+                    Report</button></a>
+                </div>
+</div>
 <div class="col-lg-12">
     <div class="card" style="margin-bottom: 100px;">
         <!-- <div class="card-header">

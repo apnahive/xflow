@@ -58,10 +58,10 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="description" class=" form-control-label">Description</label>
+                            <label for="description" class=" form-control-label">Responsibilities</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
+                            <textarea name="description" id="description" rows="3" placeholder="Responsibilities..." class="form-control" required></textarea>
                             <?php if($errors->has('description')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('description')); ?></strong>
@@ -70,6 +70,19 @@
                         </div>
                     </div>                    
                     <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="requirements" class=" form-control-label">Requirements</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="requirements" id="requirements" rows="3" placeholder="Requirements..." class="form-control" required></textarea>
+                            <?php if($errors->has('requirements')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('requirements')); ?></strong>
+                                </span>
+                            <?php endif; ?>                            
+                        </div>
+                    </div>                    
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
@@ -88,7 +101,7 @@
                             <?php endif; ?>
                         </div>
                          
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
@@ -96,17 +109,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1">0 Years</option>
-                                <option value="2">1 Years</option>
-                                <option value="3">2 Years</option>
-                                <option value="4">3 Years</option>
+                                <option value="1">0-2 Years</option>
+                                <option value="2">2-5 Years</option>
+                                <option value="5">5+ Years</option>
+                                <!-- <option value="4">3 Years</option>
                                 <option value="5">4 Years</option>
                                 <option value="6">5 Years</option>
                                 <option value="7">6 Years</option>
                                 <option value="8">7 Years</option>
                                 <option value="9">8 Years</option>
                                 <option value="10">9 Years</option>
-                                <option value="11">10+ Years</option>
+                                <option value="11">10+ Years</option> -->
 
                             </select>                            
                             <?php if($errors->has('experience_years')): ?>
@@ -185,7 +198,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="certificate" class=" form-control-label">Certificate</label>
+                            <label for="certificate" class=" form-control-label">Field</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">
@@ -213,13 +226,13 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="start_date" class=" form-control-label">Start Date</label>
+                            <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="start_date" type="date" class="form-control" name="start_date" value="<?php echo e(old('start_date')); ?>" required autofocus>
-                            <?php if($errors->has('start_date')): ?>
+                            <input id="due_date" type="date" class="form-control" name="due_date" value="<?php echo e(old('due_date')); ?>" required autofocus>
+                            <?php if($errors->has('due_date')): ?>
                                 <span class="help-block error">
-                                    <strong><?php echo e($errors->first('start_date')); ?></strong>
+                                    <strong><?php echo e($errors->first('due_date')); ?></strong>
                                 </span>
                             <?php endif; ?> 
                         </div>

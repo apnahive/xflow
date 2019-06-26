@@ -46,17 +46,17 @@ class JobController extends Controller
 
         foreach ($jobs as $jobkey => $value) 
         {
-            switch ($value->experience_level) 
+            switch ($value->experience_years) 
             {
                 case '1':
-                    $value->experience = 'Entry Level';
+                    $value->experience = '0-2 Years';
                     break;
                 case '2':
-                    $value->experience = 'Inermediate Level';
+                    $value->experience = '2-5 Years';
                     break;
-                case '3':
-                    $value->experience = 'Expert Level';
-                    break;
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
             }
             switch ($value->qualification) 
             {
@@ -94,6 +94,8 @@ class JobController extends Controller
         $id1 = Auth::id();
         $checkadmin = User::find($id1);        
         $checkadmins = $checkadmin->hasRole('Admin');
+        $profile_exist = Profile::select('user_id')->get();
+        $candidates = User::whereIn('id', $profile_exist)->get();
     
         if($checkadmins)        
             $jobs = Job::orderBy($feild, $type)->paginate(15);
@@ -103,16 +105,16 @@ class JobController extends Controller
         foreach ($jobs as $jobkey => $value) 
         {
             switch ($value->experience_years) 
-            {
+            {                
                 case '1':
-                    $value->experience = 'Entry Level';
+                    $value->experience = '0-2 Years';
                     break;
                 case '2':
-                    $value->experience = 'Intermediate Level';
+                    $value->experience = '2-5 Years';
                     break;
-                case '3':
-                    $value->experience = 'Expert Level';
-                    break;
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
             }
             switch ($value->qualification) 
             {
@@ -135,13 +137,13 @@ class JobController extends Controller
         }
         //dd($jobs);
         if (Auth::user()->hasPermissionTo('can create job'))
-            return view('jobs.index', compact('jobs'));
+            return view('jobs.index', compact('jobs', 'candidates'));
         else
             return view('errors.401');
         
         
     }
-
+    //job awarded
     public function award(Request $request)
     {
         //dd(request()->all());
@@ -192,7 +194,8 @@ class JobController extends Controller
             'title'=> 'required|max:191', 
             'description'=> 'required|max:2048',
             'requirements'=> 'required|max:2048',
-            'experience_level'=> 'numeric|min:1',
+            'benefits'=> 'required|max:2048',
+            //'experience_level'=> 'numeric|min:1',
             'experience_years'=> 'numeric|min:1',
             'state'=> 'required|max:191', 
             'city'=> 'required|max:191', 
@@ -200,7 +203,7 @@ class JobController extends Controller
             'certificate'=> 'numeric|min:1',
             'due_date'=> 'required|date',
             'skills'=> 'required|max:191', 
-            'salary_offered'=> 'numeric|min:1',
+            'salary_offered'=> 'required|max:191',
             ],
             [
                 'experience_level.min' => 'Please choose a Experience.',
@@ -215,7 +218,8 @@ class JobController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->requirements = $request->requirements;
-        $job->experience_level = $request->experience_level;
+        $job->benefits = $request->benefits;
+        //$job->experience_level = $request->experience_level;
         $job->experience_years = $request->experience_years;
         $job->state = $request->state;
         $job->city = $request->city;
@@ -314,15 +318,24 @@ class JobController extends Controller
             $profile = Profile::where('user_id', $value->user_id)->first();
             
             $usershortlisted = User::where('id', $value->user_id)->first();
-            //dd($usershortlisted);
+            //dd($profile);
             $value->name = $usershortlisted->name.' '.$usershortlisted->lastname;
-            $value->title = $profile->title;
-            $value->skills = $profile->skills;
-            $value->qualification = $profile->qualification;
+            if($profile)
+            {
+                $value->title = $profile->title;    
+                $value->skills = $profile->skills;
+                $value->qualification = $profile->qualification;
+            }            
+            else
+            {
+                $value->title = '';    
+                $value->skills = '';
+                $value->qualification = '';
+            }
         }
         //dd($shortlisted);
 
-        $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id')->distinct()->get();
+        $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id', 'created_at', 'accepted_date')->distinct()->get();
         //dd($interviews);
         foreach ($interviews as $key => $value) 
         {
@@ -332,21 +345,37 @@ class JobController extends Controller
             $value->name = $user->name.' '.$user->lastname;
             $profile = Profile::where('user_id', $value->candidate_id)->first();
             //dd($value->candidate_id, $profile);
-            switch ($profile->experience_level) 
+            switch ($profile->experience_years) 
             {
                 case '1':
-                    $value->experience = 'Entry Level';
+                    $value->experience = '0-2 Years';
                     break;
                 case '2':
-                    $value->experience = 'Inermediate Level';
+                    $value->experience = '2-5 Years';
                     break;
-                case '3':
-                    $value->experience = 'Expert Level';
+                case '5':
+                    $value->experience = '5+ Years';
                     break;
             }
             $value->skills = $profile->skills;
             $value->salary_expected = $profile->salary_expected;
+            if(Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('active', 1)->exists())
+            {
+                $interview_date = Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('active', 1)->first();
+                $value->interview_date = $interview_date->date;
+            }
+            if(Job_award::where('job_id', $job->id)->where('candidate_id', $value->candidate_id)->exists())
+            {
+                $value->awarded = 1;
+                $awarded = Job_award::where('job_id', $job->id)->where('candidate_id', $value->candidate_id)->first();
+                $value->awarded_date = $awarded_date->created_at;
+            }
+            
 
+
+            
+            /*$value->invite_sent = $value->created_at;
+            dd($value->invite_sent);*/
         }
 
         $notes = Interview_schedule::where('job_id', $id)->where('scheduled', 1)->get();
@@ -413,7 +442,8 @@ class JobController extends Controller
             'title'=> 'required|max:191', 
             'description'=> 'required|max:2048',
             'requirements'=> 'required|max:2048',
-            'experience_level'=> 'numeric|min:1',
+            'benefits'=> 'required|max:2048',
+            //'experience_level'=> 'numeric|min:1',
             'experience_years'=> 'numeric|min:1',
             'state'=> 'required|max:191', 
             'city'=> 'required|max:191', 
@@ -421,7 +451,7 @@ class JobController extends Controller
             'certificate'=> 'numeric|min:1',
             'due_date'=> 'required|date',
             'skills'=> 'required|max:191', 
-            'salary_offered'=> 'numeric|min:1',
+            'salary_offered'=> 'required|max:191',
             ],
             [
                 'experience_level.min' => 'Please choose a Experience.',
@@ -436,7 +466,8 @@ class JobController extends Controller
         $job->title = $request->title;
         $job->description = $request->description;
         $job->requirements = $request->requirements;
-        $job->experience_level = $request->experience_level;
+        $job->benefits = $request->benefits;
+        //$job->experience_level = $request->experience_level;
         $job->experience_years = $request->experience_years;
         $job->state = $request->state;
         $job->city = $request->city;

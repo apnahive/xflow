@@ -89,6 +89,8 @@ Route::get('xflow_status/{id}', 'XflowController@status')->name('xflows.status')
 
 //Work_order
 Route::resource('work_orders', 'WorkOrderController');
+Route::get('work_orders/report/{id}', 'WorkOrderController@report')->name('work_orders.report');
+Route::post('work_orders/report_download', 'WorkOrderController@report_download')->name('work_orders.report_download');
 Route::get('work_orders/sort/{feild}/{type}', 'WorkOrderController@sort')->name('work_orders.sort');
 Route::get('assign_user/{id}', 'WorkOrderAssignedController@assign')->name('work_orders.assign');
 Route::resource('work_order_assign', 'WorkOrderAssignedController');

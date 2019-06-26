@@ -393,7 +393,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="qualification" class=" form-control-label">Qualification And Education</label>
+                            <label for="qualification" class=" form-control-label">Education</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
@@ -416,7 +416,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="certificate" class=" form-control-label">Certificate</label>
+                            <label for="certificate" class=" form-control-label">Field</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="certificate" id="certificate" class="custom-select form-control">

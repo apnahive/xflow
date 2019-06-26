@@ -25,8 +25,10 @@
     color: blueviolet!important;
 }
  </style>
+        <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
         <?php if($jobpast): ?>
-        <div class="page-content--bgf7" style="margin-bottom: 10px;padding: 12px;background-color: #ff520099;">
+        <?php $__currentLoopData = $jobpast; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="page-content--bgf7" style="margin-bottom: 10px;padding: 12px;">
 
             <!-- BREADCRUMB-->
             <section class="au-breadcrumb2" style="padding-top: 10px;padding-bottom: 0px; ">
@@ -35,17 +37,14 @@
                         <div class="col-md-12">
                             <div class="au-breadcrumb-content">
                                 <div class="au-breadcrumb-left">
-                                    <span class="au-breadcrumb-span" style="color: #fff;font-size: larger;">Please update status of the following jobs </span> <br>
-                                    <div class="row ">
-                                        <div class="col-md-12">
-                                    <?php $__currentLoopData = $jobpast; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <span class="au-breadcrumb-span">Please update status of the job : <a href="<?php echo e(route('jobs.edit', $value->id)); ?>" class="jobpast">
+                                    <?php echo e($value->title); ?></a> </span> <br>
+                                    
+                                    
 
-                                    <a href="<?php echo e(route('jobs.edit', $value->id)); ?>" class="jobpast" style="color: #00a1ff;font-size: 17px;">
-                                    <?php echo e($value->title); ?></a>
-
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </div>
-                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -53,6 +52,8 @@
                 </div>
             </section>
         </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
         <?php endif; ?>
 
         <div class="page-content--bgf7" style="margin-bottom: 10px;">
@@ -96,9 +97,63 @@
                     </div>
                 </div>
             </section> -->
-            <!-- END WELCOME--> 
+            <!-- END WELCOME-->
+
+
             <div class="row">
             <section class="welcome p-t-10 col-md-6">
+
+                <!-- Admin dashboard  -->
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                <section class="statistic statistic2" style="padding-top: 1px;">
+                    <div class="container">
+                        <h3 style="margin: 24px;">Admin Dashboard</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--red">
+                                    <h2 class="number"><span style="color: white;"><?php echo e(count($acandidates)); ?></span></h2>
+                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange">
+                                    <h2 class="number"><span style="color: white;"><?php echo e(count($aclient)); ?></span></h2>
+                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div><div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                    <h2 class="number"><span style="color: white;"><?php echo e(count($ajobs)); ?></span></h2>
+                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div><div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><span style="color: white;"><?php echo e(count($anewjobs)); ?></span></h2>
+                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </section>
+                </div>
+                
+                <?php endif; ?>
+
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <div class="container">
                      <div class="row">
@@ -326,56 +381,7 @@
                 
                 <?php endif; ?>
 
-                <!-- Admin dashboard  -->
-                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
-                <div class="page-content--bgf7" style="margin-bottom: 30px;">
-                <section class="statistic statistic2" style="padding-top: 1px;">
-                    <div class="container">
-                        <h3 style="margin: 24px;">Admin Dashboard</h3>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($acandidates)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($aclient)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div><div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($ajobs)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div><div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><span style="color: white;">0</span></h2>
-                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                </section>
-                </div>
                 
-                <?php endif; ?>
 
             </section>
 

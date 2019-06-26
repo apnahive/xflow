@@ -45,7 +45,7 @@
                             </label>
                         </th> -->
                         <th><a href="<?php echo e(route('jobs.sort', ['title', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="<?php echo e(route('jobs.sort', ['title', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th> 
-                        <th>Expert level</th>
+                        <th>Experience level</th>
                         <th>Skills</th>
                         <th>Status</th>
                         <!-- <th>status</th>

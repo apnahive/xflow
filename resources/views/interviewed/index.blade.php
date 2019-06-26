@@ -47,9 +47,9 @@
                             </label>
                         </th> -->
                         <th>Job Title</th> 
-                        <th>Expert level</th>
+                        <th>Experience level</th>
                         <th>Skills</th>
-                        <th>Salary Offered</th>
+                        <th>Salary Range</th>
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>

@@ -1,5 +1,7 @@
 <?php $__env->startSection('content'); ?>
 
+
+
 <a href="<?php echo e(route('jobs.index')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
@@ -62,7 +64,7 @@
                                     <label for="description" class=" form-control-label"><?php echo e($job->requirements); ?></label>
                                 </div>
                             </div>                    
-                            <div class="row form-group">
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="poc" class=" form-control-label"><b>Experience Level</b></label>
                                 </div>
@@ -79,20 +81,20 @@
                                         <?php endif; ?>
                                     </label>
                                 </div>
-                            </div>                    
+                            </div>                     -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="cco" class=" form-control-label"><b>CCO</b></label>
+                                    <label for="cco" class=" form-control-label"><b>Years of Experience</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="cco" class=" form-control-label">
                                         <?php if($job['experience_years'] == 1): ?>
-                                            0 Years
+                                            0-2 Years
                                         <?php elseif($job['experience_years'] == 2): ?>
-                                            1 Years
-                                        <?php elseif($job['experience_years'] == 3): ?>
-                                            2 Years
-                                        <?php elseif($job['experience_years'] == 4): ?>
+                                            2-5 Years
+                                        <?php elseif($job['experience_years'] == 5): ?>
+                                            5+ Years
+                                        <!-- <?php elseif($job['experience_years'] == 4): ?>
                                             3 Years
                                         <?php elseif($job['experience_years'] == 5): ?>
                                             4 Years
@@ -107,7 +109,7 @@
                                         <?php elseif($job['experience_years'] == 10): ?>
                                             9 Years
                                         <?php elseif($job['experience_years'] == 11): ?>
-                                            10 Years
+                                            10 Years -->
                                         <?php else: ?>
                                             Not Selected
                                         <?php endif; ?>
@@ -138,7 +140,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Qualification And Education</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Education</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -214,7 +216,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Salary Offered</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Salary Range</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -237,7 +239,7 @@
                                         <th>Name</th>
                                         <th>Title</th>
                                         <th>Skills</th>
-                                        <th>Qualification</th>
+                                        <th>Education</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -509,7 +511,7 @@
                                             </label>
                                         </th> -->
                                         <th>Name</th> 
-                                        <th>Expert level</th>
+                                        <th>Experience level</th>
                                         <th>Skills</th>
                                         <th>Salary Expected</th>
                                         <!-- <th>status</th>
@@ -520,7 +522,7 @@
                                 <tbody>
                                     <?php $__currentLoopData = $interviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     
-                                    <tr class="tr-shadow">
+                                    <tr>
                                         <!-- <td>
                                             <label class="au-checkbox">
                                                 <input type="checkbox">
@@ -546,8 +548,54 @@
                                                     <i class="zmdi zmdi-more"></i>
                                                 </button> -->
                                             </div>
+                                            
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <ul class="timeline" id="timeline">
+                                              <li class="li complete">
+                                                <div class="timestamp">
+                                                  <span class="author">Invite Sent</span>
+                                                  <span class="date"><?php echo e($value->created_at->format('m/d/Y')); ?><span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Invite Sent </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li <?php if($value->accepted_date): ?> complete <?php endif; ?>">
+                                                <div class="timestamp">
+                                                  <span class="author">Invite Accepted</span>
+                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->accepted_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Interview Scheduled  </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li <?php if($value->accepted_date): ?> complete <?php endif; ?>">
+                                                <div class="timestamp">
+                                                  <span class="author">Interviewed</span>
+                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->interview_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Interview </h5>
+                                                </div>
+                                              </li>
+                                              <li class="li <?php if($value->awarded): ?> complete <?php endif; ?>">
+                                                <div class="timestamp">
+                                                  <span class="author">Feedback</span>
+                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->awarded_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                </div>
+                                                <div class="status">
+                                                  <h5> Process Completed </h5>
+                                                </div>
+                                              </li>
+                                             </ul>
+                                            <hr>
                                         </td>
                                     </tr>
+
                                     <tr class="spacer"></tr>
                                     
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

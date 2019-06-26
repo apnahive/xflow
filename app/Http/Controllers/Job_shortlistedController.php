@@ -135,9 +135,21 @@ class Job_shortlistedController extends Controller
             $usershortlisted = User::where('id', $value->user_id)->first();
             //dd($usershortlisted);
             $value->name = $usershortlisted->name.' '.$usershortlisted->lastname;
-            $value->title = $profile->title;
+            if($profile)
+            {
+                $value->title = $profile->title;    
+                $value->skills = $profile->skills;
+                $value->qualification = $profile->qualification;
+            }            
+            else
+            {
+                $value->title = '';    
+                $value->skills = '';
+                $value->qualification = '';
+            }
+            /*$value->title = $profile->title;
             $value->skills = $profile->skills;
-            $value->qualification = $profile->qualification;
+            $value->qualification = $profile->qualification;*/
         }
         //dd($shortlisted);
 

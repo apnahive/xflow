@@ -84,7 +84,7 @@
                             <?php endif; ?>                            
                         </div>
                     </div>                    
-                    <div class="row form-group">
+                    <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
                         </div>
@@ -103,7 +103,7 @@
                             <?php endif; ?>
                         </div>
                          
-                    </div>
+                    </div> -->
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_years" class=" form-control-label">Experience in Years</label>
@@ -111,17 +111,17 @@
                         <div class="col-12 col-md-9">
                             <select name="experience_years" id="experience_years" class="custom-select form-control">
                                 <option value="0">Please select</option>
-                                <option value="1" <?php echo e($job['experience_years'] == '1' ? 'selected' : ''); ?>>0 Years</option>
-                                <option value="2" <?php echo e($job['experience_years'] == '2' ? 'selected' : ''); ?>>1 Years</option>
-                                <option value="3" <?php echo e($job['experience_years'] == '3' ? 'selected' : ''); ?>>2 Years</option>
-                                <option value="4" <?php echo e($job['experience_years'] == '4' ? 'selected' : ''); ?>>3 Years</option>
+                                <option value="1" <?php echo e($job['experience_years'] == 1 ? 'selected' : ''); ?>>0-2 Years</option>
+                                <option value="2" <?php echo e($job['experience_years'] == 2 ? 'selected' : ''); ?>>2-5 Years</option>
+                                <option value="5" <?php echo e($job['experience_years'] == 3 ? 'selected' : ''); ?>>5+ Years</option>
+                                <!-- <option value="4" <?php echo e($job['experience_years'] == '4' ? 'selected' : ''); ?>>3 Years</option>
                                 <option value="5" <?php echo e($job['experience_years'] == '5' ? 'selected' : ''); ?>>4 Years</option>
                                 <option value="6" <?php echo e($job['experience_years'] == '6' ? 'selected' : ''); ?>>5 Years</option>
                                 <option value="7" <?php echo e($job['experience_years'] == '7' ? 'selected' : ''); ?>>6 Years</option>
                                 <option value="8" <?php echo e($job['experience_years'] == '8' ? 'selected' : ''); ?>>7 Years</option>
                                 <option value="9" <?php echo e($job['experience_years'] == '9' ? 'selected' : ''); ?>>8 Years</option>
                                 <option value="10" <?php echo e($job['experience_years'] == '10' ? 'selected' : ''); ?>>9 Years</option>
-                                <option value="11" <?php echo e($job['experience_years'] == '11' ? 'selected' : ''); ?>>10+ Years</option>
+                                <option value="11" <?php echo e($job['experience_years'] == '11' ? 'selected' : ''); ?>>10+ Years</option> -->
 
                             </select>                            
                             <?php if($errors->has('experience_years')): ?>

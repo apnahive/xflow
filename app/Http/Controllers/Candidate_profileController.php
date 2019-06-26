@@ -31,19 +31,18 @@ class Candidate_profileController extends Controller
         {
             $user = User::find($value->user_id);
             $value->name = $user->name.' '.$user->lastname;
-
-            switch ($value->experience_level) 
+            switch ($value->experience_years) 
             {
                 case '1':
-                    $value->experience = 'Entry Level';
+                    $value->experience = '0-2 Years';
                     break;
                 case '2':
-                    $value->experience = 'Inermediate Level';
+                    $value->experience = '2-5 Years';
                     break;
-                case '3':
-                    $value->experience = 'Expert Level';
-                    break;
-            }
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
+            }            
             switch ($value->qualification) 
             {
                 case '1':
@@ -81,17 +80,17 @@ class Candidate_profileController extends Controller
             $user = User::find($value->user_id);
             $value->name = $user->name.' '.$user->lastname;
 
-            switch ($value->experience_level) 
+            switch ($value->experience_years) 
             {
                 case '1':
-                    $value->experience = 'Entry Level';
+                    $value->experience = '0-2 Years';
                     break;
                 case '2':
-                    $value->experience = 'Inermediate Level';
+                    $value->experience = '2-5 Years';
                     break;
-                case '3':
-                    $value->experience = 'Expert Level';
-                    break;
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
             }
             switch ($value->qualification) 
             {

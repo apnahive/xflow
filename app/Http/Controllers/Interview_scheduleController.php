@@ -10,7 +10,7 @@ use App\Job;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use DateTime;
 use Mail;
 use App\Mail\Candidate_invite;
 use App\Mail\Candidate_interview_confirmed;
@@ -119,12 +119,14 @@ class Interview_scheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //interview confirmned
     public function edit($id)
     {
         $selected = Interview_schedule::find($id);
         $job_id = $selected->job_id;
         $candidate_id = $selected->candidate_id;
-
+        $now = new \DateTime();
         $interviews = Interview_schedule::where('job_id', $job_id)->where('candidate_id', $candidate_id)->get();
 
         foreach ($interviews as $key => $value) 
@@ -132,6 +134,7 @@ class Interview_scheduleController extends Controller
             if($value->id == $id) 
             {
                 $value->scheduled = 1;
+                $value->accepted_date = $now;
                 $value->save();
             }
             else
@@ -162,6 +165,8 @@ class Interview_scheduleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    //job invited
     public function update(Request $request, $id)
     {
         //dd(request()->all());
@@ -176,6 +181,9 @@ class Interview_scheduleController extends Controller
             'city'=> 'required|max:191', 
             'address'=> 'required|max:2048',
         ));
+
+        
+
         $interview1 = new Interview_schedule;
         $interview2 = new Interview_schedule;
         $interview3 = new Interview_schedule;

@@ -48,9 +48,9 @@
                         </th> -->
                         <th><a href="{{ route('profiles.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="{{ route('profiles.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
                         <th><a href="{{ route('profiles.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="{{ route('profiles.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
-                        <th>Expert level</th>
+                        <th>Experience level</th>
                         <th>Skills</th>
-                        <th>Qualification</th>
+                        <th>Education</th>
                         <!-- <th>status</th>
                         <th>price</th> -->
                         <th></th>

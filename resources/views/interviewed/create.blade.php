@@ -246,10 +246,10 @@
                     
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="salary_offered" class=" form-control-label">Salary Offered</label>
+                            <label for="salary_offered" class=" form-control-label">Salary Range</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Offered" class="form-control" required>
+                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Range" class="form-control" required>
                             @if ($errors->has('salary_offered'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('salary_offered') }}</strong>

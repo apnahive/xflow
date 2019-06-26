@@ -192,7 +192,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Salary Offered</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Salary Range</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">

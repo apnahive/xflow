@@ -215,10 +215,14 @@ class HomeController extends Controller
        //dd($jobpast);
        //$mytasks = Task::where('assignee', $id1)->where('status', 1)->take(10)->get();
        //dd($mytasks);
+       $now30 = new \DateTime();
+       $now30->modify('-30 day');
+       //dd($now, $now30);
         $acandidates = User::role('Candidate')->get();
         $aclient = User::role('Recuriter')->get();
         $ajobs = Job::where('status', '=', 0)->get();
+        $anewjobs = Job::where('status', '=', 0)->whereBetween('created_at', array($now30, $now))->get();
         //dd($interviews, $job);
-        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs')); 
+        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs', 'anewjobs')); 
     }
 }

@@ -26,8 +26,10 @@
     color: blueviolet!important;
 }
  </style>
+        @role('Admin')
         @if($jobpast)
-        <div class="page-content--bgf7" style="margin-bottom: 10px;padding: 12px;background-color: #ff520099;">
+        @foreach ($jobpast as $key => $value)
+        <div class="page-content--bgf7" style="margin-bottom: 10px;padding: 12px;">
 
             <!-- BREADCRUMB-->
             <section class="au-breadcrumb2" style="padding-top: 10px;padding-bottom: 0px; ">
@@ -36,17 +38,14 @@
                         <div class="col-md-12">
                             <div class="au-breadcrumb-content">
                                 <div class="au-breadcrumb-left">
-                                    <span class="au-breadcrumb-span" style="color: #fff;font-size: larger;">Please update status of the following jobs </span> <br>
-                                    <div class="row ">
-                                        <div class="col-md-12">
-                                    @foreach ($jobpast as $key => $value)
+                                    <span class="au-breadcrumb-span">Please update status of the job : <a href="{{ route('jobs.edit', $value->id) }}" class="jobpast">
+                                    {{ $value->title }}</a> </span> <br>
+                                    
+                                    
 
-                                    <a href="{{ route('jobs.edit', $value->id) }}" class="jobpast" style="color: #00a1ff;font-size: 17px;">
-                                    {{ $value->title }}</a>
-
-                                    @endforeach
-                                    </div>
-                                    </div>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -54,7 +53,9 @@
                 </div>
             </section>
         </div>
+        @endforeach
         @endif
+        @endrole
 
         <div class="page-content--bgf7" style="margin-bottom: 10px;">
 
@@ -97,9 +98,63 @@
                     </div>
                 </div>
             </section> -->
-            <!-- END WELCOME--> 
+            <!-- END WELCOME-->
+
+
             <div class="row">
             <section class="welcome p-t-10 col-md-6">
+
+                <!-- Admin dashboard  -->
+                @role('Admin')
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                <section class="statistic statistic2" style="padding-top: 1px;">
+                    <div class="container">
+                        <h3 style="margin: 24px;">Admin Dashboard</h3>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--red">
+                                    <h2 class="number"><span style="color: white;">{{ count($acandidates) }}</span></h2>
+                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange">
+                                    <h2 class="number"><span style="color: white;">{{ count($aclient) }}</span></h2>
+                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div><div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
+                                    <h2 class="number"><span style="color: white;">{{ count($ajobs) }}</span></h2>
+                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div><div class="col-md-6 col-lg-3">
+                                <div class="statistic__item statistic__item--green">
+                                    <h2 class="number"><span style="color: white;">{{ count($anewjobs) }}</span></h2>
+                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
+                                    <div class="icon">
+                                        <i class="zmdi zmdi-calendar-note"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </section>
+                </div>
+                
+                @endrole
+
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <div class="container">
                      <div class="row">
@@ -327,56 +382,7 @@
                 
                 @endcan
 
-                <!-- Admin dashboard  -->
-                @role('Admin')
-                <div class="page-content--bgf7" style="margin-bottom: 30px;">
-                <section class="statistic statistic2" style="padding-top: 1px;">
-                    <div class="container">
-                        <h3 style="margin: 24px;">Admin Dashboard</h3>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><span style="color: white;">{{ count($acandidates) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><span style="color: white;">{{ count($aclient) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div><div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><span style="color: white;">{{ count($ajobs) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div><div class="col-md-6 col-lg-3">
-                                <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><span style="color: white;">0</span></h2>
-                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
-                            
-                        </div>
-                    </div>
-                </section>
-                </div>
                 
-                @endrole
 
             </section>
 
