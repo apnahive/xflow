@@ -7,7 +7,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong>Create New Client</strong>
+                <strong>Create New Project</strong>
             </div>            
             <form action="{{ route('projects.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
             {{ csrf_field() }}

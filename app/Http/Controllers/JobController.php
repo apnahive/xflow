@@ -335,13 +335,20 @@ class JobController extends Controller
         }
         //dd($shortlisted);
 
-        $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id', 'created_at', 'accepted_date')->distinct()->get();
+        $interviews = Interview_schedule::where('job_id', $id)->select('job_id', 'candidate_id')->distinct()->get();
         //dd($interviews);
         foreach ($interviews as $key => $value) 
         {
-            //dd($value->candidate_id);
+            //dd($value->id);
             $user = User::find($value->candidate_id);
-
+            if(Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('accepted_date', '<>', null)->exists())                
+                $interview1 = Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('accepted_date', '<>', null)->first();
+            else
+                $interview1 = Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->first();
+            
+                //dd('true');
+            $value->created_at = $interview1->created_at;
+            $value->accepted_date = $interview1->accepted_date;
             $value->name = $user->name.' '.$user->lastname;
             $profile = Profile::where('user_id', $value->candidate_id)->first();
             //dd($value->candidate_id, $profile);

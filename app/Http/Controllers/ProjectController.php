@@ -252,8 +252,8 @@ class ProjectController extends Controller
         Mail::to($user2['email'])->send(new Project_created($user2, $project));
         //dd('test');
 
-        Alert::success('Success', 'You have successfully created Client')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.index')->with('success', 'You have successfully created new client');
+        Alert::success('Success', 'You have successfully created Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('projects.index')->with('success', 'You have successfully created new Project');
     }
 
     /**
@@ -273,7 +273,7 @@ class ProjectController extends Controller
         if(!$project)
         {
             Alert::error('Error', 'Project not found')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-            return redirect()->route('projects.index')->with('success', 'You have successfully updated Client');
+            return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
         }
         
         $poc = User::find($project->poc);
@@ -497,8 +497,8 @@ class ProjectController extends Controller
         else            
             Mail::to('erg@ginisis.com')->send(new Project_editted($project));
 
-        Alert::success('Success', 'You have successfully updated Client')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.index')->with('success', 'You have successfully updated client');
+        Alert::success('Success', 'You have successfully updated Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('projects.index')->with('success', 'You have successfully updated Project');
     }
 
     /**
@@ -541,7 +541,7 @@ class ProjectController extends Controller
         //dd('wait');
         $project->delete();
 
-        Alert::success('Success', 'You have successfully deleted Client')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
-        return redirect()->route('projects.index')->with('success', 'You have successfully deleted Client');
+        Alert::success('Success', 'You have successfully deleted Project')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
+        return redirect()->route('projects.index')->with('success', 'You have successfully deleted Project');
     }
 }

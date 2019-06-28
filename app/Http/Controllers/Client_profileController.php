@@ -21,7 +21,7 @@ class Client_profileController extends Controller
     public function index()
     {
         //$profiles = Client_profile::all();
-        $profiles = User::permission('can create job')->get();
+        $profiles = User::role('Recuriter')->get(); 
         //dd($profiles);
         foreach ($profiles as $key => $value) 
         {

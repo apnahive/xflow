@@ -102,22 +102,6 @@
                                             2-5 Years
                                         <?php elseif($job['experience_years'] == 5): ?>
                                             5+ Years
-                                        <!-- <?php elseif($job['experience_years'] == 4): ?>
-                                            3 Years
-                                        <?php elseif($job['experience_years'] == 5): ?>
-                                            4 Years
-                                        <?php elseif($job['experience_years'] == 6): ?>
-                                            5 Years
-                                        <?php elseif($job['experience_years'] == 7): ?>
-                                            6 Years
-                                        <?php elseif($job['experience_years'] == 8): ?>
-                                            7 Years
-                                        <?php elseif($job['experience_years'] == 9): ?>
-                                            8 Years
-                                        <?php elseif($job['experience_years'] == 10): ?>
-                                            9 Years
-                                        <?php elseif($job['experience_years'] == 11): ?>
-                                            10 Years -->
                                         <?php else: ?>
                                             Not Selected
                                         <?php endif; ?>
@@ -278,10 +262,7 @@
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button></a>
                                             
-                                            <!-- <a href="<?php echo e(route('jobs.edit', $short->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Invite">
-                                                <i class="fas fa-user-plus"></i>
-                                                <!-- <i class="zmdi zmdi-edit"></i> 
-                                            </button></a> -->
+                                            
 
                                             <button class="item" data-toggle="modal" data-target="#interview<?php echo e($short->id); ?>" data-backdrop="false" title="Invite">
                                                 <i class="fas fa-user-plus"></i>
@@ -463,11 +444,7 @@
                                             </div>
                                             </form>
 
-                                            
-                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($short->id); ?>" data-backdrop="false">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button> -->
-
+                    
                                             
 
                                             <form action="<?php echo e(route('jobs.destroy', $short->id)); ?>" method="POST">
@@ -512,18 +489,12 @@
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
-                                        <!-- <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th> -->
+                    
                                         <th>Name</th> 
                                         <th>Experience level</th>
                                         <th>Skills</th>
                                         <th>Salary Expected</th>
-                                        <!-- <th>status</th>
-                                        <th>price</th> -->
+                    
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -531,12 +502,7 @@
                                     <?php $__currentLoopData = $interviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     
                                     <tr>
-                                        <!-- <td>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </td> -->
+                    
                                         <td><?php echo e($value->name); ?></td>
                                         <td><?php echo e($value->experience); ?></td>                        
                                         <td><?php echo e($value->skills); ?></td>                        
@@ -547,14 +513,7 @@
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>
                                                 
-                                                
-                                                                                
-
-
-
-                                                <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                    <i class="zmdi zmdi-more"></i>
-                                                </button> -->
+                    
                                             </div>
                                             
                                         </td>
@@ -566,7 +525,7 @@
                                               <li class="li complete">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Sent</span>
-                                                  <span class="date"><?php echo e($value->created_at->format('m/d/Y')); ?><span>
+                                                  <span class="date"><?php echo e($value->created_at); ?><span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Invite Sent </h5>
@@ -575,7 +534,7 @@
                                               <li class="li <?php if($value->accepted_date): ?> complete <?php endif; ?>">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Accepted</span>
-                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->accepted_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->accepted_date); ?> <?php else: ?> TBD <?php endif; ?><span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Interview Scheduled  </h5>
@@ -584,7 +543,7 @@
                                               <li class="li <?php if($value->accepted_date): ?> complete <?php endif; ?>">
                                                 <div class="timestamp">
                                                   <span class="author">Interviewed</span>
-                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->interview_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->interview_date); ?> <?php else: ?> TBD <?php endif; ?><span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Interview </h5>
@@ -593,7 +552,7 @@
                                               <li class="li <?php if($value->awarded): ?> complete <?php endif; ?>">
                                                 <div class="timestamp">
                                                   <span class="author">Feedback</span>
-                                                  <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->awarded_date->format('m/d/Y')); ?> <?php else: ?> TBD <?php endif; ?><span>
+                                                  <span class="date"><?php if($value->awarded): ?> <?php echo e($value->awarded_date); ?> <?php else: ?> TBD <?php endif; ?><span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Process Completed </h5>
@@ -618,31 +577,17 @@
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
-                                        <!-- <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th> -->
+                    
                                         <th style="width: 25%;">Name</th> 
                                         <th style="width: 75%;">Notes</th>
-                                        <!-- <th>Skills</th>
-                                        <th>Salary Expected</th> -->
-                                        <!-- <th>status</th>
-                                        <th>price</th> -->
-                                        <!-- <th></th> -->
+                    
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php if(count($notes) > 0): ?>
                                     <?php $__currentLoopData = $notes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="tr-shadow">
-                                        <!-- <td>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </td> -->
+                    
                                         <td style="width: 25%;"><?php echo e($value->name); ?></td>
                                         <td style="width: 75%;">
                                             <?php if($value->note_scheduled): ?>
@@ -664,15 +609,7 @@
                                             </div>    
 
                                         </td>                        
-                                        <!-- <td><?php echo e($value->skills); ?></td>                        
-                                        <td><?php echo e($value->salary_expected); ?></td>
-                                        <td>
-                                            <div class="table-data-feature">
-                                                <a href="<?php echo e(route('profiles.show', $value->candidate_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
-                                                    <i class="zmdi zmdi-mail-send"></i>
-                                                </button></a>
-                                            </div>
-                                        </td> -->
+                    
                                     </tr>
                                     <tr class="spacer"></tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -682,33 +619,7 @@
                             
                         </div>                        
                     </div>
-                    <!--<?php if($job->status == 1): ?>
-                    <div class="tab-pane fade" id="custom-nav-candidates" role="tabpanel" aria-labelledby="custom-nav-candidates-tab">
-                         <div class="table-responsive table-responsive-data2" style="margin-bottom: 0px;">
-                            <table class="table table-data2">
-                                <thead>
-                                    <tr>
-                                       
-                                        <th style="width: 25%;">Name</th> 
-                                        <th style="width: 75%;">Notes</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr class="tr-shadow">
-                                    
-                                                     
-                                        
-                                    </tr>
-                                    <tr class="spacer"></tr>
-                                    
-                                </tbody>
-                            </table>
-                            
-                        </div> 
-                    </div>
-                    <?php endif; ?> -->                       
+                    
                 </div>
 
             </div>

@@ -573,8 +573,10 @@
 
     //for city relocation    
     $(document).ready(function() {
+        $("#show-relocation").hide();
     $("input[name$='relocation']").click(function() {
         var test = $(this).val();
+        console.log(test);
         if(test == 1)
         $("#show-relocation").show();
         else
@@ -583,6 +585,9 @@
         $("#Cars" + test).show();*/
     });
 });
+    /*$(document).ready(function() {
+        $("#show-relocation").hide();
+    }*/
 
 </script>
 

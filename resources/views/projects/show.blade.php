@@ -17,7 +17,7 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link" id="custom-nav-project-tab" data-toggle="tab" href="#custom-nav-project" role="tab" aria-controls="custom-nav-project"
-                         aria-selected="true"><i class="fab fa-product-hunt"></i>Client</a>
+                         aria-selected="true"><i class="fab fa-product-hunt"></i>Project</a>
                         <a class="nav-item nav-link active" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-tasks"></i>Tasks</a>
                         <a class="nav-item nav-link {{ old('tab') == 'custom-nav-xflow' ? 'active' : '' }}" id="custom-nav-xflow-tab" data-toggle="tab" href="#custom-nav-xflow" role="tab" aria-controls="custom-nav-xflow"
@@ -319,7 +319,7 @@
                             
                                 </style> -->
 
-                            <h3 class="title-5 m-b-35">Add users to the Client</h3>
+                            <h3 class="title-5 m-b-35">Add users to the Project</h3>
                                 <link href="{{ asset('css/select.css') }}" rel="stylesheet">
 
                                 <form action="{{ route('project_users.update', $project['id']) }}" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -348,7 +348,7 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Update Users in Client
+                                <i class="fa fa-dot-circle-o"></i> Update Users in Project
                             </button>                
                         </form>
 

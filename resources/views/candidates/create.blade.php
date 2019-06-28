@@ -32,6 +32,9 @@
         color: white;
         padding: 1px 13px;
     }
+    /*#show-relocation {
+        display: none;
+    }*/
 </style>
 
 <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
@@ -380,7 +383,7 @@
                     </div>
                     </div>
                     <hr>
-
+                </div>
 
 
 
@@ -522,7 +525,7 @@
                     
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="salary_expected" class=" form-control-label">Salary Expected</label>
+                            <label for="salary_expected" class=" form-control-label">Salary Range</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <input type="text" id="salary_expected" name="salary_expected" placeholder="Salary Expected" class="form-control" required>
@@ -636,8 +639,10 @@
     });
     //for city relocation    
     $(document).ready(function() {
+        $("#show-relocation").hide();
     $("input[name$='relocation']").click(function() {
         var test = $(this).val();
+        console.log(test);
         if(test == 1)
         $("#show-relocation").show();
         else
@@ -645,5 +650,9 @@
         /*$("div.desc").hide();
         $("#Cars" + test).show();*/
     });
+
+});
+    
+
 </script>
 @endsection

@@ -87,22 +87,6 @@
                                             2-5 Years
                                         <?php elseif($job['experience_years'] == 5): ?>
                                             5+ Years
-                                        <!-- <?php elseif($job['experience_years'] == 4): ?>
-                                            3 Years
-                                        <?php elseif($job['experience_years'] == 5): ?>
-                                            4 Years
-                                        <?php elseif($job['experience_years'] == 6): ?>
-                                            5 Years
-                                        <?php elseif($job['experience_years'] == 7): ?>
-                                            6 Years
-                                        <?php elseif($job['experience_years'] == 8): ?>
-                                            7 Years
-                                        <?php elseif($job['experience_years'] == 9): ?>
-                                            8 Years
-                                        <?php elseif($job['experience_years'] == 10): ?>
-                                            9 Years
-                                        <?php elseif($job['experience_years'] == 11): ?>
-                                            10 Years -->
                                         <?php else: ?>
                                             Not Selected
                                         <?php endif; ?>

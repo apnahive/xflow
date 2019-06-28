@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Clients</h3>
+        <h3 class="title-5 m-b-35">Projects</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
                 <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -30,7 +30,7 @@
             <div class="table-data__tool-right">
                 <?php if($projects->can_create): ?>
                 <a href="<?php echo e(route('projects.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                    <i class="zmdi zmdi-plus"></i>Add New Client</button></a>
+                    <i class="zmdi zmdi-plus"></i>Add New Project</button></a>
                 <?php endif; ?>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">

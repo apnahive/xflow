@@ -184,7 +184,7 @@ class HomeController extends Controller
 
 
        //My tasks
-       $mytasks = Task::where('status', 1)->orderBy('duedate', 'ASC')->take(10)->get();
+       $mytasks = Task::where('status', 1)->where('assignee', $id1)->orderBy('duedate', 'ASC')->take(10)->get();
        //$mytasks = Task::where('assignee', $id1)->where('status', 1)->orderBy('duedate', 'ASC')->take(10)->get();
 
        foreach ($mytasks as $key => $value) {

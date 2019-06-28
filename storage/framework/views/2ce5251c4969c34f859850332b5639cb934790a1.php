@@ -82,6 +82,19 @@
                             <?php endif; ?>                            
                         </div>
                     </div>                    
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="benefits" class=" form-control-label">Benefits</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <textarea name="benefits" id="benefits" rows="3" placeholder="Benefits..." class="form-control" required></textarea>
+                            <?php if($errors->has('benefits')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('benefits')); ?></strong>
+                                </span>
+                            <?php endif; ?>                            
+                        </div>
+                    </div>                    
                     <!-- <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="experience_level" class=" form-control-label">Experience Level</label>
@@ -175,7 +188,7 @@
 
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="qualification" class=" form-control-label">Qualification And Education</label>
+                            <label for="qualification" class=" form-control-label">Education</label>
                         </div>
                         <div class="col-12 col-md-9">
                             <select name="qualification" id="qualification" class="custom-select form-control">
@@ -229,7 +242,7 @@
                             <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="due_date" type="date" class="form-control" name="due_date" value="<?php echo e(old('due_date')); ?>" required autofocus>
+                            <input id="due_date" type="date" class="form-control" name="due_date" value="<?php echo e(old('due_date')); ?>" required>
                             <?php if($errors->has('due_date')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('due_date')); ?></strong>
@@ -292,10 +305,10 @@
                     
                     <div class="row form-group">
                         <div class="col col-md-3">
-                            <label for="salary_offered" class=" form-control-label">Salary Offered</label>
+                            <label for="salary_offered" class=" form-control-label">Salary Range</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Offered" class="form-control" required>
+                            <input type="text" id="salary_offered" name="salary_offered" placeholder="Salary Range" class="form-control" required>
                             <?php if($errors->has('salary_offered')): ?>
                                 <span class="help-block error">
                                     <strong><?php echo e($errors->first('salary_offered')); ?></strong>

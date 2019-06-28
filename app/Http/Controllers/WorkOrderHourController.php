@@ -34,6 +34,8 @@ class WorkOrderHourController extends Controller
         $work_order_hour->work_order_id = $request->work_order;
         $work_order_hour->date = $request->date;
         $work_order_hour->hours = $request->hours;
+        $work_order_hour->status = 0;
+        $work_order_hour->comment = '';
         $work_order_hour->save();
         Alert::success('Success', 'You have successfully added hours to your Work Order')->showConfirmButton('Ok','#3085d6')->autoClose(15000);
         return redirect()->route('work_order_assign.index')->with('success', 'You have successfully added hours to Work Order');

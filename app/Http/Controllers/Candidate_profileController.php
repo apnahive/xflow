@@ -177,7 +177,7 @@ class Candidate_profileController extends Controller
             'certificate'=> 'numeric|min:1',
             'certification'=> 'required|max:191',
             'skills'=> 'required|max:191',
-            'salary_expected'=> 'numeric|min:1',
+            'salary_expected'=> 'required|max:191',
             ],
             [
                 'experience_level.min' => 'Please choose a Experience.',
@@ -208,6 +208,7 @@ class Candidate_profileController extends Controller
         $profile->city4 = $request->city4;
         $profile->qualification = $request->qualification;
         $profile->certificate = $request->certificate;
+        $profile->certification = $request->certification;
         $profile->skills = $request->skills;
         $profile->salary_expected = $request->salary_expected;
         $profile->user_id = $id1;
@@ -294,7 +295,7 @@ class Candidate_profileController extends Controller
             'certificate'=> 'numeric|min:1',
             'certification'=> 'required|max:191',
             'skills'=> 'required|max:191',
-            'salary_expected'=> 'numeric|min:1',
+            'salary_expected'=> 'required|max:191',
             ],
             [
                 'experience_level.min' => 'Please choose a Experience.',

@@ -105,22 +105,6 @@
                                             2-5 Years
                                         @elseif($job['experience_years'] == 5)
                                             5+ Years
-                                        <!-- @elseif($job['experience_years'] == 4)
-                                            3 Years
-                                        @elseif($job['experience_years'] == 5)
-                                            4 Years
-                                        @elseif($job['experience_years'] == 6)
-                                            5 Years
-                                        @elseif($job['experience_years'] == 7)
-                                            6 Years
-                                        @elseif($job['experience_years'] == 8)
-                                            7 Years
-                                        @elseif($job['experience_years'] == 9)
-                                            8 Years
-                                        @elseif($job['experience_years'] == 10)
-                                            9 Years
-                                        @elseif($job['experience_years'] == 11)
-                                            10 Years -->
                                         @else
                                             Not Selected
                                         @endif
@@ -276,10 +260,7 @@
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button></a>
                                             
-                                            <!-- <a href="{{ route('jobs.edit', $short->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Invite">
-                                                <i class="fas fa-user-plus"></i>
-                                                <!-- <i class="zmdi zmdi-edit"></i> 
-                                            </button></a> -->
+                                            
 
                                             <button class="item" data-toggle="modal" data-target="#interview{{$short->id}}" data-backdrop="false" title="Invite">
                                                 <i class="fas fa-user-plus"></i>
@@ -461,11 +442,7 @@
                                             </div>
                                             </form>
 
-                                            
-                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm{{$short->id}}" data-backdrop="false">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button> -->
-
+                    
                                             
 
                                             <form action="{{ route('jobs.destroy', $short->id) }}" method="POST">
@@ -510,18 +487,12 @@
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
-                                        <!-- <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th> -->
+                    
                                         <th>Name</th> 
                                         <th>Experience level</th>
                                         <th>Skills</th>
                                         <th>Salary Expected</th>
-                                        <!-- <th>status</th>
-                                        <th>price</th> -->
+                    
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -529,12 +500,7 @@
                                     @foreach ($interviews as $key => $value)
                                     
                                     <tr>
-                                        <!-- <td>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </td> -->
+                    
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->experience }}</td>                        
                                         <td>{{ $value->skills }}</td>                        
@@ -545,14 +511,7 @@
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>
                                                 
-                                                
-                                                                                
-
-
-
-                                                <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                    <i class="zmdi zmdi-more"></i>
-                                                </button> -->
+                    
                                             </div>
                                             
                                         </td>
@@ -564,7 +523,7 @@
                                               <li class="li complete">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Sent</span>
-                                                  <span class="date">{{ $value->created_at->format('m/d/Y') }}<span>
+                                                  <span class="date">{{ $value->created_at }}<span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Invite Sent </h5>
@@ -573,7 +532,7 @@
                                               <li class="li @if($value->accepted_date) complete @endif">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Accepted</span>
-                                                  <span class="date">@if($value->accepted_date) {{ $value->accepted_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                  <span class="date">@if($value->accepted_date) {{ $value->accepted_date }} @else TBD @endif<span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Interview Scheduled  </h5>
@@ -582,7 +541,7 @@
                                               <li class="li @if($value->accepted_date) complete @endif">
                                                 <div class="timestamp">
                                                   <span class="author">Interviewed</span>
-                                                  <span class="date">@if($value->accepted_date) {{ $value->interview_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                  <span class="date">@if($value->accepted_date) {{ $value->interview_date }} @else TBD @endif<span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Interview </h5>
@@ -591,7 +550,7 @@
                                               <li class="li @if($value->awarded) complete @endif">
                                                 <div class="timestamp">
                                                   <span class="author">Feedback</span>
-                                                  <span class="date">@if($value->accepted_date) {{ $value->awarded_date->format('m/d/Y') }} @else TBD @endif<span>
+                                                  <span class="date">@if($value->awarded) {{ $value->awarded_date }} @else TBD @endif<span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Process Completed </h5>
@@ -616,31 +575,17 @@
                             <table class="table table-data2">
                                 <thead>
                                     <tr>
-                                        <!-- <th>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </th> -->
+                    
                                         <th style="width: 25%;">Name</th> 
                                         <th style="width: 75%;">Notes</th>
-                                        <!-- <th>Skills</th>
-                                        <th>Salary Expected</th> -->
-                                        <!-- <th>status</th>
-                                        <th>price</th> -->
-                                        <!-- <th></th> -->
+                    
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if(count($notes) > 0)
                                     @foreach ($notes as $key => $value)
                                     <tr class="tr-shadow">
-                                        <!-- <td>
-                                            <label class="au-checkbox">
-                                                <input type="checkbox">
-                                                <span class="au-checkmark"></span>
-                                            </label>
-                                        </td> -->
+                    
                                         <td style="width: 25%;">{{ $value->name }}</td>
                                         <td style="width: 75%;">
                                             @if($value->note_scheduled)
@@ -662,15 +607,7 @@
                                             </div>    
 
                                         </td>                        
-                                        <!-- <td>{{ $value->skills }}</td>                        
-                                        <td>{{ $value->salary_expected }}</td>
-                                        <td>
-                                            <div class="table-data-feature">
-                                                <a href="{{ route('profiles.show', $value->candidate_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
-                                                    <i class="zmdi zmdi-mail-send"></i>
-                                                </button></a>
-                                            </div>
-                                        </td> -->
+                    
                                     </tr>
                                     <tr class="spacer"></tr>
                                     @endforeach
@@ -680,33 +617,7 @@
                             
                         </div>                        
                     </div>
-                    <!--@if($job->status == 1)
-                    <div class="tab-pane fade" id="custom-nav-candidates" role="tabpanel" aria-labelledby="custom-nav-candidates-tab">
-                         <div class="table-responsive table-responsive-data2" style="margin-bottom: 0px;">
-                            <table class="table table-data2">
-                                <thead>
-                                    <tr>
-                                       
-                                        <th style="width: 25%;">Name</th> 
-                                        <th style="width: 75%;">Notes</th>
-                                       
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                    <tr class="tr-shadow">
-                                    
-                                                     
-                                        
-                                    </tr>
-                                    <tr class="spacer"></tr>
-                                    
-                                </tbody>
-                            </table>
-                            
-                        </div> 
-                    </div>
-                    @endif -->                       
+                    
                 </div>
 
             </div>

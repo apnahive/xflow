@@ -210,21 +210,20 @@ class XflowController extends Controller
             'duedate'=> 'required|date',
             'startdate'=> 'required|date',
             'assign'=> 'numeric|min:1',
-            'assign-team'=> 'numeric|min:1',             
+            'assignteam'=> 'numeric|min:1',             
             ],
             [
                 'assign.min' => 'Please choose a user.',
                 'assignteam.min' => 'Please choose a Team.',                
             ]
         );
-
         $id1 = Auth::id();
 
         $xflow = new Xflow;        
         $xflow->title = $request->title;
         $xflow->description = $request->description;
         $xflow->assignee = $request->assign;
-        $xflow->team_id = $request->assignteam;
+        $xflow->team_id = $request->assignteam; 
         $xflow->duedate = $request->duedate;
         $xflow->startdate = $request->startdate;  
         //status to be pending, initiated, inwork, finishing, complete      

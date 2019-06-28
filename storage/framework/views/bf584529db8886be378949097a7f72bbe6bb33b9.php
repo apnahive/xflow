@@ -4,7 +4,7 @@
 <div class="row" style="margin-bottom: 100px;">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Add Tasks to Client</h3>
+        <h3 class="title-5 m-b-35">Add Tasks to Project</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
                 <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
@@ -77,7 +77,7 @@
             <div class="form-group">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-info">
-                            Add to Client
+                            Add to Project
                         </button>
                     </div>
                 </div>
