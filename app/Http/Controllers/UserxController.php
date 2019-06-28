@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Job;
 use Auth; 
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Form_sign;
@@ -225,9 +226,52 @@ class UserxController extends Controller
         $tasks->remaining = $other_task;
 
 
+        // Jobs
+        $userrole = $user1->hasRole('Recuriter');
+        //dd($userrole);
+        $jobs = Job::where('user_id', $id)->get();
+        $jobs->role = $userrole;
+        /*$profile_exist = Profile::select('user_id')->get();
+        $candidates = User::whereIn('id', $profile_exist)->get();*/
+
+        foreach ($jobs as $jobkey => $value) 
+        {
+            switch ($value->experience_years) 
+            {
+                case '1':
+                    $value->experience = '0-2 Years';
+                    break;
+                case '2':
+                    $value->experience = '2-5 Years';
+                    break;
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
+            }
+            switch ($value->qualification) 
+            {
+                case '1':
+                    $value->qualifications = 'Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'Post Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'PHD';
+                    break;
+                case '1':
+                    $value->qualifications = 'No College Degree';
+                    break;
+                case '1':
+                    $value->qualifications = 'Diploma';
+                    break;
+            }
+        }
+
+
 
         //dd($project_users);
-        return view('userx.show', compact('user1', 'signed', 'status', 'project_users', 'tasks', 'poc', 'cco'));
+        return view('userx.show', compact('user1', 'signed', 'status', 'project_users', 'tasks', 'poc', 'cco', 'jobs'));
     }
 
     /**

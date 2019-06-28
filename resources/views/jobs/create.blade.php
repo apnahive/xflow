@@ -241,7 +241,7 @@
                             <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="due_date" type="date" class="form-control" name="due_date" value="{{ old('due_date') }}" required autofocus>
+                            <input id="due_date" type="date" class="form-control" name="due_date" value="{{ old('due_date') }}" required>
                             @if ($errors->has('due_date'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('due_date') }}</strong>

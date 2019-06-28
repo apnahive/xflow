@@ -205,9 +205,29 @@ class HomeController extends Controller
        foreach ($myinterviews as $key => $value) 
        {
            $user = User::find($value->candidate_id);
-
+           $job = Job::find($value->job_id);
+            $value->job = $job->title;
             $value->name = $user->name.' '.$user->lastname;
-       }
+       } 
+
+       $invites = Interview_schedule::select('job_id')->distinct()->get();
+        foreach ($invites as $key => $value) 
+        {
+            $job = Job::find($value->job_id);
+            $value->job = $job->title;
+            /*switch ($job->experience_level) 
+            {
+                case '1':
+                    $value->experience = 'Entry Level';
+                    break;
+                case '2':
+                    $value->experience = 'Inermediate Level';
+                    break;
+                case '3':
+                    $value->experience = 'Expert Level';
+                    break;
+            }*/
+        }
 
        //jobs whose date is past due date
 
@@ -223,6 +243,6 @@ class HomeController extends Controller
         $ajobs = Job::where('status', '=', 0)->get();
         $anewjobs = Job::where('status', '=', 0)->whereBetween('created_at', array($now30, $now))->get();
         //dd($interviews, $job);
-        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs', 'anewjobs')); 
+        return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs', 'anewjobs','invites')); 
     }
 }

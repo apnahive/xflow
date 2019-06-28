@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Job;
 use App\Form_sign;
 use App\Project;
 use App\Project_form;
@@ -14,6 +15,7 @@ use App\User_form;
 use App\Form_section;
 use App\Form_initial;
 use App\Project_user;
+use App\Client_profile;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 use File;
@@ -63,11 +65,50 @@ class ProfileController extends Controller
                 $poc = User::find($project_name->poc);
                 $value1->pocname = $poc->name;
                 $cco = User::find($project_name->cco);
-                $value1->cconame = $cco->name;
+                $value1->cconame = $cco->name; 
             }
         }
-        //dd($signed);
-        return view('profile.index', compact('user1', 'signed', 'status', 'project_users'));
+
+        $jobs = Job::where('user_id', $id1)->get();
+        /*$profile_exist = Profile::select('user_id')->get();
+        $candidates = User::whereIn('id', $profile_exist)->get();*/
+
+        foreach ($jobs as $jobkey => $value) 
+        {
+            switch ($value->experience_years) 
+            {
+                case '1':
+                    $value->experience = '0-2 Years';
+                    break;
+                case '2':
+                    $value->experience = '2-5 Years';
+                    break;
+                case '5':
+                    $value->experience = '5+ Years';
+                    break;            
+            }
+            switch ($value->qualification) 
+            {
+                case '1':
+                    $value->qualifications = 'Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'Post Graduate';
+                    break;
+                case '1':
+                    $value->qualifications = 'PHD';
+                    break;
+                case '1':
+                    $value->qualifications = 'No College Degree';
+                    break;
+                case '1':
+                    $value->qualifications = 'Diploma';
+                    break;
+            }
+        }
+        $details = Client_profile::where('user_id', $id1)->first();
+        //dd($details);
+        return view('profile.index', compact('user1', 'signed', 'status', 'project_users', 'jobs', 'details'));
     }
 
     /**

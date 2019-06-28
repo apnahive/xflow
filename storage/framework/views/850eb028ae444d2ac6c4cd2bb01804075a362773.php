@@ -63,6 +63,14 @@
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label"><?php echo e($job->requirements); ?></label>
                                 </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="benefits" class=" form-control-label"><b>Benefits</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="benefits" class=" form-control-label"><?php echo e($job->benefits); ?></label>
+                                </div>
                             </div>                    
                             <!-- <div class="row form-group">
                                 <div class="col col-md-3">

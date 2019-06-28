@@ -214,8 +214,9 @@
                             <?php endif; ?> 
                         </div>
                     </div>
-                    <!-- <h5>City ready to re-location:</h5> -->
-                    <!-- <hr> 
+                    <div id="show-relocation">
+                    <h5>Choose City ready to re-location:</h5>
+                    <hr> 
                     <div style="display: flex;">
                     <div class="col-md-6">
                     <h6><b>Option 1</b></h6>
@@ -382,7 +383,8 @@
                     </div>
                     </div>
                     </div>
-                    <hr> -->
+                    <hr>
+                    </div>
 
 
 
@@ -442,7 +444,21 @@
                          
                     </div>
 
-                   
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="certification" class=" form-control-label">Certifications</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <div id="tags">
+                            <input type="text" id="certification" name="certification" placeholder="certification" class="form-control" value="<?php echo e(old('certification', $profile['certification'])); ?>" data-role="tagsinput" required>
+                            </div>
+                            <?php if($errors->has('certification')): ?>
+                                <span class="help-block error">
+                                    <strong><?php echo e($errors->first('certification')); ?></strong>
+                                </span>
+                            <?php endif; ?>                            
+                        </div>
+                    </div>                   
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="skills" class=" form-control-label">Skills</label>
@@ -554,6 +570,20 @@
              //$(".chosen").chosen(); 
         });
     });
+
+    //for city relocation    
+    $(document).ready(function() {
+    $("input[name$='relocation']").click(function() {
+        var test = $(this).val();
+        if(test == 1)
+        $("#show-relocation").show();
+        else
+        $("#show-relocation").hide();
+        /*$("div.desc").hide();
+        $("#Cars" + test).show();*/
+    });
+});
+
 </script>
 
 <?php $__env->stopSection(); ?>

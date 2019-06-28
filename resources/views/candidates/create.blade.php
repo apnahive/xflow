@@ -210,7 +210,8 @@
                             @endif 
                         </div>
                     </div>
-                    <!-- <h5>City ready to re-location:</h5>
+                    <div id="show-relocation">
+                    <h5>Choose City ready to re-location:</h5>
                     <hr> 
                     <div style="display: flex;">
                     <div class="col-md-6">
@@ -378,7 +379,7 @@
                     </div>
                     </div>
                     </div>
-                    <hr> -->
+                    <hr>
 
 
 
@@ -488,6 +489,21 @@
                           width:auto;
                         }
                     </style> -->
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="certification" class=" form-control-label">Certifications</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <div id="tags">
+                            <input type="text" id="certification" name="certification" placeholder="certification" class="form-control" data-role="tagsinput" required>
+                            </div>
+                            @if ($errors->has('certification'))
+                                <span class="help-block error">
+                                    <strong>{{ $errors->first('certification') }}</strong>
+                                </span>
+                            @endif                            
+                        </div>
+                    </div>
                     <div class="row form-group">
                         <div class="col col-md-3">
                             <label for="skills" class=" form-control-label">Skills</label>
@@ -617,6 +633,17 @@
             });
              //$(".chosen").chosen(); 
         });
+    });
+    //for city relocation    
+    $(document).ready(function() {
+    $("input[name$='relocation']").click(function() {
+        var test = $(this).val();
+        if(test == 1)
+        $("#show-relocation").show();
+        else
+        $("#show-relocation").hide();
+        /*$("div.desc").hide();
+        $("#Cars" + test).show();*/
     });
 </script>
 @endsection

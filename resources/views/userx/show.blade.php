@@ -25,6 +25,10 @@
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
                         <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-check-square"></i>Status</a>
+                         @if($jobs->role)
+                         <a class="nav-item nav-link" id="custom-nav-job-tab" data-toggle="tab" href="#custom-nav-job" role="tab" aria-controls="custom-nav-job"
+                         aria-selected="true"><i class="fa fa-briefcase"></i>Jobs</a>
+                         @endif
                     </div>
                 </nav>
                 <div class="tab-content pl-3 pt-2" id="nav-tabContent">
@@ -288,7 +292,122 @@
                         </div> 
                         
                         
-                    </div>                    
+                    </div>
+
+                    @if($jobs->role)
+                    <div class="tab-pane fade" id="custom-nav-job" role="tabpanel" aria-labelledby="custom-nav-task-job">
+                        <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
+                        <table class="table table-data2">
+                            <thead>
+                                <tr>
+                                    <!-- <th>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </th> -->
+                                    <th><a href="{{ route('jobs.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="{{ route('jobs.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
+                                    <th>Experience level</th>
+                                    <th>Skills</th>
+                                    <th>Status</th>
+                                    <!-- <th>status</th>
+                                    <th>price</th> -->
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jobs as $jobkey => $job)
+                                
+                                <tr class="tr-shadow">
+                                    <!-- <td>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </td> -->
+                                    <td>{{ $job->title }}</td>
+                                    <td>{{ $job->experience }}</td>                        
+                                    <td>{{ $job->skills }}</td>                        
+                                    <td>
+                                        @if($job->status == 0)
+                                            Pending Award
+                                        @else
+                                            Awarded
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="table-data-feature">
+
+                                            @if($job->status == 1)
+                                            <span></span>
+                                            @else
+                                            <!-- <button class="item" data-toggle="modal" data-target="#status{{$job->id}}" data-backdrop="false">
+                                                <i class="fas fa-location-arrow" data-toggle="tooltip" data-placement="top" title="Change Status"></i>
+                                            </button> -->
+                                            @endif
+                                            
+                                            
+
+
+
+                                            <a href="{{ route('jobs.show', $job->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                <i class="zmdi zmdi-mail-send"></i>
+                                            </button></a>
+                                            
+                                            <a href="{{ route('jobs.edit', $job->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button></a>
+                                            
+                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm{{$job->id}}" data-backdrop="false">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button> -->
+
+                                            
+
+                                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            
+                                            <div class="modal fade" id="confirm{{$job->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$job->id}}" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content" style="text-align: left;">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Job</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    You are going to delete Job. All the associated records will be deleted. You won't be able to revert these changes!
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Job</button>
+                                                    <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            </form>
+                                            
+
+
+
+                                            <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                                <i class="zmdi zmdi-more"></i>
+                                            </button> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                    </div>
+                    @endif
                 </div>
 
             </div>

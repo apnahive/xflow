@@ -388,7 +388,7 @@
 
             <section class="welcome p-t-10 col-md-6">
                 <!-- Big and pending award removed -->
-                
+                @can('can create job')
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
@@ -423,6 +423,42 @@
                      </div>
                  </div>
                 </div>
+                @endrole
+                @can('can apply job')
+                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                 <div class="container">
+                     <div class="row">
+                        <div class="col-md-12">
+                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
+                                <table class="table table-data2">
+                                    <!-- <thead>
+                                        <tr>
+                                            <th>Consultant</th>
+                                            <th>CCO</th>
+                                            <th>Contract Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead> -->
+                                    <tbody>
+                                        @if(count($invites) > 0)
+                                        @foreach ($invites as $key => $value)
+                                        <tr class="tr-shadow">
+                                            <td><a href="{{ route('interviewed.show', $value->job_id) }}">{{ $value->job }}</a></td>
+                                        </tr>
+                                        <tr class="spacer"></tr>
+                                        @endforeach
+                                        @else
+                                            <div style="text-align: center;margin-top: 10px;">No Jobs Posted</div>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                     </div>
+                 </div>
+                </div>
                  <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
@@ -436,13 +472,13 @@
                                             <th>CCO</th>
                                             <th>Contract Date</th>
                                             <th></th>
-                                        </tr>
+                                        </tr> 
                                     </thead> -->
                                     <tbody>
                                         @if(count($myinterviews) > 0)
                                         @foreach ($myinterviews as $key => $value)
                                         <tr class="tr-shadow">
-                                            <td><a href="{{ route('profiles.show', $value->candidate_id) }}">{{ $value->name }}</a></td>
+                                            <td><a href="{{ route('interviewed.show', $value->job_id) }}">{{ $value->job }}</a></td>
                                         </tr>
                                         <tr class="spacer"></tr>
                                         @endforeach
@@ -457,7 +493,10 @@
                      </div>
                  </div>
                 </div>
-                <div class="page-content--bgf7" style="margin-bottom: 30px;">
+                @endcan
+
+
+                <!-- <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
@@ -487,7 +526,7 @@
                         </div>
                      </div>
                  </div>
-                </div>
+                </div> -->
              </section>
              </div>
 

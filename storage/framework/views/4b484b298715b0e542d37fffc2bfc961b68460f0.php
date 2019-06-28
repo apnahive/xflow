@@ -1,8 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
                     
 <div class="col-lg-12" style="margin-bottom: 100px;">
@@ -17,18 +15,18 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="custom-nav-users-tab" data-toggle="tab" href="#custom-nav-users" role="tab" aria-controls="custom-nav-users"
                          aria-selected="false"><i class="fas fa-users"></i>Users</a>
-                         @role('x-flow')
+                         <?php if(auth()->check() && auth()->user()->hasRole('x-flow')): ?>
                         <a class="nav-item nav-link" id="custom-nav-project-tab" data-toggle="tab" href="#custom-nav-project" role="tab" aria-controls="custom-nav-project"
                          aria-selected="true"><i class="fab fa-product-hunt"></i>Project</a>
                         <a class="nav-item nav-link" id="custom-nav-files-tab" data-toggle="tab" href="#custom-nav-files" role="tab" aria-controls="custom-nav-files"
                          aria-selected="false"><i class="fas fa-copy"></i>Files</a>
                         <a class="nav-item nav-link" id="custom-nav-task-tab" data-toggle="tab" href="#custom-nav-task" role="tab" aria-controls="custom-nav-task"
                          aria-selected="false"><i class="fas fa-check-square"></i>Status</a>
-                         @endrole
-                         @role('Recuriter')
+                         <?php endif; ?>
+                         <?php if(auth()->check() && auth()->user()->hasRole('Recuriter')): ?>
                          <a class="nav-item nav-link" id="custom-nav-job-tab" data-toggle="tab" href="#custom-nav-job" role="tab" aria-controls="custom-nav-job"
                          aria-selected="true"><i class="fa fa-briefcase"></i>Jobs</a>
-                         @endrole
+                         <?php endif; ?>
                          
                     </div>
                 </nav>
@@ -41,7 +39,7 @@
                                         <label class="form-control-label"><b>Name</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->name }} {{ $user1->lastname }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->name); ?> <?php echo e($user1->lastname); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -49,7 +47,7 @@
                                         <label class="form-control-label"><b>Email</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +57,7 @@
                                         <label class="form-control-label"><b>User Type</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->user_type }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->user_type); ?></label>
                                     </div>
                                 </div>
                                 <div class="row col-lg-6">
@@ -67,7 +65,7 @@
                                         <label class="form-control-label"><b>Date of Birth</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->dateofbirth }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->dateofbirth); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -79,17 +77,20 @@
                                     <div class="col-md-9">
                                         <label class=" form-control-label">
                                             
-                                            @if($details)
+                                            <?php if($details): ?>
                                             {
-                                                @if($details->company_name) 
-                                                {{ $details->company_name }}
-                                                @else
-                                                {{ $user1->company }}
-                                                @endif
+                                                <?php if($details->company_name): ?> 
+                                                <?php echo e($details->company_name); ?>
+
+                                                <?php else: ?>
+                                                <?php echo e($user1->company); ?>
+
+                                                <?php endif; ?>
                                             }                                            
-                                            @else
-                                            {{ $user1->company }}
-                                            @endif
+                                            <?php else: ?>
+                                            <?php echo e($user1->company); ?>
+
+                                            <?php endif; ?>
                                         </label>
                                     </div>
                                 </div>
@@ -98,7 +99,7 @@
                                         <label class="form-control-label"><b>Orgnization</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->organization }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->organization); ?></label>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +109,7 @@
                                         <label class="form-control-label"><b>Phone Number</b></label>
                                     </div>
                                     <div class="col-md-9">
-                                        <label class=" form-control-label">{{ $user1->phonenumber }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->phonenumber); ?></label>
                                     </div>
                                 </div>
                                 <!-- <div class="row col-lg-6">
@@ -116,7 +117,7 @@
                                         <label class="form-control-label"><b>Status</b></label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <label class=" form-control-label">{{ $user1->email }}</label>
+                                        <label class=" form-control-label"><?php echo e($user1->email); ?></label>
                                     </div>
                                 </div> -->
                             </div>
@@ -124,7 +125,7 @@
                             
                         </div>                        
                     </div>
-                    @role('x-flow')
+                    <?php if(auth()->check() && auth()->user()->hasRole('x-flow')): ?>
                     <div class="tab-pane fade" id="custom-nav-project" role="tabpanel" aria-labelledby="custom-nav-project-tab">
                         <div class="table-responsive table-responsive-data2">
                             <table class="table table-data2">
@@ -140,7 +141,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($project_users as $project_userkey => $user1)                    
+                                    <?php $__currentLoopData = $project_users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project_userkey => $user1): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>                    
                                     <tr class="tr-shadow">
                                         <!-- <td>
                                             <label class="au-checkbox">
@@ -148,19 +149,19 @@
                                                 <span class="au-checkmark"></span>
                                             </label>
                                         </td> -->
-                                        <td>{{ $user1->name }}</td>
-                                        <td>{{ $user1->pocname }}</td>                        
-                                        <td>{{ $user1->cconame }}</td>                        
-                                        <td>{{ $user1->duedate }}</td>
+                                        <td><?php echo e($user1->name); ?></td>
+                                        <td><?php echo e($user1->pocname); ?></td>                        
+                                        <td><?php echo e($user1->cconame); ?></td>                        
+                                        <td><?php echo e($user1->duedate); ?></td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <a href="{{ route('projects.show', $user1->project_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                                <a href="<?php echo e(route('projects.show', $user1->project_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                 </button></a>                                                
                                             </div>
                                         </td>
                                     </tr>                                    
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>                        
@@ -175,9 +176,9 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label class=" form-control-label">
-                                        @foreach ($signed as $key => $value)
-                                        <a href="{{ route('profile.show', $value['id']) }}" target="_blank">Download {{ $value->project }} Signed Document</a><br>
-                                        @endforeach
+                                        <?php $__currentLoopData = $signed; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="<?php echo e(route('profile.show', $value['id'])); ?>" target="_blank">Download <?php echo e($value->project); ?> Signed Document</a><br>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </label>
                                 </div>
                                 
@@ -196,26 +197,28 @@
                                 </div>
                                 <div class="col-md-9">
                                     <label style="width: 50%;">
-                                        @if(count($status) > 0)
-                                        @foreach ($status as $key => $value)
-                                            @if($value->status)
+                                        <?php if(count($status) > 0): ?>
+                                        <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($value->status): ?>
                                                 <div class="alert alert-success col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>
-                                            @else
+                                            <?php else: ?>
                                                 <div class="alert alert-secondary col-md-12" role="alert">
-                                                    {{ $value->name }}
+                                                    <?php echo e($value->name); ?>
+
                                                 </div>                                            
-                                            @endif
-                                        @endforeach
-                                        @endif
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endrole
-                    @role('Recuriter')
+                    <?php endif; ?>
+                    <?php if(auth()->check() && auth()->user()->hasRole('Recuriter')): ?>
                     <div class="tab-pane fade" id="custom-nav-job" role="tabpanel" aria-labelledby="custom-nav-task-job">
                         <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
                         <table class="table table-data2">
@@ -227,7 +230,7 @@
                                             <span class="au-checkmark"></span>
                                         </label>
                                     </th> -->
-                                    <th><a href="{{ route('jobs.sort', ['title', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="{{ route('jobs.sort', ['title', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
+                                    <th><a href="<?php echo e(route('jobs.sort', ['title', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Title <a href="<?php echo e(route('jobs.sort', ['title', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th> 
                                     <th>Experience level</th>
                                     <th>Skills</th>
                                     <th>Status</th>
@@ -237,7 +240,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($jobs as $jobkey => $job)
+                                <?php $__currentLoopData = $jobs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $jobkey => $job): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 
                                 <tr class="tr-shadow">
                                     <!-- <td>
@@ -246,50 +249,50 @@
                                             <span class="au-checkmark"></span>
                                         </label>
                                     </td> -->
-                                    <td>{{ $job->title }}</td>
-                                    <td>{{ $job->experience }}</td>                        
-                                    <td>{{ $job->skills }}</td>                        
+                                    <td><?php echo e($job->title); ?></td>
+                                    <td><?php echo e($job->experience); ?></td>                        
+                                    <td><?php echo e($job->skills); ?></td>                        
                                     <td>
-                                        @if($job->status == 0)
+                                        <?php if($job->status == 0): ?>
                                             Pending Award
-                                        @else
+                                        <?php else: ?>
                                             Awarded
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <div class="table-data-feature">
 
-                                            @if($job->status == 1)
+                                            <?php if($job->status == 1): ?>
                                             <span></span>
-                                            @else
-                                            <!-- <button class="item" data-toggle="modal" data-target="#status{{$job->id}}" data-backdrop="false">
+                                            <?php else: ?>
+                                            <!-- <button class="item" data-toggle="modal" data-target="#status<?php echo e($job->id); ?>" data-backdrop="false">
                                                 <i class="fas fa-location-arrow" data-toggle="tooltip" data-placement="top" title="Change Status"></i>
                                             </button> -->
-                                            @endif
+                                            <?php endif; ?>
                                             
                                             
 
 
 
-                                            <a href="{{ route('jobs.show', $job->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                            <a href="<?php echo e(route('jobs.show', $job->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button></a>
                                             
-                                            <a href="{{ route('jobs.edit', $job->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <a href="<?php echo e(route('jobs.edit', $job->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button></a>
                                             
-                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm{{$job->id}}" data-backdrop="false">
+                                            <!-- <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($job->id); ?>" data-backdrop="false">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button> -->
 
                                             
 
-                                            <form action="{{ route('jobs.destroy', $job->id) }}" method="POST">
+                                            <form action="<?php echo e(route('jobs.destroy', $job->id)); ?>" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                             
-                                            <div class="modal fade" id="confirm{{$job->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$job->id}}" aria-hidden="true">
+                                            <div class="modal fade" id="confirm<?php echo e($job->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($job->id); ?>" aria-hidden="true">
                                               <div class="modal-dialog" role="document">
                                                 <div class="modal-content" style="text-align: left;">
                                                   <div class="modal-header">
@@ -321,14 +324,14 @@
                                 </tr>
                                 <tr class="spacer"></tr>
                                 
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </tbody>
                         </table>
                         
                     </div>
                     </div>
-                    @endrole        
+                    <?php endif; ?>        
                 </div>
 
             </div>
@@ -336,4 +339,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

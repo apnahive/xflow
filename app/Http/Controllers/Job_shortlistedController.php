@@ -73,16 +73,20 @@ class Job_shortlistedController extends Controller
             $points = 0;
             //location
             //location comnted on location requirement change
-            /*if($job->state == $profile->state1 && $job->city == $profile->city1)
-                $points = $points + 1;
-            elseif($job->state == $profile->state2 && $job->city == $profile->city2)
-                $points = $points + 1;
-            elseif($job->state == $profile->state3 && $job->city == $profile->city3)
-                $points = $points + 1;
-            elseif($job->state == $profile->state4 && $job->city == $profile->city4)
-                $points = $points + 1;
-            else
-            {}*/
+            if ($profile->relocation == 1) 
+            {
+                if($job->state == $profile->state1 && $job->city == $profile->city1)
+                    $points = $points + 1;
+                elseif($job->state == $profile->state2 && $job->city == $profile->city2)
+                    $points = $points + 1;
+                elseif($job->state == $profile->state3 && $job->city == $profile->city3)
+                    $points = $points + 1;
+                elseif($job->state == $profile->state4 && $job->city == $profile->city4)
+                    $points = $points + 1;
+                else
+                {}
+            }
+            
             //skills
             $cskills = explode(', ', $profile->skills);
             $jskills = explode(', ', $job->skills);

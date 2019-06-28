@@ -38,13 +38,29 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="description" class=" form-control-label"><b>Description</b></label>
+                                    <label for="description" class=" form-control-label"><b>Responsibilities</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="description" class=" form-control-label">{{ $job->description }}</label>
                                 </div>
                             </div>                    
                             <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="description" class=" form-control-label"><b>Requirements</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="description" class=" form-control-label">{{ $job->requirements }}</label>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="benefits" class=" form-control-label"><b>Benefits</b></label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="benefits" class=" form-control-label">{{ $job->benefits }}</label>
+                                </div>
+                            </div>                    
+                            <!-- <div class="row form-group">
                                 <div class="col col-md-3">
                                     <label for="poc" class=" form-control-label"><b>Experience Level</b></label>
                                 </div>
@@ -61,20 +77,20 @@
                                         @endif
                                     </label>
                                 </div>
-                            </div>                    
+                            </div>                     -->
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="cco" class=" form-control-label"><b>CCO</b></label>
+                                    <label for="cco" class=" form-control-label"><b>Years of Experience</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="cco" class=" form-control-label">
                                         @if($job['experience_years'] == 1)
-                                            0 Years
+                                            0-2 Years
                                         @elseif($job['experience_years'] == 2)
-                                            1 Years
-                                        @elseif($job['experience_years'] == 3)
-                                            2 Years
-                                        @elseif($job['experience_years'] == 4)
+                                            2-5 Years
+                                        @elseif($job['experience_years'] == 5)
+                                            5+ Years
+                                        <!-- @elseif($job['experience_years'] == 4)
                                             3 Years
                                         @elseif($job['experience_years'] == 5)
                                             4 Years
@@ -89,7 +105,7 @@
                                         @elseif($job['experience_years'] == 10)
                                             9 Years
                                         @elseif($job['experience_years'] == 11)
-                                            10 Years
+                                            10 Years -->
                                         @else
                                             Not Selected
                                         @endif
@@ -118,7 +134,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Qualification And Education</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Education</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -140,7 +156,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Certificate</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Field</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
@@ -172,11 +188,11 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
-                                    <label for="duedate" class=" form-control-label"><b>Start Date</b></label>
+                                    <label for="duedate" class=" form-control-label"><b>Due Date</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="duedate" class=" form-control-label">
-                                        {{ $job['start_date'] }}
+                                        {{ $job['due_date'] }}
                                     </label>
                                 </div>
                             </div>

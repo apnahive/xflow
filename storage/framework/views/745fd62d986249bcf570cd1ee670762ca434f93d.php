@@ -249,7 +249,7 @@
                                     <?php endif; ?> 
                                 </div>
                             </div>
-                            <!-- <h5>City ready to re-location:</h5>
+                            <h5>City ready to re-location:</h5>
                             <hr>
                             <div class="col-md-12">
                             <h6><b>Option 1</b></h6>
@@ -304,7 +304,7 @@
                             </div>                    
                             </div>
                             
-                            <hr> -->
+                            <hr>
 
                             
 
@@ -360,6 +360,15 @@
                                     <?php endif; ?>
                                 </div>
                                  
+                            </div>
+                            <div class="row form-group">
+                                <div class="col col-md-3">
+                                    <label for="certification" class=" form-control-label">Certifications</label>
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <?php echo e($profile['certification']); ?>
+
+                                </div>
                             </div>
                             <div class="row form-group">
                                 <div class="col col-md-3">
