@@ -200,7 +200,8 @@ class HomeController extends Controller
             if($value->status == 3)
                 $value->color = 4;
        }
-       $myjobs = Job::where('user_id', $id1)->get();
+
+       
        $myinterviews = Interview_schedule::where('scheduled', 1)->where('candidate_id', $id1)->get();
        foreach ($myinterviews as $key => $value) 
        {
@@ -242,6 +243,11 @@ class HomeController extends Controller
         $aclient = User::role('Recuriter')->get();
         $ajobs = Job::where('status', '=', 0)->get();
         $anewjobs = Job::where('status', '=', 0)->whereBetween('created_at', array($now30, $now))->get();
+
+        if($checkadmins)
+            $myjobs = Job::where('status', '=', 0)->whereBetween('created_at', array($now30, $now))->get();
+        else
+            $myjobs = Job::where('user_id', $id1)->get();
         //dd($interviews, $job);
         return view('home', compact('tasks', 'poc', 'cco', 'pie', 'interviews', 'jobs', 'mytasks', 'myjobs', 'myinterviews', 'jobpast', 'acandidates', 'aclient', 'ajobs', 'anewjobs','invites')); 
     }

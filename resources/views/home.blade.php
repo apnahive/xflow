@@ -113,8 +113,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><span style="color: white;">{{ count($acandidates) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="{{ route('profiles.index') }}" style="color: white;">{{ count($acandidates) }}</a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="{{ route('profiles.index') }}" style="color: white;"> Candidates Available </a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -122,24 +122,24 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><span style="color: white;">{{ count($aclient) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="{{ route('client_profiles.index') }}" style="color: white;">{{ count($aclient) }}</a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="{{ route('client_profiles.index') }}" style="color: white;"> Clients Available</a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
                                 </div>
                             </div><div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><span style="color: white;">{{ count($ajobs) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="{{ route('jobs.index') }}" style="color: white;">{{ count($ajobs) }}</a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="{{ route('jobs.index') }}" style="color: white;"> Jobs Available</a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
                                 </div>
                             </div><div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><span style="color: white;">{{ count($anewjobs) }}</span></h2>
-                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="{{ route('jobs.index') }}" style="color: white;">{{ count($anewjobs) }}</a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="{{ route('jobs.index') }}" style="color: white;"> New Jobs Available </a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -154,7 +154,10 @@
                 </div>
                 
                 @endrole
+                @role('Admin')
+                @else
 
+                @role('x-flow')
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <div class="container">
                      <div class="row">
@@ -196,7 +199,8 @@
                         </div>
                 </div>
                 </div>
-                
+                @endrole
+                @endrole
                 @can('xflow view')
                 @role('Admin')
                 @else
@@ -239,6 +243,8 @@
                 </section>
                 </div>
                 @endrole
+                @role('Admin')
+                @else
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
 
@@ -285,8 +291,11 @@
                     </div>
                 </section>
                 </div>
+                @endrole
                 @endcan
                 @can('can apply job')
+                @role('Admin')
+                @else
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
@@ -294,8 +303,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><a href="{{ route('calender.show', 'past') }}" style="color: white;">{{ $interviews->red }}</a></h2>
-                                    <span class="desc"><a href="{{ route('calender.show', 'past') }}" style="color: white;">interviews past due date</a></span>
+                                    <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->red }}</a></h2>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">interviews past due date</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -303,8 +312,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">{{ $interviews->yellow }}</a></h2>
-                                    <span class="desc"><a href="{{ route('calender.show', '7-days') }}" style="color: white;">3 days to due</a></span>
+                                    <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->yellow }}</a></h2>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">3 days to due</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -312,8 +321,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">{{ $interviews->lightgreen }}</a></h2>
-                                    <span class="desc"><a href="{{ route('calender.show', '30-days') }}" style="color: white;">7 days to due</a></span>
+                                    <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->lightgreen }}</a></h2>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">7 days to due</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -321,8 +330,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><a href="{{ route('calender.show', 'future') }}" style="color: white;">{{ $interviews->green }}</a></h2>
-                                    <span class="desc"><a href="{{ route('calender.show', 'future') }}" style="color: white;">more than 7 days for interview</a></span>
+                                    <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->green }}</a></h2>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">more than 7 days for interview</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -332,8 +341,11 @@
                     </div>
                 </section>
                 </div>
+                @endrole
                 @endcan
                 @can('can create job')
+                @role('Admin')
+                @else
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
@@ -379,7 +391,7 @@
                     </div>
                 </section>
                 </div>
-                
+                @endrole
                 @endcan
 
                 
@@ -393,7 +405,7 @@
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <h3 style="margin: 24px;">@role('Admin') New Jobs Posted @else Job Posting @endrole</h3>
                             <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
@@ -424,12 +436,15 @@
                  </div>
                 </div>
                 @endrole
+
                 @can('can apply job')
+                @role('Admin')
+                @else
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <h3 style="margin: 24px;">Available Jobs</h3>
                             <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
@@ -459,6 +474,7 @@
                      </div>
                  </div>
                 </div>
+
                  <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
@@ -493,6 +509,7 @@
                      </div>
                  </div>
                 </div>
+                @endrole
                 @endcan
 
 

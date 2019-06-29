@@ -220,7 +220,7 @@ class ProjectController extends Controller
             'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required|date_format:Y-m-d',            
+            'duedate'=> 'required',            
             ],
             [
                 'poc.min' => 'Please choose a user.',
@@ -465,7 +465,7 @@ class ProjectController extends Controller
             'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required|date_format:Y-m-d',            
+            'duedate'=> 'required',            
             ],
             [
                 'poc.min' => 'Please choose a user.',

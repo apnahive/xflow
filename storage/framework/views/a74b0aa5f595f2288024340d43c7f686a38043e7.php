@@ -112,8 +112,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($acandidates)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Candidates Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="<?php echo e(route('profiles.index')); ?>" style="color: white;"><?php echo e(count($acandidates)); ?></a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="<?php echo e(route('profiles.index')); ?>" style="color: white;"> Candidates Available </a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -121,24 +121,24 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($aclient)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Clients Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="<?php echo e(route('client_profiles.index')); ?>" style="color: white;"><?php echo e(count($aclient)); ?></a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="<?php echo e(route('client_profiles.index')); ?>" style="color: white;"> Clients Available</a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
                                 </div>
                             </div><div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($ajobs)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> Jobs Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="<?php echo e(route('jobs.index')); ?>" style="color: white;"><?php echo e(count($ajobs)); ?></a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="<?php echo e(route('jobs.index')); ?>" style="color: white;"> Jobs Available</a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
                                 </div>
                             </div><div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><span style="color: white;"><?php echo e(count($anewjobs)); ?></span></h2>
-                                    <span class="desc"><span style="color: white;"> New Jobs Available</span></span>
+                                    <h2 class="number"><span style="color: white;"><a href="<?php echo e(route('jobs.index')); ?>" style="color: white;"><?php echo e(count($anewjobs)); ?></a></span></h2>
+                                    <span class="desc"><span style="color: white;"><a href="<?php echo e(route('jobs.index')); ?>" style="color: white;"> New Jobs Available </a></span></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -153,7 +153,10 @@
                 </div>
                 
                 <?php endif; ?>
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <?php else: ?>
 
+                <?php if(auth()->check() && auth()->user()->hasRole('x-flow')): ?>
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <div class="container">
                      <div class="row">
@@ -195,7 +198,8 @@
                         </div>
                 </div>
                 </div>
-                
+                <?php endif; ?>
+                <?php endif; ?>
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('xflow view')): ?>
                 <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                 <?php else: ?>
@@ -238,6 +242,8 @@
                 </section>
                 </div>
                 <?php endif; ?>
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <?php else: ?>
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
 
@@ -285,7 +291,10 @@
                 </section>
                 </div>
                 <?php endif; ?>
+                <?php endif; ?>
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <?php else: ?>
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
@@ -293,8 +302,8 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--red">
-                                    <h2 class="number"><a href="<?php echo e(route('calender.show', 'past')); ?>" style="color: white;"><?php echo e($interviews->red); ?></a></h2>
-                                    <span class="desc"><a href="<?php echo e(route('calender.show', 'past')); ?>" style="color: white;">interviews past due date</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;"><?php echo e($interviews->red); ?></a></h2>
+                                    <span class="desc"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;">interviews past due date</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -302,8 +311,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange">
-                                    <h2 class="number"><a href="<?php echo e(route('calender.show', '7-days')); ?>" style="color: white;"><?php echo e($interviews->yellow); ?></a></h2>
-                                    <span class="desc"><a href="<?php echo e(route('calender.show', '7-days')); ?>" style="color: white;">3 days to due</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;"><?php echo e($interviews->yellow); ?></a></h2>
+                                    <span class="desc"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;">3 days to due</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -311,8 +320,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
-                                    <h2 class="number"><a href="<?php echo e(route('calender.show', '30-days')); ?>" style="color: white;"><?php echo e($interviews->lightgreen); ?></a></h2>
-                                    <span class="desc"><a href="<?php echo e(route('calender.show', '30-days')); ?>" style="color: white;">7 days to due</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;"><?php echo e($interviews->lightgreen); ?></a></h2>
+                                    <span class="desc"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;">7 days to due</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -320,8 +329,8 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--green">
-                                    <h2 class="number"><a href="<?php echo e(route('calender.show', 'future')); ?>" style="color: white;"><?php echo e($interviews->green); ?></a></h2>
-                                    <span class="desc"><a href="<?php echo e(route('calender.show', 'future')); ?>" style="color: white;">more than 7 days for interview</a></span>
+                                    <h2 class="number"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;"><?php echo e($interviews->green); ?></a></h2>
+                                    <span class="desc"><a href="<?php echo e(route('interviewed.index')); ?>" style="color: white;">more than 7 days for interview</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -332,7 +341,10 @@
                 </section>
                 </div>
                 <?php endif; ?>
+                <?php endif; ?>
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can create job')): ?>
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <?php else: ?>
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                 <section class="statistic statistic2" style="padding-top: 1px;">
                     <div class="container">
@@ -378,7 +390,7 @@
                     </div>
                 </section>
                 </div>
-                
+                <?php endif; ?>
                 <?php endif; ?>
 
                 
@@ -392,7 +404,7 @@
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <h3 style="margin: 24px;"><?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?> New Jobs Posted <?php else: ?> Job Posting <?php endif; ?></h3>
                             <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
@@ -423,12 +435,15 @@
                  </div>
                 </div>
                 <?php endif; ?>
+
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('can apply job')): ?>
+                <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
+                <?php else: ?>
                 <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
                         <div class="col-md-12">
-                            <h3 style="margin: 24px;">Job Posting</h3>
+                            <h3 style="margin: 24px;">Available Jobs</h3>
                             <div class="table-responsive table-responsive-data2" style="margin-bottom: 30px;">
                                 <table class="table table-data2">
                                     <!-- <thead>
@@ -458,6 +473,7 @@
                      </div>
                  </div>
                 </div>
+
                  <div class="page-content--bgf7" style="margin-bottom: 30px;">
                  <div class="container">
                      <div class="row">
@@ -492,6 +508,7 @@
                      </div>
                  </div>
                 </div>
+                <?php endif; ?>
                 <?php endif; ?>
 
 

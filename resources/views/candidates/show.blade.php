@@ -240,6 +240,7 @@
                                     @endif 
                                 </div>
                             </div>
+                            @if($profile['relocation'] === "1")
                             <h5>City ready to re-location:</h5>
                             <hr>
                             <div class="col-md-12">
@@ -292,7 +293,7 @@
                             </div>
                             
                             <hr>
-
+                            @endif
                             
 
                             <div class="row form-group">

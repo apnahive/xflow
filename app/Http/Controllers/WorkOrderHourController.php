@@ -19,7 +19,7 @@ class WorkOrderHourController extends Controller
         //dd(request()->all());
         $this->validate($request, [
         	'work_order' => 'numeric|min:1',           
-            'date'=> 'required|date_format:Y-m-d',
+            'date'=> 'required',
             'hours'=> 'required|numeric|min:1',
             ],
             [
