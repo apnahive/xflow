@@ -52,7 +52,7 @@
                             <label for="duedate" class=" form-control-label">Contract Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="duedate" type="date" class="form-control" name="duedate" value="{{ $task['duedate'] }}" required autofocus @if($task->admin == 0) disabled @endif>
+                            <input id="duedate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="duedate" value="{{ $task['duedate'] }}" required autofocus @if($task->admin == 0) disabled @endif>
                             @if ($errors->has('duedate'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('duedate') }}</strong>
@@ -127,7 +127,7 @@
                             <label for="date_completed" class="form-control-label">Date Completed</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="date_completed" type="date" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
+                            <input id="date_completed" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
                             @if ($errors->has('date_completed'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('date_completed') }}</strong>

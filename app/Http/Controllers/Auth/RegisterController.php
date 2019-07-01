@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'dateofbirth'=> 'required|date|before:today',
+            'dateofbirth'=> 'required|date_format:Y-m-d|before:today',
             'lastname' => 'required|string|max:255',
             'user_type' => 'required|string|max:255',
             'organization' => 'required|string|max:255',

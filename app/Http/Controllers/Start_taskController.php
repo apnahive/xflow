@@ -48,8 +48,8 @@ class Start_taskController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'start'=> 'required|date',
-            'till'=> 'required|date',
+            'start'=> 'required|date_format:Y-m-d',
+            'till'=> 'required|date_format:Y-m-d',
             'interval'=> 'numeric|min:1',
         ));
         //$now = new \DateTime();
@@ -130,7 +130,7 @@ class Start_taskController extends Controller
     {
         //dd("task complete");
         $this->validate($request, array(            
-            'date_completed'=> 'date',
+            'date_completed'=> 'date_format:Y-m-d',
             'actual_time_to_complete'=> 'numeric|min:1',            
         ));
         $task = Task::find($id);

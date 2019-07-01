@@ -183,7 +183,7 @@
                             <label for="start_date" class=" form-control-label">Start Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="start_date" type="date" class="form-control" name="start_date" value="{{ old('start_date') }}" required autofocus>
+                            <input id="start_date" type="date" placeholder="yyyy-mm-dd" class="form-control" name="start_date" value="{{ old('start_date') }}" required autofocus>
                             @if ($errors->has('start_date'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('start_date') }}</strong>

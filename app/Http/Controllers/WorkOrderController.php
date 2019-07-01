@@ -80,8 +80,8 @@ class WorkOrderController extends Controller
     {        
        //dd(request()->all());
         $this->validate($request, [            
-            'from_date'=> 'required|date|before:to_date',
-            'to_date'=> 'required|date|after:from_date'
+            'from_date'=> 'required|date_format:Y-m-d|before:to_date',
+            'to_date'=> 'required|date_format:Y-m-d|after:from_date'
             ]
         );
         $work_order = work_order::find($request->work_order_id);

@@ -1,7 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<?php $__env->startSection('content'); ?>
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 <div class="row" style="margin-bottom: 100px;">
     <div class="col-lg-12">
@@ -9,8 +7,9 @@
             <div class="card-header">
                 <strong>Create New Project</strong>
             </div>            
-            <form action="{{ route('projects.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-            {{ csrf_field() }}
+            <form action="<?php echo e(route('projects.store')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <?php echo e(csrf_field()); ?>
+
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-3">
@@ -18,11 +17,11 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <input type="text" id="name" name="name" placeholder="Name" class="form-control" required>
-                            @if ($errors->has('name'))
+                            <?php if($errors->has('name')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong><?php echo e($errors->first('name')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>
                     <div class="row form-group">
@@ -31,11 +30,11 @@
                         </div>
                         <div class="col-12 col-md-9">
                             <textarea name="description" id="description" rows="3" placeholder="Description..." class="form-control" required></textarea>
-                            @if ($errors->has('description'))
+                            <?php if($errors->has('description')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('description') }}</strong>
+                                    <strong><?php echo e($errors->first('description')); ?></strong>
                                 </span>
-                            @endif                            
+                            <?php endif; ?>                            
                         </div>
                     </div>                    
                     <div class="row form-group">
@@ -45,15 +44,16 @@
                         <div class="col-12 col-md-9">
                             <select name="poc" id="poc" class="custom-select form-control chosen">
                                 <option value="0">Please select</option>
-                                @foreach ($users as $user) 
-                                    <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}
-                                @endforeach
+                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>                            
-                            @if ($errors->has('poc'))
+                            <?php if($errors->has('poc')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('poc') }}</strong>
+                                    <strong><?php echo e($errors->first('poc')); ?></strong>
                                 </span>
-                            @endif
+                            <?php endif; ?>
                         </div>
                          
                     </div>                    
@@ -64,15 +64,16 @@
                         <div class="col-12 col-md-9">
                             <select name="cco" id="cco" class="form-control chosen">
                                 <option value="0">Please select</option>
-                                @foreach ($users as $user) 
-                                    <option value="{{$user->id}}">{{$user->name}} {{$user->lastname}}
-                                @endforeach
+                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                                    <option value="<?php echo e($user->id); ?>"><?php echo e($user->name); ?> <?php echo e($user->lastname); ?>
+
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </select>
-                            @if ($errors->has('cco'))
+                            <?php if($errors->has('cco')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('cco') }}</strong>
+                                    <strong><?php echo e($errors->first('cco')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
                     <script type="text/javascript">
@@ -82,13 +83,13 @@
                         <div class="col col-md-3">
                             <label for="duedate" class=" form-control-label">Contract Date</label>
                         </div>
-                        <div class="col-12 col-md-9"> 
-                            <input id="duedate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
-                            @if ($errors->has('duedate'))
+                        <div class="col-12 col-md-9">
+                            <input id="duedate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="duedate" value="<?php echo e(old('duedate')); ?>" required autofocus>
+                            <?php if($errors->has('duedate')): ?>
                                 <span class="help-block error">
-                                    <strong>{{ $errors->first('duedate') }}</strong>
+                                    <strong><?php echo e($errors->first('duedate')); ?></strong>
                                 </span>
-                            @endif 
+                            <?php endif; ?> 
                         </div>
                     </div>
             </div>
@@ -104,4 +105,6 @@
         </div>        
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -93,7 +93,7 @@ class Assign_checklistController extends Controller
         //dd(request()->all());
         $this->validate($request, [            
             'template'=> 'numeric|min:1',
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
             ],
             [
                 'template.min' => 'Please choose a template.',

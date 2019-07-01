@@ -51,7 +51,7 @@ class Checklist_itemController extends Controller
         $this->validate($request, array(
             'checklist_id'=> 'numeric|min:1',
             'title'=> 'required|max:191',
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
         ));
 
         $checklist = Checklist::find($request->checklist_id);
@@ -115,7 +115,7 @@ class Checklist_itemController extends Controller
         //dd(request()->all());
         $this->validate($request, array(
             'title'=> 'required|max:191',
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
         ));
 
         $item = Checklist_item::find($id);

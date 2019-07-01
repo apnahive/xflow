@@ -288,7 +288,7 @@
                                                             <label for="date1" class=" form-control-label"> Date 1</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date1" type="date" class="form-control" name="date1" value="{{ old('date1') }}" required autofocus>
+                                                            <input id="date1" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date1" value="{{ old('date1') }}" required autofocus>
                                                             @if ($errors->has('date1'))
                                                                 <span class="help-block error">
                                                                     <strong>{{ $errors->first('date1') }}</strong>
@@ -320,7 +320,7 @@
                                                             <label for="date2" class=" form-control-label"> Date 2</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date2" type="date" class="form-control" name="date2" value="{{ old('date2') }}" required autofocus>
+                                                            <input id="date2" type="date"  placeholder="yyyy-mm-dd" class="form-control" name="date2" value="{{ old('date2') }}" required autofocus>
                                                             @if ($errors->has('date2'))
                                                                 <span class="help-block error">
                                                                     <strong>{{ $errors->first('date2') }}</strong>
@@ -352,7 +352,7 @@
                                                             <label for="date3" class=" form-control-label"> Date 3</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date3" type="date" class="form-control" name="date3" value="{{ old('date3') }}" required autofocus>
+                                                            <input id="date3" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date3" value="{{ old('date3') }}" required autofocus>
                                                             @if ($errors->has('date3'))
                                                                 <span class="help-block error">
                                                                     <strong>{{ $errors->first('date3') }}</strong>

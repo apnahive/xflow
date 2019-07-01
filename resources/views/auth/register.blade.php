@@ -139,7 +139,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Date Of Birth</label>
-                                            <input id="dateofbirth" type="date" class="au-input au-input--full" name="dateofbirth" value="{{ old('dateofbirth') }}" required autofocus>
+                                            <input id="dateofbirth" type="date" placeholder="yyyy-mm-dd" class="au-input au-input--full" name="dateofbirth" value="{{ old('dateofbirth') }}" required autofocus>
 
                                             @if ($errors->has('dateofbirth'))
                                                 <span class="help-block">

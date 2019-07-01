@@ -492,7 +492,7 @@ class TaskController extends Controller
         $this->validate($request, [
             'project'=> 'numeric|min:1',
             'title'=> 'required|max:50', /*limit increased on client's request -samar*/
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
             'note'=> 'required|max:2048',
@@ -672,7 +672,7 @@ class TaskController extends Controller
         $this->validate($request, [
             'project'=> 'numeric|min:1',
             'title'=> 'max:50', /*limit increased on client's request -samar*/
-            'duedate'=> 'date',
+            'duedate'=> 'date_format:Y-m-d',
             'category'=> 'numeric|min:1',
             'estimated_time_to_complete'=> 'numeric|min:1',
             'actual_time_to_complete'=> 'numeric|nullable|min:1',

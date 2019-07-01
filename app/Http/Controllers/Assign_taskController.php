@@ -50,7 +50,7 @@ class Assign_taskController extends Controller
      ///dd(request()->all());
         $this->validate($request, array(
             'task_id'=> 'numeric|min:1',
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
             'assignee'=> 'numeric|min:1',
         ));
         $task = Task::find($request->task_id);

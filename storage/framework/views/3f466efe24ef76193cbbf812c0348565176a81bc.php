@@ -1,9 +1,6 @@
-@extends('layouts.app')
+<?php $__env->startSection('content'); ?>
 
-
-@section('content')
-
-<a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
+<a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small" style="margin-bottom: 33px;">
                     Back</button></a>
 
 
@@ -21,10 +18,10 @@
             <div class="card-body card-block">
                     <div class="row form-group">
                         <div class="col col-md-6">
-                            <label for="title" class=" form-control-label"><b>Title</b>: {{ $work_order->title }} </label>
+                            <label for="title" class=" form-control-label"><b>Title</b>: <?php echo e($work_order->title); ?> </label>
                         </div>
                         <div class="col col-md-6">
-                            <label for="project" class=" form-control-label"><b>Description</b>: {{ $work_order->description }} </label>
+                            <label for="project" class=" form-control-label"><b>Description</b>: <?php echo e($work_order->description); ?> </label>
                         </div>
                     </div>                    
             </div>
@@ -35,19 +32,20 @@
  -->
 
 <!-- One page view -->
-                 <form action="{!! route('work_order_assign.search') !!}" method="POST" role="search" class="search-des">
-                    {{ csrf_field() }}
+                 <form action="<?php echo route('work_order_assign.search'); ?>" method="POST" role="search" class="search-des">
+                    <?php echo e(csrf_field()); ?>
+
                     <div class="search-task" style="background: #dee2e6;padding: 10px 2px 10px 2px;">
-                         <input type="hidden" name="work_order_id" value="{{ $work_order->id }}">
+                         <input type="hidden" name="work_order_id" value="<?php echo e($work_order->id); ?>">
                                     
                         <div class="col-md-4">
                              <label for="from_date" class=" form-control-label"><b>From Date</b></label>
-                            <input id="from_date" type="date" placeholder="yyyy-mm-dd" class="col-md-12" name="from_date" value="{{ old('from_date') }}" placeholder="From Date" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="from_date" type="date" class="col-md-12" name="from_date" value="<?php echo e(old('from_date')); ?>" placeholder="From Date" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             
                         </div>
                         <div class="col-md-4">
                            <label for="to_date" class=" form-control-label"><b>To Date</b></label>
-                            <input id="to_date" type="date" placeholder="yyyy-mm-dd" class="col-md-12" name="to_date" value="{{ old('to_date') }}" placeholder="To Date" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
+                            <input id="to_date" type="date" class="col-md-12" name="to_date" value="<?php echo e(old('to_date')); ?>" placeholder="To Date" style="border: none;color: #808bab;box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);height: 40px;border-radius: 4px;font-weight: 600;font-size: 16px;">
                             
                            
                         </div>
@@ -83,7 +81,7 @@
                                     <label for="name" class=" form-control-label"><b>Work Order Title</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="name" class=" form-control-label">{{ $work_order->title }}</label>
+                                    <label for="name" class=" form-control-label"><?php echo e($work_order->title); ?></label>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -91,7 +89,7 @@
                                     <label for="description" class=" form-control-label"><b>Description</b></label>
                                 </div>
                                 <div class="col-12 col-md-9">
-                                    <label for="description" class=" form-control-label">{{ $work_order->description }}</label>
+                                    <label for="description" class=" form-control-label"><?php echo e($work_order->description); ?></label>
                                 </div>
                             </div>
                         </div>                        
@@ -105,15 +103,16 @@
                                         
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <a href="{{ route('task_for_templates.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <a href="<?php echo e(route('task_for_templates.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                             <i class="zmdi zmdi-plus"></i>Add New Task</button></a>
                                         
                                     </div>
                                 </div> -->
                                 <div class="table-responsive table-responsive-data2" style="margin-bottom: 100px;">
-                                    <form class="form-horizontal  form-material" method="POST" enctype="multipart/form-data" action="{{ route('work_order_hour.approvemany')}}">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="workorder" value="{{ $work_order->id }}">
+                                    <form class="form-horizontal  form-material" method="POST" enctype="multipart/form-data" action="<?php echo e(route('work_order_hour.approvemany')); ?>">
+                                    <?php echo e(csrf_field()); ?>
+
+                                    <input type="hidden" name="workorder" value="<?php echo e($work_order->id); ?>">
                                   
                                     <table class="table table-data2">
                                         <thead>
@@ -131,38 +130,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($work_order_hours as $key => $value)
+                                            <?php $__currentLoopData = $work_order_hours; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <tr class="tr-shadow">  
                                                 <td>
                                                    
                                                     <label class="au-checkbox">
                                                         <!-- <input type="checkbox"> -->
-                                                         @if($value->status === 0)
-                                                        <input type="hidden" name="{{ $value->id }}" value="false">
-                                                        <input type="checkbox" id="{{ $value->id }}" value="true" name="{{ $value->id }}">
+                                                         <?php if($value->status === 0): ?>
+                                                        <input type="hidden" name="<?php echo e($value->id); ?>" value="false">
+                                                        <input type="checkbox" id="<?php echo e($value->id); ?>" value="true" name="<?php echo e($value->id); ?>">
                                                         <span class="au-checkmark"></span>
                                                     </label>
-                                                 @endif
+                                                 <?php endif; ?>
                                                 </td>                                              
-                                                <td>{{ $value->date }}</td>
-                                                <td>{{ $value->hours }}</td>                        
-                                                <td>{{ $value->statusis }}</td>
+                                                <td><?php echo e($value->date); ?></td>
+                                                <td><?php echo e($value->hours); ?></td>                        
+                                                <td><?php echo e($value->statusis); ?></td>
                                                 <td>
-                                                    @if($value->status === 0)
+                                                    <?php if($value->status === 0): ?>
                                                     
                                                     <div class="table-data-feature">
-                                                    @role('workuser')    
-                                                                <a href="{{ route('work_order_assign.edit', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <?php if(auth()->check() && auth()->user()->hasRole('workuser')): ?>    
+                                                                <a href="<?php echo e(route('work_order_assign.edit', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                     <i class="zmdi zmdi-edit"></i>
                                                                 </button></a>
-                                                                <button class="item" data-toggle="modal" data-target="#confirm{{$value->id}}" data-backdrop="false">
+                                                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($value->id); ?>" data-backdrop="false">
                                                                     <i class="zmdi zmdi-delete"></i>
                                                                 </button>
-                                                                <form action="{{ route('task_for_templates.destroy', $value->id) }}" method="POST">
+                                                                <form action="<?php echo e(route('task_for_templates.destroy', $value->id)); ?>" method="POST">
                                                                     <input type="hidden" name="_method" value="DELETE">
-                                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                                     
-                                                                    <div class="modal fade" id="confirm{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                                    <div class="modal fade" id="confirm<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
                                                                       <div class="modal-dialog" role="document">
                                                                         <div class="modal-content" style="text-align: left;">
                                                                           <div class="modal-header">
@@ -184,11 +183,11 @@
                                                                       </div>
                                                                     </div>
                                                                 </form>
-                                                                @if($value->commentis === 1)
-                                                                    <button class="item" data-toggle="modal" data-target="#comment{{$value->id}}" data-backdrop="false">
+                                                                <?php if($value->commentis === 1): ?>
+                                                                    <button class="item" data-toggle="modal" data-target="#comment<?php echo e($value->id); ?>" data-backdrop="false">
                                                                             <i class="zmdi zmdi-comment-alert"></i>
                                                                     </button>
-                                                                    <div class="modal fade" id="comment{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                                    <div class="modal fade" id="comment<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
                                                                       <div class="modal-dialog" role="document">
                                                                         <div class="modal-content" style="text-align: left;">
                                                                           <div class="modal-header">
@@ -197,7 +196,7 @@
                                                                               <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                           </div>
-                                                                          <div class="modal-body">{{ $value->comment }}</div>
+                                                                          <div class="modal-body"><?php echo e($value->comment); ?></div>
                                                                           <div class="modal-footer">
                                                                             
                                                                           </div>
@@ -205,26 +204,27 @@
                                                                       </div>
                                                                     </div>
                                                          
-                                                                @endif
-                                                        @endrole
-                                                    @role('Admin')
+                                                                <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                                                     
-                                                        <a href="{{ route('work_order_hour.approve', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Approve">
+                                                        <a href="<?php echo e(route('work_order_hour.approve', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Approve">
                                                             <i class="zmdi zmdi-check-circle"></i>
                                                         </button></a>
 
-                                                        <a href="{{ route('work_order_hour.reject', $value->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Reject">
+                                                        <a href="<?php echo e(route('work_order_hour.reject', $value->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Reject">
                                                             <i class="zmdi zmdi-block"></i>
                                                         </button></a>
                                                         <!-- -popup -->
-                                                        <button class="item" data-toggle="modal" data-target="#comment{{$value->id}}" data-backdrop="false">
+                                                        <button class="item" data-toggle="modal" data-target="#comment<?php echo e($value->id); ?>" data-backdrop="false">
                                                             <i class="zmdi zmdi-comment-alert"></i>
                                                         </button>
-                                                        <div class="modal fade" id="comment{{$value->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$value->id}}" aria-hidden="true">
+                                                        <div class="modal fade" id="comment<?php echo e($value->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($value->id); ?>" aria-hidden="true">
                                                             <div class="modal-dialog" role="document">
-                                                                <form action="{{ route('work_order_hour.comment') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                                                    {{ csrf_field() }}
-                                                                        <input type="hidden" name="hour_id" value="{{ $value->id }}">
+                                                                <form action="<?php echo e(route('work_order_hour.comment')); ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
+                                                                    <?php echo e(csrf_field()); ?>
+
+                                                                        <input type="hidden" name="hour_id" value="<?php echo e($value->id); ?>">
                                                                         <div class="modal-content" style="text-align: left;">
                                                                           <div class="modal-header">
                                                                             <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
@@ -237,56 +237,56 @@
                                                                                 <div class="col col-md-3">
                                                                                     <label for="assignee" class=" form-control-label">Comment</label>
                                                                                 </div>
-                                                                                @if($value->commentis === 1)
+                                                                                <?php if($value->commentis === 1): ?>
                                                                                 <div class="col-12 col-md-9">
-                                                                                    <label for="assignee" class=" form-control-label">{{ $value->comment }}</label>
+                                                                                    <label for="assignee" class=" form-control-label"><?php echo e($value->comment); ?></label>
                                                                                 </div>
-                                                                                @elseif($value->commentis === 0)
+                                                                                <?php elseif($value->commentis === 0): ?>
                                                                                 <div class="col-12 col-md-9">
                                                                                     <textarea name="description" id="description" placeholder="Your entry is still pending because..." class="form-control"></textarea>
                                                                                                         <!-- <small class="form-text text-muted">This is a help text</small> -->
-                                                                                                        @if ($errors->has('description'))
+                                                                                                        <?php if($errors->has('description')): ?>
                                                                                                             <span class="help-block error">
-                                                                                                                <strong>{{ $errors->first('description') }}</strong>
+                                                                                                                <strong><?php echo e($errors->first('description')); ?></strong>
                                                                                                             </span>
-                                                                                                        @endif 
+                                                                                                        <?php endif; ?> 
                                                                                 </div>
 
-                                                                                @endif
+                                                                                <?php endif; ?>
                                                                             </div>
                                                                           </div>
-                                                                          @if($value->commentis === 0)
+                                                                          <?php if($value->commentis === 0): ?>
                                                                           <div class="modal-footer">
                                                                             <button type="submit" class="btn btn-primary btn-sm">
                                                                                 <i class="fa fa-dot-circle-o"></i> Submit
                                                                             </button>
                                                                             <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-ban"></i>Cancel</button>
                                                                           </div>
-                                                                          @endif
+                                                                          <?php endif; ?>
                                                                         </div>
                                                                         </form>
                                                                       </div>
                                                                     </div>              
-                                                    @endrole
-                                                    @endif
+                                                    <?php endif; ?>
+                                                    <?php endif; ?>
                                                 </div>
                                                     
                                                 </td>
                                             </tr>
                                             <tr class="spacer"></tr>
-                                            @endforeach
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
                                     </table>
                                         <div class="form-group">
                                                 <div class="col-md-8">
-                                                    @role('Admin')
+                                                    <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                                                     <button type="submit" name="submitbutton" value="approve" class="btn btn-info">
                                                         Approve Selected
                                                     </button>
                                                     <button type="submit" name="submitbutton" value="reject" class="btn btn-info">
                                                         Reject Selected
                                                     </button>
-                                                    @endrole
+                                                    <?php endif; ?>
                                                 </div>
                                                 <div class="col-md-8">
                                                    
@@ -313,4 +313,6 @@
          $('input:checkbox').not(this).prop('checked', this.checked);
      });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

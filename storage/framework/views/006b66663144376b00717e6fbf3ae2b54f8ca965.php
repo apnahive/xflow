@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="row">
     <div class="col-md-12">
@@ -8,7 +6,7 @@
         <h3 class="title-5 m-b-35">Projects</h3>
         <div class="table-data__tool">
             <div class="table-data__tool-left">
-                <a href="{{ URL::previous() }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <a href="<?php echo e(URL::previous()); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     Back</button></a>
                 <!-- <div class="rs-select2--light rs-select2--md">
                     <select class="js-select2" name="property">
@@ -30,10 +28,10 @@
                     <i class="zmdi zmdi-filter-list"></i>filters</button> -->
             </div>
             <div class="table-data__tool-right">
-                @if($projects->can_create)
-                <a href="{{ route('projects.create') }}"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                <?php if($projects->can_create): ?>
+                <a href="<?php echo e(route('projects.create')); ?>"><button class="au-btn au-btn-icon au-btn--green au-btn--small">
                     <i class="zmdi zmdi-plus"></i>Add New Project</button></a>
-                @endif
+                <?php endif; ?>
                 <!-- <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
                     <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
@@ -54,7 +52,7 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </th> -->
-                        <th><a href="{{ route('projects.sort', ['name', 'asc']) }}"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="{{ route('projects.sort', ['name', 'desc']) }}"><i class="fas fa-sort-alpha-up"></i></a></th> 
+                        <th><a href="<?php echo e(route('projects.sort', ['name', 'asc'])); ?>"><i class="fas fa-sort-alpha-down"></i></a> Name <a href="<?php echo e(route('projects.sort', ['name', 'desc'])); ?>"><i class="fas fa-sort-alpha-up"></i></a></th> 
                         <th>Consultant</th>
                         <th>CCO</th>
                         <th>Contract Date</th>
@@ -64,8 +62,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($projects as $projectkey => $project)
-                    @if($project->can_view)
+                    <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $projectkey => $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($project->can_view): ?>
                     <tr class="tr-shadow">
                         <!-- <td>
                             <label class="au-checkbox">
@@ -73,52 +71,52 @@
                                 <span class="au-checkmark"></span>
                             </label>
                         </td> -->
-                        <td>{{ $project->name }}</td>
-                        <td>{{ $project->pocname }}</td>                        
-                        <td>{{ $project->cconame }}</td>                        
-                        <td>{{ $project->duedate }}</td>
+                        <td><?php echo e($project->name); ?></td>
+                        <td><?php echo e($project->pocname); ?></td>                        
+                        <td><?php echo e($project->cconame); ?></td>                        
+                        <td><?php echo e($project->duedate); ?></td>
                         <td>
                             <div class="table-data-feature">
-                                <a href="{{ route('projects.show', $project->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
+                                <a href="<?php echo e(route('projects.show', $project->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button></a>
-                                @if($project->can_edit)
-                                <a href="{{ route('projects.edit', $project->id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                <?php if($project->can_edit): ?>
+                                <a href="<?php echo e(route('projects.edit', $project->id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button></a>
-                                @endif
-                                @if($project->can_delete)
-                                <button class="item" data-toggle="modal" data-target="#confirm{{$project->id}}" data-backdrop="false">
+                                <?php endif; ?>
+                                <?php if($project->can_delete): ?>
+                                <button class="item" data-toggle="modal" data-target="#confirm<?php echo e($project->id); ?>" data-backdrop="false">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
 
-                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm{{$project->id}}">Delete</button> -->
+                                <!-- <button type="button" class="btn btn-priamry"  data-toggle="modal" data-target="#confirm<?php echo e($project->id); ?>">Delete</button> -->
 
-                                <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                                <form action="<?php echo e(route('projects.destroy', $project->id)); ?>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                 
-                                <div class="modal fade" id="confirm{{$project->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$project->id}}" aria-hidden="true">
+                                <div class="modal fade" id="confirm<?php echo e($project->id); ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo e($project->id); ?>" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content" style="text-align: left;">
                                       <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Project</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Client</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                           <span aria-hidden="true">&times;</span>
                                         </button>
                                       </div>
                                       <div class="modal-body">
-                                        You are going to delete Project. All the associated records will be deleted. You won't be able to revert these changes!
+                                        You are going to delete Client. All the associated records will be deleted. You won't be able to revert these changes!
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Project</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No, I'll keep this Client</button>
                                         <button type="submit" class="btn btn-primary" >Yes! Delete it</button>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                                 </form>
-                                @endif
+                                <?php endif; ?>
 
 
 
@@ -129,12 +127,13 @@
                         </td>
                     </tr>
                     <tr class="spacer"></tr>
-                    @endif
-                    @endforeach
+                    <?php endif; ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </tbody>
             </table>
-            {!! $projects->render() !!}
+            <?php echo $projects->render(); ?>
+
         </div>
         <!-- END DATA TABLE -->
     </div>
@@ -154,22 +153,24 @@
                     <div class="col-md-5">Action</div>
                 </div>
                 <hr>
-                @foreach ($projects as $projectkey => $project)
+                <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $projectkey => $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="row">
-                    <div class="col-md-1">{{ $project->id }}</div>
-                    <div class="col-md-3">{{ $project->name }}</div>
-                    <div class="col-md-3">POC: {{ $project->pocname }}<br>CCO: {{ $project->cconame }}<br>Due Date: {{ $project->duedate }}</div>
+                    <div class="col-md-1"><?php echo e($project->id); ?></div>
+                    <div class="col-md-3"><?php echo e($project->name); ?></div>
+                    <div class="col-md-3">POC: <?php echo e($project->pocname); ?><br>CCO: <?php echo e($project->cconame); ?><br>Due Date: <?php echo e($project->duedate); ?></div>
                     <div class="col-md-5" style="display:flex;">
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-primary btn-sm">View</button></a></div>
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-success btn-sm">Edit</button></a></div>
-                        <div class="col-md-4"><a href="{{ route('projects.show', $project->id) }}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></div>
+                        <div class="col-md-4"><a href="<?php echo e(route('projects.show', $project->id)); ?>"><button type="button" class="btn btn-primary btn-sm">View</button></a></div>
+                        <div class="col-md-4"><a href="<?php echo e(route('projects.show', $project->id)); ?>"><button type="button" class="btn btn-success btn-sm">Edit</button></a></div>
+                        <div class="col-md-4"><a href="<?php echo e(route('projects.show', $project->id)); ?>"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></div>
                     </div>
                 </div>
                 <hr>   
-                @endforeach                
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                
                                             
             </div>            
         </div>        
     </div>
 </div> -->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

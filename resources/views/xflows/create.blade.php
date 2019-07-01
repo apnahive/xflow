@@ -83,7 +83,7 @@
                             <label for="startdate" class=" form-control-label">Start Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="startdate" type="date" class="form-control" name="startdate" value="{{ old('startdate') }}" required autofocus>
+                            <input id="startdate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="startdate" value="{{ old('startdate') }}" required autofocus>
                             @if ($errors->has('startdate'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('startdate') }}</strong>
@@ -96,7 +96,7 @@
                             <label for="duedate" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="duedate" type="date" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
+                            <input id="duedate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="duedate" value="{{ old('duedate') }}" required autofocus>
                             @if ($errors->has('duedate'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('duedate') }}</strong>

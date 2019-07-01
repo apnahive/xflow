@@ -102,7 +102,7 @@ class ChecklistController extends Controller
         //dd(request()->all());
         $this->validate($request, [            
             'title'=> 'required|max:191',
-            'duedate'=> 'required|date',
+            'duedate'=> 'required|date_format:Y-m-d',
             'assign'=> 'numeric|min:1',            
             ],
             [
@@ -186,7 +186,7 @@ class ChecklistController extends Controller
     {
         $this->validate($request, [            
             'title'=> 'required|max:191',
-            'duedate'=> 'required|date',            
+            'duedate'=> 'required|date_format:Y-m-d',            
             'assign'=> 'numeric|min:1',            
             ],
             [

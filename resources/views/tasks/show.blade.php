@@ -100,7 +100,7 @@
                                 <label for="start" class=" form-control-label">Start Date</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input id="start" type="date" class="form-control" name="start" value="<?php echo date("Y-m-d"); ?>" required autofocus>
+                                <input id="start" type="date" placeholder="yyyy-mm-dd" class="form-control" name="start" value="<?php echo date("Y-m-d"); ?>" required autofocus>
                                 @if ($errors->has('start'))
                                     <span class="help-block error">
                                         <strong>{{ $errors->first('start') }}</strong>
@@ -113,7 +113,7 @@
                                 <label for="till" class=" form-control-label">Till Date</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input id="till" type="date" class="form-control" name="till" value="{{ old('till') }}" required autofocus>
+                                <input id="till" type="date" placeholder="yyyy-mm-dd" class="form-control" name="till" value="{{ old('till') }}" required autofocus>
                                 @if ($errors->has('till'))
                                     <span class="help-block error">
                                         <strong>{{ $errors->first('till') }}</strong>
@@ -209,7 +209,7 @@
                             <label for="date_completed" class="form-control-label">Date Completed</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="date_completed" type="date" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
+                            <input id="date_completed" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date_completed" value="{{ $task['date_completed'] }}" autofocus>
                         </div>
 
                         @if ($errors->has('date_completed'))

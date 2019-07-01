@@ -171,9 +171,9 @@ class Interview_scheduleController extends Controller
     {
         //dd(request()->all());
         $this->validate($request, array(
-            'date1'=> 'required|date',
-            'date2'=> 'required|date',
-            'date3'=> 'required|date',
+            'date1'=> 'required|date_format:Y-m-d',
+            'date2'=> 'required|date_format:Y-m-d',
+            'date3'=> 'required|date_format:Y-m-d',
             'time1' => 'date_format:H:i',
             'time2' => 'date_format:H:i',
             'time3' => 'date_format:H:i',

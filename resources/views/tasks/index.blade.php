@@ -165,7 +165,7 @@
                                                                 <label for="start" class=" form-control-label">Contract Date</label>
                                                             </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="duedate" type="date" class="form-control" name="duedate" value="<?php echo date("Y-m-d"); ?>" required autofocus>
+                                                            <input id="duedate" type="date" placeholder="yyyy-mm-dd" class="form-control" name="duedate" value="<?php echo date("Y-m-d"); ?>" required autofocus>
                                                             @if ($errors->has('duedate'))
                                                                 <span class="help-block error">
                                                                     <strong>{{ $errors->first('duedate') }}</strong>

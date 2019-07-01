@@ -245,7 +245,7 @@
                             <label for="due_date" class=" form-control-label">Due Date</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input id="due_date" type="date" class="form-control" name="due_date" value="{{ old('due_date', $job['due_date']) }}" required>
+                            <input id="due_date" type="date" placeholder="yyyy-mm-dd" class="form-control" name="due_date" value="{{ old('due_date', $job['due_date']) }}" required>
                             @if ($errors->has('due_date'))
                                 <span class="help-block error">
                                     <strong>{{ $errors->first('due_date') }}</strong>

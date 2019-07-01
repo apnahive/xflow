@@ -220,7 +220,7 @@ class ProjectController extends Controller
             'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required',            
+            'duedate'=> 'required|date_format:Y-m-d',            
             ],
             [
                 'poc.min' => 'Please choose a user.',
@@ -228,7 +228,7 @@ class ProjectController extends Controller
             ]
         );
        
-        //dd($request->getErrors());
+        //dd('Validated');
         $project = new Project;
         $project->name = $request->name;
         $project->description = $request->description;
@@ -247,7 +247,7 @@ class ProjectController extends Controller
         $project->save();
 
 
-
+        //dd('test');
         Mail::to($user1['email'])->send(new Project_created($user1, $project));
         Mail::to($user2['email'])->send(new Project_created($user2, $project));
         //dd('test');
@@ -465,7 +465,7 @@ class ProjectController extends Controller
             'description'=> 'required|max:2048',
             'poc'=> 'numeric|min:1',
             'cco'=> 'numeric|min:1',
-            'duedate'=> 'required',            
+            'duedate'=> 'required|date_format:Y-m-d',            
             ],
             [
                 'poc.min' => 'Please choose a user.',
