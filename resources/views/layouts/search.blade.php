@@ -191,8 +191,14 @@
                         </li>
                         @endcan -->
                         <li class="has-sub">
+                            @role('Admin')
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management</a>
+                            @endrole
+                            @role('x-flow')
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management</a>
+                            @endrole
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                  @can('client view')
                                <li class="{{ request()->is('projects') ? 'active' : '' }}">
@@ -487,8 +493,22 @@
                         </li>
                         @endcan -->
                         <li class="has-sub">
+                            @role('Admin')
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Project Management</a>
+                                <i class="fas fa-copy"></i>Project Management
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            @endrole
+                            @role('x-flow')
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            @endrole
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                  @can('client view')
                                <li class="{{ request()->is('projects') ? 'active' : '' }}">

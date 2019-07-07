@@ -523,7 +523,7 @@
                                               <li class="li complete">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Sent</span>
-                                                  <span class="date">{{ $value->created_at }}<span>
+                                                  <span class="date">{{ $value->created_at->format('Y/m/d') }}<span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Invite Sent </h5>
@@ -538,7 +538,7 @@
                                                   <h5> Interview Scheduled  </h5>
                                                 </div>
                                               </li>
-                                              <li class="li @if($value->accepted_date) complete @endif">
+                                              <li class="li @if($value->held == 0 && $value->accepted_date) complete @endif">
                                                 <div class="timestamp">
                                                   <span class="author">Interviewed</span>
                                                   <span class="date">@if($value->accepted_date) {{ $value->interview_date }} @else TBD @endif<span>

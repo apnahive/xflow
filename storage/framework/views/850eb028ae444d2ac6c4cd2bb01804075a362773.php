@@ -290,7 +290,7 @@
                                                             <label for="date1" class=" form-control-label"> Date 1</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date1" type="date" class="form-control" name="date1" value="<?php echo e(old('date1')); ?>" required autofocus>
+                                                            <input id="date1" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date1" value="<?php echo e(old('date1')); ?>" required autofocus>
                                                             <?php if($errors->has('date1')): ?>
                                                                 <span class="help-block error">
                                                                     <strong><?php echo e($errors->first('date1')); ?></strong>
@@ -322,7 +322,7 @@
                                                             <label for="date2" class=" form-control-label"> Date 2</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date2" type="date" class="form-control" name="date2" value="<?php echo e(old('date2')); ?>" required autofocus>
+                                                            <input id="date2" type="date"  placeholder="yyyy-mm-dd" class="form-control" name="date2" value="<?php echo e(old('date2')); ?>" required autofocus>
                                                             <?php if($errors->has('date2')): ?>
                                                                 <span class="help-block error">
                                                                     <strong><?php echo e($errors->first('date2')); ?></strong>
@@ -354,7 +354,7 @@
                                                             <label for="date3" class=" form-control-label"> Date 3</label>
                                                         </div>
                                                         <div class="col-12 col-md-9">
-                                                            <input id="date3" type="date" class="form-control" name="date3" value="<?php echo e(old('date3')); ?>" required autofocus>
+                                                            <input id="date3" type="date" placeholder="yyyy-mm-dd" class="form-control" name="date3" value="<?php echo e(old('date3')); ?>" required autofocus>
                                                             <?php if($errors->has('date3')): ?>
                                                                 <span class="help-block error">
                                                                     <strong><?php echo e($errors->first('date3')); ?></strong>
@@ -525,7 +525,7 @@
                                               <li class="li complete">
                                                 <div class="timestamp">
                                                   <span class="author">Invite Sent</span>
-                                                  <span class="date"><?php echo e($value->created_at); ?><span>
+                                                  <span class="date"><?php echo e($value->created_at->format('Y/m/d')); ?><span>
                                                 </div>
                                                 <div class="status">
                                                   <h5> Invite Sent </h5>
@@ -540,7 +540,7 @@
                                                   <h5> Interview Scheduled  </h5>
                                                 </div>
                                               </li>
-                                              <li class="li <?php if($value->accepted_date): ?> complete <?php endif; ?>">
+                                              <li class="li <?php if($value->held == 0 && $value->accepted_date): ?> complete <?php endif; ?>">
                                                 <div class="timestamp">
                                                   <span class="author">Interviewed</span>
                                                   <span class="date"><?php if($value->accepted_date): ?> <?php echo e($value->interview_date); ?> <?php else: ?> TBD <?php endif; ?><span>

@@ -12,6 +12,7 @@ use App\Profile;
 use App\Interview_schedule;
 use App\User;
 use App\Job_shortlisted;
+use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class JobController extends Controller
@@ -297,6 +298,7 @@ class JobController extends Controller
         //dd($job);
         $states = State::all();
         $cities = City::select('city')->distinct()->get();
+        $now = new \DateTime();
         //dd($cities);
         /*$tags = $job->skills->toArray();
         $tags = implode(', ', $tags);
@@ -349,6 +351,18 @@ class JobController extends Controller
                 //dd('true');
             $value->created_at = $interview1->created_at;
             $value->accepted_date = $interview1->accepted_date;
+            if($value->accepted_date)
+            {
+                $date2 = new DateTime($value->accepted_date);
+                $d1 = date_diff($now, $date2);
+                if($d1->invert)
+                    $value->held = 1;
+                else
+                    $value->held = 0;
+            }
+            else
+                $value->held = 0;
+            
             $value->name = $user->name.' '.$user->lastname;
             $profile = Profile::where('user_id', $value->candidate_id)->first();
             //dd($value->candidate_id, $profile);
@@ -369,7 +383,7 @@ class JobController extends Controller
             if(Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('active', 1)->exists())
             {
                 $interview_date = Interview_schedule::where('job_id', $id)->where('candidate_id', $value->candidate_id)->where('active', 1)->first();
-                $value->interview_date = $interview_date->date;
+                $value->interview_date = $interview_date->date; 
             }
             if(Job_award::where('job_id', $job->id)->where('candidate_id', $value->candidate_id)->exists())
             {

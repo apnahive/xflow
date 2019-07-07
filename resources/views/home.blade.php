@@ -313,7 +313,7 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange">
                                     <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->yellow }}</a></h2>
-                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">3 days to due</a></span>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">3 days to interview</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>
@@ -322,7 +322,7 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item statistic__item--orange" style="background-color: #9dff00;">
                                     <h2 class="number"><a href="{{ route('interviewed.index') }}" style="color: white;">{{ $interviews->lightgreen }}</a></h2>
-                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">7 days to due</a></span>
+                                    <span class="desc"><a href="{{ route('interviewed.index') }}" style="color: white;">7 days to interview</a></span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-calendar-note"></i>
                                     </div>

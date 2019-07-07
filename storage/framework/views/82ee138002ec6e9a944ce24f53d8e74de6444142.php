@@ -171,8 +171,14 @@
                         </li>
                         <?php endif; ?> -->
                         <li class="has-sub">
+                            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management</a>
+                            <?php endif; ?>
+                            <?php if(auth()->check() && auth()->user()->hasRole('x-flow')): ?>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management</a>
+                            <?php endif; ?>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
@@ -475,12 +481,22 @@
                         </li>                        
                         <?php endif; ?> -->
                         <li class="has-sub">
+                            <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Project Management
                                 <span class="arrow" style="float: right;">
                                     <i class="fas fa-angle-down"></i>
                                 </span>
                             </a>
+                            <?php endif; ?>
+                            <?php if(auth()->check() && auth()->user()->hasRole('x-flow')): ?>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Project Management
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <?php endif; ?>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('client view')): ?>
                                <li class="<?php echo e(request()->is('projects') ? 'active' : ''); ?>">
