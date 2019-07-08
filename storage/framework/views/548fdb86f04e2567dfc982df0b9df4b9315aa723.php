@@ -48,8 +48,8 @@
                         <th>Experience level</th>
                         <th>Skills</th>
                         <th>Salary Range</th>
-                        <!-- <th>status</th>
-                        <th>price</th> -->
+                        <th>status</th>
+                        <!-- <th>price</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -67,6 +67,14 @@
                         <td><?php echo e($value->experience); ?></td>                        
                         <td><?php echo e($value->skills); ?></td>                        
                         <td><?php echo e($value->salary_offered); ?></td>
+                        <td>
+                            <?php if($value->scheduled == 1): ?>                            
+                            Scheduled on <br> <?php echo e($value->date); ?>
+
+                            <?php else: ?>
+                            TBD
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <div class="table-data-feature">
                                 <a href="<?php echo e(route('interviewed.show', $value->job_id)); ?>"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">

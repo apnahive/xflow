@@ -50,8 +50,8 @@
                         <th>Experience level</th>
                         <th>Skills</th>
                         <th>Salary Range</th>
-                        <!-- <th>status</th>
-                        <th>price</th> -->
+                        <th>status</th>
+                        <!-- <th>price</th> -->
                         <th></th>
                     </tr>
                 </thead>
@@ -69,6 +69,13 @@
                         <td>{{ $value->experience }}</td>                        
                         <td>{{ $value->skills }}</td>                        
                         <td>{{ $value->salary_offered }}</td>
+                        <td>
+                            @if($value->scheduled == 1)                            
+                            Scheduled on <br> {{ $value->date }}
+                            @else
+                            TBD
+                            @endif
+                        </td>
                         <td>
                             <div class="table-data-feature">
                                 <a href="{{ route('interviewed.show', $value->job_id) }}"><button class="item" data-toggle="tooltip" data-placement="top" title="Details">

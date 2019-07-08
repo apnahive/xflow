@@ -551,7 +551,11 @@
                         </li> 
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Human Resource</a>
+                                <i class="fas fa-copy"></i>Human Resource
+                                <span class="arrow" style="float: right;">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 @role('Admin')
                                 <li class="{{ request()->is('profiles') ? 'active' : '' }}">

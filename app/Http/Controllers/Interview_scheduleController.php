@@ -30,7 +30,8 @@ class Interview_scheduleController extends Controller
 
     public function index()
     {
-        $interviews = Interview_schedule::select('job_id')->distinct()->get();
+        $id1 = Auth::id();
+        $interviews = Interview_schedule::where('candidate_id', $id1)->select('job_id')->distinct()->get();
         foreach ($interviews as $key => $value) 
         {
             $job = Job::find($value->job_id);
@@ -49,8 +50,18 @@ class Interview_scheduleController extends Controller
             }
             $value->skills = $job->skills;
             $value->salary_offered = $job->salary_offered;
+            //dd($value->job_id, $value->candidate_id, $value);
+            //dd(Interview_schedule::where('job_id', $value->job_id)->where('candidate_id', $value->candidate_id)->where('scheduled', '1')->get());
+            if(Interview_schedule::where('job_id', $value->job_id)->where('candidate_id', $id1)->where('scheduled', 1)->exists())
+            {
+                $interview = Interview_schedule::where('job_id', $value->job_id)->where('candidate_id', $id1)->where('scheduled', '1')->first();
+                $value->scheduled = 1;
+                $value->date = $interview->date;
+                //dd($interview);                
+            }
 
         }
+        //dd($interviews);
         if (Auth::user()->hasPermissionTo('can apply job'))
             return view('interviewed.index', compact('interviews'));
         else

@@ -35,7 +35,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $id1 = Auth::id();
+        $id1 = Auth::id(); 
         $checkadmin = User::find($id1);        
         $checkadmins = $checkadmin->hasRole('Admin');
         //dd($users);
@@ -140,7 +140,8 @@ class HomeController extends Controller
             
        }
 
-       $interviews = Interview_schedule::where('scheduled', 1)->get();
+       $interviews = Interview_schedule::where('candidate_id', $id1)->where('scheduled', 1)->get();
+
        $job_id = Interview_schedule::where('scheduled', 1)->select('job_id')->distinct()->get();
        $jobs = Job::whereIn('id', $job_id)->get();
 
@@ -148,6 +149,7 @@ class HomeController extends Controller
         $interviews->yellow = 0;
         $interviews->green = 0;
         $interviews->lightgreen = 0;
+
        foreach ($interviews as $key => $value) 
        {        
             $date2 = new DateTime($value->date);
@@ -178,7 +180,7 @@ class HomeController extends Controller
                 $jobs->lightgreen++;
             elseif($d2->days <= 3 && $d2->invert == 0)
                 $jobs->yellow++;
-            if($d1->invert)
+            if($d2->invert)
                 $jobs->red++;
        }
 
@@ -211,7 +213,7 @@ class HomeController extends Controller
             $value->name = $user->name.' '.$user->lastname;
        } 
 
-       $invites = Interview_schedule::select('job_id')->distinct()->get();
+       $invites = Interview_schedule::where('candidate_id', $id1)->select('job_id')->distinct()->get();
         foreach ($invites as $key => $value) 
         {
             $job = Job::find($value->job_id);
